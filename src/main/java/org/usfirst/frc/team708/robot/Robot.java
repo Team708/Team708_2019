@@ -42,7 +42,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * directory.
  * 
  * @cleanup of vision & gamedata - 1/28 @11:24
- * sue 7:05
+ * sue 7:31
  */
 public class Robot extends IterativeRobot {
 	

@@ -1,24 +1,24 @@
+//test jnp 1/12/2019 4:38
 
 package org.usfirst.frc.team708.robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+// import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.TimedRobot;
+// import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.TimedRobot;
+// import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+// import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+// import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team708.robot.commands.intakeCube.*;
-import org.usfirst.frc.team708.robot.commands.drivetrain.*;
+// import org.usfirst.frc.team708.robot.commands.intakeCube.*;
+// import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
@@ -28,10 +28,10 @@ import org.usfirst.frc.team708.robot.subsystems.IntakeCube;
 import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
 import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
 import org.usfirst.frc.team708.robot.subsystems.PneumaticsClimber;
-import org.usfirst.frc.team708.robot.commands.pneumatics.*;
+// import org.usfirst.frc.team708.robot.commands.pneumatics.*;
 import org.usfirst.frc.team708.robot.Constants;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 
@@ -140,158 +140,157 @@ public class Robot extends TimedRobot {
     	
 		// if the autoMode is one of the 2 "special modes" - those that run based on the gamedata
 		// run the autoMode based on the state LL LR RL RR AND robotLocation combination
-		if ((autoMode.equals("Right_RobotLocation")) ||
-				(autoMode.equals("Left_RobotLocation")))
-			{
-//				SmartDashboard.putString("HERE", "running the special modes");
-				switch(gameData.substring(0,2))
-				{
-					case "LL":
-					{
-						SmartDashboard.putString("Auto State", "LL");
+// 		if ((autoMode.equals("Right_RobotLocation")) ||
+// 				(autoMode.equals("Left_RobotLocation")))
+// 			{
+// 				switch(gameData.substring(0,2))
+// 				{
+// 					case "LL":
+// 					{
+// 						SmartDashboard.putString("Auto State", "LL");
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_LL command_Left_LL = new autoLeft_LL();
-					    	command_Left_LL.start();
-						}
-						else
-						{
-					    	autoRight_LL command_Right_LL = new autoRight_LL();
-					    	command_Right_LL.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_LL command_Left_LL = new autoLeft_LL();
+// 					    	command_Left_LL.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_LL command_Right_LL = new autoRight_LL();
+// 					    	command_Right_LL.start();
+// 						}
 					
-						break;
-					}
-					case "RR":
-					{
-						SmartDashboard.putString("Auto State", "RR");				
+// 						break;
+// 					}
+// 					case "RR":
+// 					{
+// 						SmartDashboard.putString("Auto State", "RR");				
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_RR command_Left_RR = new autoLeft_RR();
-					    	command_Left_RR.start();
-						}
-						else
-						{
-					    	autoRight_RR command_Right_RR = new autoRight_RR();
-					    	command_Right_RR.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_RR command_Left_RR = new autoLeft_RR();
+// 					    	command_Left_RR.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_RR command_Right_RR = new autoRight_RR();
+// 					    	command_Right_RR.start();
+// 						}
 		
-						break;
-					}
-					case "LR":
-					{
-						SmartDashboard.putString("Auto State", "LR");
+// 						break;
+// 					}
+// 					case "LR":
+// 					{
+// 						SmartDashboard.putString("Auto State", "LR");
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_LR command_Left_LR = new autoLeft_LR();
-					    	command_Left_LR.start();
-						}
-						else
-						{
-					    	autoRight_LR command_Right_LR = new autoRight_LR();
-					    	command_Right_LR.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_LR command_Left_LR = new autoLeft_LR();
+// 					    	command_Left_LR.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_LR command_Right_LR = new autoRight_LR();
+// 					    	command_Right_LR.start();
+// 						}
 		
-						break;
-					}
-					case "RL":
-					{
-						SmartDashboard.putString("Auto State", "RL");
+// 						break;
+// 					}
+// 					case "RL":
+// 					{
+// 						SmartDashboard.putString("Auto State", "RL");
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_RL command_Left_RL = new autoLeft_RL();
-					    	command_Left_RL.start();
-						}
-						else
-						{
-					    	autoRight_RL command_Right_RL = new autoRight_RL();
-					    	command_Right_RL.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_RL command_Left_RL = new autoLeft_RL();
+// 					    	command_Left_RL.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_RL command_Right_RL = new autoRight_RL();
+// 					    	command_Right_RL.start();
+// 						}
 		
-						break;
-					}
-					default:
-					{
-						SmartDashboard.putString("Auto State", "DO NOTHING");
-						break;
-					}
+// 						break;
+// 					}
+// 					default:
+// 					{
+// 						SmartDashboard.putString("Auto State", "DO NOTHING");
+// 						break;
+// 					}
 				
-				}
-			} // end if - using both switch and scale gamedata
+// 				}
+// 			} // end if - using both switch and scale gamedata
 		
-			else if ((autoMode.equals("Right_SwitchOnly_RobotLocation")) ||
-					(autoMode.equals("Left_SwitchOnly_RobotLocation"))) {
+// 			else if ((autoMode.equals("Right_SwitchOnly_RobotLocation")) ||
+// 					(autoMode.equals("Left_SwitchOnly_RobotLocation"))) {
 				
-//				SmartDashboard.putString("HERE", "running the switchonly specials");
-				switch(gameData.substring(0,1))
-				{
-					case "L":
-					{
-						SmartDashboard.putString("Auto State", "L");
+// //				SmartDashboard.putString("HERE", "running the switchonly specials");
+// 				switch(gameData.substring(0,1))
+// 				{
+// 					case "L":
+// 					{
+// 						SmartDashboard.putString("Auto State", "L");
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_L_SwitchOnly command_Left_L_SwitchOnly = new autoLeft_L_SwitchOnly();
-					    	command_Left_L_SwitchOnly.start();
-						}
-						else
-						{
-					    	autoRight_L_SwitchOnly command_Right_L_SwitchOnly = new autoRight_L_SwitchOnly();
-					    	command_Right_L_SwitchOnly.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_L_SwitchOnly command_Left_L_SwitchOnly = new autoLeft_L_SwitchOnly();
+// 					    	command_Left_L_SwitchOnly.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_L_SwitchOnly command_Right_L_SwitchOnly = new autoRight_L_SwitchOnly();
+// 					    	command_Right_L_SwitchOnly.start();
+// 						}
 					
-						break;
-					}
-					case "R":
-					{
-						SmartDashboard.putString("Auto State", "R");				
+// 						break;
+// 					}
+// 					case "R":
+// 					{
+// 						SmartDashboard.putString("Auto State", "R");				
 						
-						if (robotLocation.equals("L"))
-						{
-					    	autoLeft_R_SwitchOnly command_Left_R_SwitchOnly = new autoLeft_R_SwitchOnly();
-					    	command_Left_R_SwitchOnly.start();
-						}
-						else
-						{
-					    	autoRight_R_SwitchOnly command_Right_R_SwitchOnly = new autoRight_R_SwitchOnly();
-					    	command_Right_R_SwitchOnly.start();
-						}
+// 						if (robotLocation.equals("L"))
+// 						{
+// 					    	autoLeft_R_SwitchOnly command_Left_R_SwitchOnly = new autoLeft_R_SwitchOnly();
+// 					    	command_Left_R_SwitchOnly.start();
+// 						}
+// 						else
+// 						{
+// 					    	autoRight_R_SwitchOnly command_Right_R_SwitchOnly = new autoRight_R_SwitchOnly();
+// 					    	command_Right_R_SwitchOnly.start();
+// 						}
 		
-						break;
-					}
-				}//switch
-			} //end else if - using switch only
-		else if ((autoMode.equals("Center_SwitchOnly_RobotLocation"))
-				) {		
-			switch(gameData.substring(0,1)) // checks for 'L' or 'R'
-			{
-				case "L":
-				{
-//					SmartDashboard.putString("Auto State", "L"); //(Makovics) - Sets string to LL for the dashboard
-				    	SwitchOnly_Center_Left command_Center_L_SwitchOnly = new SwitchOnly_Center_Left(); //autoCenter_LL(); Changed the name to match SwitchOnly_Center Class
-				    	command_Center_L_SwitchOnly.start(); //Changed the name to switch only
-					break;
-				}
-				case "R":
-				{
-				    	SwitchOnly_Center_Right command_Center_R_SwitchOnly = new SwitchOnly_Center_Right(); //autoCenter_RR(); Matched with the auto class
-				    	command_Center_R_SwitchOnly.start(); 
-				}
-					break;
+// 						break;
+// 					}
+// 				}//switch
+// 			} //end else if - using switch only
+// 		else if ((autoMode.equals("Center_SwitchOnly_RobotLocation"))
+// 				) {		
+// 			switch(gameData.substring(0,1)) // checks for 'L' or 'R'
+// 			{
+// 				case "L":
+// 				{
+// //					SmartDashboard.putString("Auto State", "L"); //(Makovics) - Sets string to LL for the dashboard
+// 				    	SwitchOnly_Center_Left command_Center_L_SwitchOnly = new SwitchOnly_Center_Left(); //autoCenter_LL(); Changed the name to match SwitchOnly_Center Class
+// 				    	command_Center_L_SwitchOnly.start(); //Changed the name to switch only
+// 					break;
+// 				}
+// 				case "R":
+// 				{
+// 				    	SwitchOnly_Center_Right command_Center_R_SwitchOnly = new SwitchOnly_Center_Right(); //autoCenter_RR(); Matched with the auto class
+// 				    	command_Center_R_SwitchOnly.start(); 
+// 				}
+// 					break;
 				
-			}
-		}
-			else
-				{
-					SmartDashboard.putString("HERE", "running the other modes");
+// 			}
+// 		}
+// 			else
+// 				{
+// 					SmartDashboard.putString("HERE", "running the other modes");
 	
-					SmartDashboard.putString("Auto State", autoMode);
-					if (autonomousCommand != null) autonomousCommand.start();
-				}
+// 					SmartDashboard.putString("Auto State", autoMode);
+// 					if (autonomousCommand != null) autonomousCommand.start();
+// 				}
 
 
     }
@@ -367,17 +366,17 @@ public class Robot extends TimedRobot {
      */
     private void queueAutonomousModes() {
     	
-//    	autonomousMode.addObject("Test Auto 1", null);
-    	autonomousMode.addObject("Do Nothing", new DoNothing());
+//    	autonomousMode.addOption("Test Auto 1", null);
+    	autonomousMode.addOption("Do Nothing", new DoNothing());
 
-//    	autonomousMode.addObject("Drive in Square", 					new DriveInSquare());
-    	autonomousMode.addObject("Drive encoder distance", 				new driveDistanceEncoder());
-//    	autonomousMode.addObject("Curvature Drive", 					new driveCurvatureForTime());
-    	autonomousMode.addObject("Left Robot Location", 				new Left_RobotLocation());
-//    	autonomousMode.addObject("Right Robot Location", 				new Right_RobotLocation());
-    	autonomousMode.addObject("Left Switch Only RobotLocation", 		new Left_SwitchOnly_RobotLocation());
-//    	autonomousMode.addObject("Right Switch Only RobotLocation", 	new Left_SwitchOnly_RobotLocation());
-    	autonomousMode.addObject("Center Switch Only RobotLocation", 	new Center_SwitchOnly_RobotLocation());
+//    	autonomousMode.addOption("Drive in Square", 					new DriveInSquare());
+    	autonomousMode.addOption("Drive encoder distance", 				new driveDistanceEncoder());
+//    	autonomousMode.addOption("Curvature Drive", 					new driveCurvatureForTime());
+    	autonomousMode.addOption("Left Robot Location", 				new Left_RobotLocation());
+//    	autonomousMode.addOption("Right Robot Location", 				new Right_RobotLocation());
+    	autonomousMode.addOption("Left Switch Only RobotLocation", 		new Left_SwitchOnly_RobotLocation());
+//    	autonomousMode.addOption("Right Switch Only RobotLocation", 	new Left_SwitchOnly_RobotLocation());
+    	autonomousMode.addOption("Center Switch Only RobotLocation", 	new Center_SwitchOnly_RobotLocation());
 
 
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	

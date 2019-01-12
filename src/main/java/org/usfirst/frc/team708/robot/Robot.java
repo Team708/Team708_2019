@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -42,9 +43,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * directory.
  * 
  * @cleanup of vision & gamedata - 1/28 @11:24
- * sue 7:31
+ * sue 7:31; 7:15
+ * sue 2
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	
 	Timer statsTimer;										// Timer used for Smart Dash statistics
     

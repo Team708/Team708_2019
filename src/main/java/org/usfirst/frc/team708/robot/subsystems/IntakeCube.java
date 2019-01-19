@@ -85,7 +85,7 @@ public class IntakeCube extends Subsystem {
     public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
-		SmartDashboard.putBoolean("Has cube:", hasCube());
+		// SmartDashboard.putBoolean("Has cube:", hasCube());
     }
     
     

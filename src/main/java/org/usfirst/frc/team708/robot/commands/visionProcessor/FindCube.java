@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class FindCube extends Command {
 	
-	private double maxTime;
 
     public FindCube(double maxTime)
     {

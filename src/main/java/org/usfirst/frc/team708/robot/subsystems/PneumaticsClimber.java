@@ -48,6 +48,6 @@ public class PneumaticsClimber extends Subsystem {
 	public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
-		SmartDashboard.putBoolean("Climber High", high);
+		// SmartDashboard.putBoolean("Climber High", high);
 	}
 }

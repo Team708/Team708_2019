@@ -71,9 +71,9 @@ public class Telescope extends Subsystem {
 		}
 	}
    
-	public double getAngle() {		
-		return getEncoderDistance();
-	}
+	// public double getAngle() {		
+	// 	return getEncoderDistance();
+	// }
 	
    public void setEncoderReading(int telelocation) {
 	   teleMotorMaster.setSelectedSensorPosition(telelocation, 0, 10);
@@ -94,8 +94,8 @@ public class Telescope extends Subsystem {
     	
 		if (Constants.DEBUG) {
 		}
-		SmartDashboard.putBoolean("Tele Down", telescopeDown());
-    	SmartDashboard.putNumber("Tele length", getAngle());	// Encoder reading
+		// SmartDashboard.putBoolean("Tele Down", telescopeDown());
+    	// SmartDashboard.putNumber("Tele length", getAngle());	// Encoder reading
     }
     
     

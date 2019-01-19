@@ -90,7 +90,7 @@ public class PneumaticsCube extends Subsystem {
 	public void sendToDashboard() {
 
 //		SmartDashboard.putBoolean("In Soleniod", true);
-		SmartDashboard.putBoolean("intake claw closed", getClawPosition());
+		// SmartDashboard.putBoolean("intake claw closed", getClawPosition());
 
 		if (Constants.DEBUG) {
 		}

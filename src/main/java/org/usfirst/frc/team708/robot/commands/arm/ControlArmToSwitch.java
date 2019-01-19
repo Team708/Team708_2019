@@ -32,19 +32,19 @@ public class ControlArmToSwitch extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.arm.getAngle() >= Constants.SWITCH_HEIGHT - Constants.ARM_TOLERANCE)
-    		Robot.arm.moveMotor(Constants.ARM_REVERSE);
-    	else
+    	// if(Robot.arm.getAngle() >= Constants.SWITCH_HEIGHT - Constants.ARM_TOLERANCE)
+    	// 	Robot.arm.moveMotor(Constants.ARM_REVERSE);
+    	// else
     		Robot.arm.moveMotor(Constants.ARM_FORWARD);
     	}    	
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//Have a range in case the RIO can't get the angle exact.
-       	if (Robot.arm.getAngle() >= Constants.SWITCH_HEIGHT - Constants.ARM_TOLERANCE && 
-			      Robot.arm.getAngle() <= Constants.SWITCH_HEIGHT + Constants.ARM_TOLERANCE || this.timeSinceInitialized() >= runTime)
-    		return true;
-    	else
+       	// if (Robot.arm.getAngle() >= Constants.SWITCH_HEIGHT - Constants.ARM_TOLERANCE && 
+		// 	      Robot.arm.getAngle() <= Constants.SWITCH_HEIGHT + Constants.ARM_TOLERANCE || this.timeSinceInitialized() >= runTime)
+    	// 	return true;
+    	// else
     		return false;
     }
 

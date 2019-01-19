@@ -76,15 +76,15 @@ public class Arm extends Subsystem {
 		}
 	}
    
-	public double getAngle(){
+//	public double getAngle(){
 //		return enc.get() * Constants.ARM_REVS_PER_TALON_REV; //Arm Angle = (# talon revs) * (arm revs/talon rev) 
 //	   	return enc.getDistancePerPulse();
 		
 //		armMotorMaster.configSensorTerm
 //		armMotorMaster.
 		
-		return getEncoderDistance();
-	}
+	// 	return getEncoderDistance();
+	// }
 	
    public void setEncoderReading(int armlocation) {
 //	   armMotorMaster.getSensorCollection().setPulseWidthPosition(armlocation, 10);
@@ -106,8 +106,8 @@ public class Arm extends Subsystem {
     	
 		if (Constants.DEBUG) {
 		}
-		SmartDashboard.putBoolean("Arm Down:", armDown());
-    	SmartDashboard.putNumber("Arm Angle", getAngle());	// Encoder reading
+		// SmartDashboard.putBoolean("Arm Down:", armDown());
+    	// SmartDashboard.putNumber("Arm Angle", getAngle());	// Encoder reading
 //    	SmartDashboard.putNumber("Arm Distance", getEncoderDistance());	// Encoder reading
     }
     

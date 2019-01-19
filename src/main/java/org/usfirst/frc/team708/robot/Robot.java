@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
 	    tele	 			= new Telescope();
 
 
-	    visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
+	    // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
     	Robot.pneumaticsCube.IntakeOff(); /*intake open*/ //Switch to Intakeoff during practice field
 
 	    
@@ -115,28 +115,29 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
     	// schedule the autonomous command 
     	
-        visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
+        // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
         visionProcessor.setNTInfo("camMode", Constants.VISION_PROCESSING_ON);
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+        
+        gameData = DriverStation.getInstance().getGameSpecificMessage();
 		 drivetrain.setBrakeMode(true);
 		
 		//original dashboard code
-//    	autonomousCommand = (Command)autonomousMode.getSelected();
-//      if (autonomousCommand != null) autonomousCommand.start();
+   	   autonomousCommand = (Command)autonomousMode.getSelected();
+       if (autonomousCommand != null) autonomousCommand.start();
 		
 		// get the autocommand entered on the dashboard
 		// robotLocation is the 1st character of the autoMode - to be used to determine whether the robot is lined up on the right or left side of the field
-    	autonomousCommand = (Command)autonomousMode.getSelected();
-    	robotLocation = autonomousCommand.getName().substring(0,1); 
-    	autoMode = autonomousCommand.getName();
+    	// autonomousCommand = (Command)autonomousMode.getSelected();
+    	// robotLocation = autonomousCommand.getName().substring(0,1); 
+    	// autoMode = autonomousCommand.getName();
 
     	
-		SmartDashboard.putString("gameData", gameData);
-		SmartDashboard.putString("robotLocation", robotLocation);
-		SmartDashboard.putString("Auto Mode", autoMode);
+		// SmartDashboard.putString("gameData", gameData);
+		// SmartDashboard.putString("robotLocation", robotLocation);
+		// SmartDashboard.putString("Auto Mode", autoMode);
 		
-    	Robot.pneumaticsClimber.forward(); /*high gear*/
-//    	Robot.pneumaticsCube.IntakeOff(); /*intake closed*/
+    	// Robot.pneumaticsClimber.forward(); /*high gear*/
+        // Robot.pneumaticsCube.IntakeOff(); /*intake closed*/
     	
 		// if the autoMode is one of the 2 "special modes" - those that run based on the gamedata
 		// run the autoMode based on the state LL LR RL RR AND robotLocation combination
@@ -366,18 +367,17 @@ public class Robot extends TimedRobot {
      */
     private void queueAutonomousModes() {
     	
-//    	autonomousMode.addOption("Test Auto 1", null);
+//    	autonomousMode.addOption
     	autonomousMode.addOption("Do Nothing", new DoNothing());
 
-//    	autonomousMode.addOption("Drive in Square", 					new DriveInSquare());
+   	    autonomousMode.addOption("Drive in Square", 					new DriveInSquare());
     	autonomousMode.addOption("Drive encoder distance", 				new driveDistanceEncoder());
-//    	autonomousMode.addOption("Curvature Drive", 					new driveCurvatureForTime());
-    	autonomousMode.addOption("Left Robot Location", 				new Left_RobotLocation());
+   	    autonomousMode.addOption("Curvature Drive", 					new driveCurvatureForTime());
+//      autonomousMode.addOption("Left Robot Location", 				new Left_RobotLocation());
 //    	autonomousMode.addOption("Right Robot Location", 				new Right_RobotLocation());
-    	autonomousMode.addOption("Left Switch Only RobotLocation", 		new Left_SwitchOnly_RobotLocation());
+//      autonomousMode.addOption("Left Switch Only RobotLocation", 		new Left_SwitchOnly_RobotLocation());
 //    	autonomousMode.addOption("Right Switch Only RobotLocation", 	new Left_SwitchOnly_RobotLocation());
-    	autonomousMode.addOption("Center Switch Only RobotLocation", 	new Center_SwitchOnly_RobotLocation());
-
+//      autonomousMode.addOption("Center Switch Only RobotLocation", 	new Center_SwitchOnly_RobotLocation());
 
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	
     }

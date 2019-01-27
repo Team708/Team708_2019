@@ -1,41 +1,44 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.OI;
+// import org.usfirst.frc.team708.robot.OI;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.drivetrain.JoystickDrive;
-import org.usfirst.frc.team708.robot.util.HatterDrive;
 import org.usfirst.frc.team708.robot.util.IRSensor;
 import org.usfirst.frc.team708.robot.util.UltrasonicSensor;
 import org.usfirst.frc.team708.robot.util.Math708;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+// import com.ctre.phoenix.motorcontrol.can.*;
+// import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
-// import edu.wpi.first.wpilibj.interfaces.Gyro;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.GyroBase;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 // import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.revrobotics.*;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * This class is a drivetrain subsystem that uses PID to drive straight.
- * @author Nam Tran & Thomas Zhao & Viet Tran
+ * @author Nam Tran & Viet Tran
  */
 
 public class Drivetrain extends PIDSubsystem {
 
-	private WPI_TalonSRX leftMaster, rightMaster;	// Motor Controllers
-	private WPI_VictorSPX	leftSlave1, leftSlave2, rightSlave2, rightSlave1;
-
-	
+	// private WPI_TalonSRX leftMaster, rightMaster;	// Motor Controllers
+	// private WPI_VictorSPX	leftSlave1, leftSlave2, rightSlave2, rightSlave1;
+	private CANSparkMax leftMaster, rightMaster, leftSlave1, rightSlave1;
+		
 	// Variables specific for drivetrain PID loop
 	private double moveSpeed = 0.0;
 	private double pidOutput = 0.0;
@@ -47,14 +50,17 @@ public class Drivetrain extends PIDSubsystem {
 	private Encoder encoder2;						// Encoder for the drivetrain
 
 	private double distancePerPulse;
-	private BuiltInAccelerometer accelerometer;			// Accelerometer that is built into the roboRIO
-	private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
+	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
+	
+	// private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
+	private ADIS16448_IMU gyro;
+	
 	private Solenoid butterflySolenoid;
 	private DoubleSolenoid gearShiftSolenoid;
 	
 	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
-	// private DigitalInput opticalSensor;
+	private DigitalInput opticalSensor;
 	private DigitalInput opticalSensor1;
 	
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
@@ -72,40 +78,29 @@ public class Drivetrain extends PIDSubsystem {
     	super("Drivetrain", Constants.Kp, Constants.Ki, Constants.Kd);
     	
     	// Initializes motor controllers with device IDs from RobotMap
-		leftMaster  = new WPI_TalonSRX(RobotMap.drivetrainLeftMotorMaster);
-		leftSlave1   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave1);
-		leftSlave2   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave2);
-		rightMaster = new WPI_TalonSRX(RobotMap.drivetrainRightMotorMaster);
-		rightSlave1  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave1);
-		rightSlave2  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave2);
+		// leftMaster  = new WPI_TalonSRX(RobotMap.drivetrainLeftMotorMaster);
+		// leftSlave1   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave1);
+		// leftSlave2   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave2);
+		// rightMaster = new WPI_TalonSRX(RobotMap.drivetrainRightMotorMaster);
+		// rightSlave1  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave1);
+		// rightSlave2  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave2);
+		leftMaster = new CANSparkMax(RobotMap.drivetrainLeftMotorMaster, MotorType.kBrushless);
+		leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftMotorSlave1, MotorType.kBrushless);
+		rightMaster = new CANSparkMax(RobotMap.drivetrainRightMotorMaster, MotorType.kBrushless);
+		rightSlave1 = new CANSparkMax(RobotMap.drivetrainRightMotorSlave1, MotorType.kBrushless);
 		
-		/* Peak Current and Duration must be exceeded before current limit is activated.
-		 * When activated, current will be limited to Continuous Current.
-		 * Set Peak Current params to 0 if desired behavior is to immediately current-limit. 
-		 * (10 ms timeout)*/
-		leftMaster.configPeakCurrentLimit(45, 10); /* 45 A */
-		leftMaster.configPeakCurrentDuration(200, 10); /* 200ms */
-		leftMaster.configContinuousCurrentLimit(40, 10); /* 40A */
-		leftMaster.enableCurrentLimit(true); /* turn it on */
-		
-		/* Peak Current and Duration must be exceeded before current limit is activated.
-		 * When activated, current will be limited to Continuous Current.
-		 * Set Peak Current params to 0 if desired behavior is to immediately current-limit. 
-		 * (10 ms timeout)*/
-		rightMaster.configPeakCurrentLimit(45, 10); /* 45 A */
-		rightMaster.configPeakCurrentDuration(200, 10); /* 200ms */
-		rightMaster.configContinuousCurrentLimit(40, 10); /* 40A */
-		rightMaster.enableCurrentLimit(true); /* turn it on */
-		
-		SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMaster, leftSlave1, leftSlave2);
-		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMaster, rightSlave1, rightSlave2);
+		SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMaster, leftSlave1);
+		SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMaster, rightSlave1);
 		
 		drivetrain = new DifferentialDrive(leftMotors, rightMotors);	// Initializes drivetrain class
 		
 		accelerometer 	= new BuiltInAccelerometer();	// Initializes the accelerometer from the roboRIO
-		gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
-		gyro.calibrate();
+		// gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
+		// gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
 		
+		gyro = new ADIS16448_IMU();
+		gyro.reset();
+
 		encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 		encoder2 = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 														// Initializes the encoder
@@ -156,9 +151,9 @@ public class Drivetrain extends PIDSubsystem {
 	    		if (!getPIDController().isEnabled()) {
 	    			getPIDController().setPID(Constants.KpForward, Constants.KiForward, Constants.KdForward);
 	    			getPIDController().reset();
-	    			resetGyro();
+	    			gyro.reset();
 	    			enable();
-	    			resetGyro();
+	    			gyro.reset();
 	    		}
 	    		// Sets the forward move speed to the move parameter
 	    		moveSpeed = move;
@@ -167,9 +162,9 @@ public class Drivetrain extends PIDSubsystem {
 	    		if (!getPIDController().isEnabled()) {
 	    			getPIDController().setPID(Constants.KpBackward, Constants.KiBackward, Constants.KdBackward);
 	    			getPIDController().reset();
-	    			resetGyro();
+	    			gyro.reset();
 	    			enable();
-	    			resetGyro();
+	    			gyro.reset();
 	    		}
 	    		// Sets the forward move speed to the move parameter
 	    		moveSpeed = move;
@@ -215,7 +210,7 @@ public class Drivetrain extends PIDSubsystem {
     	if (Math.abs(left - right) < Constants.TANK_STICK_TOLERANCE && left != 0.0 && right != 0.0) {
     		// Enables the PID controller if it is not already
     		if (!getPIDController().isEnabled()) {
-    			resetGyro();
+    			gyro.reset();
     			getPIDController().reset();
     			enable();
     		}
@@ -248,15 +243,20 @@ public class Drivetrain extends PIDSubsystem {
      * @return
      */
     public double getAngle() {
-		// return Math708.round(gyro.getAngle(),2);
-		return gyro.getAngle();
-    }
+		//    return gyro.getAngle();
+		   return  Math708.round(gyro.getAngleZ(),0);
+	}
+	
+	public boolean isLevel(int x, int y) {
+
+        return(true);
+	}
     
     /**
      * Resets the gyro reading
      */
     public void resetGyro() {
-    	gyro.reset();
+		gyro.reset();
     }
     
     public double rotateByGyro(double targetAngle, double tolerance) {
@@ -314,38 +314,54 @@ public class Drivetrain extends PIDSubsystem {
     public void toggleBrakeMode() {
     	brake = !brake;
     	if (brake) {
-    		leftMaster.setNeutralMode(NeutralMode.Brake);
-    		leftSlave1.setNeutralMode(NeutralMode.Brake);
-    		leftSlave2.setNeutralMode(NeutralMode.Brake);
-    		rightMaster.setNeutralMode(NeutralMode.Brake);
-    		rightSlave1.setNeutralMode(NeutralMode.Brake);
-    		rightSlave2.setNeutralMode(NeutralMode.Brake);
+			// leftMaster.setNeutralMode(NeutralMode.Brake);
+    		// leftSlave1.setNeutralMode(NeutralMode.Brake);
+    		// leftSlave2.setNeutralMode(NeutralMode.Brake);
+    		// rightMaster.setNeutralMode(NeutralMode.Brake);
+    		// rightSlave1.setNeutralMode(NeutralMode.Brake);
+			// rightSlave2.setNeutralMode(NeutralMode.Brake);
+			leftMaster.setIdleMode(IdleMode.kBrake);
+			leftSlave1.setIdleMode(IdleMode.kBrake);
+			rightMaster.setIdleMode(IdleMode.kBrake);
+			rightSlave1.setIdleMode(IdleMode.kBrake);
     	} else {
-    		leftMaster.setNeutralMode(NeutralMode.Coast);
-    		leftSlave1.setNeutralMode(NeutralMode.Coast);
-    		leftSlave2.setNeutralMode(NeutralMode.Coast);
-    		rightMaster.setNeutralMode(NeutralMode.Coast);
-    		rightSlave1.setNeutralMode(NeutralMode.Coast);
-    		rightSlave2.setNeutralMode(NeutralMode.Coast);
+    		// leftMaster.setNeutralMode(NeutralMode.Coast);
+    		// leftSlave1.setNeutralMode(NeutralMode.Coast);
+    		// leftSlave2.setNeutralMode(NeutralMode.Coast);
+    		// rightMaster.setNeutralMode(NeutralMode.Coast);
+    		// rightSlave1.setNeutralMode(NeutralMode.Coast);
+			// rightSlave2.setNeutralMode(NeutralMode.Coast);
+			leftMaster.setIdleMode(IdleMode.kCoast);
+			leftSlave1.setIdleMode(IdleMode.kCoast);
+			rightMaster.setIdleMode(IdleMode.kCoast);
+			rightSlave1.setIdleMode(IdleMode.kCoast);
     	}
     }
     
     public void setBrakeMode(boolean setBrake) {
     	brake = setBrake;
     	if (brake) {
-    		leftMaster.setNeutralMode(NeutralMode.Brake);
-    		leftSlave1.setNeutralMode(NeutralMode.Brake);
-    		leftSlave2.setNeutralMode(NeutralMode.Brake);
-    		rightMaster.setNeutralMode(NeutralMode.Brake);
-    		rightSlave1.setNeutralMode(NeutralMode.Brake);
-    		rightSlave2.setNeutralMode(NeutralMode.Brake);
+    		// leftMaster.setNeutralMode(NeutralMode.Brake);
+    		// leftSlave1.setNeutralMode(NeutralMode.Brake);
+    		// leftSlave2.setNeutralMode(NeutralMode.Brake);
+    		// rightMaster.setNeutralMode(NeutralMode.Brake);
+    		// rightSlave1.setNeutralMode(NeutralMode.Brake);
+			// rightSlave2.setNeutralMode(NeutralMode.Brake);
+			leftMaster.setIdleMode(IdleMode.kBrake);
+			leftSlave1.setIdleMode(IdleMode.kBrake);
+			rightMaster.setIdleMode(IdleMode.kBrake);
+			rightSlave1.setIdleMode(IdleMode.kBrake);
     	} else {
-    		leftMaster.setNeutralMode(NeutralMode.Coast);
-    		leftSlave1.setNeutralMode(NeutralMode.Coast);
-    		leftSlave2.setNeutralMode(NeutralMode.Coast);
-    		rightMaster.setNeutralMode(NeutralMode.Coast);
-    		rightSlave1.setNeutralMode(NeutralMode.Coast);
-    		rightSlave2.setNeutralMode(NeutralMode.Coast);
+    		// leftMaster.setNeutralMode(NeutralMode.Coast);
+    		// leftSlave1.setNeutralMode(NeutralMode.Coast);
+    		// leftSlave2.setNeutralMode(NeutralMode.Coast);
+    		// rightMaster.setNeutralMode(NeutralMode.Coast);
+    		// rightSlave1.setNeutralMode(NeutralMode.Coast);
+			// rightSlave2.setNeutralMode(NeutralMode.Coast);
+			leftMaster.setIdleMode(IdleMode.kCoast);
+			leftSlave1.setIdleMode(IdleMode.kCoast);
+			rightMaster.setIdleMode(IdleMode.kCoast);
+			rightSlave1.setIdleMode(IdleMode.kCoast);
     	}
     }
     
@@ -458,8 +474,8 @@ public class Drivetrain extends PIDSubsystem {
 ////	    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
 //	    	
 //	    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getTemperature());
-	    	// SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
-	    	// SmartDashboard.putNumber("DT Rt Master", leftMaster.getOutputCurrent());
+	    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
+	    	SmartDashboard.putNumber("DT Rt Master", leftMaster.getOutputCurrent());
 //	    	SmartDashboard.putNumber("DT Rt Slave", rightSlave.getTemperature());
 //	    	SmartDashboard.putNumber("DT Lft Master", leftMaster.getTemperature());
 //	    	SmartDashboard.putNumber("DT Lft Slave", leftSlave.getTemperature());
@@ -467,13 +483,28 @@ public class Drivetrain extends PIDSubsystem {
     	
 //    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
 //    	SmartDashboard.putNumber("DT Encoder right Distance", encoder.getDistance());	// Encoder reading
-    	SmartDashboard.putNumber("DT Encoder Distance", Math708.round(encoder2.getDistance(),2));		// Encoder reading
-    	SmartDashboard.putNumber("Gyro angle", getAngle());
+    	// SmartDashboard.putNumber("DT Encoder Distance", Math708.round(encoder2.getDistance(),2));		// Encoder reading
     	// SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-    	// SmartDashboard.putBoolean("gear high", gear_high);			// Brake or Coast
-    	// SmartDashboard.putBoolean("butterfly", butterfly_on);
+//    	SmartDashboard.putBoolean("gear high", gear_high);					// Brake or Coast
+//    	SmartDashboard.putBoolean("butterfly", butterfly_on);
     	// SmartDashboard.putBoolean("Optical1", isOpticalSensor1White());
 //    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
 //    	SmartDashboard.putNumber("DT Lt Master", leftMaster.getOutputCurrent());
+
+    	SmartDashboard.putNumber("old Gyro angle", getAngle());
+		SmartDashboard.putNumber("Gyro-X", Math708.round(gyro.getAngleX(),0));
+		// SmartDashboard.putNumber("Gyro-Y", Math708.round(gyro.getAngleY(),0));
+		// SmartDashboard.putNumber("Gyro-Z", Math708.round(gyro.getAngleZ(),0));
+
+		// SmartDashboard.putNumber("Accel-X", Math708.round(gyro.getAccelX(),0));
+		// SmartDashboard.putNumber("Accel-Y", Math708.round(gyro.getAccelY(),0));
+		// SmartDashboard.putNumber("Accel-Z", Math708.round(gyro.getAccelZ(),0));
+
+		SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
+		// SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
+		// SmartDashboard.putNumber("Yaw", Math708.round(gyro.getYaw(),0));
+
+		// SmartDashboard.putNumber("Pressure: ", Math708.round(climber_gyro.getBarometricPressure(),0));
+		// SmartDashboard.putNumber("Temperature: ", Math708.round(climber_gyro.getTemperature(),0)); 
     }
 }

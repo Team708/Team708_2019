@@ -3,16 +3,11 @@ package org.usfirst.frc.team708.robot;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Relay;
 
-/**
- * Class containing all the code-related constants, so wiring and
- * gamepad controls are not included
- * @author omn0mn0m
- */
 public final class Constants {
 
-	/*
-	 * Motor Controllers
-	 */
+	public static final double DRIVE_MOTOR_MAX_SPEED 		= 1.0; 
+	public static final double ROTATE_MOTOR_MAX_SPEED 		= 1.0;
+
 	public static final double INTAKE_FORWARD 		= 1.0;
 	public static final double INTAKE_REVERSE 		= -0.8;
 
@@ -20,8 +15,7 @@ public final class Constants {
 	public static final double INTAKE_PULSE_TIME	= 0.5;
 
 	
-	public static final double DRIVE_MOTOR_MAX_SPEED 		= 1.0;  // 1.0
-	public static final double ROTATE_MOTOR_MAX_SPEED 		= 1.0;  // 1.0
+
 	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 1.0;
 	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.8;
 	public static final double DRIVE_MOTOR_OFF		 		= 0.0;

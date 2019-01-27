@@ -82,9 +82,9 @@ public class VisionProcessor extends Subsystem {
 		if (seesTarget()) {
 			if (!isCentered())	
 			     if (xAngle > 0)
-				     rotate = .7;
+				     rotate = .5;
 			     else 
-			 	    rotate = -.7;
+			 	    rotate = -.5;
 			else // centered
 				rotate= 0.0;
 		} 

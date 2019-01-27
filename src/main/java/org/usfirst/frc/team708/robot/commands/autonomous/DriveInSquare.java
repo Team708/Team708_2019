@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveInSquare extends CommandGroup {
 
 	
-	private static final double driveStraightSpeed = 0.6;
+	private static final double driveStraightSpeed = 0.5;
 	private static final double driveStraightTime = 2;
 	
-	private static final double turnSpeed = 0.7;
-	private static final double turnDegrees = 72;
+	private static final double turnSpeed = 0.4;
+	private static final double turnDegrees = 60;
    
     // Called just before this Command runs the first time
     protected void initialize() {

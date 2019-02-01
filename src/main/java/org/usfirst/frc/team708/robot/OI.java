@@ -8,13 +8,7 @@ import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
 
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
-import org.usfirst.frc.team708.robot.commands.intakeCube.*;
-// import org.usfirst.frc.team708.robot.commands.arm.*;
-// import org.usfirst.frc.team708.robot.commands.telescope.*;
-import org.usfirst.frc.team708.robot.commands.pneumatics.*;
-// import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
-
 
 
 /**
@@ -35,35 +29,42 @@ public class OI {
  */
 
 // Drivetrain Buttons
-	private static final int BUTTERFLY_BUTTON 				= Gamepad.button_Y;
-	private static final int HIGH_GEAR_BUTTON   		    = Gamepad.button_R_Shoulder;
-	private static final int LOW_GEAR_BUTTON				= Gamepad.button_L_Shoulder;
-	private static final int BRAKE_BUTTON					= Gamepad.button_B;
-	private static final int LED_BUTTON						= Gamepad.button_A;
-	private static final int RELEASE_CUBE_BUTTON			= Gamepad.button_X;
+	private static final int BALL_OUT_BUTTON  	 		    = Gamepad.button_R_Shoulder;
+	private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
+	private static final int HOLDDRIVETRAINHIGH				= Gamepad.shoulderAxisLeft;;
+//	private static final int 								= Gamepad.shoulderAxisRight;;
+	private static final int SHIFT_DRIVETRAIN_HIGH_BUTTON 	= Gamepad.button_Y;
+	private static final int DEPLOY_INTAKE_BUTTON			= Gamepad.button_B;
+	private static final int SHIFT_DRIVETRAIN_LOW_BUTTON	= Gamepad.button_A;
+	private static final int RETRACT_INTAKE_BUTTON			= Gamepad.button_X;
+
+	private static final int TOGGLE_BRAKES_BUTTON			= Gamepad.button_Back;
 
 /*
  * Operator Button Assignment
  */
 	
-//	private static final int SQUEEZE_CUBE_BUTTON			= Gamepad.button_L_Shoulder;
 	
-//	private static final int SQUEEZE_CUBE_BUTTON			= Gamepad.shoulderAxisRight;;
-	private static final int SQUEEZE_CUBE_BUTTON			= Gamepad.button_RightStick;;
+//	private static final int 								= Gamepad.shoulderAxisLeft;;
+//	private static final int 								= Gamepad.shoulderAxisRight;
 
-	private static final int INTAKE_CUBE_BUTTON_OUT			= Gamepad.button_R_Shoulder;
-	private static final int INTAKE_CUBE_BUTTON_IN			= Gamepad.button_L_Shoulder;
-	private static final int OPERATE_ARM_BUTTON				= Gamepad.leftStick_Y;
-	private static final int OPERATE_TELESCOPE_BUTTON		= Gamepad.rightStick_Y;
+	private static final int HATCH_IN_BUTTON				= Gamepad.button_L_Shoulder;
+	private static final int HATCH_OUT_BUTTON				= Gamepad.button_R_Shoulder;
 
-	private static final int ARM_UP_TO_GROUND_BUTTON		= Gamepad.button_A;
-	private static final int ARM_UP_TO_SWITCH_BUTTON		= Gamepad.button_X;
-	private static final int ARM_UP_TO_SCALE_BUTTON			= Gamepad.button_B;
-	private static final int ARM_UP_TO_HUMAN_FEEDER_BUTTON	= Gamepad.button_Y;
+	private static final int CARGO_SHIP_BUTTON				= Gamepad.button_X;
+	private static final int LEVEL_1_ROCKET_BUTTON			= Gamepad.button_A;
+	private static final int LEVEL_2_ROCKET_BUTTON			= Gamepad.button_B;
+	private static final int LEVEL_3_ROCKET_BUTTON			= Gamepad.button_Y;
 
-	private static final int CLIMB_HIGH_GEAR_BUTTON			= Gamepad.button_Back;
-	private static final int CLIMB_LOW_GEAR_BUTTON			= Gamepad.button_Start;
+	private static final int ELEVATOR_OVERIDE_BUTTON		= Gamepad.leftStick_Y;
+	private static final int CLIMBER_BUTTON					= Gamepad.rightStick_Y;
+	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;
 
+	private static final int SECURE_RELEASE_HATCH_BUTTON	= Gamepad.button_Back;
+	private static final int DEPLOY_HATCH_BUTTON			= Gamepad.button_Start;
+
+//	private static final int 								= Gamepad.button_RightStick;
+//	private static final int INITIATE_CLIMB					= Gamepad.button_LeftStick;
 	
 	
 /*

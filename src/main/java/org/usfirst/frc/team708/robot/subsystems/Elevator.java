@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-public class Arm extends Subsystem {
+public class Elevator extends Subsystem {
 	
 	private WPI_TalonSRX 	armMotorMaster;
 	private WPI_VictorSPX   armMotorSlave1;
@@ -27,7 +27,7 @@ public class Arm extends Subsystem {
     /**
       * Constructor
       */
-	public Arm() {
+	public Elevator() {
 		armMotorMaster = new WPI_TalonSRX(RobotMap.pivotArmMotorMaster);
 		armMotorSlave1  = new WPI_VictorSPX(RobotMap.pivotArmMotorSlave1);
 		armSensor 	= new DigitalInput(RobotMap.armSensor);

@@ -24,14 +24,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Alex Tysak
  */
 
-public class IntakeCube extends Subsystem {
+public class Intake extends Subsystem {
 	
 	private WPI_TalonSRX 	intakeMaster;
 	private WPI_VictorSPX   intakeSlave;
 	
 	public DigitalInput 	cubeSensor;
 
-	public IntakeCube() {
+	public Intake() {
 		intakeMaster = new WPI_TalonSRX(RobotMap.intakeMotorMaster);
 		intakeSlave  = new WPI_VictorSPX(RobotMap.intakeMotorSlave);
 		

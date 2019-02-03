@@ -2,7 +2,7 @@ package org.usfirst.frc.team708.robot.commands.drivetrain;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.subsystems.IntakeCube;
+import org.usfirst.frc.team708.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

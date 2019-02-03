@@ -57,7 +57,8 @@ public class OI {
 	private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
 
 	private static final int DEPLOY_HATCH					= Gamepad.button_RightStick;
-	
+	private static final int LEVEL_0_ELEV_BUTTON			= Gamepad.button_LeftStick;
+
 	private static final int INITIATE_CLIMB					= Gamepad.button_A;	
 	private static final int STOP_CLIMB						= Gamepad.button_B;	
 //	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
@@ -93,6 +94,7 @@ public class OI {
 	public static final Button openBeak			= new JoystickButton(operatorGamepad, CLOSE_BEAK_BUTTON);
 	public static final Button closeBeak		= new JoystickButton(operatorGamepad, OPEN_BEAK_BUTTON);
 	public static final Button deployHatch 		= new JoystickButton(operatorGamepad, DEPLOY_HATCH);
+	public static final Button elevatorGround	= new JoystickButton(operatorGamepad, LEVEL_0_ELEV_BUTTON);
 
 	public static final Trigger elevatorUp		= new AxisUp(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
 	public static final Trigger elevatorDown	= new AxisDown(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
@@ -134,6 +136,8 @@ public class OI {
 		closeBeak.whenPressed(new CloseBeak());
 		openBeak.whenPressed(new OpenBeak());
 		deployHatch.whenPressed(new DeployHatch());
+		elevatorGround.whenPressed(new Elevator_Level0());
+				
 		initiateClimb.whenPressed(new InitiateClimb());
 		stopClimb.whenPressed(new StopClimb());
 

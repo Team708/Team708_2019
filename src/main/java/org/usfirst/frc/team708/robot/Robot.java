@@ -26,9 +26,9 @@ import edu.wpi.cscore.VideoMode;
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team708.robot.subsystems.Arm;
+import org.usfirst.frc.team708.robot.subsystems.Elevator;
 import org.usfirst.frc.team708.robot.subsystems.Telescope;
-import org.usfirst.frc.team708.robot.subsystems.IntakeCube;
+import org.usfirst.frc.team708.robot.subsystems.Intake;
 import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
 import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
 import org.usfirst.frc.team708.robot.subsystems.PneumaticsClimber;
@@ -54,8 +54,8 @@ public class Robot extends TimedRobot {
     public static VisionProcessor visionProcessor;
     public static PneumaticsCube pneumaticsCube;
     public static PneumaticsClimber pneumaticsClimber;
-    public static IntakeCube intakeCube;
-    public static Arm arm;
+    public static Intake intakeCube;
+    public static Elevator arm;
     public static Telescope tele;
     public static OI oi;
 
@@ -80,11 +80,11 @@ public class Robot extends TimedRobot {
         // Subsystem Initialization
 
         drivetrain = new Drivetrain();
-        intakeCube = new IntakeCube();
+        intakeCube = new Intake();
         pneumaticsCube = new PneumaticsCube();
         pneumaticsClimber = new PneumaticsClimber();
         visionProcessor = new VisionProcessor();
-        arm = new Arm();
+        arm = new Elevator();
         tele = new Telescope();
 
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);

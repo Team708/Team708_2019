@@ -14,7 +14,8 @@ public class OI {
 // Gamepads
 	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver gamepad
 	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
-	
+	public final static Gamepad climbingGamepad = new Gamepad(RobotMap.climbingGamepad);// Operator gamepad
+
 // look in Gamepad.java for button constants
 	
 /*
@@ -51,16 +52,18 @@ public class OI {
 	private static final int LEVEL_3_ROCKET_BUTTON			= Gamepad.button_Y;
 
 	private static final int ELEVATOR_OVERIDE_BUTTON		= Gamepad.leftStick_Y;
-	private static final int CLIMBER_BUTTON					= Gamepad.rightStick_Y;
-	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;
 
 	private static final int OPEN_BEAK_BUTTON				= Gamepad.button_Back;
 	private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
 
 	private static final int DEPLOY_HATCH					= Gamepad.button_RightStick;
-	private static final int INITIATE_CLIMB					= Gamepad.button_LeftStick;
 	
-	
+	private static final int INITIATE_CLIMB					= Gamepad.button_A;	
+	private static final int STOP_CLIMB						= Gamepad.button_B;	
+//	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
+// 	private static final int OPENBUTTON2_BUTTON				= Gamepad.button_Start;
+	private static final int CLIMBER_BUTTON					= Gamepad.rightStick_Y;
+	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;	
 /*
  * Driver Button events
  */
@@ -68,8 +71,8 @@ public class OI {
 	public static final Button ballIn			= new JoystickButton(driverGamepad, BALL_IN_BUTTON);
 	public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
 	public static final Button lowGear			= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_LOW_BUTTON);
-	public static final Button intakeDeploy		= new JoystickButton(driverGamepad, DEPLOY_INTAKE_BUTTON);
-	public static final Button intakeRetract	= new JoystickButton(driverGamepad, RETRACT_INTAKE_BUTTON);
+	public static final Button intakeOut		= new JoystickButton(driverGamepad, DEPLOY_INTAKE_BUTTON);
+	public static final Button intakeIn			= new JoystickButton(driverGamepad, RETRACT_INTAKE_BUTTON);
 	public static final Button toggleBrakes		= new JoystickButton(driverGamepad, TOGGLE_BRAKES_BUTTON);
 	public static final Button toggleLEDs		= new JoystickButton(driverGamepad, TOGGLE_LED_BUTTON);
 
@@ -89,15 +92,18 @@ public class OI {
 	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
 	public static final Button openBeak			= new JoystickButton(operatorGamepad, CLOSE_BEAK_BUTTON);
 	public static final Button closeBeak		= new JoystickButton(operatorGamepad, OPEN_BEAK_BUTTON);
-	public static final Button initiateClimb	= new JoystickButton(operatorGamepad, INITIATE_CLIMB);
 	public static final Button deployHatch 		= new JoystickButton(operatorGamepad, DEPLOY_HATCH);
 
 	public static final Trigger elevatorUp		= new AxisUp(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
 	public static final Trigger elevatorDown	= new AxisDown(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
-	public static final Trigger climbUp			= new AxisUp(operatorGamepad, CLIMBER_BUTTON);
-	public static final Trigger climbDown		= new AxisDown(operatorGamepad, CLIMBER_BUTTON);
-	public static final Trigger climbForward	= new AxisUp(operatorGamepad, CLIMBER_FORWARD_BUTTON);
-	public static final Trigger climbBack		= new AxisDown(operatorGamepad, CLIMBER_FORWARD_BUTTON);
+
+
+	public static final Button initiateClimb	= new JoystickButton(climbingGamepad, INITIATE_CLIMB);
+	public static final Button stopClimb		= new JoystickButton(climbingGamepad, STOP_CLIMB);
+	public static final Trigger climbUp			= new AxisUp(climbingGamepad, 	CLIMBER_BUTTON);
+	public static final Trigger climbDown		= new AxisDown(climbingGamepad, CLIMBER_BUTTON);
+	public static final Trigger climbForward	= new AxisUp(climbingGamepad, 	CLIMBER_FORWARD_BUTTON);
+	public static final Trigger climbBack		= new AxisDown(climbingGamepad, CLIMBER_FORWARD_BUTTON);
 
 	public OI() {
 
@@ -128,7 +134,8 @@ public class OI {
 		closeBeak.whenPressed(new CloseBeak());
 		openBeak.whenPressed(new OpenBeak());
 		deployHatch.whenPressed(new DeployHatch());
-		initiateClimb.whenPressed(new ShiftClimberLow());
+		initiateClimb.whenPressed(new InitiateClimb());
+		stopClimb.whenPressed(new StopClimb());
 
 		elevatorUp.whileActive(new JoystickMoveElevator());
 		elevatorDown.whileActive(new JoystickMoveElevator());

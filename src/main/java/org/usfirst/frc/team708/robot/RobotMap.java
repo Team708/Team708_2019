@@ -12,6 +12,7 @@ public class RobotMap {
 
 	public static final int driverGamepad   = 0;
 	public static final int operatorGamepad = 1;
+	public static final int climbingGamepad = 2;
 	
 // PWM Ports
 

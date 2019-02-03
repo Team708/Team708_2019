@@ -1,15 +1,8 @@
-
-
 package org.usfirst.frc.team708.robot;
-
 
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
-
-import org.usfirst.frc.team708.robot.commands.drivetrain.*;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,10 +21,10 @@ public class OI {
  * Driver Button Assignment
  */
 
-// Drivetrain Buttons
+// Driver Buttons
 	private static final int BALL_OUT_BUTTON  	 		    = Gamepad.button_R_Shoulder;
 	private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
-	private static final int HOLDDRIVETRAINHIGH				= Gamepad.shoulderAxisLeft;;
+	private static final int HOLDGEARHIGH					= Gamepad.shoulderAxisLeft;;
 //	private static final int 								= Gamepad.shoulderAxisRight;;
 	private static final int SHIFT_DRIVETRAIN_HIGH_BUTTON 	= Gamepad.button_Y;
 	private static final int DEPLOY_INTAKE_BUTTON			= Gamepad.button_B;
@@ -39,6 +32,7 @@ public class OI {
 	private static final int RETRACT_INTAKE_BUTTON			= Gamepad.button_X;
 
 	private static final int TOGGLE_BRAKES_BUTTON			= Gamepad.button_Back;
+	private static final int TOGGLE_LED_BUTTON				= Gamepad.button_Start;
 
 /*
  * Operator Button Assignment
@@ -60,86 +54,90 @@ public class OI {
 	private static final int CLIMBER_BUTTON					= Gamepad.rightStick_Y;
 	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;
 
-	private static final int SECURE_RELEASE_HATCH_BUTTON	= Gamepad.button_Back;
-	private static final int DEPLOY_HATCH_BUTTON			= Gamepad.button_Start;
+	private static final int OPEN_BEAK_BUTTON				= Gamepad.button_Back;
+	private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
 
-//	private static final int 								= Gamepad.button_RightStick;
-//	private static final int INITIATE_CLIMB					= Gamepad.button_LeftStick;
+	private static final int DEPLOY_HATCH					= Gamepad.button_RightStick;
+	private static final int INITIATE_CLIMB					= Gamepad.button_LeftStick;
 	
 	
 /*
- * Driver Button Commands
+ * Driver Button events
  */
-	public static final Button butterflyOn	= new JoystickButton(driverGamepad, BUTTERFLY_BUTTON);
-	public static final Button highGearOn	= new JoystickButton(driverGamepad, HIGH_GEAR_BUTTON);
-	public static final Button lowGearOn 	= new JoystickButton(driverGamepad, LOW_GEAR_BUTTON);
-	public static final Button breakOn	 	= new JoystickButton(driverGamepad, BRAKE_BUTTON);
-	public static final Button ledToggle	= new JoystickButton(driverGamepad, LED_BUTTON);
-	public static final Button releaseCube	= new JoystickButton(driverGamepad, RELEASE_CUBE_BUTTON);
+	public static final Button ballOut			= new JoystickButton(driverGamepad, BALL_OUT_BUTTON);
+	public static final Button ballIn			= new JoystickButton(driverGamepad, BALL_IN_BUTTON);
+	public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
+	public static final Button lowGear			= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_LOW_BUTTON);
+	public static final Button intakeDeploy		= new JoystickButton(driverGamepad, DEPLOY_INTAKE_BUTTON);
+	public static final Button intakeRetract	= new JoystickButton(driverGamepad, RETRACT_INTAKE_BUTTON);
+	public static final Button toggleBrakes		= new JoystickButton(driverGamepad, TOGGLE_BRAKES_BUTTON);
+	public static final Button toggleLEDs		= new JoystickButton(driverGamepad, TOGGLE_LED_BUTTON);
+
+	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
+	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
+//	public static final Trigger lowGear			= new AxisUp(driverGamepad, HOLDGEARHIGH);
+//	public static final Trigger lowGear			= new AxisDown(driverGamepad, HOLDGEARHIGH);
 
 /*
- * Operator Button Commands
+ * Operator Button events
  */
-	public static final Button squeezeCube		= new JoystickButton(operatorGamepad, SQUEEZE_CUBE_BUTTON);
-	public static final Button intakeCubeOut	= new JoystickButton(operatorGamepad, INTAKE_CUBE_BUTTON_OUT);
-	public static final Button intakeCubeIn		= new JoystickButton(operatorGamepad, INTAKE_CUBE_BUTTON_IN);
-	
-	public static final Trigger operateArmUp 	= new AxisUp(operatorGamepad, OPERATE_ARM_BUTTON);
-	public static final Trigger operateArmDown	= new AxisDown(operatorGamepad, OPERATE_ARM_BUTTON);
-	public static final Trigger operateTeleUp	= new AxisUp(operatorGamepad, OPERATE_TELESCOPE_BUTTON);
-	public static final Trigger operateTeleDown	= new AxisDown(operatorGamepad, OPERATE_TELESCOPE_BUTTON);
-	public static final Button armToGround		= new JoystickButton(operatorGamepad, ARM_UP_TO_GROUND_BUTTON);
-	public static final Button armToSwitch		= new JoystickButton(operatorGamepad, ARM_UP_TO_SWITCH_BUTTON);
-	public static final Button armToScale		= new JoystickButton(operatorGamepad, ARM_UP_TO_SCALE_BUTTON);
-	public static final Button armToFeeder		= new JoystickButton(operatorGamepad, ARM_UP_TO_HUMAN_FEEDER_BUTTON);
-	public static final Button climbLowGear		= new JoystickButton(operatorGamepad, CLIMB_LOW_GEAR_BUTTON);
-	public static final Button climbHighGear	= new JoystickButton(operatorGamepad, CLIMB_HIGH_GEAR_BUTTON);
+	public static final Button hatchIn			= new JoystickButton(operatorGamepad, HATCH_IN_BUTTON);
+	public static final Button hatchOut			= new JoystickButton(operatorGamepad, HATCH_OUT_BUTTON);
+	public static final Button CargoShip		= new JoystickButton(operatorGamepad, CARGO_SHIP_BUTTON);
+	public static final Button level1Rocket		= new JoystickButton(operatorGamepad, LEVEL_1_ROCKET_BUTTON);
+	public static final Button level2Rocket		= new JoystickButton(operatorGamepad, LEVEL_2_ROCKET_BUTTON);
+	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
+	public static final Button openBeak			= new JoystickButton(operatorGamepad, CLOSE_BEAK_BUTTON);
+	public static final Button closeBeak		= new JoystickButton(operatorGamepad, OPEN_BEAK_BUTTON);
+	public static final Button initiateClimb	= new JoystickButton(operatorGamepad, INITIATE_CLIMB);
+	public static final Button deployHatch 		= new JoystickButton(operatorGamepad, DEPLOY_HATCH);
 
+	public static final Trigger elevatorUp		= new AxisUp(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
+	public static final Trigger elevatorDown	= new AxisDown(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
+	public static final Trigger climbUp			= new AxisUp(operatorGamepad, CLIMBER_BUTTON);
+	public static final Trigger climbDown		= new AxisDown(operatorGamepad, CLIMBER_BUTTON);
+	public static final Trigger climbForward	= new AxisUp(operatorGamepad, CLIMBER_FORWARD_BUTTON);
+	public static final Trigger climbBack		= new AxisDown(operatorGamepad, CLIMBER_FORWARD_BUTTON);
 
 	public OI() {
 
-		butterflyOn.whenPressed(new ActivateButterfly());
-		
-	//	highGearOn.whenPressed(new GearShift2());
-		highGearOn.whenReleased(new GearShift2());
-		highGearOn.whileHeld(new GearShift1());
+// Driver
+		ballOut.whenPressed(new SpinBallOut());
+		ballIn.whenPressed(new SpinBallIn());
+		highGear.whenPressed(new ShiftGearHigh());
+		lowGear.whenPressed(new ShiftGearLow());
+		intakeIn.whenPressed(new IntakeIn());
+		intakeOut.whenPressed(new IntakeOut());
+		toggleBrakes.whenPressed(new ToggleBrakeMode());
+		toggleLEDs.whenPressed(new ToggleLEDMode());
 
-	//	lowGearOn.whenPressed(new GearShift1());
-		lowGearOn.whenReleased(new GearShift2());
-		lowGearOn.whileHeld(new GearShift1());
+	//  highGearHeld.whileActive(new GearHigh());	
+		highGearEngaged.whileHeld(new GearHigh());
+		highGearEngaged.whenReleased(new GearLow());
+	//	lowGear.whileHeld(new GearHigh());
+	//	lowGear.whenReleased(new GearLow());
 
-		
-		climbHighGear.whenPressed(new ShiftClimberLow());
-		climbLowGear.whenPressed(new ShiftClimberHigh());
+//Operator
 
-		breakOn.whenPressed(new ToggleBrakeMode());
-		ledToggle.whenPressed(new ToggleLEDMode());
-		
-		releaseCube.whenPressed(new ReleaseCube());
-		squeezeCube.whenPressed(new ReleaseCube());
+		hatchIn.whenPressed(new HatchIn());
+		hatchOut.whenPressed(new HatchOut());
+		CargoShip.whenPressed(new Elevator_Cargo());
+		level1Rocket.whenPressed(new Elevator_Level1());
+		level2Rocket.whenPressed(new Elevator_Level2());
+		level3Rocket.whenPressed(new Elevator_Level3());
+		closeBeak.whenPressed(new CloseBeak());
+		openBeak.whenPressed(new OpenBeak());
+		deployHatch.whenPressed(new DeployHatch());
+		initiateClimb.whenPressed(new ShiftClimberLow());
 
-		intakeCubeIn.whileHeld(new IntakeIn());
-		intakeCubeOut.whileHeld(new IntakeOut());
-//		operateArmDown.whileActive(new JoystickMoveArm());
-//		operateArmUp.whileActive(new JoystickMoveArm());
-//		operateTeleDown.whileActive(new JoystickMoveTele());
-//		operateTeleUp.whileActive(new JoystickMoveTele());
+		elevatorUp.whileActive(new JoystickMoveElevator());
+		elevatorDown.whileActive(new JoystickMoveElevator());
+
+		climbUp.whileActive(new JoystickMoveClimbY());
+		climbDown.whileActive(new JoystickMoveClimbY());
 		
-// jame's version this works - start both when armToScale is pressed		
-//		armToScale.whenPressed(new ControlArmToScale());
-//		armToScale.whenPressed(new ControlTeleToScale()); //Test if armToScale works with two calls
-//		armToGround.whenPressed(new ControlArmToGround());
-//		armToSwitch.whenPressed(new ControlArmToSwitch());	
-//		armToFeeder.whenPressed(new ControlArmToFeeder());
-		
-// sue's version - trying to call a command to do both things off the button press
-//		armToGround.whenPressed(new MoveArmTeleToGroundCG());
-//		armToSwitch.whenPressed(new MoveArmTeleToSwitchCG());
-//		armToScale.whenPressed(new MoveArmTeleToScaleCG());		
-//		armToFeeder.whenPressed(new MoveArmTeleToFeederCG());
-		
-		climbLowGear.whileActive(new ShiftClimberLow()); 
-		climbHighGear.whileActive(new ShiftClimberHigh()); 
+		climbForward.whileActive(new JoystickMoveClimbX()); 
+		climbBack.whileActive(new JoystickMoveClimbX()); 
 
 /*
  		.whileActive(new 

@@ -2,68 +2,46 @@
 
 package org.usfirst.frc.team708.robot;
 
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-// import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
-// import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-// import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-// import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-//import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
-// import org.usfirst.frc.team708.robot.commands.intakeCube.*;
-// import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import edu.wpi.cscore.VideoMode;
 
+
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.subsystems.Climber;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team708.robot.subsystems.Elevator;
-import org.usfirst.frc.team708.robot.subsystems.Telescope;
 import org.usfirst.frc.team708.robot.subsystems.Intake;
 import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
-import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
-import org.usfirst.frc.team708.robot.subsystems.PneumaticsClimber;
-// import org.usfirst.frc.team708.robot.commands.pneumatics.*;
 import org.usfirst.frc.team708.robot.Constants;
 
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- * 
- * @cleanup of vision & gamedata - 1/28 @11:24
- */
 public class Robot extends TimedRobot {
 
     Timer statsTimer; // Timer used for Smart Dash statistics
 
-    public static Drivetrain drivetrain;
-    public static VisionProcessor visionProcessor;
-    public static PneumaticsCube pneumaticsCube;
-    public static PneumaticsClimber pneumaticsClimber;
-    public static Intake intakeCube;
-    public static Elevator arm;
-    public static Telescope tele;
+    public static Climber           climber;
+    public static Drivetrain        drivetrain;
+    public static Elevator          elevator;
+    public static Intake            intake;
+    public static VisionProcessor   visionProcessor;
+
     public static OI oi;
 
     public String gameData;
     public String robotLocation;
     public String autoMode;
 
-    public boolean climber = true;
+    // public boolean climber = true;
     SendableChooser<Command> autonomousMode = new SendableChooser<>();
     Command autonomousCommand;
     Preferences prefs;
@@ -79,23 +57,18 @@ public class Robot extends TimedRobot {
 
         // Subsystem Initialization
 
-        drivetrain = new Drivetrain();
-        intakeCube = new Intake();
-        pneumaticsCube = new PneumaticsCube();
-        pneumaticsClimber = new PneumaticsClimber();
+        climber         = new Climber();
+        drivetrain      = new Drivetrain();
+        intake          = new Intake();
         visionProcessor = new VisionProcessor();
-        arm = new Elevator();
-        tele = new Telescope();
+        elevator        = new Elevator();
 
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
-        Robot.pneumaticsCube.IntakeOff(); /* intake open */ // Switch to Intakeoff during practice field
+        Robot.intake.IntakeIn();    // initialize intake in starting config
 
-        sendDashboardSubsystems(); // Sends each subsystem's currently running command to the Smart Dashboard
+        sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes(); // Adds autonomous modes to the selection box
-
-        // This MUST BE LAST or a NullPointerException will be thrown
-        oi = new OI(); // Initializes the OI
 
         UsbCamera camerafront = CameraServer.getInstance().startAutomaticCapture(0);
         camerafront.setResolution(320,240);
@@ -105,6 +78,9 @@ public class Robot extends TimedRobot {
         UsbCamera cameraback = CameraServer.getInstance().startAutomaticCapture(1);
         cameraback.setResolution(320, 240);
         cameraback.setFPS(20);
+
+        // This MUST BE LAST or a NullPointerException will be thrown
+        oi = new OI(); // Initializes the OI
     }
 
     /**
@@ -125,15 +101,12 @@ public class Robot extends TimedRobot {
         visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_ON);
         visionProcessor.setNTInfo("camMode", Constants.VISION_PROCESSING_ON);
 
-        gameData = DriverStation.getInstance().getGameSpecificMessage();
         drivetrain.setBrakeMode(true);
 
         // original dashboard code
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
             autonomousCommand.start();
-
-       
     }
 
     /**
@@ -153,15 +126,10 @@ public class Robot extends TimedRobot {
         // remove this line or comment it out.
         if (autonomousCommand != null)
             autonomousCommand.cancel();
-        visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
-        visionProcessor.setNTInfo("camMode", Constants.VISION_PROCESSING_OFF);
-        drivetrain.setBrakeMode(false);
-        drivetrain.shiftGearReverse();
-        drivetrain.setgear(false);
-        drivetrain.resetGyro();
 
-        Robot.pneumaticsClimber.forward(); /* high gear */
-        Robot.pneumaticsCube.IntakeOn(); /* intake closed */
+        drivetrain.setBrakeOn();
+        drivetrain.shiftLow();
+        drivetrain.resetGyro();
     }
 
     /**
@@ -193,13 +161,11 @@ public class Robot extends TimedRobot {
 
     private void sendStatistics() {
         // if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) statsTimer.reset();
+        climber.sendToDashboard();
         drivetrain.sendToDashboard();
-        intakeCube.sendToDashboard();
+        elevator.sendToDashboard();
+        intake.sendToDashboard();
         visionProcessor.sendToDashboard();
-        pneumaticsCube.sendToDashboard();
-        pneumaticsClimber.sendToDashboard();
-        arm.sendToDashboard();
-        tele.sendToDashboard();
     }
 
     /**
@@ -214,14 +180,9 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive encoder distance", new driveDistanceEncoder());
         autonomousMode.addOption("Curvature Drive", new driveCurvatureForTime());
-        // autonomousMode.addOption("Left Robot Location", new Left_RobotLocation());
-        // autonomousMode.addOption("Right Robot Location", new Right_RobotLocation());
-        // autonomousMode.addOption("Left Switch Only RobotLocation", new
-        // Left_SwitchOnly_RobotLocation());
-        // autonomousMode.addOption("Right Switch Only RobotLocation", new
-        // Left_SwitchOnly_RobotLocation());
-        // autonomousMode.addOption("Center Switch Only RobotLocation", new
-        // Center_SwitchOnly_RobotLocation());
+        autonomousMode.addOption("Rocket Left", new rocketLeft());
+        autonomousMode.addOption("Rocket right", new rocketRight());
+        autonomousMode.addOption("Ship", new ship());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
@@ -230,12 +191,10 @@ public class Robot extends TimedRobot {
      * Sends every subsystem to the Smart Dashboard
      */
     private void sendDashboardSubsystems() {
+        SmartDashboard.putData(climber);
         SmartDashboard.putData(drivetrain);
-        SmartDashboard.putData(intakeCube);
+        SmartDashboard.putData(elevator);
+        SmartDashboard.putData(intake);
         SmartDashboard.putData(visionProcessor);
-        SmartDashboard.putData(arm);
-        SmartDashboard.putData(pneumaticsCube);
-        SmartDashboard.putData(pneumaticsClimber);
-        SmartDashboard.putData(tele);
     }
 }

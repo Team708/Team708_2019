@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Telescope extends Subsystem {
+public class Climber extends Subsystem {
 	
 private WPI_TalonSRX 	teleMotorMaster;
 private WPI_VictorSPX	teleMotorSlave1, teleMotorSlave2;
@@ -22,70 +22,77 @@ public 	DigitalInput 	teleSensor;
 public double teleDistancePerPulse;
     
 public Climber() {
-		teleMotorMaster  = new WPI_TalonSRX(RobotMap.telescopingMotorMaster);
-		teleMotorSlave1  = new WPI_VictorSPX(RobotMap.telescopingMotorSlave1);
-		teleMotorSlave2  = new WPI_VictorSPX(RobotMap.telescopingMotorSlave2);
+		climberLFMaster  	= new WPI_TalonSRX(RobotMap.ClimberLeftFrontMotorMaster);
+		climberRFMaster  	= new WPI_TalonSRX(RobotMap.ClimberRightFrontMotorMaster);
+		climberRearMaster  	= new WPI_TalonSRX(RobotMap.ClimberLeftRearMotorMaster);
+		climberRearSlave  	= new WPI_TalonSRX(RobotMap.ClimberRightRearMotorSlave);
 		
-		/* Peak Current and Duration must be exceeded before current limit is activated.
-		 * When activated, current will be limited to Continuous Current.
-		 * Set Peak Current params to 0 if desired behavior is to immediately current-limit. 
-		 * (10 ms timeout)*/
-		teleMotorMaster.configPeakCurrentLimit(45, 10); /* 45 A */
-		teleMotorMaster.configPeakCurrentDuration(200, 10); /* 200ms */
-		teleMotorMaster.configContinuousCurrentLimit(40, 10); /* 40A */
-		teleMotorMaster.enableCurrentLimit(true); /* turn it on */
-
-		teleSensor 	= new DigitalInput(RobotMap.TelescopeSensor);
-
-		teleMotorSlave1.follow(teleMotorMaster);
-		teleMotorSlave2.follow(teleMotorMaster);
-
-		teleMotorMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		teleMotorMaster.setSelectedSensorPosition(Constants.TELE_ENC_STARTING_POSITION, 0, 0);
+		climberRearSlave.follow(climberRearMaster);
+		
+		// define 6 sensors on motor controllers 
+		// define 3 encoders on motor controlers
 	}
 	
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new JoystickMoveTele());
+        // setDefaultCommand(new JoystickMoveClimber());
     }
 	
 	public void manualMove(double speed) {
-		teleMotorMaster.set(speed);
+		climberLFMaster.set(speed);
+		climberRFMaster.set(speed);
+		climberRearMaster.set(speed);
 	}
 	
-	public void moveMotor(double speed) {
-		teleMotorMaster.set(speed);
+	public void moveLFMotor(double speed) {
+		climberLFMaster.set(speed);
+	}
+	public void moveRFMotor(double speed) {
+		climberRFMaster.set(speed);
+	}
+	public void moveRearMotor(double speed) {
+		climberRearMaster.set(speed);
 	}
 	
-	public void stop(){
-		teleMotorMaster.stopMotor();
+	public void stopAll(){
+		climberLFMaster.stopMotor();
+		climberRFMaster.stopMotor();
+		climberRearMaster.stopMotor();
 	}
-    
-   public boolean telescopeDown() {
-		if (!teleSensor.get()) {
-			teleMotorMaster.setSelectedSensorPosition(0, 0, 0);
-			return (true);
-	    }
-		else {
-			return (false);
-		}
+
+	public void stopLF(){
+		climberLFMaster.stopMotor();
+	}
+
+	public void stopRF(){
+		climberRFMaster.stopMotor();
+	}
+
+	public void stopLF(){
+		climberRearMaster.stopMotor();
 	}
    
-	// public double getAngle() {		
-	// 	return getEncoderDistance();
-	// }
-	
    public void setEncoderReading(int telelocation) {
 	   teleMotorMaster.setSelectedSensorPosition(telelocation, 0, 10);
    }
    
-   public double getEncoderDistance() {
-       return -teleMotorMaster.getSensorCollection().getQuadraturePosition();
-   }
-   
-   public void resetTeleEncoder() {
-	   teleMotorMaster.setSelectedSensorPosition(0, 0, 0);
-   }
+	public double getEncoderLF() {
+		return climberLFMaster.getSensorCollection().getQuadraturePosition();
+    }   
+	
+	public double getEncoderRF() {
+		return climberRFMaster.getSensorCollection().getQuadraturePosition();
+	}
+
+	public double getEncoderRear() {
+		return climberRearMaster.getSensorCollection().getQuadraturePosition();
+	}
+	
+   public void resetClimberEncoders() {
+		climberLFMaster.setSelectedSensorPosition(0, 0, 0);
+		climberRFMaster.setSelectedSensorPosition(0, 0, 0);
+		climberRearMaster.setSelectedSensorPosition(0, 0, 0);
+}
    
     /**
      * Sends data about the subsystem to the Smart Dashboard
@@ -94,8 +101,17 @@ public Climber() {
     	
 		if (Constants.DEBUG) {
 		}
-		// SmartDashboard.putBoolean("Tele Down", telescopeDown());
-    	// SmartDashboard.putNumber("Tele length", getAngle());	// Encoder reading
+		// SmartDashboard.putBoolean("Extended Front Left", );
+		// SmartDashboard.putBoolean("Extended Front Right", );
+		// SmartDashboard.putBoolean("Extended Rear", );
+		
+		// SmartDashboard.putBoolean("Retracted Front Left", );
+		// SmartDashboard.putBoolean("Retracted Front Right", );
+		// SmartDashboard.putBoolean("Retracted Rear", );
+
+    	// SmartDashboard.putNumber("Encoder Front Left", );
+    	// SmartDashboard.putNumber("Encoder Front Right", );
+    	// SmartDashboard.putNumber("Encoder Rear", );
     }
     
     

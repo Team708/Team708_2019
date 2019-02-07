@@ -61,14 +61,12 @@ public class Drivetrain extends PIDSubsystem {
 	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
 	private DigitalInput lineSensor;
-	private DigitalInput opticalSensor1;
 	
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
 						// (this could be important if a jerky robot causes things to topple
 	private boolean usePID = false;
 	
 	private boolean gearHigh;
-	private boolean butterfly_on = false;
 
     /**
      * Constructor
@@ -113,7 +111,7 @@ public class Drivetrain extends PIDSubsystem {
 		encoderRight.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
 //		opticalSensor  = new DigitalInput(7);
-		opticalSensor1 = new DigitalInput(RobotMap.lineSensor);
+		lineSensor = new DigitalInput(RobotMap.lineSensor);
 
 		gearShiftSolenoid = new DoubleSolenoid(RobotMap.driveShiftLow, RobotMap.driveShiftHigh);
 		

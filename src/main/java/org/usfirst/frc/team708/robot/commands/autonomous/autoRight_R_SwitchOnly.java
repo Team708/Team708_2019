@@ -23,7 +23,7 @@ public class autoRight_R_SwitchOnly extends CommandGroup {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         addSequential(new Send("In autoLeft_R_SwitchOnly - SWITCH"));
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	
     	addSequential(new DriveStraightToEncoderDistanceOrTime(36, .8, true, 2));
     	addSequential(new DriveCurvatureToEncoderOrTime(.8, .5, false, 58, 2));
@@ -39,7 +39,7 @@ public class autoRight_R_SwitchOnly extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
        	Robot.pneumaticsClimber.forward();
-    	Robot.pneumaticsCube.IntakeOn();
+    	Robot.pneumaticsCube.intakeDeploy();
     }
 
     // Called repeatedly when this Command is scheduled to run

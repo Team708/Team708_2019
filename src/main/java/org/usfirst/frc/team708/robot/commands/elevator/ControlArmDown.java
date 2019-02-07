@@ -30,7 +30,7 @@ public class ControlArmDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.arm.armDown()) {
+    	if(Robot.arm.eleMin()) {
         	Robot.arm.stop();
         	Robot.arm.resetArmEncoder();
         	return true;

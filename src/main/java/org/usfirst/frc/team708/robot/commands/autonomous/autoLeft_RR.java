@@ -25,7 +25,7 @@ public class autoLeft_RR extends CommandGroup {
     	// put this here in case you want to just do a drive straight over the line
     	
     	addSequential(new SqueezeCubeAuto()); /*intake closed*/
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	addSequential(new ShiftClimberHigh());
     	
     	// drive to the scale

@@ -46,8 +46,8 @@ public class Drivetrain extends PIDSubsystem {
 
 	private DifferentialDrive drivetrain;						// FRC provided drivetrain class
 	
-	private Encoder encoder;						// Encoder for the drivetrain
-	private Encoder encoder2;						// Encoder for the drivetrain
+	private Encoder encoderLeft;						// Encoder for the drivetrain
+	private Encoder encoderRight;						// Encoder for the drivetrain
 
 	private double distancePerPulse;
 	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
@@ -60,14 +60,14 @@ public class Drivetrain extends PIDSubsystem {
 	
 	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
-	private DigitalInput opticalSensor;
+	private DigitalInput lineSensor;
 	private DigitalInput opticalSensor1;
 	
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
 						// (this could be important if a jerky robot causes things to topple
 	private boolean usePID = false;
 	
-	private boolean gear_high;
+	private boolean gearHigh;
 	private boolean butterfly_on = false;
 
     /**
@@ -101,25 +101,24 @@ public class Drivetrain extends PIDSubsystem {
 		gyro = new ADIS16448_IMU();
 		gyro.reset();
 
-		encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-		encoder2 = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+		encoderLeft = new Encoder(RobotMap.drivetrainEncoderARight, RobotMap.drivetrainEncoderBRight, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+		encoderRight = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 														// Initializes the encoder
 		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 						(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
 												// Sets the distance per pulse of the encoder to read distance properly
-		encoder.setDistancePerPulse(distancePerPulse);
-		encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
-		encoder2.setDistancePerPulse(distancePerPulse);
-		encoder2.reset();								// Resets the encoder so that it starts with a 0.0 value
+		encoderLeft.setDistancePerPulse(distancePerPulse);
+		encoderLeft.reset();								// Resets the encoder so that it starts with a 0.0 value
+		encoderRight.setDistancePerPulse(distancePerPulse);
+		encoderRight.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
 //		opticalSensor  = new DigitalInput(7);
-		opticalSensor1 = new DigitalInput(RobotMap.colorSensor);
+		opticalSensor1 = new DigitalInput(RobotMap.lineSensor);
 
-		butterflySolenoid = new Solenoid(RobotMap.butterflyShift);
-		gearShiftSolenoid = new DoubleSolenoid(RobotMap.shifterLow, RobotMap.shifterHigh);
+		gearShiftSolenoid = new DoubleSolenoid(RobotMap.driveShiftLow, RobotMap.driveShiftHigh);
 		
-		butterflySolenoid.set(false);
-		butterflySolenoid.setPulseDuration(Constants.BUTTERFLY_PULSE_TIME);
+		// butterflySolenoid.set(false);
+		// butterflySolenoid.setPulseDuration(Constants.BUTTERFLY_PULSE_TIME);
     }
     
 
@@ -341,108 +340,67 @@ public class Drivetrain extends PIDSubsystem {
     public void setBrakeMode(boolean setBrake) {
     	brake = setBrake;
     	if (brake) {
-    		// leftMaster.setNeutralMode(NeutralMode.Brake);
-    		// leftSlave1.setNeutralMode(NeutralMode.Brake);
-    		// leftSlave2.setNeutralMode(NeutralMode.Brake);
-    		// rightMaster.setNeutralMode(NeutralMode.Brake);
-    		// rightSlave1.setNeutralMode(NeutralMode.Brake);
-			// rightSlave2.setNeutralMode(NeutralMode.Brake);
-			leftMaster.setIdleMode(IdleMode.kBrake);
+    		leftMaster.setIdleMode(IdleMode.kBrake);
 			leftSlave1.setIdleMode(IdleMode.kBrake);
 			rightMaster.setIdleMode(IdleMode.kBrake);
 			rightSlave1.setIdleMode(IdleMode.kBrake);
     	} else {
-    		// leftMaster.setNeutralMode(NeutralMode.Coast);
-    		// leftSlave1.setNeutralMode(NeutralMode.Coast);
-    		// leftSlave2.setNeutralMode(NeutralMode.Coast);
-    		// rightMaster.setNeutralMode(NeutralMode.Coast);
-    		// rightSlave1.setNeutralMode(NeutralMode.Coast);
-			// rightSlave2.setNeutralMode(NeutralMode.Coast);
-			leftMaster.setIdleMode(IdleMode.kCoast);
+    		leftMaster.setIdleMode(IdleMode.kCoast);
 			leftSlave1.setIdleMode(IdleMode.kCoast);
 			rightMaster.setIdleMode(IdleMode.kCoast);
 			rightSlave1.setIdleMode(IdleMode.kCoast);
     	}
     }
-    
-    public void toggleButterfly()
-    {
-    	if(butterflySolenoid.get() == true)
-    		butterflySolenoid.set(false);
-    	else
-    		butterflySolenoid.set(true);
-    	switch_butterfly();
+
+    public void shiftGearHigh() {
+		gearShiftSolenoid.set(DoubleSolenoid.Value.kForward);
+		gearHigh = true;
     }
     
-    //Activate Butterfly Solenoid for a set duration
-    public void pulseButterfly() {
-    	butterflySolenoid.startPulse();
-    }
-    
-    public void shiftGearForward() {
-    	gearShiftSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-    
-    public void shiftGearReverse() {
-    	gearShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    public void shiftGearlow() {
+		gearShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+		gearHigh = false;
     }
         
     /**
      * Sets encoder direction depending on which side of the drivetrain it is on
      */
-//    public void setEncoderReading() {
-//    	encoder.setReverseDirection(Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-//    }
-    
-    public void setEncoderReading2() {
-    	encoder.setReverseDirection(!Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-    }
+
+    // public void setEncoderReading2() {
+    // 	encoder.setReverseDirection(!Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+    // }
     
     /**
      * 
      * @return Distance traveled since last encoder reset
      */
-//    public double getEncoderDistance() {
-//    	return encoder.getDistance();
-//    }
-    public double getEncoderDistance2() {
-    	return encoder2.getDistance();
+  	 public double getEncoderDistanceLeft() {
+  	 	return encoderLeft.getDistance();
+  	 }
+    public double getEncoderDistanceRight() {
+    	return encoderRight.getDistance();
     }
     /**
      * Resets the encoder to 0.0
      */
     public void resetEncoder() {
-    	encoder.reset();
+		encoderLeft.reset();
+		encoderRight.reset();
     }
-    public void resetEncoder2() {
-    	encoder2.reset();
-    }
-    /**
+     /**
      * Returns if the optical sensor detects the color white
      * @return
      */
-//    public boolean isOpticalSensorWhite() {
-//    	return !opticalSensor.get();
-//    }
-    
-    public void setgear(boolean gear)
-    {
-    	gear_high=gear;
-    }
-    
-    public void switch_butterfly()
-    {
-    	butterfly_on = !butterfly_on;
-    }
-    public boolean isOpticalSensor1White() {
-    	return !opticalSensor1.get();
-    }
-    /**
+  	public boolean isOnLine() {
+   		return !lineSensor.get();
+	}
+	  
+  	/**
      * Returns a process variable to the PIDSubsystem for correction
      */
     @Override
 	protected double returnPIDInput() {
-    	return gyro.getAngle();
+    	return getAngle();
     }
     
     /**
@@ -453,58 +411,24 @@ public class Drivetrain extends PIDSubsystem {
         pidOutput = output;
         drivetrain.arcadeDrive(moveSpeed, -output);
     }
-    
-  
-    
+     
     
     /**
      * Sends data for this subsystem to the dashboard
      */
     public void sendToDashboard() {
     	if (Constants.DEBUG) {
-	    	// Accelerometer Info
-//	    	SmartDashboard.putNumber("Accelerometer X", accelerometer.getX());
-//	    	SmartDashboard.putNumber("Accelerometer Y", accelerometer.getY());
-//	    	SmartDashboard.putNumber("Accelerometer Z", accelerometer.getZ());
-//	    	
-//	    	SmartDashboard.putNumber("Gyro Rate", gyro.getRate());			// Gyro rate
-//	    	SmartDashboard.putNumber("PID Output", pidOutput);			// PID Info
-//	    	SmartDashboard.putNumber("DT Encoder Raw", encoder.get());		// Encoder raw count
-//	    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-////	    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
-//	    	
-//	    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getTemperature());
-	    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
-	    	SmartDashboard.putNumber("DT Rt Master", leftMaster.getOutputCurrent());
-//	    	SmartDashboard.putNumber("DT Rt Slave", rightSlave.getTemperature());
-//	    	SmartDashboard.putNumber("DT Lft Master", leftMaster.getTemperature());
-//	    	SmartDashboard.putNumber("DT Lft Slave", leftSlave.getTemperature());
-    	}
-    	
-//    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
-//    	SmartDashboard.putNumber("DT Encoder right Distance", encoder.getDistance());	// Encoder reading
-    	// SmartDashboard.putNumber("DT Encoder Distance", Math708.round(encoder2.getDistance(),2));		// Encoder reading
-    	// SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-//    	SmartDashboard.putBoolean("gear high", gear_high);					// Brake or Coast
-//    	SmartDashboard.putBoolean("butterfly", butterfly_on);
-    	// SmartDashboard.putBoolean("Optical1", isOpticalSensor1White());
-//    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
-//    	SmartDashboard.putNumber("DT Lt Master", leftMaster.getOutputCurrent());
+			SmartDashboard.putNumber("DT Encoder Left Raw", encoderLeft.get());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Right Raw", encoderRight.get());		// Encoder raw count
 
-    	SmartDashboard.putNumber("old Gyro angle", getAngle());
-		SmartDashboard.putNumber("Gyro-X", Math708.round(gyro.getAngleX(),0));
-		// SmartDashboard.putNumber("Gyro-Y", Math708.round(gyro.getAngleY(),0));
-		// SmartDashboard.putNumber("Gyro-Z", Math708.round(gyro.getAngleZ(),0));
-
-		// SmartDashboard.putNumber("Accel-X", Math708.round(gyro.getAccelX(),0));
-		// SmartDashboard.putNumber("Accel-Y", Math708.round(gyro.getAccelY(),0));
-		// SmartDashboard.putNumber("Accel-Z", Math708.round(gyro.getAccelZ(),0));
-
-		SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
-		// SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
-		// SmartDashboard.putNumber("Yaw", Math708.round(gyro.getYaw(),0));
-
-		// SmartDashboard.putNumber("Pressure: ", Math708.round(climber_gyro.getBarometricPressure(),0));
-		// SmartDashboard.putNumber("Temperature: ", Math708.round(climber_gyro.getTemperature(),0)); 
-    }
+	    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
+	    	// SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
+	    	// SmartDashboard.putNumber("DT Rt Master", leftMaster.getOutputCurrent());
+	    	
+			SmartDashboard.putNumber("Gyro turn angle", getAngle());
+			SmartDashboard.putNumber("Gyro-X", Math708.round(gyro.getAngleX(),0));
+			SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
+			SmartDashboard.putNumber("Yaw", Math708.round(gyro.getYaw(),0));
+	  }
+	}
 }

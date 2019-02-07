@@ -25,7 +25,7 @@ public class autoLeft_RL extends CommandGroup {
         // eg. requires(chassis);
     	addSequential(new SqueezeCubeAuto()); /*intake open*/
     	addSequential(new Send("In autoLeft_RL -- SCALE"));
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	addSequential(new ShiftClimberHigh());
      
     	//drive to the scale

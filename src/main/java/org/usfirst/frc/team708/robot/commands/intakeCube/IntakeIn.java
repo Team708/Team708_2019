@@ -29,7 +29,7 @@ public class IntakeIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.intakeCube.hasCube())
+    	if(Robot.intakeCube.hasBall())
     		Robot.intakeCube.stop();
     	else
          	Robot.intakeCube.moveMotor(Constants.INTAKE_FORWARD);

@@ -33,7 +33,6 @@ public class DriveCurvatureToEncoderOrTime extends Command {
     protected void initialize() {
     	Robot.drivetrain.resetGyro();
     	Robot.drivetrain.resetEncoder();
-    	Robot.drivetrain.resetEncoder2();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -49,9 +48,9 @@ public class DriveCurvatureToEncoderOrTime extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if (targetDistance >= 0) {
-    		return ((Robot.drivetrain.getEncoderDistance2() >= targetDistance) || this.timeSinceInitialized() >= runTime);
+    		return ((Robot.drivetrain.getEncoderDistanceRight() >= targetDistance) || this.timeSinceInitialized() >= runTime);
     	} else {
-    		return ((Robot.drivetrain.getEncoderDistance2() <= targetDistance) || this.timeSinceInitialized() >= runTime);
+    		return ((Robot.drivetrain.getEncoderDistanceRight() <= targetDistance) || this.timeSinceInitialized() >= runTime);
     	}
     }
 

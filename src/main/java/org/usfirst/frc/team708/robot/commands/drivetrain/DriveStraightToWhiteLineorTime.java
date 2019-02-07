@@ -37,7 +37,7 @@ public class DriveStraightToWhiteLineorTime extends Command {
 
  //    Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.drivetrain.isOpticalSensor1White();
+    	return Robot.drivetrain.isOnLine();
  //   	return toWhite ? Robot.drivetrain.isOpticalSensorWhite() : !Robot.drivetrain.isOpticalSensorWhite();
     }
 

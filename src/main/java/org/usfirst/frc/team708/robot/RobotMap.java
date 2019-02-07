@@ -38,34 +38,33 @@ public class RobotMap {
 
 // Elevator 
 	public static final int elevatorMotorMaster	 			= 21;
-	public static final int elevatorMotorSlave1	 			= 22;
 
 // Ball Intake
 	public static final int ballIntakeMotorMaster			= 31; 
 	public static final int ballIntakeMotorSlave1			= 32; 
 	
 // Hatch Intake
-	public static final int HatchIntakeeMotorMaster			= 41; 
-	public static final int HatchIntakeMotorSlave			= 42; 
+	public static final int hatchIntakeeMotorMaster			= 41; 
 
 // Climber
 	public static final int ClimberLeftFrontMotorMaster		= 51; 
 	public static final int ClimberRightFrontMotorMaster	= 52; 
+
 	public static final int ClimberLeftRearMotorMaster		= 53; 
 	public static final int ClimberRightRearMotorSlave		= 54; 
 
 
 // Digital IO
-	public static final int drivetrainEncoderARight		= 0;  	
-	public static final int drivetrainEncoderBRight		= 1;
-	public static final int drivetrainEncoderALeft		= 2;
-	public static final int drivetrainEncoderBLeft		= 3;
-	public static final int elevatorEncoderA			= 4;
-	public static final int elevatorEncoderB			= 5;	
-// public static final int 								= 6;
-// public static final int								= 7;	
-// public static final int 					 			= 8;  
-// public static final int 								= 9;
+	public static final int drivetrainEncoderALeft		= 0;  	
+	public static final int drivetrainEncoderBLeft		= 1;
+	public static final int drivetrainEncoderARight		= 2;
+	public static final int drivetrainEncoderBRight		= 3;
+//	public static final int 							= 4;
+	public static final int ballSensor					= 5;	
+	public static final int hatchSensor					= 6;
+	// public static final int								= 7;	
+	// public static final int 					 			= 8;  
+	public static final int lineSensor					= 9;
 	
 	
 // RELAY

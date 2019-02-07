@@ -25,7 +25,7 @@ public class autoLeft_LR extends CommandGroup {
     	
     	addSequential(new SqueezeCubeAuto());
         addSequential(new Send("In autoLeft_LR - SWITCH"));
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	addSequential(new ShiftClimberHigh());
     	
        	// drive to the scale
@@ -76,7 +76,7 @@ public class autoLeft_LR extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.pneumaticsClimber.forward();
-    	Robot.pneumaticsCube.IntakeOn();   	
+    	Robot.pneumaticsCube.intakeDeploy();   	
     }
 
     // Called repeatedly when this Command is scheduled to run

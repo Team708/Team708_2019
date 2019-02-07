@@ -24,7 +24,7 @@ public class SwitchOnly_Center_Right extends CommandGroup {
         // eg. requires(chassis);
     	
     	addSequential(new ReleaseCubeAuto()); /*intake closed*/  
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	
        	//drive to the switch
     	addSequential(new DriveCurvatureToDegreesOrTime(.8, .7, false, 35, 2));
@@ -44,7 +44,7 @@ public class SwitchOnly_Center_Right extends CommandGroup {
     	// grab 2nd cube from the center
 		addSequential(new ControlArmToGround(2));
     	addParallel(new AutoIntakeIn(2.0));  
-    	addSequential(new DriveStraightToCubeOrTime(40, .6, true, 3));
+    	addSequential(new DriveStraightToBallOrTime(40, .6, true, 3));
     	addSequential(new AutoIntakeInForTime(1.0));  
     	addSequential(new DriveStraightToEncoderDistanceOrTime(3, .6, false, 1));
     	
@@ -66,7 +66,7 @@ public class SwitchOnly_Center_Right extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.pneumaticsClimber.forward();
-    	Robot.pneumaticsCube.IntakeOn();
+    	Robot.pneumaticsCube.intakeDeploy();
     }
 
     // Called repeatedly when this Command is scheduled to run

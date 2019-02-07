@@ -8,11 +8,11 @@ import org.usfirst.frc.team708.robot.util.Gamepad;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class JoystickMoveArm extends Command {
+public class JoystickMoveElevator extends Command {
 	
 	private double moveSpeed;
 	
-    public JoystickMoveArm() {
+    public JoystickMoveElevator() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.arm);
     }

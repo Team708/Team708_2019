@@ -23,7 +23,7 @@ public class ReleaseCubeAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumaticsCube.IntakeOn(); /*intake open*/
+    	Robot.pneumaticsCube.intakeDeploy(); /*intake open*/
     }
 
     // Called repeatedly when this Command is scheduled to run

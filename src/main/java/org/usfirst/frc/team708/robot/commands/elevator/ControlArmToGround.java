@@ -38,7 +38,7 @@ public class ControlArmToGround extends Command {
     	//do we neeed a timer here to keep the arm motor from spinning too long
     	//maybe check voltage draw and encoder change?
     	
-    	if(Robot.arm.armDown() || this.timeSinceInitialized() >= runTime) {
+    	if(Robot.arm.eleMin() || this.timeSinceInitialized() >= runTime) {
         	Robot.arm.stop();
         	Robot.arm.resetArmEncoder();
         	return true;

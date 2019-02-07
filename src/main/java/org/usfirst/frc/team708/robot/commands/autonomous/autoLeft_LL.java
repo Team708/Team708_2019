@@ -27,7 +27,7 @@ public class autoLeft_LL extends CommandGroup {
     	
     	
     	addSequential(new SqueezeCubeAuto());
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	addSequential(new ShiftClimberHigh());
 
     	

@@ -3,7 +3,7 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
-import org.usfirst.frc.team708.robot.commands.drivetrain.GearShift1;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightForTime;
 //import org.usfirst.frc.team708.robot.commands.drivetrain.RotateAndDriveToBoiler;
 import org.usfirst.frc.team708.robot.commands.drivetrain.ToggleBrakeMode;
@@ -36,7 +36,7 @@ public class driveDistanceEncoder extends CommandGroup {
     public  driveDistanceEncoder() {
 
     	addSequential(new ReleaseCubeAuto()); /*intake closed*/  
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
 
 //    	addSequential(new WaitCommand(5.0));
     	

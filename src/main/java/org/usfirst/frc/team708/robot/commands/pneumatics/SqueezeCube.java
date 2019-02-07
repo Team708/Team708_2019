@@ -34,12 +34,12 @@ public class SqueezeCube extends Command {
 
     	if (grab==1) {
     		done = false;
-    		Robot.pneumaticsCube.IntakeOn();
+    		Robot.pneumaticsCube.intakeDeploy();
     	}
     	else
     	{
     		done = true;
-	    	Robot.pneumaticsCube.IntakeOff();
+	    	Robot.pneumaticsCube.intakeRetract();
 //        Robot.pneumaticsCube.toggleIntake();
     	}
     }

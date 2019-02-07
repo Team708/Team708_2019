@@ -64,8 +64,10 @@ public class Robot extends TimedRobot {
         elevator        = new Elevator();
 
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
-        Robot.intake.IntakeIn();    // initialize intake in starting config
-
+        Robot.intake.intakeRetract();    // initialize intake in starting config
+        Robot.intake.beakOpen();
+        Robot.intake.hatchRetract();
+        Robot.drivetrain.shiftGearlow();
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes(); // Adds autonomous modes to the selection box
@@ -127,8 +129,8 @@ public class Robot extends TimedRobot {
         if (autonomousCommand != null)
             autonomousCommand.cancel();
 
-        drivetrain.setBrakeOn();
-        drivetrain.shiftLow();
+        drivetrain.setBrakeMode(false);
+        drivetrain.shiftGearlow();
         drivetrain.resetGyro();
     }
 
@@ -180,9 +182,9 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive encoder distance", new driveDistanceEncoder());
         autonomousMode.addOption("Curvature Drive", new driveCurvatureForTime());
-        autonomousMode.addOption("Rocket Left", new rocketLeft());
-        autonomousMode.addOption("Rocket right", new rocketRight());
-        autonomousMode.addOption("Ship", new ship());
+        // autonomousMode.addOption("Rocket Left", new rocketLeft());
+        // autonomousMode.addOption("Rocket right", new rocketRight());
+        // autonomousMode.addOption("Ship", new ship());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

@@ -25,7 +25,7 @@ public class autoRight_L_SwitchOnly extends CommandGroup {
     	addSequential(new SqueezeCubeAuto()); /*intake closed*/  
 
     	addSequential(new Send("In autoLeft_L_SwitchOnly - SWITCH"));
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	
        	//drive to the switch
 
@@ -47,7 +47,7 @@ public class autoRight_L_SwitchOnly extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
        	Robot.pneumaticsClimber.forward();
-    	Robot.pneumaticsCube.IntakeOn();
+    	Robot.pneumaticsCube.intakeDeploy();
     }
 
     // Called repeatedly when this Command is scheduled to run

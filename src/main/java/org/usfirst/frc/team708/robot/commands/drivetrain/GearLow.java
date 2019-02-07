@@ -8,18 +8,18 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearShift1 extends Command{
+public class GearLow extends Command{
         
-    public GearShift1() {
+    public GearLow() {
 
-   // 	requires(Robot.drivetrain);
+    //	requires(Robot.drivetrain);
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.shiftGearForward();
-    	Robot.drivetrain.setgear(true);
+    	Robot.drivetrain.shiftGearlow();
+
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -36,16 +36,16 @@ public class AutoIntakeIn extends Command {
 //    		Robot.intakeCube.stop();
 //    	else
 //         	Robot.intakeCube.moveMotor(Constants.INTAKE_FORWARD);    }
-    	Robot.intakeCube.moveMotor(Constants.INTAKE_FORWARD);
+    	Robot.intake.moveMotor(Constants.INTAKE_FORWARD);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.intakeCube.hasCube() || isTimedOut());
+    	return (Robot.intake.hasBall() || isTimedOut());
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intakeCube.stop();
+    	Robot.intake.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -2,7 +2,7 @@ package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
-import org.usfirst.frc.team708.robot.commands.arm.JoystickMoveArm;
+import org.usfirst.frc.team708.robot.commands.arm.JoystickMoveElevator;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -19,55 +19,51 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem {
 	
-	private WPI_TalonSRX 	armMotorMaster;
-	private WPI_VictorSPX   armMotorSlave1;
-	public 	DigitalInput 	armSensor;
+	private WPI_TalonSRX 	elevatorMotorMaster;
+//	private WPI_VictorSPX   armMotorSlave1;
+//	public 	DigitalInput 	armSensor;
 
 	public double armDistancePerPulse;
     /**
       * Constructor
       */
 	public Elevator() {
-		armMotorMaster = new WPI_TalonSRX(RobotMap.pivotArmMotorMaster);
-		armMotorSlave1  = new WPI_VictorSPX(RobotMap.pivotArmMotorSlave1);
-		armSensor 	= new DigitalInput(RobotMap.armSensor);
+		elevatorMotorMaster = new WPI_TalonSRX(RobotMap.elevatorMotorMaster);
 		
 		/* Peak Current and Duration must be exceeded before current limit is activated.
 		 * When activated, current will be limited to Continuous Current.
 		 * Set Peak Current params to 0 if desired behavior is to immediately current-limit. 
 		 * (10 ms timeout)*/
-		armMotorMaster.configPeakCurrentLimit(30, 10); /* 45 A */
-		armMotorMaster.configPeakCurrentDuration(200, 10); /* 200ms */
-		armMotorMaster.configContinuousCurrentLimit(25, 10); /* 40A */
-		armMotorMaster.enableCurrentLimit(true); /* turn it on */
+		// elevatorMotorMaster.configPeakCurrentLimit(30, 10); /* 45 A */
+		// elevatorMotorMaster.configPeakCurrentDuration(200, 10); /* 200ms */
+		// elevatorMotorMaster.configContinuousCurrentLimit(25, 10); /* 40A */
+		// elevatorMotorMaster.enableCurrentLimit(true); /* turn it on */
 
-		armMotorSlave1.follow(armMotorMaster);
-
-		armMotorMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		armMotorMaster.setSelectedSensorPosition(Constants.ARM_ENC_STARTING_POSITION, 0, 0);
+		elevatorMotorMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		elevatorMotorMaster.setSelectedSensorPosition(Constants.ELE_ENC_STARTING_POSITION, 0, 0);
 	}
 	
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new JoystickMoveArm());
+        setDefaultCommand(new JoystickMoveElevator());
     }
 	
 	public void manualMove(double speed) {
-		armMotorMaster.set(speed);
+		elevatorMotorMaster.set(speed);
 	}
 	
 	public void moveMotor(double speed) {
-		armMotorMaster.set(speed);
+		elevatorMotorMaster.set(speed);
 	}
 	
 	public void stop(){
-		armMotorMaster.stopMotor();
+		elevatorMotorMaster.stopMotor();
 	}
     
-   public boolean armDown() {
-		if (!armSensor.get()) {
+   public boolean eleMin() {
+		if (!elevatorMotorMaster.getSensorCollection().isRevLimitSwitchClosed()) {
 //			armMotorMaster.getSensorCollection().setQuadraturePosition(0, 0);	
-			armMotorMaster.setSelectedSensorPosition(0, 0, 0);
+			elevatorMotorMaster.setSelectedSensorPosition(0, 0, 0);
 
 			return (true);
 	    }
@@ -75,6 +71,18 @@ public class Elevator extends Subsystem {
 			return (false);
 		}
 	}
+	public boolean eleMax() {
+		if (!elevatorMotorMaster.getSensorCollection().isFwdLimitSwitchClosed()) {
+//			armMotorMaster.getSensorCollection().setQuadraturePosition(0, 0);	
+			elevatorMotorMaster.setSelectedSensorPosition(Constants.ELE_MAX, 0, 0); //TBD
+
+			return (true);
+	    }
+		else {
+			return (false);
+		}
+	}
+	
    
 //	public double getAngle(){
 //		return enc.get() * Constants.ARM_REVS_PER_TALON_REV; //Arm Angle = (# talon revs) * (arm revs/talon rev) 
@@ -86,17 +94,17 @@ public class Elevator extends Subsystem {
 	// 	return getEncoderDistance();
 	// }
 	
-   public void setEncoderReading(int armlocation) {
+   public void setEncoderReading(int eleLocation) {
 //	   armMotorMaster.getSensorCollection().setPulseWidthPosition(armlocation, 10);
-	   armMotorMaster.setSelectedSensorPosition(armlocation, 0, 10);
+	   elevatorMotorMaster.setSelectedSensorPosition(eleLocation, 0, 10);
    }
    
    public double getEncoderDistance() {
-       return armMotorMaster.getSensorCollection().getQuadraturePosition();
+       return elevatorMotorMaster.getSensorCollection().getQuadraturePosition();
    }
    
    public void resetArmEncoder() {
-		armMotorMaster.setSelectedSensorPosition(0, 0, 0);
+		elevatorMotorMaster.setSelectedSensorPosition(0, 0, 0);
    }
    
     /**

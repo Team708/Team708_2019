@@ -24,7 +24,7 @@ public class autoLeft_L_SwitchOnly extends CommandGroup {
         // eg. requires(chassis);
     	
     	addSequential(new ReleaseCubeAuto()); /*intake closed*/  
-    	addSequential(new GearShift1());
+    	addSequential(new GearHigh());
     	
 //       	//drive to the switch
 ////    	addSequential(new DriveCurvatureForTime(1.0, .6, false, 1.5));
@@ -76,7 +76,7 @@ public class autoLeft_L_SwitchOnly extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.pneumaticsClimber.forward();
-    	Robot.pneumaticsCube.IntakeOn();
+    	Robot.pneumaticsCube.intakeDeploy();
     }
 
     // Called repeatedly when this Command is scheduled to run

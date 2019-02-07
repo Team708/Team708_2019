@@ -42,7 +42,7 @@ public class DriveCurvatureToWhiteOrTime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (this.timeSinceInitialized() >= runTime || Robot.drivetrain.isOpticalSensor1White());
+        return (this.timeSinceInitialized() >= runTime || Robot.drivetrain.isOnLine());
     }
 
     // Called once after isFinished returns true

@@ -23,7 +23,7 @@ public class SqueezeCubeAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumaticsCube.IntakeOff(); /*intake closed*/
+    	Robot.pneumaticsCube.intakeRetract(); /*intake closed*/
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -2,7 +2,7 @@ package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
-import org.usfirst.frc.team708.robot.commands.telescope.JoystickMoveTele;
+import org.usfirst.frc.team708.robot.commands.elevator.JoystickMoveElevator;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
@@ -15,17 +15,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climber extends Subsystem {
 	
-private WPI_TalonSRX 	teleMotorMaster;
-private WPI_VictorSPX	teleMotorSlave1, teleMotorSlave2;
+private WPI_TalonSRX 	climberFLMaster, climberFRMaster, climberRearMaster;
+private WPI_VictorSPX	climberRearSlave;
 public 	DigitalInput 	teleSensor;
 
 public double teleDistancePerPulse;
     
 public Climber() {
-		climberLFMaster  	= new WPI_TalonSRX(RobotMap.ClimberLeftFrontMotorMaster);
-		climberRFMaster  	= new WPI_TalonSRX(RobotMap.ClimberRightFrontMotorMaster);
+		climberFLMaster  	= new WPI_TalonSRX(RobotMap.ClimberLeftFrontMotorMaster);
+		climberFRMaster  	= new WPI_TalonSRX(RobotMap.ClimberRightFrontMotorMaster);
 		climberRearMaster  	= new WPI_TalonSRX(RobotMap.ClimberLeftRearMotorMaster);
-		climberRearSlave  	= new WPI_TalonSRX(RobotMap.ClimberRightRearMotorSlave);
+		climberRearSlave  	= new WPI_VictorSPX(RobotMap.ClimberRightRearMotorSlave);
 		
 		climberRearSlave.follow(climberRearMaster);
 		
@@ -39,49 +39,45 @@ public Climber() {
     }
 	
 	public void manualMove(double speed) {
-		climberLFMaster.set(speed);
-		climberRFMaster.set(speed);
+		climberFLMaster.set(speed);
+		climberFRMaster.set(speed);
 		climberRearMaster.set(speed);
 	}
 	
 	public void moveLFMotor(double speed) {
-		climberLFMaster.set(speed);
+		climberFLMaster.set(speed);
 	}
 	public void moveRFMotor(double speed) {
-		climberRFMaster.set(speed);
+		climberFRMaster.set(speed);
 	}
 	public void moveRearMotor(double speed) {
 		climberRearMaster.set(speed);
 	}
 	
 	public void stopAll(){
-		climberLFMaster.stopMotor();
-		climberRFMaster.stopMotor();
+		climberFLMaster.stopMotor();
+		climberFRMaster.stopMotor();
 		climberRearMaster.stopMotor();
 	}
 
-	public void stopLF(){
-		climberLFMaster.stopMotor();
+	public void stopFrontLeft(){
+		climberFLMaster.stopMotor();
 	}
 
-	public void stopRF(){
-		climberRFMaster.stopMotor();
+	public void stopFrontRight(){
+		climberFRMaster.stopMotor();
 	}
 
-	public void stopLF(){
+	public void stopRear(){
 		climberRearMaster.stopMotor();
 	}
-   
-   public void setEncoderReading(int telelocation) {
-	   teleMotorMaster.setSelectedSensorPosition(telelocation, 0, 10);
-   }
-   
-	public double getEncoderLF() {
-		return climberLFMaster.getSensorCollection().getQuadraturePosition();
+    
+	public double getEncoderFL() {
+		return climberFLMaster.getSensorCollection().getQuadraturePosition();
     }   
 	
-	public double getEncoderRF() {
-		return climberRFMaster.getSensorCollection().getQuadraturePosition();
+	public double getEncoderFR() {
+		return climberFRMaster.getSensorCollection().getQuadraturePosition();
 	}
 
 	public double getEncoderRear() {
@@ -89,8 +85,8 @@ public Climber() {
 	}
 	
    public void resetClimberEncoders() {
-		climberLFMaster.setSelectedSensorPosition(0, 0, 0);
-		climberRFMaster.setSelectedSensorPosition(0, 0, 0);
+		climberFLMaster.setSelectedSensorPosition(0, 0, 0);
+		climberFRMaster.setSelectedSensorPosition(0, 0, 0);
 		climberRearMaster.setSelectedSensorPosition(0, 0, 0);
 }
    

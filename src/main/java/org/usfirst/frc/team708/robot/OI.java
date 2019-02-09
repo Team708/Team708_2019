@@ -3,6 +3,10 @@ package org.usfirst.frc.team708.robot;
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
+import org.usfirst.frc.team708.robot.commands.climber.*;
+import org.usfirst.frc.team708.robot.commands.drivetrain.*;
+import org.usfirst.frc.team708.robot.commands.elevator.*;
+import org.usfirst.frc.team708.robot.commands.intake.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,7 +37,6 @@ public class OI {
 	private static final int RETRACT_INTAKE_BUTTON			= Gamepad.button_X;
 
 	private static final int TOGGLE_BRAKES_BUTTON			= Gamepad.button_Back;
-	private static final int TOGGLE_LED_BUTTON				= Gamepad.button_Start;
 
 /*
  * Operator Button Assignment
@@ -53,8 +56,10 @@ public class OI {
 
 	private static final int ELEVATOR_OVERIDE_BUTTON		= Gamepad.leftStick_Y;
 
-	private static final int OPEN_BEAK_BUTTON				= Gamepad.button_Back;
-	private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
+// private static final int OPEN_BEAK_BUTTON				= Gamepad.button_Back;
+// private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
+	private static final int FIND_HATCH_BUTTON				= Gamepad.button_Back;
+	private static final int FIND_BALL_BUTTON				= Gamepad.button_Start;
 
 	private static final int DEPLOY_HATCH					= Gamepad.button_RightStick;
 	private static final int LEVEL_0_ELEV_BUTTON			= Gamepad.button_LeftStick;
@@ -75,7 +80,6 @@ public class OI {
 	public static final Button intakeOut		= new JoystickButton(driverGamepad, DEPLOY_INTAKE_BUTTON);
 	public static final Button intakeIn			= new JoystickButton(driverGamepad, RETRACT_INTAKE_BUTTON);
 	public static final Button toggleBrakes		= new JoystickButton(driverGamepad, TOGGLE_BRAKES_BUTTON);
-	public static final Button toggleLEDs		= new JoystickButton(driverGamepad, TOGGLE_LED_BUTTON);
 
 	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
 	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
@@ -91,8 +95,8 @@ public class OI {
 	public static final Button level1Rocket		= new JoystickButton(operatorGamepad, LEVEL_1_ROCKET_BUTTON);
 	public static final Button level2Rocket		= new JoystickButton(operatorGamepad, LEVEL_2_ROCKET_BUTTON);
 	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
-	public static final Button openBeak			= new JoystickButton(operatorGamepad, CLOSE_BEAK_BUTTON);
-	public static final Button closeBeak		= new JoystickButton(operatorGamepad, OPEN_BEAK_BUTTON);
+	public static final Button findHatch		= new JoystickButton(operatorGamepad, FIND_HATCH_BUTTON);
+	public static final Button findBall			= new JoystickButton(operatorGamepad, FIND_BALL_BUTTON);
 	public static final Button deployHatch 		= new JoystickButton(operatorGamepad, DEPLOY_HATCH);
 	public static final Button elevatorGround	= new JoystickButton(operatorGamepad, LEVEL_0_ELEV_BUTTON);
 
@@ -110,14 +114,13 @@ public class OI {
 	public OI() {
 
 // Driver
-		ballOut.whenPressed(new SpinBallOut());
-		ballIn.whenPressed(new SpinBallIn());
-		highGear.whenPressed(new ShiftGearHigh());
-		lowGear.whenPressed(new ShiftGearLow());
-		intakeIn.whenPressed(new IntakeIn());
-		intakeOut.whenPressed(new IntakeOut());
+		ballOut.whenPressed(new IntakeBallOut());
+		ballIn.whenPressed(new IntakeBallIn());
+		highGear.whenPressed(new GearHigh());
+		lowGear.whenPressed(new GearLow());
+		intakeIn.whenPressed(new DeployIntake());
+		intakeOut.whenPressed(new RetractIntake());
 		toggleBrakes.whenPressed(new ToggleBrakeMode());
-		toggleLEDs.whenPressed(new ToggleLEDMode());
 
 	//  highGearHeld.whileActive(new GearHigh());	
 		highGearEngaged.whileHeld(new GearHigh());
@@ -127,16 +130,16 @@ public class OI {
 
 //Operator
 
-		hatchIn.whenPressed(new HatchIn());
-		hatchOut.whenPressed(new HatchOut());
-		CargoShip.whenPressed(new Elevator_Cargo());
-		level1Rocket.whenPressed(new Elevator_Level1());
-		level2Rocket.whenPressed(new Elevator_Level2());
-		level3Rocket.whenPressed(new Elevator_Level3());
-		closeBeak.whenPressed(new CloseBeak());
-		openBeak.whenPressed(new OpenBeak());
+		hatchIn.whenPressed(new IntakeHatchIn());
+		hatchOut.whenPressed(new IntakeHatchOut());
+		CargoShip.whenPressed(new ElevatorToCargo());
+		level1Rocket.whenPressed(new ElevatorToLevel1());
+		level2Rocket.whenPressed(new ElevatorToLevel2());
+		level3Rocket.whenPressed(new ElevatorToLevel3());
+		findHatch.whenPressed(new FindHatch());
+		findBall.whenPressed(new FindBall());
 		deployHatch.whenPressed(new DeployHatch());
-		elevatorGround.whenPressed(new Elevator_Level0());
+		elevatorGround.whenPressed(new ElevatorToLevel0());
 				
 		initiateClimb.whenPressed(new InitiateClimb());
 		stopClimb.whenPressed(new StopClimb());
@@ -144,11 +147,11 @@ public class OI {
 		elevatorUp.whileActive(new JoystickMoveElevator());
 		elevatorDown.whileActive(new JoystickMoveElevator());
 
-		climbUp.whileActive(new JoystickMoveClimbY());
-		climbDown.whileActive(new JoystickMoveClimbY());
+		climbUp.whileActive(new JoystickMoveClimb());
+		climbDown.whileActive(new JoystickMoveClimb());
 		
-		climbForward.whileActive(new JoystickMoveClimbX()); 
-		climbBack.whileActive(new JoystickMoveClimbX()); 
+		climbForward.whileActive(new JoystickMoveClimb()); 
+		climbBack.whileActive(new JoystickMoveClimb()); 
 
 /*
  		.whileActive(new 

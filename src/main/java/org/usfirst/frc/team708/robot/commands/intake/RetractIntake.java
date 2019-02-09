@@ -1,29 +1,18 @@
-package org.usfirst.frc.team708.robot.commands.pneumatics;
+package org.usfirst.frc.team708.robot.commands.intake;
 
-//import java.awt.Robot;
-
-import org.usfirst.frc.team708.robot.Constants;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team708.robot.commands.pneumatics.*;
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
 
-public class SqueezeCubeAuto extends Command {
+public class RetractIntake extends Command {
 
 
-    public SqueezeCubeAuto() {
-//    	requires(Robot.feeder);
-//    	requires(Robot.intake_ball);
-//    	requires(Robot.drivetrain);
-//    	requires(Robot.shooter);
+    public RetractIntake() {
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumaticsCube.intakeRetract(); /*intake closed*/
+    	Robot.intake.intakeRetract();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -1,30 +1,22 @@
-package org.usfirst.frc.team708.robot.commands.pneumatics;
+package org.usfirst.frc.team708.robot.commands.intake;
 
-//import java.awt.Robot;
-
-import org.usfirst.frc.team708.robot.Constants;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team708.robot.commands.pneumatics.*;
-import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
 import org.usfirst.frc.team708.robot.Robot;
 
-public class PneumaticsClose extends Command {
+public class RetractHatch extends Command {
 
 
-    public PneumaticsClose() {
-    	
+    public RetractHatch() {
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumaticsCube.toggleIntake();
+    	Robot.intake.hatchRetract();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {    	
+    protected void execute() {    
     }
 
     // Make this return true when this Command no longer needs to run execute()

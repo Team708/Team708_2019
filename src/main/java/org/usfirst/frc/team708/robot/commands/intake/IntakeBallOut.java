@@ -1,42 +1,38 @@
-package org.usfirst.frc.team708.robot.commands.pneumatics;
-
-//import java.awt.Robot;
+package org.usfirst.frc.team708.robot.commands.intake;
 
 import org.usfirst.frc.team708.robot.Constants;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team708.robot.commands.pneumatics.*;
+import org.usfirst.frc.team708.robot.OI;
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.subsystems.PneumaticsCube;
+import org.usfirst.frc.team708.robot.RobotMap;
 
-public class PneumaticsOpen extends Command {
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.command.Command;
 
+public class IntakeBallOut extends Command {
 
-    public PneumaticsOpen() {
-//    	requires(Robot.feeder);
-//    	requires(Robot.intake_ball);
-//    	requires(Robot.drivetrain);
-//    	requires(Robot.shooter);
+	
+    public IntakeBallOut() {
+    	requires(Robot.intake);
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumaticsCube.toggleIntake();
+    	Robot.intake.moveMotorBall(Constants.BALL_OUT);
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {    
+    protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return(true);
+    	return(false);
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.intake.stopMotorBall();
     }
 
     // Called when another command which requires one or more of the same

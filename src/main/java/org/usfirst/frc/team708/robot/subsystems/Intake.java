@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class Intake extends Subsystem {
 	
-	private WPI_TalonSRX 	ballMaster, hatchMaster;
+	private WPI_TalonSRX 		ballMaster, hatchMaster;
 	private WPI_VictorSPX   ballSlave;
 
 	private Solenoid intakeSolenoid;
@@ -99,12 +99,10 @@ public class Intake extends Subsystem {
 	}
 	
 	public void ballStop(){
-		ballMaster.set(Constants.BALL_OFF);
-    	SmartDashboard.putNumber("In Stop Motor speed=", 0.0);
+		ballMaster.set(Constants.BALL_STOP);
 	}
 	public void hatchStop(){
-		hatchMaster.set(Constants.HATCH_OFF);
-    	SmartDashboard.putNumber("In Stop Motor speed=", 0.0);
+		hatchMaster.set(Constants.HATCH_STOP);
 	}
  //Pneumatics
 	  public void intakeRetract()
@@ -117,17 +115,6 @@ public class Intake extends Subsystem {
 			intakeRetracted = false;
 		  intakeSolenoid.set(false);
 	    }
-		public void beakOpen()
-	    {
-		  beakOpened = true;
-		  beakSolenoid.set(true);
-	    }
-	  
-	  public void beakClose()
-	    {
-		  beakOpened = false;
-		  beakSolenoid.set(false);
-	    }
     public void hatchRetract()
 	    {
 			hatchRetracted = true;
@@ -138,7 +125,21 @@ public class Intake extends Subsystem {
 	    {
 			hatchRetracted = false;
 		  hatchSolenoid.set(false);
-	    }
+			}
+			
+		// public void beakOpen()
+	  //   {
+		//   beakOpened = true;
+		//   beakSolenoid.set(true);
+	  //   }
+	  
+	  // public void beakClose()
+	  //   {
+		//   beakOpened = false;
+		//   beakSolenoid.set(false);
+	  //   }
+
+
     /**
      * Sends data about the subsystem to the Smart Dashboard
      */

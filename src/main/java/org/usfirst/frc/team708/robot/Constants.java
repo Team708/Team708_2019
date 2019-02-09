@@ -20,7 +20,7 @@ public final class Constants {
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	TANK_STICK_TOLERANCE 					= .30;
-	public static final int  DRIVETRAIN_WHEEL_DIAMETER 					= 6;  //4inch wheel * .56 gear ratio
+	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 6;  	//4inch wheel * .56 gear ratio
 	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 256.0;
 	public static final boolean DRIVE_USE_SQUARED_INPUT 				= false;
 	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER				= true; // variable to determine which side encoder is on
@@ -49,50 +49,53 @@ public final class Constants {
 	/*
 	 * Elevator
 	 */
-	public static final double 	ELEVATOR_MOTOR_MIN_SPEED 		= .8;
-	public static final double 	ELEVATOR_MOTOR_MAX_SPEED 		= 1.0;
-	public static final double	ELE_DEADZONE 					= .6; 
-	public static final double 	ELE_FORWARD 					= 1.0; 
-	public static final double 	ELE_REVERSE 					= -1.0;
-	public static final int	ELE_MAX							= 21000; //Change based on DESIGN (USE INCHES)
-	public static final double	ELE_LV3							= 20000; //Change based on ROCKET (USE INCHES)
-	public static final double	ELE_LV2							= 20000; //Change based on ROCKET (USE INCHES)
-	public static final double	ELE_LV1							= 20000; //Change based on ROCKET (USE INCHES)
-	public static final double	ELE_LV_DIFF						= 20000; //Change based on ROCKET (USE INCHES)
-	public static final int ELE_ENC_STARTING_POSITION 			= 0;
-	public static final int	ELE_TOLERANCE						= 1000;
+	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
+	public static final double 	ELEVATOR_MOTOR_DOWN		 	= -1.0;
+	public static final double	ELE_DEADZONE 				=   .6; 
+	public static final int		ELE_MAX						= 400;
+	public static final double	ELE_HATCH_LVL3				= 300; 
+	public static final double	ELE_HATCH_LVL2				= 200; 
+	public static final double	ELE_HATCH_LVL1				= 100; 
+	public static final double	ELE_BALL_LVL1				= 100; 
+	public static final double	ELE_BALL_LVL2				= 200; 
+	public static final double	ELE_BALL_LVL3				= 300; 
+	public static final double	ELE_CARGO					= 150; 
+	public static final int ELE_ENC_STARTING_POSITION 		= 100;
+	public static final int ELE_ENC_MAX				 		= 600;
+	public static final int ELE_ENC_MIN				 		= 0;
+	public static final int	ELE_TOLERANCE					= 10;
 
 	/*
 	 * Intake
 	 */
-	public static final int	INTAKE_DEPLOY			= 1;
-	public static final int	INTAKE_RETRACT			= 0;
-	public static final int	HATCH_SECURE			= 1;
-	public static final int	HATCH_RELEASE			= 0;
-	public static final int	HATCH_EXTEND			= 1;
-	public static final double BALL_FORWARD 		= 1.0;
-	public static final double BALL_REVERSE 		= -0.8;
-	public static final double BALL_OFF 			= 0.0;
-	public static final double HATCH_FORWARD 		= 1.0;
-	public static final double HATCH_REVERSE 		= -0.8;
-	public static final double HATCH_OFF 			= 0.0;
-	public static final double INTAKE_PULSE_TIME	= 0.5;
+	public static final int		HATCH_IN			=  1;
+	public static final int		HATCH_OUT			= -1;
+	public static final double 	HATCH_STOP 			=  0;
 
+	public static final double BALL_IN 				=  1.0;
+	public static final double BALL_OUT 			= -1.0;
+	public static final double BALL_STOP 			=  0.0;
+
+	public static final int		INTAKE_HATCH_IN		=  0;
+	public static final int		INTAKE_HATCH_OUT	=  1;
+	
+	public static final int		INTAKE_BALL_IN		=  0;
+	public static final int		INTAKE_BALL_OUT		=  1;
 	/*
 	 * Vision
 	 */
 	public static final double VISION_LED_ON				= 0.0;
 	public static final double VISION_LED_OFF				= 1.0;
 	public static final double VISION_LED_BLINK				= 2.0;
-	public static final double VISION_PROCESSING_ON			= 0.0;
-	public static final double VISION_PROCESSING_OFF		= 1.0;
+	public static final double VISION_PIPELINE_0			= 0.0;
+	public static final double VISION_PIPELINE_1			= 1.0;
 	public static final double VISION_TARGET_NOT_FOUND		= 0.0;
 	public static final double VISION_TARGET_FOUND			= 1.0;
 	
 	/*
 	 * Smart Dashboard
 	 */
-	public static final double SEND_STATS_INTERVAL	= .5;	// Interval for reporting in seconds
+	public static final double SEND_STATS_INTERVAL	= .2;	// Interval for reporting in seconds
 	public static final boolean DEBUG 				= false;
 	   
 }

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team708.robot.commands.arm;
+package org.usfirst.frc.team708.robot.commands.elevator;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.OI;
@@ -6,49 +6,45 @@ import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 //import org.team708.robot.subsystems.*;
 //import org.usfirst.frc.team708.robot.subsystems.Loader;
+import org.usfirst.frc.team708.robot.util.Gamepad;
 
-
-import edu.wpi.first.wpilibj.Relay;
+//import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  *@author Nick, Mike, Josh
  */
-public class ControlArmToScale extends Command {
-	
-    public ControlArmToScale() {
-    	requires(Robot.arm);
+
+public class ElevatorUp extends Command {
+
+    public ElevatorUp() {
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	}    	
-  
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// if(Robot.arm.getAngle() >= Constants.SCALE_HEIGHT - Constants.ARM_TOLERANCE)
-    	// 	Robot.arm.moveMotor(Constants.ARM_REVERSE);
-    	// else
-    		Robot.arm.moveMotor(Constants.ARM_FORWARD);
-    	}    	
+}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//Have a range in case the RIO can't get the angle exact.
-    	// if ((Robot.arm.getAngle() >= Constants.SCALE_HEIGHT - Constants.ARM_TOLERANCE && 
-    	// 		      Robot.arm.getAngle() <= Constants.SCALE_HEIGHT + Constants.ARM_TOLERANCE) ) {
-    	// 	return true;
-    	// }
-    	// else
-    		return false;
+        if(Robot.elevator.isElevatorMax()) {
+            return true;
+        }
+        else {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+            return false;
+        }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-     Robot.arm.stop();
+     Robot.elevator.stop();
     }
 
     // Called when another command which requires one or more of the same

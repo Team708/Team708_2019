@@ -53,16 +53,17 @@ public final class Constants {
 	public static final double 	ELEVATOR_MOTOR_DOWN		 	= -1.0;
 	public static final double	ELE_DEADZONE 				=   .6; 
 	public static final int		ELE_MAX						= 400;
-	public static final double	ELE_HATCH_LVL0				= 300; 
+	public static final double	ELE_HATCH_LVL3				= 300; 
 	public static final double	ELE_HATCH_LVL2				= 200; 
 	public static final double	ELE_HATCH_LVL1				= 100; 
-	public static final double	ELE_BALL_LVL1				= 100; 
-	public static final double	ELE_BALL_LVL2				= 200; 
-	public static final double	ELE_BALL_LVL3				= 300; 
+	public static final double	ELE_BALL_LVL1				= 150; 
+	public static final double	ELE_BALL_LVL2				= 250; 
+	public static final double	ELE_BALL_LVL3				= 350; 
 	public static final double	ELE_LVL0					=  25; 
 	public static final double	ELE_FEEDER					=  50; 
 	public static final double	ELE_GROUND					=   0; 
-	public static final double	ELE_CARGO					= 150; 
+	public static final double	ELE_CARGO_BALL				= 150; 
+	public static final double	ELE_CARGO_HATCH				= 100; 
 	public static final int ELE_ENC_STARTING_POSITION 		= 100;
 	public static final int ELE_ENC_MAX				 		= 600;
 	public static final int ELE_ENC_MIN				 		= 0;
@@ -84,6 +85,16 @@ public final class Constants {
 	
 	public static final int		INTAKE_BALL_IN		=  0;
 	public static final int		INTAKE_BALL_OUT		=  1;
+
+	/*
+	 * Cimber
+	 */
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE	=  10;
+	public static final int		MOVE_CLIMBER_FORWARD			=  18;
+	public static final int		MOVE_CLIMBER_TOLERANCE			=  50;
+	public static final double	MOVE_CLIMBER_EXTEND				=  1.0;
+	public static final double	MOVE_CLIMBER_RETRACT			=  -1.0;
+
 	/*
 	 * Vision
 	 */

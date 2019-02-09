@@ -7,14 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FindCube extends Command {
-	
+public class FindBall extends Command {
+    
+    private double maxTime = 5.0;
 
-    public FindCube(double maxTime)
+    public FindBall()
     {
-        // Use requires() here to declare subsystem dependencies
-//        requires(Robot.visionProcessor);
-//        requires(Robot.drivetrain);
     	this.setTimeout(maxTime);
     }
 
@@ -25,11 +23,6 @@ public class FindCube extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     // ADD BACK IN LATER	Robot.visionProcessor.processData();
-        Robot.drivetrain.haloDrive(0.0, Robot.visionProcessor.getRotate(), false);
-    
-
-//    Robot.drivetrain.haloDrive(0.0, .5, false);
-
     }
 
     // Make this return true when this Command no longer needs to run execute()

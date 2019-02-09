@@ -5,9 +5,9 @@ import org.usfirst.frc.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ElevatorToLevel3 extends Command {
+public class ElevatorToLevel2 extends Command {
 	
-    public ElevatorToLevel3() {
+    public ElevatorToLevel2() {
     	requires(Robot.elevator);
     }
     
@@ -17,22 +17,18 @@ public class ElevatorToLevel3 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// if(Robot.arm.getAngle() >= Constants.SCALE_HEIGHT - Constants.ARM_TOLERANCE)
-    	// 	Robot.arm.moveMotor(Constants.ARM_REVERSE);
-    	// else
-
     	}    	
 
     protected boolean isFinished()
     {
         if (Robot.intake.hasHatch())
         {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL3)-Constants.ELE_TOLERANCE))
+            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL2)-Constants.ELE_TOLERANCE))
             {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL3)-Constants.ELE_TOLERANCE)) {
+            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL2)-Constants.ELE_TOLERANCE)) {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }
@@ -44,12 +40,12 @@ public class ElevatorToLevel3 extends Command {
         } 
         else if ((Robot.intake.hasBall()))
         {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL3)-Constants.ELE_TOLERANCE))
+            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL2)-Constants.ELE_TOLERANCE))
             {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL3)-Constants.ELE_TOLERANCE)) 
+            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL2)-Constants.ELE_TOLERANCE)) 
             {
                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                return false;

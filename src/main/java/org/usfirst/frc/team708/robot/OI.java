@@ -7,6 +7,7 @@ import org.usfirst.frc.team708.robot.commands.climber.*;
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.commands.elevator.*;
 import org.usfirst.frc.team708.robot.commands.intake.*;
+import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -123,8 +124,8 @@ public class OI {
 		toggleBrakes.whenPressed(new ToggleBrakeMode());
 
 	//  highGearHeld.whileActive(new GearHigh());	
-		highGearEngaged.whileHeld(new GearHigh());
-		highGearEngaged.whenReleased(new GearLow());
+		highGearEngaged.whileActive(new GearHigh());
+		highGearEngaged.whileActive(new GearLow());
 	//	lowGear.whileHeld(new GearHigh());
 	//	lowGear.whenReleased(new GearLow());
 
@@ -142,7 +143,7 @@ public class OI {
 		elevatorGround.whenPressed(new ElevatorToLevel0());
 				
 		initiateClimb.whenPressed(new InitiateClimb());
-		stopClimb.whenPressed(new StopClimb());
+		stopClimb.whenPressed(new ClimberStop());
 
 		elevatorUp.whileActive(new JoystickMoveElevator());
 		elevatorDown.whileActive(new JoystickMoveElevator());

@@ -2,11 +2,12 @@ package org.usfirst.frc.team708.robot.commands.elevator;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ElevatorToLevel0 extends Command {
+public class ElevatorToFeeder extends Command {
 	
-    public ElevatorToLevel0() {
+    public ElevatorToFeeder() {
     	requires(Robot.elevator);
     }
     
@@ -20,12 +21,12 @@ public class ElevatorToLevel0 extends Command {
 
     protected boolean isFinished()
     {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE))
+            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_FEEDER)-Constants.ELE_TOLERANCE))
             {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE)) {
+            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_FEEDER)-Constants.ELE_TOLERANCE)) {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }

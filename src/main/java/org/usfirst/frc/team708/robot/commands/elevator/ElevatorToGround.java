@@ -1,14 +1,8 @@
 package org.usfirst.frc.team708.robot.commands.elevator;
 
 import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.OI;
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.RobotMap;
 
-import org.usfirst.frc.team708.robot.subsystems.Elevator;
-
-
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorToGround extends Command {

@@ -80,6 +80,8 @@ public class Robot extends TimedRobot {
         cameraback.setResolution(320, 240);
         cameraback.setFPS(20);
 
+        climbStarted = true;
+
         // This MUST BE LAST or a NullPointerException will be thrown
         oi = new OI(); // Initializes the OI
     }

@@ -56,6 +56,7 @@ public class Drivetrain extends PIDSubsystem {
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
 						// (this could be important if a jerky robot causes things to topple
 	private boolean usePID = false;
+	public boolean tilting = false;
 	
     /**
      * Constructor
@@ -215,6 +216,7 @@ public class Drivetrain extends PIDSubsystem {
 	
 	public boolean isTiltingLeft() {
 		if (gyro.getRoll() >= Constants.ROLL_MAX) {
+			tilting = true;
 			return true;
 		}
 		else {
@@ -223,6 +225,7 @@ public class Drivetrain extends PIDSubsystem {
 	}
 	public boolean isTiltingRight() {
 		if (gyro.getRoll() <= -Constants.PITCH_MAX) {
+			tilting = true;
 			return true;
 		}
 		else {
@@ -231,19 +234,26 @@ public class Drivetrain extends PIDSubsystem {
 	}
 	public boolean isTiltingForward() {
 		if (gyro.getPitch() <= -Constants.PITCH_MAX) {
-			return true;
+			tilting = true;
+			return tilting;
 		}
 		else {
-			return false;
+			tilting = false;
+			return tilting;
 		}
 	}
   public boolean isTiltingBack() {
 		if (gyro.getPitch() >= Constants.PITCH_MAX) {
-			return true;
+			tilting = true;
+			return tilting;
 		}
 		else {
-			return false;
+			tilting = false;
+			return tilting;
 		}
+	}
+	public boolean isBalanced() {
+		return !tilting;
 	}	  
     /**
      * Resets the gyro reading

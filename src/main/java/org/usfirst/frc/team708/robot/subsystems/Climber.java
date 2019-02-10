@@ -26,8 +26,11 @@ private CANSparkMax 	climberFLMaster, climberFRMaster, climberRearMaster, climbe
 private WPI_TalonSRX	climberRoller;
 private CANEncoder		climberFLEncoder, climberFREncoder, climberRearEncoder;
 private CANDigitalInput upperLimitFL, lowerLimitFL, upperLimitFR, lowerLimitFR, upperLimitRear, lowerLimitRear;
-    
+	
+public boolean climbStarted = false;;
+
 public Climber() {
+
 		climberFLMaster  	= new CANSparkMax(RobotMap.ClimberLeftFrontMotorMaster, MotorType.kBrushless);
 		climberFRMaster  	= new CANSparkMax(RobotMap.ClimberRightFrontMotorMaster, MotorType.kBrushless);
 		climberRearMaster  	= new CANSparkMax(RobotMap.ClimberLeftRearMotorMaster, MotorType.kBrushless);
@@ -65,13 +68,15 @@ public Climber() {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new JoystickMoveClimber());
     }
-	
+	/**
+	 * Motion methods for the climber/roller
+	 * @param speed
+	 */
 	public void manualMove(double speed) {
 		climberFLMaster.set(speed);
 		climberFRMaster.set(speed);
 		climberRearMaster.set(speed);
 	}
-	
 	public void moveLFMotor(double speed) {
 		climberFLMaster.set(speed);
 	}
@@ -84,37 +89,31 @@ public Climber() {
 	public void moveRollerMotor(double speed) {
 		climberRoller.set(speed);
 	}
-	
 	public void stopAll(){
 		climberFLMaster.stopMotor();
 		climberFRMaster.stopMotor();
 		climberRearMaster.stopMotor();
 	}
-
 	public void stopFrontLeft(){
 		climberFLMaster.stopMotor();
 	}
-
 	public void stopFrontRight(){
 		climberFRMaster.stopMotor();
 	}
-
 	public void stopRear(){
 		climberRearMaster.stopMotor();
 	}
-    
+
+    // Encoders methods
 	public double getEncoderFL() {
 		return climberFLEncoder.getPosition();
     }   
-	
 	public double getEncoderFR() {
 		return climberFREncoder.getPosition();
 	}
-
 	public double getEncoderRear() {
 		return climberRearEncoder.getPosition();
 	}
-	
     public void resetClimberEncoders() {
 		climberFLEncoder.setPosition(0.0);
 		climberFREncoder.setPosition(0.0);
@@ -124,7 +123,25 @@ public Climber() {
 		climberRoller.setSelectedSensorPosition(0, 0, 0);
 	}
 
-   
+	// Limit Switch Methods
+	public boolean upperLimitFL() {
+		return upperLimitFL.get();
+	}
+	public boolean lowerLimitFL() {
+		return lowerLimitFL.get();
+	}
+	public boolean upperLimitFR() {
+		return upperLimitFR.get();
+	}
+	public boolean lowerLimitFR() {
+		return lowerLimitFR.get();
+	}
+	public boolean upperLimitRear() {
+		return upperLimitRear.get();
+	}
+	public boolean lowerLimitRear() {
+		return lowerLimitRear.get();
+	}
     /**
      * Sends data about the subsystem to the Smart Dashboard
      */
@@ -133,8 +150,6 @@ public Climber() {
 		if (Constants.DEBUG) {
 		}
 		//Add later
-    }
-    
-    
+    } 
 }
 

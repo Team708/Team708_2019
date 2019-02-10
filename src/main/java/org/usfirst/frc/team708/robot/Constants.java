@@ -93,11 +93,15 @@ public final class Constants {
 	/*
 	 * Cimber
 	 */
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE	=  10;
-	public static final int		MOVE_CLIMBER_FORWARD			=  18;
-	public static final int		MOVE_CLIMBER_TOLERANCE			=  50;
-	public static final double	MOVE_CLIMBER_EXTEND				=  1.0;
-	public static final double	MOVE_CLIMBER_RETRACT			=  -1.0;
+	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  42; //raw encoder value
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE		=  126; //raw encoder value
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  18; //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  12; //inches encoder value
+
+	public static final int		MOVE_CLIMBER_FORWARD				=  18;
+	public static final int		MOVE_CLIMBER_TOLERANCE				=  50;
+	public static final double	MOVE_CLIMBER_EXTEND					=  1.0;
+	public static final double	MOVE_CLIMBER_RETRACT				=  -1.0;
 
 	/*
 	 * Vision

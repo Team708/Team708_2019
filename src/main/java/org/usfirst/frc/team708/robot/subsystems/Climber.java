@@ -20,13 +20,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANDigitalInput.LimitSwitch;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 
+
 public class Climber extends Subsystem {
 	
 private CANSparkMax 	climberFLMaster, climberFRMaster, climberRearMaster, climberRearSlave;
 private WPI_TalonSRX	climberRoller;
 private CANEncoder		climberFLEncoder, climberFREncoder, climberRearEncoder;
 private CANDigitalInput upperLimitFL, lowerLimitFL, upperLimitFR, lowerLimitFR, upperLimitRear, lowerLimitRear;
-	
+
 public boolean climbStarted = false;;
 
 public Climber() {

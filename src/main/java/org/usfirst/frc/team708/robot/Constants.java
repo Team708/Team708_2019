@@ -102,6 +102,7 @@ public final class Constants {
 	public static final int		MOVE_CLIMBER_TOLERANCE				=  50;
 	public static final double	MOVE_CLIMBER_EXTEND					=  1.0;
 	public static final double	MOVE_CLIMBER_RETRACT				=  -1.0;
+	public static final double	STOP_CLIMBER						= 0.0;
 
 	/*
 	 * Vision

@@ -33,6 +33,31 @@ public class InitiateClimb extends Command {
                     !Robot.climber.upperLimitRear()){
                         //Robot balancedExtend 
                     }
+                if (Robot.drivetrain.isBalanced()){
+                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
+                }
+                else if (Robot.drivetrain.isTiltingBack()){
+                    Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
+                    Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
+                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
+                }
+                else if (Robot.drivetrain.isTiltingRight()){
+                    Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
+                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
+                }
+                else if (Robot.drivetrain.isTiltingLeft()){
+                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
+                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
+                }
+                else if (Robot.drivetrain.isTiltingForward()){
+                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
+                }
             else {
                 stage1 = false;
                 stage2 = true;

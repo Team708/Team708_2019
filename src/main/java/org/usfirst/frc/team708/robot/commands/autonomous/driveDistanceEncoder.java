@@ -7,7 +7,6 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightForTime;
 //import org.usfirst.frc.team708.robot.commands.drivetrain.RotateAndDriveToBoiler;
 import org.usfirst.frc.team708.robot.commands.drivetrain.ToggleBrakeMode;
-import org.usfirst.frc.team708.robot.commands.pneumatics.ReleaseCubeAuto;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 //import org.usfirst.frc.team708.robot.commands.feeder.SpinFeeder;
 //import org.usfirst.frc.team708.robot.commands.shooter.SpinShooter;
@@ -35,7 +34,6 @@ public class driveDistanceEncoder extends CommandGroup {
 	
     public  driveDistanceEncoder() {
 
-    	addSequential(new ReleaseCubeAuto()); /*intake closed*/  
     	addSequential(new GearHigh());
 
 //    	addSequential(new WaitCommand(5.0));

@@ -9,7 +9,6 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToWhiteLin
 //import org.usfirst.frc.team708.robot.commands.drivetrain.RotateAndDriveToBoiler;
 import org.usfirst.frc.team708.robot.commands.drivetrain.ToggleBrakeMode;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.FindCube;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 //import org.usfirst.frc.team708.robot.commands.feeder.SpinFeeder;
 //import org.usfirst.frc.team708.robot.commands.shooter.SpinShooter;

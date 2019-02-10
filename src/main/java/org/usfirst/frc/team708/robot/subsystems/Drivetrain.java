@@ -1,7 +1,6 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
-// import org.usfirst.frc.team708.robot.OI;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.drivetrain.JoystickDrive;
 import org.usfirst.frc.team708.robot.util.IRSensor;
@@ -10,21 +9,16 @@ import org.usfirst.frc.team708.robot.util.Math708;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-// import com.ctre.phoenix.motorcontrol.can.*;
-// import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
-//import edu.wpi.first.wpilibj.interfaces.Gyro;
-//import edu.wpi.first.wpilibj.GyroBase;
-//import edu.wpi.first.wpilibj.AnalogGyro;
-// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.*;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -38,24 +32,21 @@ public class Drivetrain extends PIDSubsystem {
 	// private WPI_TalonSRX leftMaster, rightMaster;	// Motor Controllers
 	// private WPI_VictorSPX	leftSlave1, leftSlave2, rightSlave2, rightSlave1;
 	private CANSparkMax leftMaster, rightMaster, leftSlave1, rightSlave1;
-		
+	private CANEncoder encoderLeft;
+	private CANEncoder encoderRight;
+	
 	// Variables specific for drivetrain PID loop
 	private double moveSpeed = 0.0;
 	private double pidOutput = 0.0;
 	
-
+	private double gearratio = Constants.DRIVETRAIN_GEAR_RATIO_LOW;
+	
 	private DifferentialDrive drivetrain;						// FRC provided drivetrain class
-	
-	private Encoder encoderLeft;						// Encoder for the drivetrain
-	private Encoder encoderRight;						// Encoder for the drivetrain
-
 	private double distancePerPulse;
-	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
-	
+	private boolean gearHigh = false;
 	// private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
 	private ADIS16448_IMU gyro;
 	
-	private Solenoid butterflySolenoid;
 	private DoubleSolenoid gearShiftSolenoid;
 	
 	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
@@ -66,8 +57,6 @@ public class Drivetrain extends PIDSubsystem {
 						// (this could be important if a jerky robot causes things to topple
 	private boolean usePID = false;
 	
-	private boolean gearHigh;
-
     /**
      * Constructor
      */
@@ -76,12 +65,6 @@ public class Drivetrain extends PIDSubsystem {
     	super("Drivetrain", Constants.Kp, Constants.Ki, Constants.Kd);
     	
     	// Initializes motor controllers with device IDs from RobotMap
-		// leftMaster  = new WPI_TalonSRX(RobotMap.drivetrainLeftMotorMaster);
-		// leftSlave1   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave1);
-		// leftSlave2   = new WPI_VictorSPX(RobotMap.drivetrainLeftMotorSlave2);
-		// rightMaster = new WPI_TalonSRX(RobotMap.drivetrainRightMotorMaster);
-		// rightSlave1  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave1);
-		// rightSlave2  = new WPI_VictorSPX(RobotMap.drivetrainRightMotorSlave2);
 		leftMaster = new CANSparkMax(RobotMap.drivetrainLeftMotorMaster, MotorType.kBrushless);
 		leftSlave1 = new CANSparkMax(RobotMap.drivetrainLeftMotorSlave1, MotorType.kBrushless);
 		rightMaster = new CANSparkMax(RobotMap.drivetrainRightMotorMaster, MotorType.kBrushless);
@@ -92,34 +75,22 @@ public class Drivetrain extends PIDSubsystem {
 		
 		drivetrain = new DifferentialDrive(leftMotors, rightMotors);	// Initializes drivetrain class
 		
-		accelerometer 	= new BuiltInAccelerometer();	// Initializes the accelerometer from the roboRIO
-		// gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
-		// gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
-		
 		gyro = new ADIS16448_IMU();
 		gyro.reset();
+		
+		encoderLeft = new CANEncoder(leftMaster);
+		encoderRight = new CANEncoder(rightMaster);
 
-		encoderLeft = new Encoder(RobotMap.drivetrainEncoderARight, RobotMap.drivetrainEncoderBRight, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-		encoderRight = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-														// Initializes the encoder
+		// Initializes the sensors
 		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-						(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
-												// Sets the distance per pulse of the encoder to read distance properly
-		encoderLeft.setDistancePerPulse(distancePerPulse);
-		encoderLeft.reset();								// Resets the encoder so that it starts with a 0.0 value
-		encoderRight.setDistancePerPulse(distancePerPulse);
-		encoderRight.reset();								// Resets the encoder so that it starts with a 0.0 value
-		
-//		opticalSensor  = new DigitalInput(7);
+					                  	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
+		// Sets the distance per pulse of the encoder to read distance properly
+		resetEncoder();
+		// encoderLeft.setDistancePerPulse(distancePerPulse);
+		// encoderRight.setDistancePerPulse(distancePerPulse);
 		lineSensor = new DigitalInput(RobotMap.lineSensor);
-
 		gearShiftSolenoid = new DoubleSolenoid(RobotMap.driveShiftLow, RobotMap.driveShiftHigh);
-		
-		// butterflySolenoid.set(false);
-		// butterflySolenoid.setPulseDuration(Constants.BUTTERFLY_PULSE_TIME);
     }
-    
-
     /**
      * Initializes the default command for this subsystem
      */
@@ -181,11 +152,10 @@ public class Drivetrain extends PIDSubsystem {
     	}
     }
 	
-	public void haloDrive(double move, double rotate) {
-		haloDrive(move, rotate, this.usePID);
-	}
-	
-	
+	// public void haloDrive(double move, double rotate) {
+	// 	haloDrive(move, rotate, this.usePID);
+	// }
+		
 	/**
 	 * Drive the drivetrain using curvature drive
 	 * @param xSpeed
@@ -195,8 +165,7 @@ public class Drivetrain extends PIDSubsystem {
     public void curvatureDrive(double xSpeed, double zRotation, boolean isQuickTurn) {
     	drivetrain.curvatureDrive(xSpeed, zRotation, isQuickTurn);
     }
-	
-    
+	    
     /**
      * Drives the drivetrain using a left motor(s) value and a right motor(s) value
      * @param left
@@ -244,11 +213,38 @@ public class Drivetrain extends PIDSubsystem {
 		   return  Math708.round(gyro.getAngleZ(),0);
 	}
 	
-	public boolean isLevel(int x, int y) {
-
-        return(true);
+	public boolean isTiltingLeft() {
+		if (gyro.getRoll() >= Constants.ROLL_MAX) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-    
+	public boolean isTiltingRight() {
+		if (gyro.getRoll() <= -Constants.PITCH_MAX) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public boolean isTiltingForward() {
+		if (gyro.getPitch() <= -Constants.PITCH_MAX) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+  public boolean isTiltingBack() {
+		if (gyro.getPitch() >= Constants.PITCH_MAX) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}	  
     /**
      * Resets the gyro reading
      */
@@ -353,11 +349,17 @@ public class Drivetrain extends PIDSubsystem {
     public void shiftGearHigh() {
 		gearShiftSolenoid.set(DoubleSolenoid.Value.kForward);
 		gearHigh = true;
+		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_HIGH;
+		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
+					                   	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
     }
     
     public void shiftGearlow() {
 		gearShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
 		gearHigh = false;
+		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_LOW;
+		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
+					                   	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
     }
         
     /**
@@ -372,18 +374,18 @@ public class Drivetrain extends PIDSubsystem {
      * 
      * @return Distance traveled since last encoder reset
      */
-  	 public double getEncoderDistanceLeft() {
-  	 	return encoderLeft.getDistance();
+  	public double getEncoderDistanceLeft() {
+  	 	return encoderLeft.getPosition() * distancePerPulse;
   	 }
     public double getEncoderDistanceRight() {
-    	return encoderRight.getDistance();
+    	return encoderRight.getPosition() * distancePerPulse;
     }
     /**
      * Resets the encoder to 0.0
      */
     public void resetEncoder() {
-		encoderLeft.reset();
-		encoderRight.reset();
+		encoderLeft.setPosition(0.0);
+		encoderRight.setPosition(0.0);
     }
      /**
      * Returns if the optical sensor detects the color white
@@ -416,15 +418,15 @@ public class Drivetrain extends PIDSubsystem {
      */
     public void sendToDashboard() {
     	if (Constants.DEBUG) {
-			SmartDashboard.putNumber("DT Encoder Left Raw", encoderLeft.get());		// Encoder raw count
-			SmartDashboard.putNumber("DT Encoder Right Raw", encoderRight.get());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Left Raw", encoderLeft.getPosition());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Right Raw", encoderRight.getPosition());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Left Inches", getEncoderDistanceLeft());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Right Inches", getEncoderDistanceRight());		// Encoder raw count
 
-	    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-	    	// SmartDashboard.putNumber("DT Rt Master", rightMaster.getOutputCurrent());
-	    	// SmartDashboard.putNumber("DT Rt Master", leftMaster.getOutputCurrent());
+	    SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
 	    	
 			SmartDashboard.putNumber("Gyro turn angle", getAngle());
-			SmartDashboard.putNumber("Gyro-X", Math708.round(gyro.getAngleX(),0));
+			SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
 			SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
 			SmartDashboard.putNumber("Yaw", Math708.round(gyro.getYaw(),0));
 	  }

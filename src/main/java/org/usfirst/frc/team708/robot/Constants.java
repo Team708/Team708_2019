@@ -20,8 +20,10 @@ public final class Constants {
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	TANK_STICK_TOLERANCE 					= .30;
-	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 6;  	//4inch wheel * .56 gear ratio
-	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 256.0;
+	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
+	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;
+	public static final double  DRIVETRAIN_GEAR_RATIO_HIGH				= 4.87;
+	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 42.0;
 	public static final boolean DRIVE_USE_SQUARED_INPUT 				= false;
 	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER				= true; // variable to determine which side encoder is on
 	public static final double	VISION_ROTATE_MOTOR_SPEED				= 0.8;
@@ -30,7 +32,9 @@ public final class Constants {
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
 	public static final int		DT_HIGH_GEAR							= 1;
 	public static final int		DT_LOW_GEAR								= 1;
-			
+	public static final double	PITCH_MAX								= 15.0;
+	public static final double	ROLL_MAX								= 10.0;
+
 	// PID Tuning parameters
 	public static final double Kp = 0.0;		// Proportional gain
 	public static final double Ki = 0.0;		// Integral gain

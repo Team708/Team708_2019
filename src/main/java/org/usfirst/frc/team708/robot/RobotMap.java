@@ -52,6 +52,7 @@ public class RobotMap {
 
 	public static final int ClimberLeftRearMotorMaster		= 53; 
 	public static final int ClimberRightRearMotorSlave		= 54; 
+	public static final int ClimberRollerMotor				= 55; 
 
 
 // Digital IO

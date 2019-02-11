@@ -28,7 +28,7 @@ public class ElevatorToLevel1 extends Command {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL1)-Constants.ELE_TOLERANCE)) {
+            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL1)+Constants.ELE_TOLERANCE)) {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }
@@ -45,7 +45,7 @@ public class ElevatorToLevel1 extends Command {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL1)-Constants.ELE_TOLERANCE)) 
+            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL1)+Constants.ELE_TOLERANCE)) 
             {
                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                return false;

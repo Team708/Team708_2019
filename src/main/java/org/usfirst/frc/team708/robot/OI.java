@@ -69,7 +69,7 @@ public class OI {
 	private static final int STOP_CLIMB						= Gamepad.button_B;	
 //	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
 // 	private static final int OPENBUTTON2_BUTTON				= Gamepad.button_Start;
-	private static final int CLIMBER_BUTTON					= Gamepad.rightStick_Y;
+	private static final int CLIMBER_BUTTON					= Gamepad.leftStick_Y;
 	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;	
 /*
  * Driver Button events
@@ -115,8 +115,8 @@ public class OI {
 	public OI() {
 
 // Driver
-		ballOut.whenPressed(new IntakeBallOut());
-		ballIn.whenPressed(new IntakeBallIn());
+		ballOut.whileHeld(new IntakeBallOut());
+		ballIn.whileHeld(new IntakeBallIn());
 		highGear.whenPressed(new GearHigh());
 		lowGear.whenPressed(new GearLow());
 		intakeIn.whenPressed(new DeployIntake());
@@ -131,8 +131,8 @@ public class OI {
 
 //Operator
 
-		hatchIn.whenPressed(new IntakeHatchIn());
-		hatchOut.whenPressed(new IntakeHatchOut());
+		hatchIn.whileHeld(new IntakeHatchIn());
+		hatchOut.whileHeld(new IntakeHatchOut());
 		CargoShip.whenPressed(new ElevatorToCargo());
 		level1Rocket.whenPressed(new ElevatorToLevel1());
 		level2Rocket.whenPressed(new ElevatorToLevel2());

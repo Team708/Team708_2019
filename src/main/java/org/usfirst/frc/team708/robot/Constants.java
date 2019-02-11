@@ -54,7 +54,7 @@ public final class Constants {
 	 * Elevator
 	 */
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
-	public static final double 	ELEVATOR_MOTOR_DOWN		 	= -1.0;
+	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -1.0;
 	public static final double	ELE_DEADZONE 				=   .6; 
 	public static final int		ELE_MAX						= 400;
 	public static final double	ELE_HATCH_LVL3				= 300; 
@@ -68,10 +68,10 @@ public final class Constants {
 	public static final double	ELE_GROUND					=   0; 
 	public static final double	ELE_CARGO_BALL				= 150; 
 	public static final double	ELE_CARGO_HATCH				= 100; 
-	public static final int ELE_ENC_STARTING_POSITION 		= 100;
+	public static final int ELE_ENC_STARTING_POSITION 		= 42;
 	public static final int ELE_ENC_MAX				 		= 600;
 	public static final int ELE_ENC_MIN				 		= 0;
-	public static final int	ELE_TOLERANCE					= 10;
+	public static final int	ELE_TOLERANCE					= 5;
 
 	/*
 	 * Intake
@@ -97,9 +97,11 @@ public final class Constants {
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE		=  126; //raw encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  18; //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  12; //inches encoder value
+	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
+	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.6;		
 
 	public static final int		MOVE_CLIMBER_FORWARD				=  18;
-	public static final int		MOVE_CLIMBER_TOLERANCE				=  50;
+	public static final double	MOVE_CLIMBER_TOLERANCE				=  .5;
 	public static final double	MOVE_CLIMBER_EXTEND					=  1.0;
 	public static final double	MOVE_CLIMBER_RETRACT				=  -1.0;
 	public static final double	STOP_CLIMBER						= 0.0;
@@ -119,6 +121,6 @@ public final class Constants {
 	 * Smart Dashboard
 	 */
 	public static final double SEND_STATS_INTERVAL	= .2;	// Interval for reporting in seconds
-	public static final boolean DEBUG 				= false;
+	public static final boolean DEBUG 				= true;
 	   
 }

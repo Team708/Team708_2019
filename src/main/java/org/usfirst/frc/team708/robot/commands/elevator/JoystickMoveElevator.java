@@ -22,7 +22,11 @@ public class JoystickMoveElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 moveSpeed = OI.operatorGamepad.getAxis(Gamepad.leftStick_Y);     	
+         moveSpeed = OI.operatorGamepad.getAxis(Gamepad.leftStick_Y);
+         Robot.elevator.moveMotor(moveSpeed);
+         if(Robot.elevator.isElevatorMin()) {
+            Robot.elevator.resetElevatorEncoder();
+         }   	
     }
 
     // Make this return true when this Command no longer needs to run execute()

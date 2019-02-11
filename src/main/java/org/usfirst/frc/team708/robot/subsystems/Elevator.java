@@ -100,10 +100,10 @@ public class Elevator extends Subsystem {
 	 
    public void sendToDashboard() {
     if (Constants.DEBUG) {
+		}
 			SmartDashboard.putBoolean("Elev Down:", 	lowerLimit.get());
    		SmartDashboard.putBoolean("Elev Up", 			upperLimit.get());	
 			SmartDashboard.putNumber(	"Ele Distance", elevatorEncoder.getPosition());
- 		}	
 	}
     
     

@@ -44,7 +44,7 @@ public class RobotMap {
 	public static final int ballIntakeMotorSlave1			= 32; 
 	
 // Hatch Intake
-	public static final int hatchIntakeeMotorMaster			= 41; 
+	public static final int hatchIntakeMotorMaster			= 41; 
 
 // Climber
 	public static final int ClimberLeftFrontMotorMaster		= 51; 

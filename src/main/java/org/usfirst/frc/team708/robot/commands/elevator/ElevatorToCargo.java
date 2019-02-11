@@ -28,7 +28,7 @@ public class ElevatorToCargo extends Command {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_HATCH)-Constants.ELE_TOLERANCE)) {
+            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_HATCH)+Constants.ELE_TOLERANCE)) {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }
@@ -45,7 +45,7 @@ public class ElevatorToCargo extends Command {
                 Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE)) 
+            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE)) 
             {
                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                return false;

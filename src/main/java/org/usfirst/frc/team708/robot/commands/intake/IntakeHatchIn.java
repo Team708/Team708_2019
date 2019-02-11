@@ -38,7 +38,7 @@ public class IntakeHatchIn extends Command {
             return true;
         }
         else {
-            Robot.intake.moveMotorBall(Constants.HATCH_IN);
+            Robot.intake.moveMotorHatch(Constants.HATCH_IN);
     	    return false;
         }    }
 

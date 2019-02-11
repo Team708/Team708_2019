@@ -41,14 +41,14 @@ public class Intake extends Subsystem {
 	public Intake() {
 		ballMaster = new WPI_TalonSRX(RobotMap.ballIntakeMotorMaster);
 		ballSlave  = new WPI_VictorSPX(RobotMap.ballIntakeMotorSlave1);
-		hatchMaster = new WPI_TalonSRX(RobotMap.hatchIntakeeMotorMaster);
+		hatchMaster = new WPI_TalonSRX(RobotMap.hatchIntakeMotorMaster);
 
 		intakeSolenoid = new Solenoid(RobotMap.intake);
-		beakSolenoid = new Solenoid(RobotMap.beak);
+		// beakSolenoid = new Solenoid(RobotMap.beak);
 		hatchSolenoid = new Solenoid(RobotMap.hatch);
 
 		intakeSolenoid.set(intakeRetracted);
-		beakSolenoid.set(beakOpened);
+		// beakSolenoid.set(beakOpened);
 		hatchSolenoid.set(hatchRetracted);
 
 		ballSensor 	= new DigitalInput(RobotMap.ballSensor);
@@ -146,7 +146,8 @@ public class Intake extends Subsystem {
     public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
-		// SmartDashboard.putBoolean("Has cube:", hasCube());
+		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
+		SmartDashboard.putBoolean("Has Ball:", hasBall());
     }
     
     

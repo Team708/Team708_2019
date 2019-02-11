@@ -27,8 +27,13 @@ private CANSparkMax 	climberFLMaster, climberFRMaster, climberRearMaster, climbe
 private WPI_TalonSRX	climberRoller;
 private CANEncoder		climberFLEncoder, climberFREncoder, climberRearEncoder;
 private CANDigitalInput upperLimitFL, lowerLimitFL, upperLimitFR, lowerLimitFR, upperLimitRear, lowerLimitRear;
-
-public boolean climbStarted = false;;
+public boolean stage1  = true;
+public boolean stage2  = false;
+public boolean stage3  = false;
+public boolean stage4  = false;
+public boolean stage5  = false;
+public boolean stage6  = false;
+public boolean climbStarted = true;
 
 public Climber() {
 
@@ -61,7 +66,7 @@ public Climber() {
 		climberFLMaster.setIdleMode(IdleMode.kBrake);
 		climberFRMaster.setIdleMode(IdleMode.kBrake);
 		climberRearMaster.setIdleMode(IdleMode.kBrake);
-    	climberRoller.setNeutralMode(NeutralMode.Brake);
+    climberRoller.setNeutralMode(NeutralMode.Brake);
 
 	}
 	
@@ -74,8 +79,8 @@ public Climber() {
 	 * @param speed
 	 */
 	public void manualMove(double speed) {
-		climberFLMaster.set(speed);
 		climberFRMaster.set(speed);
+		climberFLMaster.set(speed);
 		climberRearMaster.set(speed);
 	}
 	public void moveLFMotor(double speed) {
@@ -115,6 +120,9 @@ public Climber() {
 	public double getEncoderRear() {
 		return climberRearEncoder.getPosition();
 	}
+	public double getEncoderRoller() {
+		return climberRoller.getSensorCollection().getQuadraturePosition();
+	}
     public void resetClimberEncoders() {
 		climberFLEncoder.setPosition(0.0);
 		climberFREncoder.setPosition(0.0);
@@ -150,7 +158,14 @@ public Climber() {
     	
 		if (Constants.DEBUG) {
 		}
-		//Add later
+		SmartDashboard.putBoolean("FR Upper Limit", upperLimitFR.get());
+		SmartDashboard.putBoolean("FR Lower Limit", lowerLimitFR.get());
+		SmartDashboard.putBoolean("FL Upper Limit", upperLimitFL.get());
+		SmartDashboard.putBoolean("FL Lower Limit", lowerLimitFL.get());
+		SmartDashboard.putBoolean("Rear Upper Limit", upperLimitRear.get());
+		SmartDashboard.putBoolean("Rear Lower Limit", lowerLimitRear.get());	
+		SmartDashboard.putNumber("Roller Encoder", getEncoderRoller());		//Encoder raw count
+
     } 
 }
 

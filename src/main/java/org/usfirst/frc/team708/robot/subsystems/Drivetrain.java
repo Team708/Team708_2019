@@ -224,7 +224,7 @@ public class Drivetrain extends PIDSubsystem {
 		}
 	}
 	public boolean isTiltingRight() {
-		if (gyro.getRoll() <= -Constants.PITCH_MAX) {
+		if (gyro.getRoll() <= -Constants.ROLL_MAX) {
 			tilting = true;
 			return true;
 		}
@@ -438,7 +438,6 @@ public class Drivetrain extends PIDSubsystem {
 			SmartDashboard.putNumber("Gyro turn angle", getAngle());
 			SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
 			SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
-			SmartDashboard.putNumber("Yaw", Math708.round(gyro.getYaw(),0));
 	  }
 	}
 }

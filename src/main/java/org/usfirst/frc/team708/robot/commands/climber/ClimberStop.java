@@ -11,10 +11,18 @@ public class ClimberStop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.climber.stopAll();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.climber.climbStarted = false;
+        Robot.climber.stage1 = false;
+        Robot.climber.stage2 = false;
+        Robot.climber.stage3 = false;
+        Robot.climber.stage4 = false;
+        Robot.climber.stage5 = false;
+        Robot.climber.stopAll();
     }
 
     // Make this return true when this Command no longer needs to run execute()

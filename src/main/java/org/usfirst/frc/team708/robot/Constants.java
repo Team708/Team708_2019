@@ -32,8 +32,8 @@ public final class Constants {
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
 	public static final int		DT_HIGH_GEAR							= 1;
 	public static final int		DT_LOW_GEAR								= 1;
-	public static final double	PITCH_MAX								= 15.0;
-	public static final double	ROLL_MAX								= 10.0;
+	public static final double	PITCH_MAX								= 2.0;
+	public static final double	ROLL_MAX								= 2.0;
 
 	// PID Tuning parameters
 	public static final double Kp = 0.0;		// Proportional gain
@@ -93,8 +93,8 @@ public final class Constants {
 	/*
 	 * Cimber
 	 */
-	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  42; //raw encoder value
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE		=  126; //raw encoder value
+	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  10000; //raw encoder value
+	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE		=  10000; //raw encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  18; //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  12; //inches encoder value
 	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		

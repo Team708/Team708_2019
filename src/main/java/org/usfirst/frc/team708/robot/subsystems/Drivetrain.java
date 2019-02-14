@@ -252,9 +252,7 @@ public class Drivetrain extends PIDSubsystem {
 			return tilting;
 		}
 	}
-	public boolean isBalanced() {
-		return !tilting;
-	}	  
+
     /**
      * Resets the gyro reading
      */

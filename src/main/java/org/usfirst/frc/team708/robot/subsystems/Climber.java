@@ -99,6 +99,8 @@ public Climber() {
 		climberFLMaster.stopMotor();
 		climberFRMaster.stopMotor();
 		climberRearMaster.stopMotor();
+		climberRoller.stopMotor();
+
 	}
 	public void stopFrontLeft(){
 		climberFLMaster.stopMotor();
@@ -157,14 +159,14 @@ public Climber() {
     public void sendToDashboard() {
     	
 		if (Constants.DEBUG) {
+			SmartDashboard.putBoolean("FR Upper Limit", upperLimitFR.get());
+			SmartDashboard.putBoolean("FR Lower Limit", lowerLimitFR.get());
+			SmartDashboard.putBoolean("FL Upper Limit", upperLimitFL.get());
+			SmartDashboard.putBoolean("FL Lower Limit", lowerLimitFL.get());
+			SmartDashboard.putBoolean("Rear Upper Limit", upperLimitRear.get());
+			SmartDashboard.putBoolean("Rear Lower Limit", lowerLimitRear.get());	
+			SmartDashboard.putNumber("Roller Encoder", getEncoderRoller());		//Encoder raw count
 		}
-		SmartDashboard.putBoolean("FR Upper Limit", upperLimitFR.get());
-		SmartDashboard.putBoolean("FR Lower Limit", lowerLimitFR.get());
-		SmartDashboard.putBoolean("FL Upper Limit", upperLimitFL.get());
-		SmartDashboard.putBoolean("FL Lower Limit", lowerLimitFL.get());
-		SmartDashboard.putBoolean("Rear Upper Limit", upperLimitRear.get());
-		SmartDashboard.putBoolean("Rear Lower Limit", lowerLimitRear.get());	
-		SmartDashboard.putNumber("Roller Encoder", getEncoderRoller());		//Encoder raw count
 
     } 
 }

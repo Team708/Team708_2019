@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot.commands.visionProcessor;
 
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FindBall extends Command {
     
     private double maxTime = 5.0;
-
+    private boolean notAligned = false;
     public FindBall()
     {
     	this.setTimeout(maxTime);
@@ -18,16 +19,30 @@ public class FindBall extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        notAligned = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    // ADD BACK IN LATER	Robot.visionProcessor.processData();
+        Robot.visionProcessor.setNTInfo("pipeline", 2);
+        Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_OFF);
+        if  (Robot.visionProcessor.seesTarget()) {
+            if (!Robot.visionProcessor.isCentered()) {
+                Robot.drivetrain.haloDrive(0.0, Robot.visionProcessor.getRotate(), false);
+            }
+            else {
+                Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(), 0.0, false);
+            }
+        }
+        else {
+            notAligned = true;
+        }
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.visionProcessor.isCentered() || isTimedOut();
+        return ((Robot.visionProcessor.isCentered()) && (Robot.visionProcessor.isAtY())) || notAligned || isTimedOut();
     }
 
     // Called once after isFinished returns true

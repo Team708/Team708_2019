@@ -109,13 +109,13 @@ public final class Constants {
 	/*
 	 * Vision
 	 */
-	public static final double VISION_LED_ON				= 0.0;
-	public static final double VISION_LED_OFF				= 1.0;
-	public static final double VISION_LED_BLINK				= 2.0;
-	public static final double VISION_PIPELINE_0			= 0.0;
-	public static final double VISION_PIPELINE_1			= 1.0;
-	public static final double VISION_TARGET_NOT_FOUND		= 0.0;
-	public static final double VISION_TARGET_FOUND			= 1.0;
+	public static final int VISION_LED_ON				= 0;
+	public static final int VISION_LED_OFF				= 1;
+	public static final int VISION_LED_BLINK			= 2;
+	public static final int VISION_PIPELINE_0			= 0;
+	public static final int VISION_PIPELINE_1			= 1;
+	public static final int VISION_TARGET_NOT_FOUND		= 0;
+	public static final int VISION_TARGET_FOUND			= 1;
 	
 	/*
 	 * Smart Dashboard

@@ -31,7 +31,7 @@ public class DoNothing extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.drivetrain.haloDrive(Robot.visionProcessor.getMove(), Robot.visionProcessor.getRotate(), false);
+        Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(), Robot.visionProcessor.getRotate(), false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

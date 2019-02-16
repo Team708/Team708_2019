@@ -22,43 +22,27 @@ public class InitiateClimb extends Command {
     {
         if (Robot.climber.stage1) 
         {
-            if (!((Robot.climber.upperLimitFL()) && (Robot.climber.upperLimitFR()) && (Robot.climber.upperLimitRear())) )
+            if (!((Robot.climber.upperLimitFront()) && (Robot.climber.upperLimitRear())) )
             {
                 if (Robot.drivetrain.isTiltingBack())
                 {
-                    Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
-                    Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
-                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
-                }
-                else if (Robot.drivetrain.isTiltingRight())
-                {
-                    Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
-                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
-                    Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
-                }
-                else if (Robot.drivetrain.isTiltingLeft())
-                {
-                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
-                    Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
+                    Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
                     Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
                 }
                 else if (Robot.drivetrain.isTiltingForward())
                 {
-                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
-                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_EXTEND);
                     Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
                 }
                 else
                 {
-                    Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_EXTEND);
-                    Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_EXTEND);
+                    Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_EXTEND);
                     Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
                 } 
             }
             else 
             {
-                Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
-                Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
+                Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
                 Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
                 Robot.climber.stage1 = false;
                 Robot.climber.stage2 = true;
@@ -80,10 +64,9 @@ public class InitiateClimb extends Command {
         }
         else if (Robot.climber.stage3) 
         {
-            if (!(Robot.climber.lowerLimitFL()&&Robot.climber.lowerLimitFR())) 
+            if (!(Robot.climber.lowerLimitFront()))
             {
-                Robot.climber.moveLFMotor(Constants.MOVE_CLIMBER_RETRACT);
-                Robot.climber.moveRFMotor(Constants.MOVE_CLIMBER_RETRACT);
+                Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_RETRACT);
             }
             else
             {
@@ -91,8 +74,7 @@ public class InitiateClimb extends Command {
                 Robot.climber.stage4 = true;
                 Robot.climber.resetClimberRoller();
                 Robot.drivetrain.resetEncoder();
-                Robot.climber.moveLFMotor(Constants.STOP_CLIMBER);
-                Robot.climber.moveRFMotor(Constants.STOP_CLIMBER);
+                Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
             }
         }
         else if (Robot.climber.stage4) 

@@ -47,11 +47,11 @@ public class RobotMap {
 	public static final int hatchIntakeMotorMaster			= 41; 
 
 // Climber
-	public static final int ClimberLeftFrontMotorMaster		= 51; 
-	public static final int ClimberRightFrontMotorMaster	= 52; 
+	public static final int ClimberLeftFrontMotor			= 51; 
+	public static final int ClimberRightFrontMotor			= 52; 
 
-	public static final int ClimberLeftRearMotorMaster		= 53; 
-	public static final int ClimberRightRearMotorSlave		= 54; 
+	public static final int ClimberLeftRearMotor			= 53; 
+	public static final int ClimberRightRearMotor			= 54; 
 	public static final int ClimberRollerMotor				= 55; 
 
 

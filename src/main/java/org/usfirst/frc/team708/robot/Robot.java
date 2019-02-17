@@ -64,12 +64,12 @@ public class Robot extends TimedRobot {
         queueAutonomousModes(); // Adds autonomous modes to the selection box
 
         UsbCamera camerafront = CameraServer.getInstance().startAutomaticCapture(0);
-        camerafront.setResolution(320,240);
-        camerafront.setFPS(20);
+        camerafront.setResolution(160,120);
+        camerafront.setFPS(10);
 
         UsbCamera cameraback = CameraServer.getInstance().startAutomaticCapture(1);
-        cameraback.setResolution(320, 240);
-        cameraback.setFPS(20);
+        cameraback.setResolution(160, 120);
+        cameraback.setFPS(15);
         // This MUST BE LAST or a NullPointerException will be thrown
         oi = new OI(); // Initializes the OI
     }

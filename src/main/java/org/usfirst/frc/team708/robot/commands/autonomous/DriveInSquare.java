@@ -28,19 +28,19 @@ public class DriveInSquare extends CommandGroup {
     public  DriveInSquare() {
 		
     	addSequential(new WaitCommand(1.0));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, true, driveStraightTime));
+    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, true, driveStraightTime));
+    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, true, driveStraightTime));
+    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, true, driveStraightTime));
+    	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));

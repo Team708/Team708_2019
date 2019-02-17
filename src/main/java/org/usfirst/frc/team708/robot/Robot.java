@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         // schedule the autonomous command
         drivetrain.setBrakeMode(true);
-
+        drivetrain.resetGyro();
         // original dashboard code
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
@@ -163,8 +163,7 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Do Nothing", new DoNothing());
         autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
-        autonomousMode.addOption("Curvature Drive", new driveCurvatureForTime());
-        // autonomousMode.addOption("Rocket Left", new rocketLeft());
+        autonomousMode.addOption("Rocket Left", new rocketLeft());
         // autonomousMode.addOption("Rocket right", new rocketRight());
         // autonomousMode.addOption("Ship", new ship());
 

@@ -2,12 +2,16 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
+import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToBallOrTime;
+
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegreesOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
+import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team708.robot.commands.intake.*;
+import org.usfirst.frc.team708.robot.commands.elevator.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -17,19 +21,34 @@ public class rocketLeft extends CommandGroup {
    
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.drivetrain.resetEncoder();
-//    	Robot.drivetrain.resetEncoder2();
-//    	Robot.drivetrain.resetGyro();
-    	
     }
 	
     public  rocketLeft() {
 
-    	addSequential(new GearHigh());
-
-//    	addSequential(new WaitCommand(5.0));
-    	
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(140, .7, true, 3));
+        addSequential(new GearHigh());
+        //Leaving HAB Lv. 2
+        addSequential(new DriveCurvatureToEncoderOrTime(-1.0, .3, false, -200, 3));
+        //Turn into the ROCKET
+        addSequential(new DriveCurvatureToDegreesOrTime(.8, .9, true, 80, 2));
+        //Place First Hatch
+        addSequential(new FindRocketHatch());
+            //Potentially move elevator
+        addSequential(new DeployHatch());  
+        //Turn away from ROCKET and acquire second HATCH
+        addSequential(new DriveCurvatureToDegreesOrTime(-.8, -.5, false, -45, 2));
+        addSequential(new FindRocketHatch());
+        addSequential(new RetractHatch());
+        //Turn to the ROCKET and place second HATCH
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-90, -1.0, 3));
+        addSequential(new TurnToDegrees(.8, -180));  
+        addSequential(new FindRocketHatch());
+        addSequential(new DeployHatch());
+        //Turn to and acquire CARGO  
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-80, -1.0, 3));
+        addSequential(new TurnToDegrees(.8, -180));  
+        addSequential(new DeployIntake());
+        addParallel(new DriveStraightToBallOrTime(24, .8, 2));
+        addSequential(new AutoIntakeBallInForTime(2));
 
     }
     

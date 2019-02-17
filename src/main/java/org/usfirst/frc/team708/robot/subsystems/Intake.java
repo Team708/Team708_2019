@@ -33,7 +33,6 @@ public class Intake extends Subsystem {
 	public Intake() {
 		ballMaster	= new WPI_TalonSRX(RobotMap.ballIntakeMotorMaster);
 		ballSlave 	= new WPI_VictorSPX(RobotMap.ballIntakeMotorSlave1);
-		hatchMaster = new WPI_TalonSRX(RobotMap.hatchIntakeMotorMaster);
 
 		intakeSolenoid = new Solenoid(RobotMap.intake);
 		hatchSolenoid	 = new Solenoid(RobotMap.hatch);
@@ -59,11 +58,11 @@ public class Intake extends Subsystem {
 	}
 
 	public void moveMotorHatch(double speed) {
-		hatchMaster.set(speed);
+		ballMaster.set(-speed);
 	}
 	
 	public void stopMotorHatch() {
-		hatchMaster.set(0.0);
+		ballMaster.set(0.0);
 	}
 	
 	public boolean hasBall() {		
@@ -79,16 +78,8 @@ public class Intake extends Subsystem {
 		else 
 			return (false);		
 	}
-	
-	public void ballStop() {
-		ballMaster.set(Constants.BALL_STOP);
-	}
 
-	public void hatchStop() {
-		hatchMaster.set(Constants.HATCH_STOP);
-	}
-
- //Pneumatics
+ 	//Pneumatics
 	public void intakeRetract() {
 		intakeRetracted = true;
 		intakeSolenoid.set(true);

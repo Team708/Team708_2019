@@ -101,9 +101,9 @@ public class VisionProcessor extends Subsystem {
 		return isAtY;
 	}
 
-	public boolean isAtArea() {
+	public boolean isAtArea(double targetArea) {
 		area = getNTInfo("ta");
-		difference = area - Constants.TARGET_AREA;
+		difference = area - targetArea;
 		if (Math.abs(difference) <= Constants.AREA_THRESHOLD) 
 			isAtArea = true;		
 		else 
@@ -125,10 +125,10 @@ public class VisionProcessor extends Subsystem {
 		return move;
 	}
 
-	public double getMoveHatch() {	
+	public double getMoveRocket(double targetArea) {	
 		if (seesTarget()) 
-			if (!isAtArea())	
-				if (area < Constants.TARGET_AREA)
+			if (!isAtArea(targetArea))	
+				if (area < targetArea)
 					move = Constants.VISION_MOVE;				
 				else 
 					move = -Constants.VISION_MOVE;					

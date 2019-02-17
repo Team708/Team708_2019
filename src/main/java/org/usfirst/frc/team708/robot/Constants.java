@@ -121,11 +121,13 @@ public final class Constants {
 	public static final int VISION_TARGET_NOT_FOUND		= 0;
 	public static final int VISION_TARGET_FOUND			= 1;
 
-	public static final double Y_TARGET 			= 190.0;		
-	public static final double Y_THRESHOLD			=   6.0;		//Target angle in degrees
-	public static final double X_THRESHOLD 			=   6.0;		//Target angle in degrees
-	public static final double AREA_THRESHOLD		= 	6.0;
-	public static final double TARGET_AREA			=	20.0;
+	public static final double Y_TARGET 				= 190.0;		
+	public static final double Y_THRESHOLD				=   6.0;		//Target angle in degrees
+	public static final double X_THRESHOLD 				=   6.0;		//Target angle in degrees
+	public static final double AREA_THRESHOLD			= 	6.0;
+	public static final double ROCKET_HATCH_TARGET_AREA			=	20.0;
+	public static final double ROCKET_CARGO_TARGET_AREA			=	20.0;
+
 
 	public static final double VISION_MOVE			= .3;
 	public static final double VISION_ROTATE		= .2;

@@ -6,6 +6,8 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveInSquare extends CommandGroup {
@@ -26,24 +28,29 @@ public class DriveInSquare extends CommandGroup {
     }
 	
     public  DriveInSquare() {
-		
+		Shuffleboard.addEventMarker("in DriveInSquare", "Start", EventImportance.kNormal);
     	addSequential(new WaitCommand(1.0));
     	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
-    	addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1));
+		Shuffleboard.addEventMarker("in DriveInSquare", "Turn 1", EventImportance.kNormal);
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
-    	addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1));
+		Shuffleboard.addEventMarker("in DriveInSquare", "Turn 2", EventImportance.kNormal);
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
-    	addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1));
+		Shuffleboard.addEventMarker("in DriveInSquare", "Turn 3", EventImportance.kNormal);
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, driveStraightTime));
-    	addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1));
+		Shuffleboard.addEventMarker("in DriveInSquare", "Turn 4", EventImportance.kNormal);
     	addSequential(new TurnToDegrees(turnSpeed, -turnDegrees));
-    	addSequential(new WaitCommand(0.1));
+		addSequential(new WaitCommand(0.1));
+		Shuffleboard.addEventMarker("in DriveInSquare", "End", EventImportance.kNormal);
     }
     
     // Make this return true when this Command no longer needs to run execute()

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -44,6 +46,8 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
 
+        Shuffleboard.startRecording();
+        Shuffleboard.addEventMarker("Initiate Robot", EventImportance.kHigh);
         statsTimer = new Timer(); // Initializes the timer for sending Smart Dashboard data
         statsTimer.start(); // Starts the timer for the Smart Dashboard
 

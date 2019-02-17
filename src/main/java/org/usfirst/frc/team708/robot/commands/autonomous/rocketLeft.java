@@ -16,6 +16,7 @@ import org.usfirst.frc.team708.robot.commands.elevator.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 
 public class rocketLeft extends CommandGroup {
    
@@ -24,7 +25,7 @@ public class rocketLeft extends CommandGroup {
     }
 	
     public  rocketLeft() {
-
+        Shuffleboard.addEventMarker("in rocketLeft", "Start", EventImportance.kNormal);
         addSequential(new GearHigh());
         //Leaving HAB Lv. 2
         addSequential(new DriveCurvatureToEncoderOrTime(-1.0, .3, false, -200, 3));
@@ -49,7 +50,7 @@ public class rocketLeft extends CommandGroup {
         addSequential(new DeployIntake());
         addParallel(new DriveStraightToBallOrTime(24, .8, 2));
         addSequential(new AutoIntakeBallInForTime(2));
-
+        Shuffleboard.addEventMarker("in rocketLeft", "End", EventImportance.kNormal);
     }
     
     // Make this return true when this Command no longer needs to run execute()

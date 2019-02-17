@@ -17,10 +17,6 @@ public class ElevatorToLevel3 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// if(Robot.arm.getAngle() >= Constants.SCALE_HEIGHT - Constants.ARM_TOLERANCE)
-    	// 	Robot.arm.moveMotor(Constants.ARM_REVERSE);
-    	// else
-
     	}    	
 
     protected boolean isFinished()
@@ -38,7 +34,7 @@ public class ElevatorToLevel3 extends Command {
             }
             else 
             {
-                Robot.elevator.stop();
+                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
                 return true;
             }
         } 
@@ -56,20 +52,20 @@ public class ElevatorToLevel3 extends Command {
             }
             else 
             {
-                Robot.elevator.stop();
+                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
                 return true;
             }
         }
         else 
         {
-            Robot.elevator.stop();
+            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
             return true;
         }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.elevator.stop();
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

@@ -26,7 +26,6 @@ public final class Constants {
 	public static final double  DRIVETRAIN_ENCODER_PULSES_PER_REV	 	= 42.0;
 	public static final boolean DRIVE_USE_SQUARED_INPUT 				= false;
 	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER				= true; // variable to determine which side encoder is on
-	public static final double	VISION_ROTATE_MOTOR_SPEED				= 0.8;
 	public static final double	DRIVE_MOTOR_OFF		 					= 0.0;
 	public static final double	GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 256.0;
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
@@ -55,7 +54,8 @@ public final class Constants {
 	 */
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
 	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -1.0;
-	public static final double	ELE_DEADZONE 				=   .6; 
+	public static final double 	ELEVATOR_STOP 				= 0.0;
+	public static final double	ELE_DEADZONE 				=  .6; 
 	public static final int		ELE_MAX						= 400;
 	public static final double	ELE_HATCH_LVL3				= 300; 
 	public static final double	ELE_HATCH_LVL2				= 200; 
@@ -93,8 +93,8 @@ public final class Constants {
 	/*
 	 * Cimber
 	 */
-	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  10000; //raw encoder value
-	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE		=  10000; //raw encoder value
+	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  6;  //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  18; //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  18; //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  12; //inches encoder value
 	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
@@ -106,6 +106,10 @@ public final class Constants {
 	public static final double	MOVE_CLIMBER_RETRACT				=  -1.0;
 	public static final double	STOP_CLIMBER						= 0.0;
 
+	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1
+	public static final double ROLLER_DIAMETER						= 2.5;	//Diameter in inches
+	public static final int ROLLER_ENCODER_COUNTS_PER_REV			= 12;	//12 ticks, lol
+
 	/*
 	 * Vision
 	 */
@@ -116,7 +120,15 @@ public final class Constants {
 	public static final int VISION_PIPELINE_1			= 1;
 	public static final int VISION_TARGET_NOT_FOUND		= 0;
 	public static final int VISION_TARGET_FOUND			= 1;
-	
+
+	public static final double Y_TARGET 			= 190.0;		
+	public static final double Y_THRESHOLD			=   6.0;		//Target angle in degrees
+	public static final double X_THRESHOLD 			=   6.0;		//Target angle in degrees
+	public static final double AREA_THRESHOLD		= 	6.0;
+	public static final double TARGET_AREA			=	20.0;
+
+	public static final double VISION_MOVE			= .3;
+	public static final double VISION_ROTATE		= .2;
 	/*
 	 * Smart Dashboard
 	 */

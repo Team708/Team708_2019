@@ -11,18 +11,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
-import edu.wpi.cscore.VideoMode;
-
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.subsystems.Climber;
-import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team708.robot.subsystems.Elevator;
-import org.usfirst.frc.team708.robot.subsystems.Intake;
-import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
+import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
 
 public class Robot extends TimedRobot {
@@ -75,11 +67,9 @@ public class Robot extends TimedRobot {
         camerafront.setResolution(320,240);
         camerafront.setFPS(20);
 
-
         UsbCamera cameraback = CameraServer.getInstance().startAutomaticCapture(1);
         cameraback.setResolution(320, 240);
         cameraback.setFPS(20);
-
         // This MUST BE LAST or a NullPointerException will be thrown
         oi = new OI(); // Initializes the OI
     }
@@ -98,7 +88,6 @@ public class Robot extends TimedRobot {
      */
     public void autonomousInit() {
         // schedule the autonomous command
-
         drivetrain.setBrakeMode(true);
 
         // original dashboard code
@@ -127,7 +116,6 @@ public class Robot extends TimedRobot {
 
         drivetrain.setBrakeMode(false);
         drivetrain.shiftGearlow();
-        drivetrain.resetGyro();
     }
 
     /**
@@ -135,7 +123,6 @@ public class Robot extends TimedRobot {
      * reset subsystems before shutting down.
      */
     public void disabledInit() {
-        // testing
     }
 
     /**
@@ -174,9 +161,8 @@ public class Robot extends TimedRobot {
 
         // autonomousMode.addOption
         autonomousMode.addOption("Do Nothing", new DoNothing());
-
         autonomousMode.addOption("Drive in Square", new DriveInSquare());
-        autonomousMode.addOption("Drive encoder distance", new driveDistanceEncoder());
+        autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
         autonomousMode.addOption("Curvature Drive", new driveCurvatureForTime());
         // autonomousMode.addOption("Rocket Left", new rocketLeft());
         // autonomousMode.addOption("Rocket right", new rocketRight());

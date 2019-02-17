@@ -26,7 +26,7 @@ public class DriveInSquare extends CommandGroup {
     }
 	
     public  DriveInSquare() {
-
+		
     	addSequential(new WaitCommand(1.0));
     	addSequential(new DriveStraightToEncoderDistanceOrTime(100, driveStraightSpeed, true, driveStraightTime));
     	addSequential(new WaitCommand(0.1));

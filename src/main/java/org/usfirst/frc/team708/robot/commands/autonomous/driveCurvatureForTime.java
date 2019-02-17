@@ -7,7 +7,6 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderD
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToWhiteLineorTime;
 //import org.usfirst.frc.team708.robot.commands.drivetrain.RotateAndDriveToBoiler;
-import org.usfirst.frc.team708.robot.commands.drivetrain.ToggleBrakeMode;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 //import org.usfirst.frc.team708.robot.commands.feeder.SpinFeeder;

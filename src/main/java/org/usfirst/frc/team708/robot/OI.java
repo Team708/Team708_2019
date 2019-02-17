@@ -37,8 +37,6 @@ public class OI {
 	private static final int SHIFT_DRIVETRAIN_LOW_BUTTON	= Gamepad.button_A;
 	private static final int RETRACT_INTAKE_BUTTON			= Gamepad.button_X;
 
-	private static final int TOGGLE_BRAKES_BUTTON			= Gamepad.button_Back;
-
 /*
  * Operator Button Assignment
  */
@@ -80,7 +78,6 @@ public class OI {
 	public static final Button lowGear			= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_LOW_BUTTON);
 	public static final Button intakeOut		= new JoystickButton(driverGamepad, DEPLOY_INTAKE_BUTTON);
 	public static final Button intakeIn			= new JoystickButton(driverGamepad, RETRACT_INTAKE_BUTTON);
-	public static final Button toggleBrakes		= new JoystickButton(driverGamepad, TOGGLE_BRAKES_BUTTON);
 
 	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
 	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
@@ -121,7 +118,6 @@ public class OI {
 		lowGear.whenPressed(new GearLow());
 		intakeIn.whenPressed(new DeployIntake());
 		intakeOut.whenPressed(new RetractIntake());
-		toggleBrakes.whenPressed(new ToggleBrakeMode());
 
 	//  highGearHeld.whileActive(new GearHigh());	
 		highGearEngaged.whileActive(new GearHigh());

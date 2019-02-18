@@ -14,13 +14,14 @@ public class DriveStraightToEncoderDistanceOrTime extends Command {
 	private final double rotate = 0.0;
 	private double 		tspeed;
 	
-	private double maxTime;
+	// private double maxTime;
     
     public DriveStraightToEncoderDistanceOrTime(double distance, double speed, double maxTime) {
        
    	// Use requires() here to declare subsystem dependencies
-    	requires(Robot.drivetrain);
-    	
+    	// requires(Robot.drivetrain);
+        tspeed = speed;
+        targetDistance = distance;
     	this.setTimeout(maxTime);
     }
 

@@ -2,8 +2,10 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
+import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
+import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -17,16 +19,16 @@ public class driveDistanceEncoder extends CommandGroup {
 //    	Robot.drivetrain.resetEncoder();
 //    	Robot.drivetrain.resetEncoder2();
 //    	Robot.drivetrain.resetGyro();
-    	
     }
 	
     public  driveDistanceEncoder() {
         Shuffleboard.addEventMarker("in driveDistanceEncoder", "Start", EventImportance.kNormal);
-    	addSequential(new GearHigh());
+    	// addSequential(new GearHigh());
 
-   	    addSequential(new WaitCommand(2.0));
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(-140, -.7, 3));
-        Shuffleboard.addEventMarker("in driveDistanceEncoder", "End", EventImportance.kNormal);
+   	    // addSequential(new WaitCommand(2.0));
+        //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
+           addSequential(new DriveStraightToEncoderDistanceOrTime(200, .4, 1.0));
+           Shuffleboard.addEventMarker("in driveDistanceEncoder", "End", EventImportance.kNormal);
     }
     
     // Make this return true when this Command no longer needs to run execute()

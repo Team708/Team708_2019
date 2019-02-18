@@ -90,13 +90,17 @@ public class Drivetrain extends PIDSubsystem {
 	 * @param move
 	 * @param rotate
 	 */
-	public void haloDrive(double move, double rotate, boolean usePID) {
+	public void haloDrive(double move, double rotate, boolean usePID)
+	{
 		move = move * Constants.DRIVE_MOTOR_MAX_SPEED;
 		rotate = rotate * Constants.ROTATE_MOTOR_MAX_SPEED;    	
-		if (usePID) {
-			if (rotate == 0.0 && move > 0.0) {
+		if (usePID)
+		{
+			if (rotate == 0.0 && move > 0.0)
+			{
 				// Enables the PID controller if it is not already
-				if (!getPIDController().isEnabled()) {
+				if (!getPIDController().isEnabled()) 
+				{
 					getPIDController().setPID(Constants.KpForward, Constants.KiForward, Constants.KdForward);
 					getPIDController().reset();
 					gyro.reset();
@@ -106,9 +110,11 @@ public class Drivetrain extends PIDSubsystem {
 				// Sets the forward move speed to the move parameter
 				moveSpeed = move;
 			} 
-			else if (rotate == 0.0 && move < 0.0){
+			else if (rotate == 0.0 && move < 0.0)
+			{
 				// Enables the PID controller if it is not already
-				if (!getPIDController().isEnabled()) {
+				if (!getPIDController().isEnabled())
+				{
 					getPIDController().setPID(Constants.KpBackward, Constants.KiBackward, Constants.KdBackward);
 					getPIDController().reset();
 					gyro.reset();
@@ -117,16 +123,21 @@ public class Drivetrain extends PIDSubsystem {
 				}
 				// Sets the forward move speed to the move parameter
 				moveSpeed = move;
-			} else {
+			} else 
+			{
 				// Disables the PID controller if it enabled so the drivetrain can move freely
-				if (getPIDController().isEnabled()) {
+				if (getPIDController().isEnabled()) 
+				{
 					getPIDController().reset();
 				}
 				drivetrain.arcadeDrive(move, rotate);
 			}
-		} else {
+		} 
+		else 
+		{
 			// Disables the PID controller if it enabled so the drivetrain can move freely
-			if (getPIDController().isEnabled()) {
+			if (getPIDController().isEnabled()) 
+			{
 				getPIDController().reset();
 			}
 			drivetrain.arcadeDrive(move, rotate);

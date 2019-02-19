@@ -81,14 +81,14 @@ public class RobotMap {
 //	public static final int 					= 3;
 	
 // PCM Ports
-	public static final int driveShiftLow		= 0; 	//Shifts Drivetrain to Low gear
-    public static final int driveShiftHigh		= 1; 	//Shifts Drivetrain to High gear
-    public static final int intake				= 2;	//actuate intake ball and hatch
-	public static final int beak				= 3;	//Open close Beak
-	public static final int hatch				= 4;	//actuate Hatch launcher
-//	public static final int 					= 5;
-//	public static final int 					= 6;
-//	public static final int 			        = 7;
+	public static final int driveShift		= 0; 	//Shifts Drivetrain to Low gear
+    public static final int intake			= 1; 	//Shifts Drivetrain to High gear
+    public static final int hatch			= 2;	//actuate intake ball and hatch
+//	public static final int					= 3;	
+//	public static final int					= 4;	
+//	public static final int 				= 5;
+//	public static final int 				= 6;
+//	public static final int 		        = 7;
 	
 	
 }

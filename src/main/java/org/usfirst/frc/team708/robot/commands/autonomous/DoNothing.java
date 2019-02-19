@@ -30,10 +30,9 @@ public class DoNothing extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Shuffleboard.addEventMarker("in DoNothing", "Start", EventImportance.kNormal);
-        Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(),
-                                              Robot.visionProcessor.getRotate(), false);
-        Shuffleboard.addEventMarker("in DoNothing", "End", EventImportance.kNormal);
+		addSequential(new Send("in DoNothing - Start"));
+        // Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(), Robot.visionProcessor.getRotate(), false);
+        addSequential(new Send("in DoNothing - End"));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -22,13 +22,13 @@ public class driveDistanceEncoder extends CommandGroup {
     }
 	
     public  driveDistanceEncoder() {
-        Shuffleboard.addEventMarker("in driveDistanceEncoder", "Start", EventImportance.kNormal);
+		addSequential(new Send("in driveDistanceEncoder - Start"));
     	// addSequential(new GearHigh());
 
    	    // addSequential(new WaitCommand(2.0));
         //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
-           addSequential(new DriveStraightToEncoderDistanceOrTime(200, .4, 3.0));
-           Shuffleboard.addEventMarker("in driveDistanceEncoder", "End", EventImportance.kNormal);
+           addSequential(new DriveStraightToEncoderDistanceOrTime(200, .4, 1.0));
+           addSequential(new Send("in driveDistanceEncoder - End"));
     }
     
     // Make this return true when this Command no longer needs to run execute()

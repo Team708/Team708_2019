@@ -46,8 +46,6 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
 
-        Shuffleboard.startRecording();
-        Shuffleboard.addEventMarker("Initiate Robot", EventImportance.kHigh);
         statsTimer = new Timer(); // Initializes the timer for sending Smart Dashboard data
         statsTimer.start(); // Starts the timer for the Smart Dashboard
 

@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -36,7 +38,7 @@ public class Drivetrain extends PIDSubsystem {
 	private boolean gearHigh;
 	private ADIS16448_IMU gyro;
 	
-	private DoubleSolenoid gearShiftSolenoid;
+	private Solenoid	gearShifter;
 	
 	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
@@ -74,7 +76,7 @@ public class Drivetrain extends PIDSubsystem {
 		resetEncoder();
 
 		lineSensor = new DigitalInput(RobotMap.lineSensor);
-		gearShiftSolenoid = new DoubleSolenoid(RobotMap.driveShiftLow, RobotMap.driveShiftHigh);
+		gearShifter	=	new Solenoid(RobotMap.driveShift);
 	}
 		
 	/**
@@ -293,16 +295,16 @@ public class Drivetrain extends PIDSubsystem {
 	}
 
 	public void shiftGearHigh() {
-		gearShiftSolenoid.set(DoubleSolenoid.Value.kForward);
 		gearHigh = true;
+		gearShifter.set(gearHigh);
 		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_HIGH;
 		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 													(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
 	}
 	
 	public void shiftGearlow() {
-		gearShiftSolenoid.set(DoubleSolenoid.Value.kReverse);
 		gearHigh = false;
+		gearShifter.set(gearHigh);		
 		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_LOW;
 		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 													(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);

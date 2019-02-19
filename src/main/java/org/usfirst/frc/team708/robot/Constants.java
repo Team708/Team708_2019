@@ -129,8 +129,8 @@ public final class Constants {
 	public static final double ROCKET_CARGO_TARGET_AREA			=	20.0;
 
 
-	public static final double VISION_MOVE			= .3;
-	public static final double VISION_ROTATE		= .2;
+	public static final double VISION_MOVE			= .6;
+	public static final double VISION_ROTATE		= .4;
 	/*
 	 * Smart Dashboard
 	 */

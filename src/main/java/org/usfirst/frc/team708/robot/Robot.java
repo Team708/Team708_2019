@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
         autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
         autonomousMode.addOption("Rocket Left", new rocketLeft());
         // autonomousMode.addOption("Rocket right", new rocketRight());
-        // autonomousMode.addOption("Ship", new ship());
+        autonomousMode.addOption("Ship Left", new shipLeft());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

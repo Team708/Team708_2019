@@ -3,6 +3,7 @@ package org.usfirst.frc.team708.robot.subsystems;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.intake.RetractIntake;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -11,14 +12,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
-/**
- * Subsystem that intakes balls
- */
+
 
 public class Intake extends Subsystem {
 	
-	private WPI_TalonSRX 		ballMaster, hatchMaster;
-	private WPI_VictorSPX   ballSlave;
+	private WPI_TalonSRX 	ballMaster;
+//	private WPI_TalonSRX 	hatchMaster;
+//	private WPI_VictorSPX	ballSlave;
 
 	private Solenoid intakeSolenoid;
 	private Solenoid hatchSolenoid;
@@ -32,10 +32,10 @@ public class Intake extends Subsystem {
 
 	public Intake() {
 		ballMaster	= new WPI_TalonSRX(RobotMap.ballIntakeMotorMaster);
-		ballSlave 	= new WPI_VictorSPX(RobotMap.ballIntakeMotorSlave1);
+		// ballSlave 	= new WPI_VictorSPX(RobotMap.ballIntakeMotorSlave1);
 
-		intakeSolenoid = new Solenoid(RobotMap.intake);
-		hatchSolenoid	 = new Solenoid(RobotMap.hatch);
+		intakeSolenoid 	= new Solenoid(RobotMap.intake);
+		hatchSolenoid	= new Solenoid(RobotMap.hatch);
 
 		intakeSolenoid.set(intakeRetracted);
 		hatchSolenoid.set(hatchRetracted);
@@ -43,7 +43,9 @@ public class Intake extends Subsystem {
 		ballSensor 		= new DigitalInput(RobotMap.ballSensor);
 		hatchSensor 	= new DigitalInput(RobotMap.hatchSensor);
 
-		ballSlave.follow(ballMaster);
+		ballMaster.setNeutralMode(NeutralMode.Brake);
+
+		// ballSlave.follow(ballMaster);
 	}
 	
 	public void initDefaultCommand() {

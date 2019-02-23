@@ -19,7 +19,7 @@ public final class Constants {
 	 */
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
 	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
-	public static final double	TANK_STICK_TOLERANCE 					= .30;
+	public static final double	TANK_STICK_TOLERANCE 					= .20;
 	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
 	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;
 	public static final double  DRIVETRAIN_GEAR_RATIO_HIGH				= 4.87;
@@ -30,9 +30,9 @@ public final class Constants {
 	public static final double	GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 256.0;
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
 	public static final int		DT_HIGH_GEAR							= 1;
-	public static final int		DT_LOW_GEAR								= 1;
-	public static final double	PITCH_MAX								= 2.0;
-	public static final double	ROLL_MAX								= 2.0;
+	public static final int		DT_LOW_GEAR								= 0;
+	public static final double	PITCH_MAX								= 4.0;
+	public static final double	ROLL_MAX								= 4.0;
 
 	// PID Tuning parameters
 	public static final double Kp = 0.0;		// Proportional gain
@@ -55,7 +55,7 @@ public final class Constants {
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
 	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -1.0;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
-	public static final double	ELE_DEADZONE 				=  .6; 
+	public static final double	ELE_DEADZONE 				=  .5; 
 	public static final int		ELE_MAX						= 400;
 	public static final double	ELE_HATCH_LVL3				= 300; 
 	public static final double	ELE_HATCH_LVL2				= 200; 
@@ -68,17 +68,17 @@ public final class Constants {
 	public static final double	ELE_GROUND					=   0; 
 	public static final double	ELE_CARGO_BALL				= 150; 
 	public static final double	ELE_CARGO_HATCH				= 100; 
-	public static final int ELE_ENC_STARTING_POSITION 		= 42;
+	public static final int ELE_ENC_STARTING_POSITION 		= 0;
 	public static final int ELE_ENC_MAX				 		= 600;
 	public static final int ELE_ENC_MIN				 		= 0;
-	public static final int	ELE_TOLERANCE					= 5;
+	public static final int	ELE_TOLERANCE					= 50;
 
 	/*
 	 * Intake
 	 */
-	public static final int		HATCH_IN			=  1;
-	public static final int		HATCH_OUT			= -1;
-	public static final double 	HATCH_STOP 			=  0;
+	public static final double	HATCH_IN			=  1.0;
+	public static final double	HATCH_OUT			= -1.0;
+	public static final double 	HATCH_STOP 			=  0.0;
 
 	public static final double BALL_IN 				=  1.0;
 	public static final double BALL_OUT 			= -1.0;

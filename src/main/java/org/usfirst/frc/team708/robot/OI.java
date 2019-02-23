@@ -131,7 +131,7 @@ public class OI {
 		hatchOut.whileHeld(new IntakeHatchOut());
 		CargoShip.whenPressed(new ElevatorToCargo());
 		level1Rocket.whenPressed(new ElevatorToLevel1());
-		level2Rocket.whenPressed(new ElevatorToLevel2());
+		level2Rocket.whenPressed(new RetractHatch());
 		level3Rocket.whenPressed(new ElevatorToLevel3());
 		findHatch.whenPressed(new FindRocketHatch());
 		findBall.whenPressed(new FindBall());

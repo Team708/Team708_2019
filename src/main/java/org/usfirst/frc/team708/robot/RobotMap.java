@@ -41,17 +41,17 @@ public class RobotMap {
 
 // Ball Intake
 	public static final int ballIntakeMotorMaster			= 31; 
-	public static final int ballIntakeMotorSlave1			= 32; 
+//	public static final int ballIntakeMotorSlave1			= 32; 
 	
 // Hatch Intake
-	public static final int hatchIntakeMotorMaster			= 41; 
+//	public static final int hatchIntakeMotorMaster			= 41; 
 
 // Climber
 	public static final int ClimberLeftFrontMotor			= 51; 
-	public static final int ClimberRightFrontMotor			= 52; 
+//	public static final int ClimberRightFrontMotor			= 52; 
 
 	public static final int ClimberLeftRearMotor			= 53; 
-	public static final int ClimberRightRearMotor			= 54; 
+//	public static final int ClimberRightRearMotor			= 54; 
 	public static final int ClimberRollerMotor				= 55; 
 
 
@@ -82,10 +82,10 @@ public class RobotMap {
 	
 // PCM Ports
 	public static final int driveShift		= 0; 	//Shifts Drivetrain to Low gear
-    public static final int intake			= 1; 	//Shifts Drivetrain to High gear
-    public static final int hatch			= 2;	//actuate intake ball and hatch
+//	public static final int 				= 1; 	
+    public static final int intake			= 2;	//intake in and out
 //	public static final int					= 3;	
-//	public static final int					= 4;	
+	public static final int	hatch			= 4;	//hatch piston in and out
 //	public static final int 				= 5;
 //	public static final int 				= 6;
 //	public static final int 		        = 7;

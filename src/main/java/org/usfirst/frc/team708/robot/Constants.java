@@ -72,6 +72,11 @@ public final class Constants {
 	public static final int ELE_ENC_MAX				 		= 600;
 	public static final int ELE_ENC_MIN				 		= 0;
 	public static final int	ELE_TOLERANCE					= 50;
+	public static final double ELE_P						= 0.1;
+	public static final double ELE_I						= 0.0001;
+	public static final double ELE_D						= 1.0;
+	public static final double ELE_Iz						= 0;
+	public static final double ELE_FF						= 0;
 
 	/*
 	 * Intake
@@ -84,11 +89,11 @@ public final class Constants {
 	public static final double BALL_OUT 			= -1.0;
 	public static final double BALL_STOP 			=  0.0;
 
-	public static final int		INTAKE_HATCH_IN		=  0;
-	public static final int		INTAKE_HATCH_OUT	=  1;
+	public static final int	INTAKE_HATCH_IN		=  0;
+	public static final int	INTAKE_HATCH_OUT	=  1;
 	
-	public static final int		INTAKE_BALL_IN		=  0;
-	public static final int		INTAKE_BALL_OUT		=  1;
+	public static final int	INTAKE_BALL_IN		=  0;
+	public static final int	INTAKE_BALL_OUT		=  1;
 
 	/*
 	 * Cimber

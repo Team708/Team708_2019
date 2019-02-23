@@ -22,9 +22,11 @@ public class Intake extends Subsystem {
 
 	private Solenoid intakeSolenoid;
 	private Solenoid hatchSolenoid;
+	private Solenoid beakSolenoid;
 
 	private boolean intakeRetracted	 = true;
 	private boolean hatchRetracted	 = true;
+	private boolean beakOpened		 = true;				
 
 	public DigitalInput 	ballSensor;
 	public DigitalInput 	hatchSensor;
@@ -36,6 +38,7 @@ public class Intake extends Subsystem {
 
 		intakeSolenoid 	= new Solenoid(RobotMap.intake);
 		hatchSolenoid	= new Solenoid(RobotMap.hatch);
+		beakSolenoid	= new Solenoid(RobotMap.beak);
 
 		intakeSolenoid.set(intakeRetracted);
 		hatchSolenoid.set(hatchRetracted);
@@ -92,6 +95,13 @@ public class Intake extends Subsystem {
 		intakeSolenoid.set(false);
 	}
 
+	public void intakeToggle() {
+		if (intakeRetracted) 
+			intakeDeploy();
+		else 
+			intakeRetract();
+	}
+
 	public void hatchRetract() {
 		hatchRetracted = true;
 		hatchSolenoid.set(true);
@@ -102,10 +112,33 @@ public class Intake extends Subsystem {
 		hatchSolenoid.set(false);
 	}
 
+	public void hatchToggle() {
+		if (hatchRetracted) 
+			hatchExtend();
+		else 
+			hatchRetract();
+	}
+	public void beakOpen() {
+		beakOpened = true;
+		beakSolenoid.set(true);
+	}
+	
+	public void beakClose() {
+		beakOpened = false;
+		beakSolenoid.set(false);
+	}
+
+	public void beakToggle() {
+		if (beakOpened) 
+			beakClose();
+		else 
+			beakOpen();
+	}
+
 	public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
-  }  
+	}  
 }

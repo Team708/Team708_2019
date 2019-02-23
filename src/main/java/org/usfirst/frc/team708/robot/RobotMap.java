@@ -87,7 +87,7 @@ public class RobotMap {
 //	public static final int					= 3;	
 	public static final int	hatch			= 4;	//hatch piston in and out
 //	public static final int 				= 5;
-//	public static final int 				= 6;
+	public static final int beak			= 6;
 //	public static final int 		        = 7;
 	
 	

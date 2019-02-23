@@ -8,6 +8,7 @@ import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANDigitalInput.LimitSwitch;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -21,6 +22,9 @@ public class Elevator extends Subsystem {
 	private CANSparkMax 			elevatorMotor;
 	private CANEncoder 				elevatorEncoder;
 	private CANDigitalInput 	upperLimit, lowerLimit;
+	private CANPIDController	elevatorPIDController;
+//	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
+
 
     /**
       * Constructor
@@ -37,6 +41,12 @@ public class Elevator extends Subsystem {
 		lowerLimit.enableLimitSwitch(true);
 		
 		elevatorEncoder.setPosition(Constants.ELE_ENC_STARTING_POSITION);
+		elevatorPIDController = elevatorMotor.getPIDController();
+		elevatorPIDController.setP(Constants.ELE_P);
+    elevatorPIDController.setI(Constants.ELE_I);
+    elevatorPIDController.setD(Constants.ELE_D);
+    elevatorPIDController.setIZone(Constants.ELE_Iz);
+    elevatorPIDController.setFF(Constants.ELE_FF);
 	}
 	
 	public void initDefaultCommand() {
@@ -75,6 +85,10 @@ public class Elevator extends Subsystem {
    
   public void resetElevatorEncoder() {
 		elevatorEncoder.setPosition(Constants.ELE_ENC_MIN);  
+	}
+
+	public void goToPosition(int elevatorLevel) {
+		elevatorPIDController.setReference(elevatorLevel, ControlType.kPosition);
 	}
 	 
 	public void sendToDashboard() {

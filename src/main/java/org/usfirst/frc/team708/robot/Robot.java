@@ -3,8 +3,11 @@
 package org.usfirst.frc.team708.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -18,6 +21,8 @@ import edu.wpi.cscore.UsbCamera;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
+
+
 
 public class Robot extends TimedRobot {
 
@@ -34,6 +39,10 @@ public class Robot extends TimedRobot {
     public String gameData;
     public String robotLocation;
     public String autoMode;
+
+    public static DriverStation 			ds;
+    public static DriverStation.Alliance 	alliance;
+    public static int 						allianceColor;
 
     // public boolean climber = true;
     SendableChooser<Command> autonomousMode = new SendableChooser<>();
@@ -83,6 +92,35 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         sendStatistics();
         prefs = Preferences.getInstance();
+
+        try {
+            // robot is ENABLED
+     		if (RobotController.isSysActive()){
+                 // connected to FMS
+                 ds = DriverStation.getInstance();
+                alliance = ds.getAlliance();
+	            if (alliance == Alliance.Blue){
+                       allianceColor = Constants.ALLIANCE_BLUE;
+                }
+                else if (alliance == Alliance.Red){
+                    allianceColor = Constants.ALLIANCE_RED;
+                }
+                else {
+                    allianceColor = 0;
+                }
+   
+           }
+           else // robot is NOT ENABLED
+           {allianceColor=20;}
+	    
+		}
+		catch (Exception e)
+		{
+             allianceColor = 11;
+             
+
+
+    	}
     }
 
     /**

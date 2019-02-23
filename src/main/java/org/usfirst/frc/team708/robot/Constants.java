@@ -131,6 +131,9 @@ public final class Constants {
 
 	public static final double VISION_MOVE			= .6;
 	public static final double VISION_ROTATE		= .4;
+
+	public static final int ALLIANCE_RED 	 	=	1;
+	public static final int ALLIANCE_BLUE 	 	=	-1;
 	/*
 	 * Smart Dashboard
 	 */

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.drivetrain.JoystickDrive;
 import org.usfirst.frc.team708.robot.util.IRSensor;
@@ -367,5 +368,6 @@ public class Drivetrain extends PIDSubsystem {
 			SmartDashboard.putNumber("Gyro turn angle", getAngle());
 			SmartDashboard.putNumber("Roll", Math708.round(gyro.getRoll(),0));
 			SmartDashboard.putNumber("Pitch", Math708.round(gyro.getPitch(),0));
+			SmartDashboard.putNumber("AllianceColor", Robot.allianceColor);
 	}
 }

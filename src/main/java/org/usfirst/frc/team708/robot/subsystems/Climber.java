@@ -121,6 +121,12 @@ public Climber() {
 		SmartDashboard.putBoolean("Front Lower Limit", lowerLimitFront());
 		SmartDashboard.putBoolean("Rear Upper Limit",  upperLimitRear());
 		SmartDashboard.putBoolean("Rear Lower Limit",  lowerLimitRear());	
+		SmartDashboard.putBoolean("Stage 1", stage1);
+		SmartDashboard.putBoolean("Stage 2", stage2);
+		SmartDashboard.putBoolean("Stage 3", stage3);
+		SmartDashboard.putBoolean("Stage 4", stage4);
+		SmartDashboard.putBoolean("Stage 5", stage5);
+		SmartDashboard.putBoolean("Stage 6", stage6);
 		SmartDashboard.putNumber("Roller Encoder", getEncoderRoller());		//Encoder raw count
   } 
 }

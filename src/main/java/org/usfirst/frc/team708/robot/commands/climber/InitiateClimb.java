@@ -15,6 +15,7 @@ public class InitiateClimb extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.climber.resetClimberRoller();
+        Robot.climber.stage1 = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -22,7 +23,7 @@ public class InitiateClimb extends Command {
     {
         if (Robot.climber.stage1) 
         {
-            if (!((Robot.climber.upperLimitFront()) && (Robot.climber.upperLimitRear())) )
+            if (!((Robot.climber.lowerLimitFront()) && (Robot.climber.lowerLimitRear())) )
             {
                 if (Robot.drivetrain.isTiltingBack())
                 {
@@ -64,7 +65,7 @@ public class InitiateClimb extends Command {
         }
         else if (Robot.climber.stage3) 
         {
-            if (!(Robot.climber.lowerLimitFront()))
+            if (!(Robot.climber.upperLimitFront()))
             {
                 Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_RETRACT);
             }
@@ -95,7 +96,7 @@ public class InitiateClimb extends Command {
         }
         else if (Robot.climber.stage5) 
         {
-            if (!Robot.climber.lowerLimitRear()) 
+            if (!Robot.climber.upperLimitRear()) 
             {
                 Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_RETRACT);
             }

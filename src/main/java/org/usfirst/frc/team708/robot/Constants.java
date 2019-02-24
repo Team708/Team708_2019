@@ -107,8 +107,8 @@ public final class Constants {
 
 	public static final int		MOVE_CLIMBER_FORWARD				=  18;
 	public static final double	MOVE_CLIMBER_TOLERANCE				=  .5;
-	public static final double	MOVE_CLIMBER_EXTEND					=  1.0;
-	public static final double	MOVE_CLIMBER_RETRACT				=  -1.0;
+	public static final double	MOVE_CLIMBER_EXTEND					=  -1.0;
+	public static final double	MOVE_CLIMBER_RETRACT				=  1.0;
 	public static final double	STOP_CLIMBER						= 0.0;
 
 	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1

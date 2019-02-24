@@ -140,5 +140,7 @@ public class Intake extends Subsystem {
 		}
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
+		SmartDashboard.putBoolean("Beak Opened:", beakOpened);
+		SmartDashboard.putBoolean("Hatch Retracted:", hatchRetracted);
 	}  
 }

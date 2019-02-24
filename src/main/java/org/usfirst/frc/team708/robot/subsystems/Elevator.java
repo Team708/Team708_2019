@@ -87,7 +87,7 @@ public class Elevator extends Subsystem {
 		elevatorEncoder.setPosition(Constants.ELE_ENC_MIN);  
 	}
 
-	public void goToPosition(int elevatorLevel) {
+	public void goToPosition(double elevatorLevel) {
 		elevatorPIDController.setReference(elevatorLevel, ControlType.kPosition);
 	}
 	 

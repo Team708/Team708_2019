@@ -9,25 +9,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.subsystems.Intake;
 
-public class DeployHatch extends Command {
+public class DeployGamePiece extends Command {
 
 
-    public DeployHatch() {
+    public DeployGamePiece() {
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.intake.hatchExtend();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {    
+        if (Robot.intake.hasHatch()) {
+            Robot.intake.hatchExtend();
+        }
+        else {
+            Robot.intake.moveMotorBall(Constants.INTAKE_BALL_OUT);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return(true);
+    	return(!(Robot.intake.hasBall() && Robot.intake.hasHatch()));
     }
 
     // Called once after isFinished returns true

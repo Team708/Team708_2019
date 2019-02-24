@@ -60,6 +60,7 @@ public Climber() {
 		climberFrontMaster.set(speed);
 		climberRearMaster.set(speed);
 	}
+	
 
 	public void moveFrontMotor(double speed) {
 		climberFrontMaster.set(speed);

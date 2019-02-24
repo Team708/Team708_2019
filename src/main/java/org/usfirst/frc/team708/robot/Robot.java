@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
         Robot.intake.intakeRetract();    // initialize intake in starting config
         Robot.intake.hatchRetract();
+        Robot.intake.beakOpen();
         Robot.drivetrain.shiftGearlow();
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 

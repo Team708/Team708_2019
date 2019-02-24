@@ -57,14 +57,9 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 
 	private static final int ELEVATOR_OVERIDE_BUTTON		= Gamepad.leftStick_Y;
 
-// private static final int OPEN_BEAK_BUTTON				= Gamepad.button_Back;
-// private static final int CLOSE_BEAK_BUTTON				= Gamepad.button_Start;
 	private static final int TOGGLE_INTAKE_BUTTON			= Gamepad.button_Back;
-	private static final int TOGGLE_HATCH_BUTTON			= Gamepad.button_RightStick;
-	private static final int TOOGLE_BEAK_BUTTON				= Gamepad.button_Start;
-
-//	private static final int DEPLOY_HATCH					= Gamepad.button_RightStick;
-//	private static final int LEVEL_0_ELEV_BUTTON			= Gamepad.button_LeftStick;
+	private static final int TOGGLE_HATCH_BUTTON			= Gamepad.button_Start;
+	private static final int TOOGLE_BEAK_BUTTON				= Gamepad.button_RightStick;
 
 	private static final int INITIATE_CLIMB					= Gamepad.button_A;	
 	private static final int STOP_CLIMB						= Gamepad.button_B;	
@@ -129,7 +124,7 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 		toggleIntake.whenPressed(new ToggleIntake());
 		toggleBeak.whenPressed(new ToggleBeak());
 		eleGround.whenPressed(new ElevatorToGround());
-		level1Rocket.whenPressed(new ElevatorToLevel1());
+		level1Rocket.whenPressed(new Level1CG());
 		level2Rocket.whenPressed(new ElevatorToLevel2());
 		level3Rocket.whenPressed(new ElevatorToLevel3());
 						

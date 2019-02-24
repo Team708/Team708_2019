@@ -1,4 +1,4 @@
-package org.usfirst.frc.team708.robot.commands.autonomous;
+package org.usfirst.frc.team708.robot.commands.elevator;
 
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.Constants;
@@ -19,18 +19,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * this does nothing
  */
-public class FindFeeder extends CommandGroup {
+public class Level1CG extends CommandGroup {
 
-    public FindFeeder() {
+    public Level1CG() {
         // Use requires() here to declare subsystem dependencies
+        addSequential( new ElevatorToLevel1());
+        addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
-        addSequential(new ElevatorToLevel1());
-        addSequential(new FindRocketHatch());
-        addSequential(new DeployHatch());
-        addSequential(new WaitCommand(.5));
-        addSequential(new OpenBeak());
         addSequential(new WaitCommand(.5));
         addSequential(new RetractHatch());
+        addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time
@@ -39,6 +37,11 @@ public class FindFeeder extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    //     addSequential( new ElevatorToLevel1()));
+    //     addSequential(new DeployHatch());
+    //     addSequential(new CloseBeak());
+    //     addSequential(new RetractHatch());
+    //    addSequential(new ElevatorToGround());
     }
 
     // Make this return true when this Command no longer needs to run execute()

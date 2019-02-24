@@ -61,18 +61,22 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 	private static final int TOGGLE_HATCH_BUTTON			= Gamepad.button_Start;
 	private static final int TOOGLE_BEAK_BUTTON				= Gamepad.button_RightStick;
 
-	private static final int INITIATE_CLIMB					= Gamepad.button_A;	
-	private static final int STOP_CLIMB						= Gamepad.button_B;	
+	private static final int INITIATE_CLIMB					= Gamepad.button_Start;	
+	private static final int STOP_CLIMB						= Gamepad.button_Back;	
+	private static final int CLIMBER_FRONT_BUTTON			= Gamepad.leftStick_Y;
+	private static final int CLIMBER_REAR_BUTTON			= Gamepad.rightStick_Y;
+	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.button_R_Shoulder;	
+
 //	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
 // 	private static final int OPENBUTTON2_BUTTON				= Gamepad.button_Start;
-	private static final int CLIMBER_BUTTON					= Gamepad.leftStick_Y;
-	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;	
+//	private static final int CLIMBER_BUTTON					= Gamepad.leftStick_Y;
+//	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;	
 /*
  * Driver Button events
  */
 	public static final Button findFeeder		= new JoystickButton(driverGamepad, FIND_FEEDER_BUTTON);
 	public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
-	public static final Button findBall		= new JoystickButton(driverGamepad, FIND_BALL_BUTTON);
+	public static final Button findBall			= new JoystickButton(driverGamepad, FIND_BALL_BUTTON);
 	public static final Button findTape			= new JoystickButton(driverGamepad, FIND_TAPE_BUTTON);
 
 //	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
@@ -100,10 +104,15 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 
 	public static final Button initiateClimb	= new JoystickButton(climbingGamepad, INITIATE_CLIMB);
 	public static final Button stopClimb		= new JoystickButton(climbingGamepad, STOP_CLIMB);
-	public static final Trigger climbUp			= new AxisUp(climbingGamepad, 	CLIMBER_BUTTON);
-	public static final Trigger climbDown		= new AxisDown(climbingGamepad, CLIMBER_BUTTON);
-	public static final Trigger climbForward	= new AxisUp(climbingGamepad, 	CLIMBER_FORWARD_BUTTON);
-	public static final Trigger climbBack		= new AxisDown(climbingGamepad, CLIMBER_FORWARD_BUTTON);
+	// public static final Trigger climbUp			= new AxisUp(climbingGamepad, 	CLIMBER_BUTTON);
+	// public static final Trigger climbDown		= new AxisDown(climbingGamepad, CLIMBER_BUTTON);
+	public static final Trigger climbUpFront	= new AxisUp(climbingGamepad, CLIMBER_FRONT_BUTTON);
+	public static final Trigger climbDownFront	= new AxisDown(climbingGamepad, CLIMBER_FRONT_BUTTON);
+	public static final Trigger climbUpRear		= new AxisUp(climbingGamepad, CLIMBER_REAR_BUTTON);
+	public static final Trigger climbDownRear	= new AxisDown(climbingGamepad, CLIMBER_REAR_BUTTON);
+	public static final Button climbForward	= new JoystickButton(climbingGamepad, CLIMBER_FORWARD_BUTTON);
+	//public static final Trigger climbForward	= new AxisUp(climbingGamepad, 	CLIMBER_FORWARD_BUTTON);
+	//public static final Trigger climbBack		= new AxisDown(climbingGamepad, CLIMBER_FORWARD_BUTTON);
 
 	public OI() {
 
@@ -128,17 +137,23 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 		level2Rocket.whenPressed(new ElevatorToLevel2());
 		level3Rocket.whenPressed(new ElevatorToLevel3());
 						
-		initiateClimb.whenPressed(new InitiateClimb());
+		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());
 
 		elevatorUp.whileActive(new JoystickMoveElevator());
 		elevatorDown.whileActive(new JoystickMoveElevator());
 
-		climbUp.whileActive(new JoystickMoveClimb());
-		climbDown.whileActive(new JoystickMoveClimb());
+		climbUpFront.whileActive(new JoystickMoveClimberFront());
+		climbDownFront.whileActive(new JoystickMoveClimberFront());
+		climbUpRear.whileActive(new JoystickMoveClimberRear());
+		climbDownRear.whileActive(new JoystickMoveClimberRear());
+		climbForward.whileHeld(new MoveRollerForward());		
+
+		// climbUp.whileActive(new JoystickMoveClimb());
+		// climbDown.whileActive(new JoystickMoveClimb());
 		
-		climbForward.whileActive(new JoystickMoveClimb()); 
-		climbBack.whileActive(new JoystickMoveClimb()); 
+		// climbForward.whileActive(new JoystickMoveClimb()); 
+		// climbBack.whileActive(new JoystickMoveClimb()); 
 
 /*
  		.whileActive(new 

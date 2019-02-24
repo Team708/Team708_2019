@@ -2,7 +2,6 @@ package org.usfirst.frc.team708.robot.commands.climber;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 

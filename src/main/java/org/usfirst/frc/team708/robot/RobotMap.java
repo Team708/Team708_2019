@@ -48,7 +48,7 @@ public class RobotMap {
 
 // Climber
 	public static final int ClimberLeftFrontMotor			= 51; 
-//	public static final int ClimberRightFrontMotor			= 52; 
+	public static final int ClimberRightFrontMotor			= 52; 
 
 	public static final int ClimberLeftRearMotor			= 53; 
 //	public static final int ClimberRightRearMotor			= 54; 

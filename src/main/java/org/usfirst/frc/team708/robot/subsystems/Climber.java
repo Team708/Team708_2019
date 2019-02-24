@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climber extends Subsystem {
 	
-private WPI_TalonSRX 	climberFrontMaster, climberRearMaster;
+private WPI_TalonSRX 	climberFrontMaster, climberFrontSlave, climberRearMaster;
 private WPI_TalonSRX	climberRoller;
 private double distancePerPulse;
 
@@ -30,11 +30,11 @@ public boolean climbStarted = true;
 
 public Climber() {
 	climberFrontMaster		= new WPI_TalonSRX(RobotMap.ClimberLeftFrontMotor);
-//	climberFrontSlave			= new WPI_TalonSRX(RobotMap.ClimberRightFrontMotor);
+	climberFrontSlave			= new WPI_TalonSRX(RobotMap.ClimberRightFrontMotor);
 	climberRearMaster			= new WPI_TalonSRX(RobotMap.ClimberLeftRearMotor);
 	climberRoller					= new WPI_TalonSRX(RobotMap.ClimberRollerMotor);
 	
-//	climberFrontSlave.follow(climberFrontMaster);
+	climberFrontSlave.follow(climberFrontMaster);
 
 	//Encoders
 	climberRoller.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -44,7 +44,7 @@ public Climber() {
 	//Brake
 	climberRoller.setNeutralMode(NeutralMode.Brake);
 	climberFrontMaster.setNeutralMode(NeutralMode.Brake);
-//	climberFrontSlave.setNeutralMode(NeutralMode.Brake);
+	climberFrontSlave.setNeutralMode(NeutralMode.Brake);
 	climberRearMaster.setNeutralMode(NeutralMode.Brake);
 }
 	
@@ -61,7 +61,6 @@ public Climber() {
 		climberRearMaster.set(speed);
 	}
 	
-
 	public void moveFrontMotor(double speed) {
 		climberFrontMaster.set(speed);
 	}

@@ -17,59 +17,57 @@ public class ElevatorToLevel3 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// if(Robot.arm.getAngle() >= Constants.SCALE_HEIGHT - Constants.ARM_TOLERANCE)
-    	// 	Robot.arm.moveMotor(Constants.ARM_REVERSE);
-    	// else
-
     	}    	
 
     protected boolean isFinished()
     {
         if (Robot.intake.hasHatch())
         {
+            Robot.elevator.goToPosition(Constants.ELE_HATCH_LVL3);
             if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL3)-Constants.ELE_TOLERANCE))
             {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
             else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL3)+Constants.ELE_TOLERANCE)) {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
+                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }
             else 
             {
-                Robot.elevator.stop();
-                return true;
+                // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+                return false;
             }
         } 
         else if ((Robot.intake.hasBall()))
         {
+            Robot.elevator.goToPosition(Constants.ELE_BALL_LVL3);
             if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL3)-Constants.ELE_TOLERANCE))
             {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
             else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL3)+Constants.ELE_TOLERANCE)) 
             {
-               Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
+            //    Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                return false;
             }
             else 
             {
-                Robot.elevator.stop();
-                return true;
+                // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+                return false;
             }
         }
         else 
         {
-            Robot.elevator.stop();
+            // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
             return true;
         }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.elevator.stop();
+        // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

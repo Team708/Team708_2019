@@ -34,7 +34,7 @@ public class ElevatorToCargo extends Command {
             }
             else 
             {
-                Robot.elevator.stop();
+                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
                 return true;
             }
         } 
@@ -52,20 +52,20 @@ public class ElevatorToCargo extends Command {
             }
             else 
             {
-                Robot.elevator.stop();
+                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
                 return true;
             }
         }
         else 
         {
-            Robot.elevator.stop();
+            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
             return true;
         }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.elevator.stop();
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

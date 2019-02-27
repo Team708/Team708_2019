@@ -1,26 +1,16 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
+import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
-import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightForTime;
-//import org.usfirst.frc.team708.robot.commands.drivetrain.RotateAndDriveToBoiler;
-import org.usfirst.frc.team708.robot.commands.drivetrain.ToggleBrakeMode;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
-//import org.usfirst.frc.team708.robot.commands.feeder.SpinFeeder;
-//import org.usfirst.frc.team708.robot.commands.shooter.SpinShooter;
-///*import org.usfirst.frc.team708.robot.commands.shooter.StopShooter;
-//import org.usfirst.frc.team708.robot.commands.intake_gear.Intake_Gear_Up;
-//import org.usfirst.frc.team708.robot.commands.intake_gear.Intake_Gear_Down;
-//import org.usfirst.frc.team708.robot.commands.intake_gear.Intake_Gear_In;
-//import org.usfirst.frc.team708.robot.commands.intake_gear.Intake_Gear_Out;
-//import org.usfirst.frc.team708.robot.commands.intake_gear.ReleaseGear;
-//import org.usfirst.frc.team708.robot.commands.autonomous.AutoFireBalls;*/
+import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 
 public class driveDistanceEncoder extends CommandGroup {
    
@@ -29,17 +19,16 @@ public class driveDistanceEncoder extends CommandGroup {
 //    	Robot.drivetrain.resetEncoder();
 //    	Robot.drivetrain.resetEncoder2();
 //    	Robot.drivetrain.resetGyro();
-    	
     }
 	
     public  driveDistanceEncoder() {
+		addSequential(new Send("in driveDistanceEncoder - Start"));
+    	// addSequential(new GearHigh());
 
-    	addSequential(new GearHigh());
-
-//    	addSequential(new WaitCommand(5.0));
-    	
-    	addSequential(new DriveStraightToEncoderDistanceOrTime(140, .7, true, 3));
-
+   	    // addSequential(new WaitCommand(2.0));
+        //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
+           addSequential(new DriveStraightToEncoderDistanceOrTime(200, .4, 1.0));
+           addSequential(new Send("in driveDistanceEncoder - End"));
     }
     
     // Make this return true when this Command no longer needs to run execute()

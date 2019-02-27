@@ -3,27 +3,26 @@
 package org.usfirst.frc.team708.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode;
-import edu.wpi.cscore.VideoMode;
-
 
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.subsystems.Climber;
-import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team708.robot.subsystems.Elevator;
-import org.usfirst.frc.team708.robot.subsystems.Intake;
-import org.usfirst.frc.team708.robot.subsystems.VisionProcessor;
+import org.usfirst.frc.team708.robot.subsystems.*;
 import org.usfirst.frc.team708.robot.Constants;
+
+
 
 public class Robot extends TimedRobot {
 
@@ -40,6 +39,10 @@ public class Robot extends TimedRobot {
     public String gameData;
     public String robotLocation;
     public String autoMode;
+
+    public static DriverStation 			ds;
+    public static DriverStation.Alliance 	alliance;
+    public static int 						allianceColor;
 
     // public boolean climber = true;
     SendableChooser<Command> autonomousMode = new SendableChooser<>();
@@ -66,20 +69,19 @@ public class Robot extends TimedRobot {
         // visionProcessor.setNTInfo("ledMode", Constants.VISION_LED_OFF);
         Robot.intake.intakeRetract();    // initialize intake in starting config
         Robot.intake.hatchRetract();
+        Robot.intake.beakOpen();
         Robot.drivetrain.shiftGearlow();
         sendDashboardSubsystems(); // Sends each subsystem's cmds to Smart Dashboard
 
         queueAutonomousModes(); // Adds autonomous modes to the selection box
 
         UsbCamera camerafront = CameraServer.getInstance().startAutomaticCapture(0);
-        camerafront.setResolution(320,240);
-        camerafront.setFPS(20);
-
+        camerafront.setResolution(160,120);
+        camerafront.setFPS(10);
 
         UsbCamera cameraback = CameraServer.getInstance().startAutomaticCapture(1);
-        cameraback.setResolution(320, 240);
-        cameraback.setFPS(20);
-
+        cameraback.setResolution(160, 120);
+        cameraback.setFPS(15);
         // This MUST BE LAST or a NullPointerException will be thrown
         oi = new OI(); // Initializes the OI
     }
@@ -91,6 +93,35 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         sendStatistics();
         prefs = Preferences.getInstance();
+
+        try {
+            // robot is ENABLED
+     		if (RobotController.isSysActive()){
+                 // connected to FMS
+                 ds = DriverStation.getInstance();
+                alliance = ds.getAlliance();
+	            if (alliance == Alliance.Blue){
+                       allianceColor = Constants.ALLIANCE_BLUE;
+                }
+                else if (alliance == Alliance.Red){
+                    allianceColor = Constants.ALLIANCE_RED;
+                }
+                else {
+                    allianceColor = 0;
+                }
+   
+           }
+           else // robot is NOT ENABLED
+           {allianceColor=20;}
+	    
+		}
+		catch (Exception e)
+		{
+             allianceColor = 11;
+             
+
+
+    	}
     }
 
     /**
@@ -98,9 +129,8 @@ public class Robot extends TimedRobot {
      */
     public void autonomousInit() {
         // schedule the autonomous command
-
         drivetrain.setBrakeMode(true);
-
+        drivetrain.resetGyro();
         // original dashboard code
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
@@ -127,7 +157,6 @@ public class Robot extends TimedRobot {
 
         drivetrain.setBrakeMode(false);
         drivetrain.shiftGearlow();
-        drivetrain.resetGyro();
     }
 
     /**
@@ -135,7 +164,6 @@ public class Robot extends TimedRobot {
      * reset subsystems before shutting down.
      */
     public void disabledInit() {
-        // testing
     }
 
     /**
@@ -174,13 +202,11 @@ public class Robot extends TimedRobot {
 
         // autonomousMode.addOption
         autonomousMode.addOption("Do Nothing", new DoNothing());
-
         autonomousMode.addOption("Drive in Square", new DriveInSquare());
-        autonomousMode.addOption("Drive encoder distance", new driveDistanceEncoder());
-        autonomousMode.addOption("Curvature Drive", new driveCurvatureForTime());
-        // autonomousMode.addOption("Rocket Left", new rocketLeft());
+        autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
+        autonomousMode.addOption("Rocket Left", new rocketLeft());
         // autonomousMode.addOption("Rocket right", new rocketRight());
-        // autonomousMode.addOption("Ship", new ship());
+        autonomousMode.addOption("Ship Left", new shipLeft());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

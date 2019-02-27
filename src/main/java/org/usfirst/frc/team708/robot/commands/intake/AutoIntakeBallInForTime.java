@@ -19,11 +19,15 @@ public class AutoIntakeBallInForTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.intake.moveMotorBall(Constants.INTAKE_BALL_IN);
+        if(Robot.intake.hasBall())
+            Robot.intake.stopMotorBall();
+        else
+            Robot.intake.moveMotorBall(Constants.INTAKE_BALL_IN);
     }
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (isTimedOut());
+    	return (isTimedOut() || Robot.intake.hasBall());
     }
 
     // Called once after isFinished returns true

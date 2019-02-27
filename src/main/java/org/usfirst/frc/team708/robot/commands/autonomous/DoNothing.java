@@ -1,12 +1,14 @@
 package org.usfirst.frc.team708.robot.commands.autonomous;
 
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.autonomous.*;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 
 
 
@@ -23,15 +25,14 @@ public class DoNothing extends CommandGroup {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {/*
-    	Robot.drivetrain.resetEncoder();
-    	Robot.drivetrain.resetEncoder2();
-    	Robot.drivetrain.resetGyro();*/
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(), Robot.visionProcessor.getRotate(), false);
+		addSequential(new Send("in DoNothing - Start"));
+        // Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveBall(), Robot.visionProcessor.getRotate(), false);
+        addSequential(new Send("in DoNothing - End"));
     }
 
     // Make this return true when this Command no longer needs to run execute()

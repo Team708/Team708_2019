@@ -26,6 +26,7 @@ protected void execute() {
 protected boolean isFinished() {
     	
     	if(Robot.elevator.isElevatorMin()) {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
         	Robot.elevator.resetElevatorEncoder();
         	return true;
     	}	
@@ -38,7 +39,7 @@ protected boolean isFinished() {
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.elevator.stop();
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

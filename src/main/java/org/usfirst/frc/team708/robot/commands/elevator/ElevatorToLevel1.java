@@ -20,52 +20,48 @@ public class ElevatorToLevel1 extends Command {
     	}    	
 
     protected boolean isFinished()
-    {
+    {   
         if (Robot.intake.hasHatch())
         {
+            Robot.elevator.goToPosition(Constants.ELE_HATCH_LVL1);
             if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL1)-Constants.ELE_TOLERANCE))
             {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
+               return false;
             }
             else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL1)+Constants.ELE_TOLERANCE)) {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                 return false;
             }
             else 
             {
-                Robot.elevator.stop();
+                // Robot.intake.hatchExtend(); 
                 return true;
             }
         } 
         else if ((Robot.intake.hasBall()))
         {
+            Robot.elevator.goToPosition(Constants.ELE_BALL_LVL1);
+
             if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL1)-Constants.ELE_TOLERANCE))
             {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
                 return false;
             }
             else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL1)+Constants.ELE_TOLERANCE)) 
             {
-               Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
                return false;
             }
             else 
             {
-                Robot.elevator.stop();
                 return true;
             }
         }
         else 
         {
-            Robot.elevator.stop();
             return true;
         }
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.elevator.stop();
     }
 
     // Called when another command which requires one or more of the same

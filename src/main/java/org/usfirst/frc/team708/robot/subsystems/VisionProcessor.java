@@ -1,6 +1,5 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
-import org.usfirst.frc.team708.robot.AutoConstants;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team708.robot.util.Math708;
@@ -30,12 +29,9 @@ public class VisionProcessor extends Subsystem {
 	private double difference;
 
 //	Accessing the Limelight's Network Table	
-	NetworkTableInstance 	limeLightInstance 	= NetworkTableInstance.getDefault();
-	NetworkTable			limeLightTable		= limeLightInstance.getTable("/limelight");
-	
-//	Sweep function variables
-//	private double gyroAngle = 0.0;
-    	
+	private NetworkTableInstance 	limeLightInstance 	= NetworkTableInstance.getDefault();
+	private NetworkTable					limeLightTable			= limeLightInstance.getTable("/limelight");
+	   	
 	private double rotate			= 0.0;
 	private double move				= 0.0;
 	
@@ -59,106 +55,91 @@ public class VisionProcessor extends Subsystem {
 
 	public boolean seesTarget() {
 		tv = getNTInfo("tv");
-		if (tv != 0.0) {
-			seesTarget = true;
-		}
-		else {
-			seesTarget = false;
-		}
+		if (tv != 0.0) 
+			seesTarget = true;		
+		else 
+			seesTarget = false;		
 		return seesTarget;
 	}
+
 	public boolean isCentered() {
-	
-		xAngle = getNTInfo("tx");
-	
-		if (Math.abs(xAngle) <= AutoConstants.X_THRESHOLD) {
-			isCentered = true;
-		}
-		else {
+		xAngle = getNTInfo("tx");	
+		if (Math.abs(xAngle) <= Constants.X_THRESHOLD) 
+			isCentered = true;		
+		else
 			isCentered = false;
-		}
 		return isCentered;
 	}
+
 	public double getRotate() {	
 		rotate=0.0;
-		if (seesTarget()) {
+		if (seesTarget())
 			if (!isCentered())	
-			     if (xAngle > 0)
-				     rotate = .2;
-			     else 
-			 	    rotate = -.2;
+					if (xAngle > 0)
+						rotate = Constants.VISION_ROTATE;
+					else 
+						rotate = -Constants.VISION_ROTATE;
 			else // centered
-				rotate= 0.0;
-		} 
+				rotate= 0.0;			 
 		return rotate;
 	}
+
 	public void toggleLEDMode() {
 		led = !led;
-		if(led) {
-			setNTInfo("ledMode", Constants.VISION_LED_ON);
-		}
-		else {
-			setNTInfo("ledMode", Constants.VISION_LED_OFF);
-		}
+		if(led) 
+			setNTInfo("ledMode", Constants.VISION_LED_ON);		
+		else 
+			setNTInfo("ledMode", Constants.VISION_LED_OFF);		
 	}
 
 	public boolean isAtY() {
-	
 		yAngle = getNTInfo("ty");
-	
-		if (Math.abs(yAngle) <= AutoConstants.Y_THRESHOLD) {
-			isAtY = true;
-		}
-		else {
-			isAtY = false;
-		}
+		if (Math.abs(yAngle) <= Constants.Y_THRESHOLD)
+			isAtY = true;			
+		else 
+			isAtY = false;			
 		return isAtY;
 	}
-	public boolean isAtArea() {
+
+	public boolean isAtArea(double targetArea) {
 		area = getNTInfo("ta");
-		difference = area - 20.0;
-		if (Math.abs(difference) <= AutoConstants.AREA_THRESHOLD) {
-			isAtArea = true;
-		}
-		else {
-			isAtArea = false;
-		}
+		difference = area - targetArea;
+		if (Math.abs(difference) <= Constants.AREA_THRESHOLD) 
+			isAtArea = true;		
+		else 
+			isAtArea = false;		
 		return isAtArea;
 	}
+
 	public double getMoveBall() {	
-		if (seesTarget()) {
+		if (seesTarget()) 
 			if (!isAtY())	
-			     if (yAngle > 0)
-				     move = .3;
-			     else 
-			 	    move = -.3;
+				if (yAngle > 0)
+					move = Constants.VISION_MOVE;
+				else 
+					move = -Constants.VISION_MOVE;
 			else // centered
-				move= 0.0;
-		} 
-		else {
-			move = 0.0;
-		}
-		return move;
-	}
-	public double getMoveHatch() {	
-		if (seesTarget()) {
-			if (!isAtArea())	
-			     if (area < 20)
-				     move = .3;
-			     else 
-			 	    move = -.3;
-			else // centered
-				move= 0.0;
-		}
-		else {
-			move = 0.0;
-		} 
+				move= 0.0;		 
+		else 
+			move = 0.0;		
 		return move;
 	}
 
-	public void sendToDashboard() {		//Might have to rewrite public variables for the smart dashboard...
-										//Future me problem		-Viet
-		
+	public double getMoveRocket(double targetArea) {	
+		if (seesTarget()) 
+			if (!isAtArea(targetArea))	
+				if (area < targetArea)
+					move = Constants.VISION_MOVE;				
+				else 
+					move = -Constants.VISION_MOVE;					
+			else  // centered
+				move= 0.0;			
+		else
+			move = 0.0; 
+		return move;
+	}
+
+	public void sendToDashboard() {
 		SmartDashboard.putBoolean("Is Centered", isCentered());
 		SmartDashboard.putNumber("Displacement X", xAngle);
 		SmartDashboard.putBoolean("Is At Y", isAtY());
@@ -166,10 +147,10 @@ public class VisionProcessor extends Subsystem {
 		SmartDashboard.putNumber("TV", tv);
 	}
 
-    public void initDefaultCommand() {
+	public void initDefaultCommand() {
 		if (Constants.DEBUG) {
 		}    	
-    }
+	}
     
 }
 

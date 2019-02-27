@@ -5,9 +5,6 @@ import org.usfirst.frc.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class FindBall extends Command {
     
     private double maxTime = 5.0;

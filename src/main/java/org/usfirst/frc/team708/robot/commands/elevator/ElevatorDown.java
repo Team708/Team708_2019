@@ -29,6 +29,7 @@ public class ElevatorDown extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(Robot.elevator.isElevatorMin()) {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
         	return true;
     	}	
     	else
@@ -39,7 +40,7 @@ public class ElevatorDown extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
-     Robot.elevator.stop();
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

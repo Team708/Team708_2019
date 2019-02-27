@@ -14,31 +14,14 @@ public class DriveStraightToEncoderDistanceOrTime extends Command {
 	private final double rotate = 0.0;
 	private double 		tspeed;
 	
-	private double maxTime;
-	
-	private boolean goForward;
-	
-    public DriveStraightToEncoderDistanceOrTime(double distance, double maxTime) {
-    	this(distance, Constants.DRIVE_MOTOR_MAX_SPEED, maxTime);
-    }
+	// private double maxTime;
     
     public DriveStraightToEncoderDistanceOrTime(double distance, double speed, double maxTime) {
-    	this(distance, speed, true, maxTime);
-    }
-    
-    public DriveStraightToEncoderDistanceOrTime(double distance, double speed, boolean goForward, double maxTime) {
-    	// Use requires() here to declare subsystem dependencies
-    	requires(Robot.drivetrain);
-    	
-    	if(goForward) {
-    		targetDistance = distance;
-    		this.tspeed = speed;
-    	} else {
-    		targetDistance = -distance;
-    		this.tspeed = -speed;
-    	}
-    	this.goForward = goForward;
-    	
+       
+   	// Use requires() here to declare subsystem dependencies
+    	// requires(Robot.drivetrain);
+        tspeed = speed;
+        targetDistance = distance;
     	this.setTimeout(maxTime);
     }
 
@@ -60,12 +43,10 @@ public class DriveStraightToEncoderDistanceOrTime extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(goForward) {
+        if(targetDistance >= 0 )
         	return (Robot.drivetrain.getEncoderDistanceRight() >= targetDistance) || isTimedOut();
-        } 
-        else {
+        else
         	return (Robot.drivetrain.getEncoderDistanceRight() <= targetDistance) || isTimedOut();
-        }
     }
 
     // Called once after isFinished returns true

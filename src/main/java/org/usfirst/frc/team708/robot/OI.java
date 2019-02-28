@@ -50,7 +50,8 @@ public class OI {
 private static final int HATCH_OUT_BUTTON				= Gamepad.button_L_Shoulder;
 private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 
-	private static final int GROUND_BUTTON					= Gamepad.button_X;
+//	private static final int GROUND_BUTTON					= Gamepad.button_X;
+	private static final int LEVEL_0_BUTTON					= Gamepad.button_X;
 	private static final int LEVEL_1_ROCKET_BUTTON			= Gamepad.button_A;
 	private static final int LEVEL_2_ROCKET_BUTTON			= Gamepad.button_B;
 	private static final int LEVEL_3_ROCKET_BUTTON			= Gamepad.button_Y;
@@ -89,7 +90,7 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
  */
 	public static final Button hatchIn			= new JoystickButton(operatorGamepad, HATCH_IN_BUTTON);
 	public static final Button hatchOut			= new JoystickButton(operatorGamepad, HATCH_OUT_BUTTON);
-	public static final Button eleGround		= new JoystickButton(operatorGamepad, GROUND_BUTTON);
+	public static final Button eleGround		= new JoystickButton(operatorGamepad, LEVEL_0_BUTTON);
 	public static final Button level1Rocket		= new JoystickButton(operatorGamepad, LEVEL_1_ROCKET_BUTTON);
 	public static final Button level2Rocket		= new JoystickButton(operatorGamepad, LEVEL_2_ROCKET_BUTTON);
 	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
@@ -132,7 +133,8 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 		toggleHatch.whenPressed(new ToggleHatch());
 		toggleIntake.whenPressed(new ToggleIntake());
 		toggleBeak.whenPressed(new ToggleBeak());
-		eleGround.whenPressed(new ElevatorToGround());
+//		eleGround.whenPressed(new ElevatorToGround());
+		eleGround.whenPressed(new Level0CG());
 		level1Rocket.whenPressed(new Level1CG());
 		level2Rocket.whenPressed(new ElevatorToLevel2());
 		level3Rocket.whenPressed(new ElevatorToLevel3());

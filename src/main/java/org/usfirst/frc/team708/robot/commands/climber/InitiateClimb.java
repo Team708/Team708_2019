@@ -22,7 +22,7 @@ public class InitiateClimb extends Command {
     {
         if (Robot.climber.stage1) 
         {
-            if (!((Robot.climber.lowerLimitFront()) && (Robot.climber.lowerLimitRear())) )
+            if (!((Robot.climber.frontRetract()) && (Robot.climber.rearRetract())) )
             {
                 if (Robot.drivetrain.isTiltingBack())
                 {
@@ -64,7 +64,7 @@ public class InitiateClimb extends Command {
         }
         else if (Robot.climber.stage3) 
         {
-            if (!(Robot.climber.upperLimitFront()))
+            if (!(Robot.climber.frontExtend()))
             {
                 Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_RETRACT);
             }
@@ -95,7 +95,7 @@ public class InitiateClimb extends Command {
         }
         else if (Robot.climber.stage5) 
         {
-            if (!Robot.climber.upperLimitRear()) 
+            if (!Robot.climber.rearExtend()) 
             {
                 Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_RETRACT);
             }

@@ -18,7 +18,7 @@ public class ClimbStage5 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (!Robot.climber.upperLimitRear()) 
+        if (!Robot.climber.rearRetract()) 
             Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_RETRACT);
         else {
             Robot.climber.moveRearMotor(Constants.STOP_CLIMBER);
@@ -29,7 +29,7 @@ public class ClimbStage5 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climber.upperLimitRear();
+        return Robot.climber.rearRetract();
     }
 
     // Called once after isFinished returns true

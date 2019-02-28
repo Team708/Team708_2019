@@ -26,30 +26,42 @@ public class rocketLeft extends CommandGroup {
 	
     public  rocketLeft() {
         addSequential(new Send("in rocketLeft - Start"));
+        // make a starting config thing        
         addSequential(new GearHigh());
         //Leaving HAB Lv. 2
-        addSequential(new DriveCurvatureToEncoderOrTime(-1.0, .3, false, -200, 3));
+        addSequential(new DriveCurvatureToEncoderOrTime(-1.0, -.3, false, -200, 3));
         //Turn into the ROCKET
         addSequential(new DriveCurvatureToDegreesOrTime(.8, .9, true, 80, 2));
         //Place First Hatch
-        addSequential(new FindRocketHatch());
+        addParallel(new FindRocketHatch());
             //Potentially move elevator
-        addSequential(new DeployHatch());  
+        addSequential(new ElevatorToLevel1());
+        addSequential(new DeployHatch());
+        addSequential(new CloseBeak());  // Potential Removal, Check with Mechanical
+        addSequential(new WaitCommand(.5));
+        addSequential(new RetractHatch());
         //Turn away from ROCKET and acquire second HATCH
         addSequential(new DriveCurvatureToDegreesOrTime(-.8, -.5, false, -45, 2));
+        // addSequential(new ElevatorToLevel1());
+        // closeBeak and eleLevel1 should run together
+        addSequential(new DriveCurvatureToEncoderOrTime(1.0, 0.1, false, 150, 3));
         addSequential(new FindRocketHatch());
+        addSequential(new DeployHatch());
+        addSequential(new WaitCommand(.5));
+        addSequential(new OpenBeak());
+        addSequential(new WaitCommand(.5));
         addSequential(new RetractHatch());
         //Turn to the ROCKET and place second HATCH
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-90, -1.0, 3));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-90, -1.0, 3)); //move fairly close to the rocket
         addSequential(new TurnToDegrees(.8, -180));  
         addSequential(new FindRocketHatch());
         addSequential(new DeployHatch());
+        addSequential(new CloseBeak());  // Potential Removal, Check with Mechanical
+        addSequential(new WaitCommand(.5));
+        addSequential(new RetractHatch());
         //Turn to and acquire CARGO  
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-80, -1.0, 3));
-        addSequential(new TurnToDegrees(.8, -180));  
-        addSequential(new DeployIntake());
-        addParallel(new DriveStraightToBallOrTime(24, .8, 2));
-        addSequential(new AutoIntakeBallInForTime(2));
+        addSequential(new DriveCurvatureToEncoderOrTime(-.8, .2, false, -12, 2));
+        addSequential(new DriveCurvatureToEncoderOrTime(1.0, .25, false, 90, 3));
         addSequential(new Send("in rocketLeft - End"));
      }
     

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team708.robot.commands.climber.JoystickMoveClimberFront;
 
 
 public class Climber extends Subsystem {
@@ -96,30 +97,30 @@ public Climber() {
 	}
 
 	// Limit Switch Methods
-	public boolean upperLimitFront() {
-		return climberFrontMaster.getSensorCollection().isFwdLimitSwitchClosed();
+	public boolean frontExtend() {
+		return climberFrontMaster.getSensorCollection().isRevLimitSwitchClosed();	//Used to be Fwd
 	}
 	
-	public boolean lowerLimitFront() {
-		// return lowerLimitFL.get();
-		return climberFrontMaster.getSensorCollection().isRevLimitSwitchClosed();
+	public boolean frontRetract() {
+		// return RetractLimitFL.get();
+		return climberFrontMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
 	}
 
-	public boolean upperLimitRear() {
-		return climberRearMaster.getSensorCollection().isFwdLimitSwitchClosed();
+	public boolean rearExtend() {
+		return climberRearMaster.getSensorCollection().isRevLimitSwitchClosed(); //Used to be Fwd
 	}
 
-	public boolean lowerLimitRear() {
-		return climberRearMaster.getSensorCollection().isRevLimitSwitchClosed();
+	public boolean rearRetract() {
+		return climberRearMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
 	}
   
 	public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
-		SmartDashboard.putBoolean("Front Upper Limit", upperLimitFront());
-		SmartDashboard.putBoolean("Front Lower Limit", lowerLimitFront());
-		SmartDashboard.putBoolean("Rear Upper Limit",  upperLimitRear());
-		SmartDashboard.putBoolean("Rear Lower Limit",  lowerLimitRear());	
+		SmartDashboard.putBoolean("Front Extend", frontExtend());
+		SmartDashboard.putBoolean("Front Retract", frontRetract());
+		SmartDashboard.putBoolean("Rear Extend",  rearExtend());
+		SmartDashboard.putBoolean("Rear Retract",  rearRetract());	
 		SmartDashboard.putBoolean("Stage 1", stage1);
 		SmartDashboard.putBoolean("Stage 2", stage2);
 		SmartDashboard.putBoolean("Stage 3", stage3);

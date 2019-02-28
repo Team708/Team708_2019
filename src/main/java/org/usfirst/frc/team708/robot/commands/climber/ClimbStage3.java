@@ -18,7 +18,7 @@ public class ClimbStage3 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (!(Robot.climber.upperLimitFront())) {
+        if (!(Robot.climber.frontRetract())) {
             Robot.climber.moveFrontMotor(Constants.MOVE_CLIMBER_RETRACT);
         }
         else {
@@ -30,7 +30,7 @@ public class ClimbStage3 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.climber.upperLimitFront();
+        return Robot.climber.frontRetract();
     }
 
     // Called once after isFinished returns true

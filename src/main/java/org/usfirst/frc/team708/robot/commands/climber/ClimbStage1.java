@@ -18,7 +18,7 @@ public class ClimbStage1 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (!((Robot.climber.lowerLimitFront()) && (Robot.climber.lowerLimitRear()))) {
+        if (!((Robot.climber.frontExtend()) && (Robot.climber.rearExtend()))) {
             if (Robot.drivetrain.isTiltingBack()) {
                 Robot.climber.moveFrontMotor(Constants.STOP_CLIMBER);
                 Robot.climber.moveRearMotor(Constants.MOVE_CLIMBER_EXTEND);
@@ -42,7 +42,7 @@ public class ClimbStage1 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.climber.lowerLimitFront()) && (Robot.climber.lowerLimitRear());
+        return (Robot.climber.frontExtend()) && (Robot.climber.rearExtend());
     }
 
     // Called once after isFinished returns true

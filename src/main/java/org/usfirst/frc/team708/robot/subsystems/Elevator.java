@@ -4,6 +4,8 @@ import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.elevator.JoystickMoveElevator;
 
+import java.lang.invoke.ConstantCallSite;
+
 import com.revrobotics.CANDigitalInput;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -26,7 +28,8 @@ public class Elevator extends Subsystem {
 	private CANPIDController	elevatorPIDController;
 //	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-
+	public double ele_position;
+	
     /**
       * Constructor
       */
@@ -73,8 +76,9 @@ public class Elevator extends Subsystem {
 	}
 
 	public boolean isElevatorMax() {
-		if (upperLimit.get()) {
-			elevatorEncoder.setPosition(Constants.ELE_ENC_MAX);
+//  if (upperLimit.get()) {
+		if (elevatorEncoder.getPosition() >= Constants.ELE_MAX) {
+			elevatorEncoder.setPosition(Constants.ELE_MAX);
 			return (true);
 	    }
 		else 

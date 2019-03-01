@@ -26,8 +26,10 @@ public class ElevatorToLevel2 extends Command {
             return false;
         else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL2)+Constants.ELE_TOLERANCE))
             return false;
-        else 
+        else {
+            Robot.elevator.ele_position = Constants.ELE_LVL2;
             return true;
+        } 
     }
 
     // Called once after isFinished returns true

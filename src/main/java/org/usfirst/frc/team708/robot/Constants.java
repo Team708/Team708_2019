@@ -72,9 +72,8 @@ public final class Constants {
 	public static final double	ELE_FEEDER					= 8.0; 
 	public static final double	ELE_GROUND					=   0; 
 	public static final int ELE_ENC_STARTING_POSITION 		= 0;
-	public static final int ELE_ENC_MAX				 		= 600;
 	public static final int ELE_ENC_MIN				 		= 0;
-	public static final int	ELE_TOLERANCE					= 5;
+	public static final int	ELE_TOLERANCE					= 2;
 	public static final double ELE_P						= 0.1;
 	public static final double ELE_I						= 0.0001;
 	public static final double ELE_D						= 1.0;

@@ -20,20 +20,22 @@ public class ElevatorToLevel0 extends Command {
 
     protected boolean isFinished()
     {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE))
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
-            }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL0)+Constants.ELE_TOLERANCE)) {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
-                return false;
-            }
-            else 
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-                return true;
-            }
+        Robot.elevator.goToPosition(Constants.ELE_LVL0);
+        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE))
+        {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+            return false;
+        }
+        else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL0)+Constants.ELE_TOLERANCE)) {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
+            return false;
+        }
+        else 
+        {
+            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP);
+            Robot.elevator.ele_position = Constants.ELE_LVL0; 
+            return true;
+        }
     }
 
     // Called once after isFinished returns true

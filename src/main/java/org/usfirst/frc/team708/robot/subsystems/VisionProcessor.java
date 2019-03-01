@@ -143,6 +143,8 @@ public class VisionProcessor extends Subsystem {
 		SmartDashboard.putBoolean("Is Centered", isCentered());
 		SmartDashboard.putNumber("Displacement X", xAngle);
 		SmartDashboard.putBoolean("Is At Y", isAtY());
+		SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
+		SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
 		SmartDashboard.putBoolean("Has Target", seesTarget());
 		SmartDashboard.putNumber("TV", tv);
 	}

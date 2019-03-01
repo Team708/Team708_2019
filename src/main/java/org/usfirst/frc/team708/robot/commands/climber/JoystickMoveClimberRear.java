@@ -8,31 +8,40 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class JoystickMoveClimberRear extends Command {
 
-    public JoystickMoveClimberRear() {
-      requires(Robot.climber);
-    }
+    private double moveSpeed;
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+  public JoystickMoveClimberRear() {
+  }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-      Robot.climber.moveRearMotor(OI.climbingGamepad.getAxis(-Gamepad.rightStick_Y));
-    }
+  // Called just before this Command runs the first time
+  protected void initialize() {
+  }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	return false;
-    }
+  // Called repeatedly when this Command is scheduled to run
+  protected void execute() {
+    moveSpeed = OI.climbingGamepad.getAxis(Gamepad.rightStick_Y);
+    Robot.climber.moveRearMotor(moveSpeed);
 
-    // Called once after isFinished returns true
-    protected void end() {
+    if(Robot.climber.rearExtend()) {
+      Robot.climber.moveRearMotor(0.0); 
     }
+    else if(Robot.climber.rearRetract()) {
+    Robot.climber.moveRearMotor(0.0);
+    }
+  }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-      Robot.climber.stopAll();
-    }
+  // Make this return true when this Command no longer needs to run execute()
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  protected void interrupted() {
+    Robot.climber.stopAll();
+  }
 }

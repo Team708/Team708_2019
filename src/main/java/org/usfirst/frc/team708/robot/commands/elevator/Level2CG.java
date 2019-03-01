@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team708.robot.commands.elevator;
 
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
@@ -23,7 +24,7 @@ public class Level2CG extends CommandGroup {
 
     public Level2CG() {
         // Use requires() here to declare subsystem dependencies
-        addSequential( new ElevatorToLevel2());
+        addSequential(new ElevatorToLevel2());
         addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(.5));

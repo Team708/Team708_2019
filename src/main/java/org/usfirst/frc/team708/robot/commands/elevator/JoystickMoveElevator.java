@@ -23,14 +23,15 @@ public class JoystickMoveElevator extends Command {
          moveSpeed = OI.operatorGamepad.getAxis(Gamepad.leftStick_Y);
          Robot.elevator.moveMotor(moveSpeed);
 
-         if(Robot.elevator.isElevatorMin()) {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-            Robot.elevator.resetElevatorEncoder();
-         }
-         else if(Robot.elevator.isElevatorMax()) {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP);
-            //set ecconer to top setting
-         }
+        if(Robot.elevator.isElevatorMin()) {
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        Robot.elevator.resetElevatorEncoder();
+        }
+        else if(Robot.elevator.isElevatorMax()) {
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP);
+        //     set encoder to top setting
+        }
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

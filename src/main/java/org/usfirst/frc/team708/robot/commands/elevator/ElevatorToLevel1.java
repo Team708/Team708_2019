@@ -21,43 +21,13 @@ public class ElevatorToLevel1 extends Command {
 
     protected boolean isFinished()
     {   
-        if (Robot.intake.hasHatch())
-        {
-            Robot.elevator.goToPosition(Constants.ELE_HATCH_LVL1);
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL1)-Constants.ELE_TOLERANCE))
-            {
-               return false;
-            }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL1)+Constants.ELE_TOLERANCE)) {
-                return false;
-            }
-            else 
-            {
-                // Robot.intake.hatchExtend(); 
-                return true;
-            }
-        } 
-        else if ((Robot.intake.hasBall()))
-        {
-            Robot.elevator.goToPosition(Constants.ELE_BALL_LVL1);
-
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL1)-Constants.ELE_TOLERANCE))
-            {
-                return false;
-            }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL1)+Constants.ELE_TOLERANCE)) 
-            {
-               return false;
-            }
-            else 
-            {
-                return true;
-            }
-        }
+        Robot.elevator.goToPosition(Constants.ELE_LVL1);
+        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL1)-Constants.ELE_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL1)+Constants.ELE_TOLERANCE))
+            return false;
         else 
-        {
             return true;
-        }
     }
 
     // Called once after isFinished returns true

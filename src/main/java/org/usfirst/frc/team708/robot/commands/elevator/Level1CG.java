@@ -16,14 +16,12 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * this does nothing
- */
+
 public class Level1CG extends CommandGroup {
 
     public Level1CG() {
         // Use requires() here to declare subsystem dependencies
-        addSequential( new ElevatorToLevel1());
+        addSequential(new ElevatorToLevel1());
         addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(.5));

@@ -12,6 +12,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANDigitalInput.LimitSwitch;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,7 +40,8 @@ public class Elevator extends Subsystem {
 		
 		upperLimit.enableLimitSwitch(true);
 		lowerLimit.enableLimitSwitch(true);
-		
+		elevatorMotor.setIdleMode(IdleMode.kBrake);
+
 		elevatorEncoder.setPosition(Constants.ELE_ENC_STARTING_POSITION);
 		elevatorPIDController = elevatorMotor.getPIDController();
 		elevatorPIDController.setP(Constants.ELE_P);

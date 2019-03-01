@@ -32,10 +32,10 @@ public class Drivetrain extends PIDSubsystem {
 	private double moveSpeed = 0.0;
 	private double pidOutput = 0.0;
 	
-	private double gearratio = Constants.DRIVETRAIN_GEAR_RATIO_LOW;
+	private double gearratio;
 	
 	private DifferentialDrive drivetrain;						// FRC provided drivetrain class
-	private double distancePerPulse;
+	private double revPerInch;
 	private boolean gearHigh;
 	private ADIS16448_IMU gyro;
 	
@@ -71,8 +71,8 @@ public class Drivetrain extends PIDSubsystem {
 		encoderRight = new CANEncoder(rightMaster);
 
 		// Initializes the sensors
-		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-					                  	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
+		// distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
+		// 			                  	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
 		// Sets the distance per pulse of the encoder to read distance properly
 		resetEncoder();
 
@@ -299,16 +299,17 @@ public class Drivetrain extends PIDSubsystem {
 		gearHigh = true;
 		gearShifter.set(gearHigh);
 		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_HIGH;
-		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-													(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
+		// distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
+		// 											(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
+		revPerInch = (Math.PI*Constants.DRIVETRAIN_WHEEL_DIAMETER)/gearratio;
+
 	}
 	
 	public void shiftGearlow() {
 		gearHigh = false;
 		gearShifter.set(gearHigh);		
 		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_LOW;
-		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-													(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
+		revPerInch = (Math.PI*Constants.DRIVETRAIN_WHEEL_DIAMETER)/gearratio;
 	}
 		
 	/**
@@ -316,11 +317,11 @@ public class Drivetrain extends PIDSubsystem {
 	 * @return Distance traveled since last encoder reset
 	 */
 	public double getEncoderDistanceLeft() {
-		return encoderLeft.getPosition() * distancePerPulse;
+		return encoderLeft.getPosition() * revPerInch;
 	}
 		
 	public double getEncoderDistanceRight() {
-		return encoderRight.getPosition() * distancePerPulse;
+		return encoderRight.getPosition() * revPerInch;
 	}
 	
 	/**
@@ -358,11 +359,12 @@ public class Drivetrain extends PIDSubsystem {
 	public void sendToDashboard() {
 		if (Constants.DEBUG) {
 		}
-			SmartDashboard.putNumber("DT Encoder Left Raw", encoderLeft.getPosition());		// Encoder raw count
-			SmartDashboard.putNumber("DT Encoder Right Raw", encoderRight.getPosition());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Left Rev", encoderLeft.getPosition());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Right Rev", encoderRight.getPosition());		// Encoder raw count
 			SmartDashboard.putNumber("DT Encoder Left Inches", getEncoderDistanceLeft());		// Encoder raw count
 			SmartDashboard.putNumber("DT Encoder Right Inches", getEncoderDistanceRight());		// Encoder raw count
 
+			SmartDashboard.putBoolean("Gear High", gearHigh);		//Drivetrain Gear mode
 			SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
 				
 			SmartDashboard.putNumber("Gyro turn angle", getAngle());

@@ -20,49 +20,14 @@ public class ElevatorToLevel3 extends Command {
     	}    	
 
     protected boolean isFinished()
-    {
-        if (Robot.intake.hasHatch())
-        {
-            Robot.elevator.goToPosition(Constants.ELE_HATCH_LVL3);
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_HATCH_LVL3)-Constants.ELE_TOLERANCE))
-            {
-                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
-            }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_HATCH_LVL3)+Constants.ELE_TOLERANCE)) {
-                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
-                return false;
-            }
-            else 
-            {
-                // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-                return false;
-            }
-        } 
-        else if ((Robot.intake.hasBall()))
-        {
-            Robot.elevator.goToPosition(Constants.ELE_BALL_LVL3);
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_BALL_LVL3)-Constants.ELE_TOLERANCE))
-            {
-                // Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
-            }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_BALL_LVL3)+Constants.ELE_TOLERANCE)) 
-            {
-            //    Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
-               return false;
-            }
-            else 
-            {
-                // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-                return false;
-            }
-        }
+    {   
+        Robot.elevator.goToPosition(Constants.ELE_LVL3);
+        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL3)-Constants.ELE_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL3)+Constants.ELE_TOLERANCE))
+            return false;
         else 
-        {
-            // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
             return true;
-        }
     }
 
     // Called once after isFinished returns true

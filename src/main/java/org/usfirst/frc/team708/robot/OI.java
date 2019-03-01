@@ -136,8 +136,8 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 //		eleGround.whenPressed(new ElevatorToGround());
 		eleGround.whenPressed(new Level0CG());
 		level1Rocket.whenPressed(new Level1CG());
-		level2Rocket.whenPressed(new ElevatorToLevel2());
-		level3Rocket.whenPressed(new ElevatorToLevel3());
+		level2Rocket.whenPressed(new Level2CG());
+		level3Rocket.whenPressed(new Level3CG());
 						
 		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());

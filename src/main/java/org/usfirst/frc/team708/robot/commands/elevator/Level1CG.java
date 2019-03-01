@@ -22,6 +22,7 @@ public class Level1CG extends CommandGroup {
     public Level1CG() {
         // Use requires() here to declare subsystem dependencies
         addSequential(new ElevatorToLevel1());
+        addParallel(new ElevatorHold());
         addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(.5));

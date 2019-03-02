@@ -57,12 +57,12 @@ public final class Constants {
 	public static final double 	ELEVATOR_STOP 				= 0.0;
 	public static final double	ELE_DEADZONE 				=  .5; 
 		//Measured off encoder revs
-	public static final double	ELE_MAX						= 59.0;
+	public static final double	ELE_MAX					= 59.0;
 	public static final double	ELE_LVL3				= 58.0; 
 	public static final double	ELE_LVL2				= 34.0; 
 	public static final double	ELE_LVL1				= 8.0;
-	public static final double	ELE_LVL0					= 5.0; 
-	public static final double	ELE_CARGO_BALL				= 24.0; 
+	public static final double	ELE_LVL0				= 5.0; 
+	public static final double	ELE_CARGO_BALL			= 24.0; 
 	// public static final double	ELE_HATCH_LVL3				= 300; 
 	// public static final double	ELE_HATCH_LVL2				= 200; 
 	// public static final double	ELE_HATCH_LVL1				= 100; 
@@ -74,7 +74,7 @@ public final class Constants {
 	public static final int ELE_ENC_STARTING_POSITION 		= 0;
 	public static final int ELE_ENC_MIN				 		= 0;
 	public static final int	ELE_TOLERANCE					= 2;
-	public static final int	ELE_HOLD_TIMEOUT				= 1.0;
+	public static final int	ELE_HOLD_TIMEOUT				= 1;
 	public static final double ELE_P						= 0.1;
 	public static final double ELE_I						= 0.0001;
 	public static final double ELE_D						= 1.0;
@@ -84,34 +84,36 @@ public final class Constants {
 	/*
 	 * Intake
 	 */
-	public static final double	HATCH_IN			=  1.0;
+	public static final double	HATCH_IN			= 1.0;
 	public static final double	HATCH_OUT			= -1.0;
-	public static final double 	HATCH_STOP 			=  0.0;
+	public static final double 	HATCH_STOP 			= 0.0;
 
-	public static final double BALL_IN 				=  1.0;
-	public static final double BALL_OUT 			= -1.0;
-	public static final double BALL_STOP 			=  0.0;
+	public static final double BALL_IN 				= -1.0;
+	public static final double BALL_OUT 			= 0.4;
+	public static final double BALL_STOP 			= 0.0;
 
 	public static final int	INTAKE_HATCH_IN		=  0;
 	public static final int	INTAKE_HATCH_OUT	=  1;
 	
-	public static final int	INTAKE_BALL_IN		=  0;
-	public static final int	INTAKE_BALL_OUT		=  1;
+	public static final int	INTAKE_BALL_IN		=  1;  //0
+	public static final int	INTAKE_BALL_OUT		=  0;  //1
 
 	/*
 	 * Cimber
 	 */
-	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  60;  //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  1000; //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  1000; //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  12; //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  13;  //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  14; //inches encoder value
+//  public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  14; //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  4; //inches encoder value
 	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
 	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.6;		
 
 	public static final int		MOVE_CLIMBER_FORWARD				=  18;
 	public static final double	MOVE_CLIMBER_TOLERANCE				=  .5;
-	public static final double	MOVE_CLIMBER_EXTEND					=  -1.0;
-	public static final double	MOVE_CLIMBER_RETRACT				=  1.0;
+	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  -1.0;
+	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  1.0;
+	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  -0.7;
+	public static final double	MOVE_CLIMBER_REAR_RETRACT			=  0.7;
 	public static final double	STOP_CLIMBER						= 0.0;
 
 	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1

@@ -71,9 +71,6 @@ public class Drivetrain extends PIDSubsystem {
 		encoderRight = new CANEncoder(rightMaster);
 
 		// Initializes the sensors
-		// distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-		// 			                  	(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
-		// Sets the distance per pulse of the encoder to read distance properly
 		resetEncoder();
 
 		lineSensor = new DigitalInput(RobotMap.lineSensor);
@@ -299,10 +296,7 @@ public class Drivetrain extends PIDSubsystem {
 		gearHigh = true;
 		gearShifter.set(gearHigh);
 		gearratio = Constants.DRIVETRAIN_GEAR_RATIO_HIGH;
-		// distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-		// 											(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV * gearratio);
 		revPerInch = (Math.PI*Constants.DRIVETRAIN_WHEEL_DIAMETER)/gearratio;
-
 	}
 	
 	public void shiftGearlow() {

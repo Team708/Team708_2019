@@ -19,7 +19,7 @@ public class Climber extends Subsystem {
 	
 private WPI_TalonSRX 	climberFrontMaster, climberFrontSlave, climberRearMaster;
 private WPI_TalonSRX	climberRoller;
-private double distancePerPulse;
+private double countsPerInch;
 
 public boolean stage1  = true;
 public boolean stage2  = false;
@@ -39,8 +39,8 @@ public Climber() {
 
 	//Encoders
 	climberRoller.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-	distancePerPulse = (Constants.ROLLER_DIAMETER * Math.PI) /
-												(Constants.ROLLER_ENCODER_COUNTS_PER_REV * Constants.ROLLER_GEAR_RATIO);
+	countsPerInch = (Constants.ROLLER_DIAMETER * Math.PI)/
+										(Constants.ROLLER_ENCODER_COUNTS_PER_REV*Constants.ROLLER_GEAR_RATIO);
 	
 	//Brake
 	climberRoller.setNeutralMode(NeutralMode.Brake);
@@ -89,7 +89,7 @@ public Climber() {
 	}
 
 	public double getEncoderRoller() {
-		return climberRoller.getSensorCollection().getQuadraturePosition() * distancePerPulse;
+		return climberRoller.getSensorCollection().getQuadraturePosition() * countsPerInch;
 	}
 
 	public void resetClimberRoller() {

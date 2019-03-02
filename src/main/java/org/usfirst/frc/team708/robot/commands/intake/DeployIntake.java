@@ -2,6 +2,7 @@ package org.usfirst.frc.team708.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team708.robot.Robot;
+import org.usfirst.frc.team708.robot.Constants;
 
 public class DeployIntake extends Command {
 
@@ -12,7 +13,9 @@ public class DeployIntake extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intake.intakeDeploy();
+        if (Robot.elevator.getEncoderDistance() >= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE)) {
+            Robot.intake.intakeDeploy();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run

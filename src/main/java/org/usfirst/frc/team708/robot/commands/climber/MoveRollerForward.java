@@ -18,7 +18,7 @@ public class MoveRollerForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-      Robot.climber.moveRollerMotor(Constants.ROTATE_MOTOR_MAX_SPEED);
+      Robot.climber.moveRollerMotor(Constants.CLIMBER_ROLLER_FORWARD);
     }
 
     // Make this return true when this Command no longer needs to run execute()

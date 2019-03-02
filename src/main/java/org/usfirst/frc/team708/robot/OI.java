@@ -47,8 +47,12 @@ public class OI {
 //	private static final int 								= Gamepad.shoulderAxisLeft;;
 //	private static final int 								= Gamepad.shoulderAxisRight;
 
-private static final int HATCH_OUT_BUTTON				= Gamepad.button_L_Shoulder;
-private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
+// private static final int HATCH_OUT_BUTTON				= Gamepad.button_L_Shoulder;
+// private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
+
+private static final int BALL_OUT_BUTTON				= Gamepad.button_R_Shoulder;
+private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
+
 
 //	private static final int GROUND_BUTTON					= Gamepad.button_X;
 	private static final int LEVEL_0_BUTTON					= Gamepad.button_X;
@@ -67,11 +71,13 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 	private static final int CLIMBER_FRONT_BUTTON			= Gamepad.leftStick_Y;
 	private static final int CLIMBER_REAR_BUTTON			= Gamepad.rightStick_Y;
 	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.button_R_Shoulder;	
+	private static final int CLIMBER_BACKWARD_BUTTON		= Gamepad.button_L_Shoulder;	
 
 //	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
 // 	private static final int OPENBUTTON2_BUTTON				= Gamepad.button_Start;
 //	private static final int CLIMBER_BUTTON					= Gamepad.leftStick_Y;
 //	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.rightStick_X;	
+
 /*
  * Driver Button events
  */
@@ -88,9 +94,12 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 /*
  * Operator Button events
  */
-	public static final Button hatchIn			= new JoystickButton(operatorGamepad, HATCH_IN_BUTTON);
-	public static final Button hatchOut			= new JoystickButton(operatorGamepad, HATCH_OUT_BUTTON);
-	public static final Button eleGround		= new JoystickButton(operatorGamepad, LEVEL_0_BUTTON);
+	// public static final Button hatchIn			= new JoystickButton(operatorGamepad, HATCH_IN_BUTTON);
+	// public static final Button hatchOut			= new JoystickButton(operatorGamepad, HATCH_OUT_BUTTON);
+	public static final Button ballIn			= new JoystickButton(operatorGamepad, BALL_IN_BUTTON);
+	public static final Button ballOut			= new JoystickButton(operatorGamepad, BALL_OUT_BUTTON);
+
+	public static final Button level0			= new JoystickButton(operatorGamepad, LEVEL_0_BUTTON);
 	public static final Button level1Rocket		= new JoystickButton(operatorGamepad, LEVEL_1_ROCKET_BUTTON);
 	public static final Button level2Rocket		= new JoystickButton(operatorGamepad, LEVEL_2_ROCKET_BUTTON);
 	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
@@ -111,9 +120,8 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 	public static final Trigger climbDownFront	= new AxisDown(climbingGamepad, CLIMBER_FRONT_BUTTON);
 	public static final Trigger climbUpRear		= new AxisUp(climbingGamepad, CLIMBER_REAR_BUTTON);
 	public static final Trigger climbDownRear	= new AxisDown(climbingGamepad, CLIMBER_REAR_BUTTON);
-	public static final Button climbForward	= new JoystickButton(climbingGamepad, CLIMBER_FORWARD_BUTTON);
-	//public static final Trigger climbForward	= new AxisUp(climbingGamepad, 	CLIMBER_FORWARD_BUTTON);
-	//public static final Trigger climbBack		= new AxisDown(climbingGamepad, CLIMBER_FORWARD_BUTTON);
+	public static final Button climbForward		= new JoystickButton(climbingGamepad, CLIMBER_FORWARD_BUTTON);
+	public static final Button climbBackward	= new JoystickButton(climbingGamepad, CLIMBER_BACKWARD_BUTTON);
 
 	public OI() {
 
@@ -128,13 +136,15 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 
 //Operator
 
-		hatchIn.whileHeld(new IntakeHatchIn());
-		hatchOut.whileHeld(new IntakeHatchOut());
+		// hatchIn.whileHeld(new IntakeHatchIn());
+		// hatchOut.whileHeld(new IntakeHatchOut());
+		ballIn.whileHeld(new IntakeBallIn());
+		ballOut.whileHeld(new IntakeBallOut());
 		toggleHatch.whenPressed(new ToggleHatch());
 		toggleIntake.whenPressed(new ToggleIntake());
 		toggleBeak.whenPressed(new ToggleBeak());
 //		eleGround.whenPressed(new ElevatorToGround());
-		eleGround.whenPressed(new Level0CG());
+		level0.whenPressed(new Level0CG());
 		level1Rocket.whenPressed(new Level1CG());
 		level2Rocket.whenPressed(new Level2CG());
 		level3Rocket.whenPressed(new Level3CG());
@@ -149,7 +159,8 @@ private static final int HATCH_IN_BUTTON				= Gamepad.button_R_Shoulder;
 		climbDownFront.whileActive(new JoystickMoveClimberFront());
 		climbUpRear.whileActive(new JoystickMoveClimberRear());
 		climbDownRear.whileActive(new JoystickMoveClimberRear());
-		climbForward.whileHeld(new MoveRollerForward());		
+		climbForward.whileHeld(new MoveRollerForward());	
+		climbBackward.whileHeld(new MoveRollerBackward());	
 
 		// climbUp.whileActive(new JoystickMoveClimb());
 		// climbDown.whileActive(new JoystickMoveClimb());

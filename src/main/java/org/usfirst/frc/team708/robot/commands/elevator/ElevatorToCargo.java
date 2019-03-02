@@ -21,46 +21,55 @@ public class ElevatorToCargo extends Command {
 
     protected boolean isFinished()
     {
-        if (Robot.intake.hasHatch())
-        {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_HATCH)-Constants.ELE_TOLERANCE))
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
-            }
-            else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_HATCH)+Constants.ELE_TOLERANCE)) {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
-                return false;
-            }
-            else 
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-                return true;
-            }
-        } 
-        else if ((Robot.intake.hasBall()))
-        {
-            if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE))
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
-                return false;
-            }
-            else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE)) 
-            {
-               Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
-               return false;
-            }
-            else 
-            {
-                Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-                return true;
-            }
-        }
-        else 
-        {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        Robot.elevator.goToPosition(Constants.ELE_CARGO_BALL);
+        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE))
+            return false;
+        else {
+            Robot.elevator.ele_position = Constants.ELE_CARGO_BALL;
             return true;
         }
+        // if (Robot.intake.hasHatch())
+        // {
+        //     if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE))
+        //     {
+        //         Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+        //         return false;
+        //     }
+        //     else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE)) {
+        //         Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
+        //         return false;
+        //     }
+        //     else 
+        //     {
+        //         Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        //         return true;
+        //     }
+        // } 
+        // else if ((Robot.intake.hasBall()))
+        // {
+        //     if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE))
+        //     {
+        //         Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_UP);
+        //         return false;
+        //     }
+        //     else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE)) 
+        //     {
+        //        Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN);
+        //        return false;
+        //     }
+        //     else 
+        //     {
+        //         Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        //         return true;
+        //     }
+        // }
+        // else 
+        // {
+        //     Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        //     return true;
+        // }
     }
 
     // Called once after isFinished returns true

@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
 	private Solenoid hatchSolenoid;
 	private Solenoid beakSolenoid;
 
-	private boolean intakeRetracted	 = true;
+	private boolean intakeDeployed	 = true;
 	private boolean hatchRetracted	 = true;
 	private boolean beakOpened		 = true;				
 
@@ -40,7 +40,7 @@ public class Intake extends Subsystem {
 		hatchSolenoid	= new Solenoid(RobotMap.hatch);
 		beakSolenoid	= new Solenoid(RobotMap.beak);
 
-		intakeSolenoid.set(intakeRetracted);
+		intakeSolenoid.set(intakeDeployed);
 		hatchSolenoid.set(hatchRetracted);
 
 		ballSensor 		= new DigitalInput(RobotMap.ballSensor);
@@ -86,53 +86,47 @@ public class Intake extends Subsystem {
 
  	//Pneumatics
 	public void intakeRetract() {
-		intakeRetracted = true;
-		intakeSolenoid.set(true);
+		intakeDeployed = false;
+		intakeSolenoid.set(intakeDeployed);
 	}
 
 	public void intakeDeploy() {
-		intakeRetracted = false;
-		intakeSolenoid.set(false);
+		intakeDeployed = true;
+		intakeSolenoid.set(intakeDeployed);
 	}
 
 	public void intakeToggle() {
-		if (intakeRetracted) 
-			intakeDeploy();
-		else 
-			intakeRetract();
+		intakeDeployed = !intakeDeployed;
+		intakeSolenoid.set(intakeDeployed);
 	}
 
 	public void hatchRetract() {
 		hatchRetracted = true;
-		hatchSolenoid.set(true);
+		hatchSolenoid.set(hatchRetracted);
 	}
 	
 	public void hatchExtend() {
 		hatchRetracted = false;
-		hatchSolenoid.set(false);
+		hatchSolenoid.set(hatchRetracted);
 	}
 
 	public void hatchToggle() {
-		if (hatchRetracted) 
-			hatchExtend();
-		else 
-			hatchRetract();
+		hatchRetracted = !hatchRetracted;
+		hatchSolenoid.set(hatchRetracted);
 	}
 	public void beakOpen() {
 		beakOpened = true;
-		beakSolenoid.set(true);
+		beakSolenoid.set(beakOpened);
 	}
 	
 	public void beakClose() {
 		beakOpened = false;
-		beakSolenoid.set(false);
+		beakSolenoid.set(beakOpened);
 	}
 
 	public void beakToggle() {
-		if (beakOpened) 
-			beakClose();
-		else 
-			beakOpen();
+		beakOpened = !beakOpened;
+		beakSolenoid.set(beakOpened);
 	}
 
 	public void sendToDashboard() {
@@ -140,7 +134,7 @@ public class Intake extends Subsystem {
 		}
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
-		SmartDashboard.putBoolean("Intake Opened:", intakeRetracted);
+		SmartDashboard.putBoolean("Intake Deployed", intakeDeployed);
 		SmartDashboard.putBoolean("Beak Opened:", beakOpened);
 		SmartDashboard.putBoolean("Hatch Retracted:", hatchRetracted);
 	}  

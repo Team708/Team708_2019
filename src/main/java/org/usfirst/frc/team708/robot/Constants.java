@@ -31,7 +31,7 @@ public final class Constants {
 	public static final double	ENCODER_BOTTOM_POSITION 				= 0.0;
 	public static final int		DT_HIGH_GEAR							= 1;
 	public static final int		DT_LOW_GEAR								= 0;
-	public static final double	PITCH_MAX								= 6.0;
+	public static final double	PITCH_MAX								= 3.0;
 	public static final double	ROLL_MAX								= 6.0;
 
 	// PID Tuning parameters
@@ -53,11 +53,11 @@ public final class Constants {
 	 * Elevator
 	 */
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
-	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -1.0;
+	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.3;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
 	public static final double	ELE_DEADZONE 				=  .5; 
 		//Measured off encoder revs
-	public static final double	ELE_MAX					= 59.0;
+	public static final double	ELE_MAX					= 58.5;
 	public static final double	ELE_LVL3				= 58.0; 
 	public static final double	ELE_LVL2				= 34.0; 
 	public static final double	ELE_LVL1				= 8.0;
@@ -74,8 +74,8 @@ public final class Constants {
 	public static final int ELE_ENC_STARTING_POSITION 		= 0;
 	public static final int ELE_ENC_MIN				 		= 0;
 	public static final int	ELE_TOLERANCE					= 2;
-	public static final int	ELE_HOLD_TIMEOUT				= 1;
-	public static final double ELE_P						= 0.1;
+	public static final int	ELE_HOLD_TIMEOUT				= 3;
+	public static final double ELE_P						= 0.8;
 	public static final double ELE_I						= 0.0001;
 	public static final double ELE_D						= 1.0;
 	public static final double ELE_Iz						= 0;
@@ -92,8 +92,8 @@ public final class Constants {
 	public static final double BALL_OUT 			= 0.4;
 	public static final double BALL_STOP 			= 0.0;
 
-	public static final int	INTAKE_HATCH_IN		=  0;
-	public static final int	INTAKE_HATCH_OUT	=  1;
+	public static final int	INTAKE_HATCH_IN		=  1;
+	public static final int	INTAKE_HATCH_OUT	=  0;
 	
 	public static final int	INTAKE_BALL_IN		=  1;  //0
 	public static final int	INTAKE_BALL_OUT		=  0;  //1
@@ -112,8 +112,8 @@ public final class Constants {
 	public static final double	MOVE_CLIMBER_TOLERANCE				=  .5;
 	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  -1.0;
 	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  1.0;
-	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  -0.7;
-	public static final double	MOVE_CLIMBER_REAR_RETRACT			=  0.7;
+	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  -0.75;
+	public static final double	MOVE_CLIMBER_REAR_RETRACT			=  1.0;
 	public static final double	STOP_CLIMBER						= 0.0;
 
 	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1

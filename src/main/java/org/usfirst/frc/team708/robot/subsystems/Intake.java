@@ -9,10 +9,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
 
+import org.usfirst.frc.team708.robot.util.Potentiometer;
 
 public class Intake extends Subsystem {
 	
@@ -25,12 +28,11 @@ public class Intake extends Subsystem {
 	private Solenoid beakSolenoid;
 
 	private boolean intakeDeployed	 = true;
-	private boolean hatchRetracted	 = true;
-	private boolean beakOpened		 = true;				
+	private boolean hatchExtended	 = true;
+	private boolean beakClosed		 = true;				
 
-	public DigitalInput 	ballSensor;
+	private AnalogInput 	ballSensor;
 	public DigitalInput 	hatchSensor;
-
 
 	public Intake() {
 		ballMaster	= new WPI_TalonSRX(RobotMap.ballIntakeMotorMaster);
@@ -41,9 +43,9 @@ public class Intake extends Subsystem {
 		beakSolenoid	= new Solenoid(RobotMap.beak);
 
 		intakeSolenoid.set(intakeDeployed);
-		hatchSolenoid.set(hatchRetracted);
+		hatchSolenoid.set(hatchExtended);
 
-		ballSensor 		= new DigitalInput(RobotMap.ballSensor);
+		ballSensor 		= new AnalogInput(RobotMap.ballSensor);
 		hatchSensor 	= new DigitalInput(RobotMap.hatchSensor);
 
 		ballMaster.setNeutralMode(NeutralMode.Brake);
@@ -71,7 +73,8 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean hasBall() {		
-		if (!ballSensor.get())
+		// if (!ballSensor.get())
+		if (ballSensor.getVoltage() >= 1)
 			return (true);	    
 		else 
 			return (false);		
@@ -101,32 +104,32 @@ public class Intake extends Subsystem {
 	}
 
 	public void hatchRetract() {
-		hatchRetracted = true;
-		hatchSolenoid.set(hatchRetracted);
+		hatchExtended = false;
+		hatchSolenoid.set(hatchExtended);
 	}
 	
 	public void hatchExtend() {
-		hatchRetracted = false;
-		hatchSolenoid.set(hatchRetracted);
+		hatchExtended = true;
+		hatchSolenoid.set(hatchExtended);
 	}
 
 	public void hatchToggle() {
-		hatchRetracted = !hatchRetracted;
-		hatchSolenoid.set(hatchRetracted);
+		hatchExtended = !hatchExtended;
+		hatchSolenoid.set(hatchExtended);
 	}
 	public void beakOpen() {
-		beakOpened = true;
-		beakSolenoid.set(beakOpened);
+		beakClosed = false;
+		beakSolenoid.set(beakClosed);
 	}
 	
 	public void beakClose() {
-		beakOpened = false;
-		beakSolenoid.set(beakOpened);
+		beakClosed = true;
+		beakSolenoid.set(beakClosed);
 	}
 
 	public void beakToggle() {
-		beakOpened = !beakOpened;
-		beakSolenoid.set(beakOpened);
+		beakClosed = !beakClosed;
+		beakSolenoid.set(beakClosed);
 	}
 
 	public void sendToDashboard() {
@@ -135,7 +138,7 @@ public class Intake extends Subsystem {
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
 		SmartDashboard.putBoolean("Intake Deployed", intakeDeployed);
-		SmartDashboard.putBoolean("Beak Opened:", beakOpened);
-		SmartDashboard.putBoolean("Hatch Retracted:", hatchRetracted);
+		SmartDashboard.putBoolean("Beak Closed:", beakClosed);
+		SmartDashboard.putBoolean("Hatch Extended:", hatchExtended);
 	}  
 }

@@ -132,6 +132,8 @@ public class Robot extends TimedRobot {
         drivetrain.setBrakeMode(true);
         drivetrain.resetGyro();
         intake.intakeRetract();
+        intake.beakOpen();
+        intake.hatchRetract();
         // original dashboard code
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
@@ -155,7 +157,8 @@ public class Robot extends TimedRobot {
         // remove this line or comment it out.
         if (autonomousCommand != null)
             autonomousCommand.cancel();
-
+        intake.beakOpen();
+        intake.hatchRetract();
         intake.intakeRetract();
         drivetrain.setBrakeMode(false);
         drivetrain.shiftGearlow();

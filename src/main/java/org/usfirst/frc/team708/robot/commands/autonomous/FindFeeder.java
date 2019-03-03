@@ -24,12 +24,13 @@ public class FindFeeder extends CommandGroup {
     public FindFeeder() {
         // Use requires() here to declare subsystem dependencies
         addSequential(new CloseBeak());
-        addSequential(new ElevatorToLevel1());
         addSequential(new FindRocketHatch());
+        addSequential(new ElevatorToLevel1());
+        addParallel(new ElevatorHoldOriginal());
         addSequential(new DeployHatch());
-        addSequential(new WaitCommand(.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new OpenBeak());
-        addSequential(new WaitCommand(.5));
+        addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
     }
 

@@ -23,9 +23,9 @@ public class ElevatorToCargo extends Command {
     {
         Robot.elevator.goToPosition(Constants.ELE_CARGO_BALL);
         if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_CARGO_BALL)-Constants.ELE_TOLERANCE))
-            return false;
+        return false;
         else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_CARGO_BALL)+Constants.ELE_TOLERANCE))
-            return false;
+        return false;
         else {
             Robot.elevator.ele_position = Constants.ELE_CARGO_BALL;
             return true;

@@ -34,9 +34,9 @@ public class OI {
 	private static final int SHIFT_DRIVETRAIN_HIGH_BUTTON	= Gamepad.button_L_Shoulder;
 //	private static final int HOLDGEARHIGH					= Gamepad.shoulderAxisLeft;;
 //	private static final int 								= Gamepad.shoulderAxisRight;;
-//	private static final int SHIFT_DRIVETRAIN_HIGH_BUTTON 	= Gamepad.button_Y;
+	private static final int ROLLER_BACKWARDS 				= Gamepad.button_Y;
 	private static final int FIND_BALL_BUTTON				= Gamepad.button_B;
-//	private static final int SHIFT_DRIVETRAIN_LOW_BUTTON	= Gamepad.button_A;
+	private static final int ROLLER_FORWARDS				= Gamepad.button_A;
 	private static final int FIND_TAPE_BUTTON				= Gamepad.button_X;
 
 /*
@@ -85,7 +85,8 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 	public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
 	public static final Button findBall			= new JoystickButton(driverGamepad, FIND_BALL_BUTTON);
 	public static final Button findTape			= new JoystickButton(driverGamepad, FIND_TAPE_BUTTON);
-
+	public static final Button rollerForward	= new JoystickButton(driverGamepad, ROLLER_FORWARDS);
+	public static final Button rollerBackward	= new JoystickButton(driverGamepad, ROLLER_BACKWARDS);
 //	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
 //	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
 //	public static final Trigger lowGear			= new AxisUp(driverGamepad, HOLDGEARHIGH);
@@ -131,11 +132,10 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		findTape.whenPressed(new FindRocketHatch());
 		findBall.whenPressed(new FindBall());
 		findFeeder.whenPressed(new FindFeeder());
-
-	
+		rollerForward.whileHeld(new MoveRollerForward());	
+		rollerBackward.whileHeld(new MoveRollerBackward());	
 
 //Operator
-
 		// hatchIn.whileHeld(new IntakeHatchIn());
 		// hatchOut.whileHeld(new IntakeHatchOut());
 		ballIn.whileHeld(new IntakeBallIn());

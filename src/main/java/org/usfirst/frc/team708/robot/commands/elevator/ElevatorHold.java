@@ -1,40 +1,35 @@
-package org.usfirst.frc.team708.robot.commands.elevator;
+// package org.usfirst.frc.team708.robot.commands.elevator;
 
-import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.Robot;
-import edu.wpi.first.wpilibj.command.Command;
+// import org.usfirst.frc.team708.robot.Constants;
+// import org.usfirst.frc.team708.robot.Robot;
+// import edu.wpi.first.wpilibj.command.Command;
 
-public class ElevatorHold extends Command {
+// public class ElevatorHold extends Command {
 
-    public ElevatorHold() {
-        requires(Robot.elevator);
-    }
+//     public ElevatorHold() {
+//         requires(Robot.elevator);
+//     }
     
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	}    	
+//     // Called just before this Command runs the first time
+//     protected void initialize() {
+//     	}    	
   
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	}    	
+//     // Called repeatedly when this Command is scheduled to run
+//     protected void execute() {
+//             Robot.elevator.goToPosition(Robot.elevator.ele_position);
+//     }    	
 
-    protected boolean isFinished()
-    {
-        Robot.elevator.goToPosition(Robot.elevator.ele_position);
-        if (this.timeSinceInitialized() >= Constants.ELE_HOLD_TIMEOUT)
-            return true;
-        else
-            return false;
-    }
+//     protected boolean isFinished()
+//     {
+//         return false;
+//     }
 
-    // Called once after isFinished returns true
-    protected void end() {
-        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-    }
+//     // Called once after isFinished returns true
+//     protected void end() {
+//     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems are scheduled to run
-    protected void interrupted() {
-    	end();
-    }
-}
+//     // Called when another command which requires one or more of the same
+//     // subsystems are scheduled to run
+//     protected void interrupted() {
+//     }
+// }

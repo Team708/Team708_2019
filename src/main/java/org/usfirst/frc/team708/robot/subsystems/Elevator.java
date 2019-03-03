@@ -3,6 +3,7 @@ package org.usfirst.frc.team708.robot.subsystems;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.elevator.JoystickMoveElevator;
+// import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHo/ld;
 
 import java.lang.invoke.ConstantCallSite;
 
@@ -28,7 +29,7 @@ public class Elevator extends Subsystem {
 	private CANPIDController	elevatorPIDController;
 //	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-	public double ele_position;
+	public double ele_position = 0.0;
 	
     /**
       * Constructor
@@ -77,8 +78,7 @@ public class Elevator extends Subsystem {
 
 	public boolean isElevatorMax() {
 //  if (upperLimit.get()) {
-		if (elevatorEncoder.getPosition() >= Constants.ELE_MAX) {
-			elevatorEncoder.setPosition(Constants.ELE_MAX);
+		if (elevatorEncoder.getPosition() > Constants.ELE_MAX) {
 			return (true);
 	    }
 		else 
@@ -102,7 +102,7 @@ public class Elevator extends Subsystem {
 		}
 			SmartDashboard.putBoolean("Elev Down:", 	lowerLimit.get());
    		SmartDashboard.putBoolean("Elev Up", 			upperLimit.get());	
-			SmartDashboard.putNumber(	"Ele Distance", elevatorEncoder.getPosition());
+			SmartDashboard.putNumber("Elev Distance", elevatorEncoder.getPosition());
+			SmartDashboard.putNumber("Elev Set Positon", ele_position);
 	}
 }
-

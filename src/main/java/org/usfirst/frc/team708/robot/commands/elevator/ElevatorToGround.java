@@ -24,17 +24,19 @@ protected void execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 protected boolean isFinished() {
-    	
-    	if(Robot.elevator.isElevatorMin()) {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-        	Robot.elevator.resetElevatorEncoder();
-        	return true;
-    	}	
-    	else
-    	{
-        	Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN); 
-    	    return false;
-    	}
+    
+    // Robot.elevator.ele_position = Constants.ELE_GROUND;
+
+    if(Robot.elevator.isElevatorMin()) {
+        Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+        Robot.elevator.resetElevatorEncoder();
+        return true;
+    }	
+    else
+    {
+        Robot.elevator.moveMotor(Constants.ELEVATOR_MOTOR_DOWN); 
+        return false;
+    }
     }
 
     // Called once after isFinished returns true

@@ -23,9 +23,9 @@ public class ElevatorToLevel2 extends Command {
     {
         Robot.elevator.goToPosition(Constants.ELE_LVL2);
         if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL2)-Constants.ELE_TOLERANCE))
-            return false;
+        return false;
         else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL2)+Constants.ELE_TOLERANCE))
-            return false;
+        return false;
         else {
             Robot.elevator.ele_position = Constants.ELE_LVL2;
             return true;

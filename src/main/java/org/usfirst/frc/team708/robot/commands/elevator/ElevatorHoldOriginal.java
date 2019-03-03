@@ -4,11 +4,10 @@ import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ElevatorHoldForBall extends Command {
+public class ElevatorHoldOriginal extends Command {
 
-    public ElevatorHoldForBall() {
+    public ElevatorHoldOriginal() {
         requires(Robot.elevator);
-        requires(Robot.intake);
     }
     
     // Called just before this Command runs the first time
@@ -22,14 +21,10 @@ public class ElevatorHoldForBall extends Command {
     protected boolean isFinished()
     {
         Robot.elevator.goToPosition(Robot.elevator.ele_position);
-        if (Robot.intake.hasBall()) {
-            Robot.intake.stopMotorBall();
+        if (this.timeSinceInitialized() >= Constants.ELE_HOLD_TIMEOUT)
             return true;
-        }
-        else {
-            Robot.intake.moveMotorBall(Constants.BALL_IN);
+        else
             return false;
-        }
     }
 
     // Called once after isFinished returns true

@@ -63,7 +63,7 @@ public Climber() {
 	}
 	
 	public void moveFrontMotor(double speed) {
-		climberFrontMaster.set(-speed);
+		climberFrontMaster.set(speed);
 	}
 
 	public void moveRearMotor(double speed) {
@@ -92,6 +92,14 @@ public Climber() {
 		return climberRoller.getSensorCollection().getQuadraturePosition() * countsPerInch;
 	}
 
+	public double getEncoderFront() {
+		return climberFrontMaster.getSensorCollection().getQuadraturePosition() * countsPerInch;
+	}
+
+	public double getEncoderRear() {
+		return climberRearMaster.getSensorCollection().getQuadraturePosition() * countsPerInch;
+	}
+
 	public void resetClimberRoller() {
 		climberRoller.setSelectedSensorPosition(0, 0, 0);
 	}
@@ -100,7 +108,6 @@ public Climber() {
 	public boolean frontExtend() {
 		return climberFrontMaster.getSensorCollection().isRevLimitSwitchClosed();	//Used to be Fwd
 	}
-	//PLEASE CHECK LIMIT SWITCH!!!
 	public boolean frontRetract() {
 		// return RetractLimitFL.get();
 		return climberFrontMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev

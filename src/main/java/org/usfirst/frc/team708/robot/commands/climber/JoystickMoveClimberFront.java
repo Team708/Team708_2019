@@ -22,12 +22,13 @@ public class JoystickMoveClimberFront extends Command {
     moveSpeed = OI.climbingGamepad.getAxis(Gamepad.leftStick_Y);
     Robot.climber.moveFrontMotor(moveSpeed);
 
-    if(Robot.climber.frontExtend()) {
-      Robot.climber.moveFrontMotor(0.0); 
-    }
-    else if(Robot.climber.frontRetract()) {
-    Robot.climber.moveFrontMotor(0.0);
-    }    }
+    // if(Robot.climber.frontExtend()) {
+    //   Robot.climber.moveFrontMotor(0.0); 
+    // }
+    // else if(Robot.climber.frontRetract()) {
+    // Robot.climber.moveFrontMotor(0.0);
+    // }    
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   protected boolean isFinished() {

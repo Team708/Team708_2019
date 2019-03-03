@@ -25,13 +25,15 @@ public class DeployGamePiece extends Command {
         if (Robot.intake.hasHatch()) {
             Robot.intake.hatchExtend();
         }
-        else {
-            Robot.intake.moveMotorBall(Constants.INTAKE_BALL_OUT);
+        else if (Robot.intake.hasBall()) {
+            Robot.intake.moveMotorBall(Constants.BALL_OUT);
         }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        Robot.intake.stopMotorBall();
+
     	return(!(Robot.intake.hasBall() && Robot.intake.hasHatch()));
     }
 

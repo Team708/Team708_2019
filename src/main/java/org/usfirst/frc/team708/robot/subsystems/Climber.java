@@ -21,6 +21,7 @@ private WPI_TalonSRX 	climberFrontMaster, climberFrontSlave, climberRearMaster;
 private WPI_TalonSRX	climberRoller;
 private double countsPerInch;
 
+public double HABLevel;
 public boolean stage1  = true;
 public boolean stage2  = false;
 public boolean stage3  = false;
@@ -93,32 +94,51 @@ public Climber() {
 	}
 
 	public double getEncoderFront() {
-		return climberFrontMaster.getSensorCollection().getQuadraturePosition() * countsPerInch;
+		return -climberFrontMaster.getSensorCollection().getQuadraturePosition();
 	}
 
 	public double getEncoderRear() {
-		return climberRearMaster.getSensorCollection().getQuadraturePosition() * countsPerInch;
+		return climberRearMaster.getSensorCollection().getQuadraturePosition();
 	}
 
 	public void resetClimberRoller() {
 		climberRoller.setSelectedSensorPosition(0, 0, 0);
 	}
+	public void resetClimberRear() {
+		climberRearMaster.setSelectedSensorPosition(0, 0, 0);
+	}	
+	public void resetClimberFront() {
+		climberFrontMaster.setSelectedSensorPosition(0, 0, 0);
+	}
+	public void resetClimberAll() {
+		resetClimberFront();
+		resetClimberRear();
+		resetClimberRoller();
+	}
+ 
 
 	// Limit Switch Methods
 	public boolean frontExtend() {
-		return climberFrontMaster.getSensorCollection().isRevLimitSwitchClosed();	//Used to be Fwd
+		// return climberFrontMaster.getSensorCollection().isRevLimitSwitchClosed();	//Used to be Fwd
+		return (getEncoderFront() >= HABLevel);
+		// return false;
 	}
 	public boolean frontRetract() {
-		// return RetractLimitFL.get();
-		return climberFrontMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
+		// return climberFrontMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
+		return (getEncoderFront() <= 0.0);
+		// return false;
 	}
 
 	public boolean rearExtend() {
-		return climberRearMaster.getSensorCollection().isRevLimitSwitchClosed(); //Used to be Fwd
+		return (getEncoderRear() >= HABLevel);
+		// return false;
+		// return climberRearMaster.getSensorCollection().isRevLimitSwitchClosed(); //Used to be Fwd
 	}
 
 	public boolean rearRetract() {
-		return climberRearMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
+		// return false;
+		return (getEncoderRear() <= 0.0);
+		// return climberRearMaster.getSensorCollection().isFwdLimitSwitchClosed(); //Used to be Rev
 	}
   
 	public void sendToDashboard() {
@@ -128,6 +148,7 @@ public Climber() {
 		SmartDashboard.putBoolean("Front Retract", frontRetract());
 		SmartDashboard.putBoolean("Rear Extend",  rearExtend());
 		SmartDashboard.putBoolean("Rear Retract",  rearRetract());	
+		SmartDashboard.putNumber("HAB Level",	HABLevel);
 		SmartDashboard.putBoolean("Stage 1", stage1);
 		SmartDashboard.putBoolean("Stage 2", stage2);
 		SmartDashboard.putBoolean("Stage 3", stage3);
@@ -135,5 +156,7 @@ public Climber() {
 		SmartDashboard.putBoolean("Stage 5", stage5);
 		SmartDashboard.putBoolean("Stage 6", stage6);
 		SmartDashboard.putNumber("Roller Encoder", getEncoderRoller());		//Encoder raw count
+		SmartDashboard.putNumber("Front Encoder", getEncoderFront());		//Encoder raw count
+		SmartDashboard.putNumber("Rear Encoder", getEncoderRear());		//Encoder raw count
   } 
 }

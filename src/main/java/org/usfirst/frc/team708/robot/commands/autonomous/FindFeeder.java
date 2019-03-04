@@ -32,6 +32,7 @@ public class FindFeeder extends CommandGroup {
         addSequential(new OpenBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.2,1.0));
     }
 
     // Called just before this Command runs the first time

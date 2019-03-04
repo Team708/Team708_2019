@@ -315,7 +315,7 @@ public class Drivetrain extends PIDSubsystem {
 	}
 		
 	public double getEncoderDistanceRight() {
-		return encoderRight.getPosition() * revPerInch;
+		return -encoderRight.getPosition() * revPerInch;
 	}
 	
 	/**

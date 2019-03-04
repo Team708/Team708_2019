@@ -18,7 +18,7 @@ public final class Constants {
 	 * Drivetrain
 	 */
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
-	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
+	public static final double	ROTATE_MOTOR_MAX_SPEED 					= .7;  // 1.0
 	public static final double	TANK_STICK_TOLERANCE 					= .20;
 	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
 	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;
@@ -53,7 +53,7 @@ public final class Constants {
 	 * Elevator
 	 */
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
-	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.3;
+	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.1;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
 	public static final double	ELE_DEADZONE 				=  .5; 
 		//Measured off encoder revs
@@ -108,13 +108,15 @@ public final class Constants {
 	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
 	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.6;		
 
-	public static final int		MOVE_CLIMBER_FORWARD				=  18;
-	public static final double	MOVE_CLIMBER_TOLERANCE				=  .5;
-	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  -1.0;
-	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  1.0;
-	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  -0.75;
-	public static final double	MOVE_CLIMBER_REAR_RETRACT			=  1.0;
-	public static final double	STOP_CLIMBER						= 0.0;
+	public static final int		MOVE_CLIMBER_FORWARD				=	18;
+	public static final double	MOVE_CLIMBER_TOLERANCE				=  	.5;
+	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  	-1.0;
+	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  	1.0;
+	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.75;
+	public static final double 	HAB_LVL3_ENCODER_DISTANCE		=	41000;
+	public static final double	HAB_LVL2_ENCODER_DISTANCE		=	15000;
+	public static final double	MOVE_CLIMBER_REAR_RETRACT			=	1.0;
+	public static final double	STOP_CLIMBER						= 	0.0;
 
 	public static final double ROLLER_GEAR_RATIO					= 16.0;	//16:1
 	public static final double ROLLER_DIAMETER						= 2.5;	//Diameter in inches
@@ -135,11 +137,11 @@ public final class Constants {
 	public static final double Y_THRESHOLD				=   6.0;		//Target angle in degrees
 	public static final double X_THRESHOLD 				=   6.0;		//Target angle in degrees
 	public static final double AREA_THRESHOLD			= 	6.0;
-	public static final double ROCKET_HATCH_TARGET_AREA			=	20.0;
-	public static final double ROCKET_CARGO_TARGET_AREA			=	20.0;
+	public static final double ROCKET_HATCH_TARGET_AREA			=	23.0;
+	public static final double ROCKET_CARGO_TARGET_AREA			=	23.0;
 
 
-	public static final double VISION_MOVE			= .6;
+	public static final double VISION_MOVE			= .7;
 	public static final double VISION_ROTATE		= .4;
 
 	public static final int ALLIANCE_RED 	 	=	1;

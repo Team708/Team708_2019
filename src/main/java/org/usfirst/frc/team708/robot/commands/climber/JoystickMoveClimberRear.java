@@ -20,7 +20,7 @@ public class JoystickMoveClimberRear extends Command {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     moveSpeed = OI.climbingGamepad.getAxis(Gamepad.rightStick_Y);
-    Robot.climber.moveRearMotor(moveSpeed);
+    Robot.climber.moveRearMotor(moveSpeed*.75);
 
     if(Robot.climber.rearExtend()) {
       Robot.climber.moveRearMotor(0.0); 

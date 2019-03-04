@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
@@ -66,12 +67,17 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 	private static final int TOGGLE_HATCH_BUTTON			= Gamepad.button_Start;
 	private static final int TOOGLE_BEAK_BUTTON				= Gamepad.button_RightStick;
 
+/**
+ * Climber Buttons
+ */
 	private static final int INITIATE_CLIMB					= Gamepad.button_Start;	
 	private static final int STOP_CLIMB						= Gamepad.button_Back;	
 	private static final int CLIMBER_FRONT_BUTTON			= Gamepad.leftStick_Y;
 	private static final int CLIMBER_REAR_BUTTON			= Gamepad.rightStick_Y;
 	private static final int CLIMBER_FORWARD_BUTTON			= Gamepad.button_R_Shoulder;	
 	private static final int CLIMBER_BACKWARD_BUTTON		= Gamepad.button_L_Shoulder;	
+	private static final int SET_HAB_LVL2					= Gamepad.button_A;
+	private static final int SET_HAB_LVL3					= Gamepad.button_B;
 
 //	private static final int OPENBUTTON1_BUTTON				= Gamepad.button_Back;
 // 	private static final int OPENBUTTON2_BUTTON				= Gamepad.button_Start;
@@ -123,6 +129,8 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 	public static final Trigger climbDownRear	= new AxisDown(climbingGamepad, CLIMBER_REAR_BUTTON);
 	public static final Button climbForward		= new JoystickButton(climbingGamepad, CLIMBER_FORWARD_BUTTON);
 	public static final Button climbBackward	= new JoystickButton(climbingGamepad, CLIMBER_BACKWARD_BUTTON);
+	public static final Button setHABLvl2 		= new JoystickButton(climbingGamepad, SET_HAB_LVL2);
+	public static final Button setHABLvl3 		= new JoystickButton(climbingGamepad, SET_HAB_LVL3);
 
 	public OI() {
 
@@ -132,8 +140,8 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		findTape.whenPressed(new FindRocketHatch());
 		findBall.whenPressed(new FindBall());
 		findFeeder.whenPressed(new FindFeeder());
-		rollerForward.whileHeld(new MoveRollerForward());	
-		rollerBackward.whileHeld(new MoveRollerBackward());	
+		// rollerForward.whileHeld(new MoveRollerForward());	
+		// rollerBackward.whileHeld(new MoveRollerBackward());	
 
 //Operator
 		// hatchIn.whileHeld(new IntakeHatchIn());
@@ -155,6 +163,9 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		elevatorUp.whileActive(new JoystickMoveElevator());
 		elevatorDown.whileActive(new JoystickMoveElevator());
 
+//Climber
+		setHABLvl2.whenPressed(new SetClimbLvl2());
+		setHABLvl3.whenPressed(new SetClimbLvl3());
 		climbUpFront.whileActive(new JoystickMoveClimberFront());
 		climbDownFront.whileActive(new JoystickMoveClimberFront());
 		climbUpRear.whileActive(new JoystickMoveClimberRear());

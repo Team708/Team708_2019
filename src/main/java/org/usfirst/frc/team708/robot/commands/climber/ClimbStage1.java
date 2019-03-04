@@ -14,6 +14,7 @@ public class ClimbStage1 extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.climber.stage1 = true;
+        Robot.climber.resetClimberAll();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -27,6 +27,7 @@ public class DoNothing extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.drivetrain.resetEncoder();
+        Robot.climber.resetClimberAll();
     }
 
     // Called repeatedly when this Command is scheduled to run

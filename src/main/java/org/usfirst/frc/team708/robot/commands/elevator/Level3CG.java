@@ -22,15 +22,16 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Level3CG extends CommandGroup {
 
     public Level3CG() {
-        // Use requires() here to declare subsystem dependencies
+        addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel3());
         addParallel(new ElevatorHoldOriginal());
-        addSequential(new FindRocketHatch());
         addSequential(new DeployGamePiece());
-        addParallel(new WaitCommand(1.0)); 
+        addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
+        addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new ElevatorToGround());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.4,1.0));
+        addSequential(new ElevatorToGround());;
     }
 
     // Called just before this Command runs the first time

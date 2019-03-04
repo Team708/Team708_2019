@@ -2,6 +2,7 @@ package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
+// import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHold;
 import org.usfirst.frc.team708.robot.commands.elevator.JoystickMoveElevator;
 // import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHo/ld;
 
@@ -52,11 +53,13 @@ public class Elevator extends Subsystem {
     elevatorPIDController.setI(Constants.ELE_I);
     elevatorPIDController.setD(Constants.ELE_D);
     elevatorPIDController.setIZone(Constants.ELE_Iz);
-    elevatorPIDController.setFF(Constants.ELE_FF);
+		elevatorPIDController.setFF(Constants.ELE_FF);
+		elevatorPIDController.setOutputRange(Constants.ELEVATOR_MOTOR_DOWN, Constants.ELEVATOR_MOTOR_UP);
 	}
 	
 	public void initDefaultCommand() {
 		setDefaultCommand(new JoystickMoveElevator());
+		// setDefaultCommand(new ElevatorHold());
   }
 	
 	public void manualMove(double speed) {

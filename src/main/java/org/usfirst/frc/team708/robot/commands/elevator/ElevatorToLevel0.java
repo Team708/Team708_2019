@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorToLevel0 extends Command {
 	
     public ElevatorToLevel0() {
-    	requires(Robot.elevator);
+    	// requires(Robot.elevator);
     }
     
     // Called just before this Command runs the first time
@@ -20,17 +20,17 @@ public class ElevatorToLevel0 extends Command {
 
     protected boolean isFinished()
     {
-        Robot.elevator.goToPosition(Constants.ELE_LVL0);
-        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE))
+        Robot.elevator.goToPosition(Constants.ELEV_LVL0);
+        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELEV_LVL0)-Constants.ELEV_TOLERANCE))
         {
             return false;
         }
-        else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL0)+Constants.ELE_TOLERANCE)) {
+        else if  (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELEV_LVL0)+Constants.ELEV_TOLERANCE)) {
             return false;
         }
         else 
         {
-            Robot.elevator.ele_position = Constants.ELE_LVL0; 
+            Robot.elevator.elev_position = Constants.ELEV_LVL0; 
             return true;
         }
     }

@@ -26,7 +26,6 @@ public class FindFeeder extends CommandGroup {
         addSequential(new CloseBeak());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
-        addParallel(new ElevatorHoldOriginal());
         addSequential(new DeployHatch());
         addSequential(new WaitCommand(1.0));
         addSequential(new OpenBeak());

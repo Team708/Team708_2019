@@ -55,31 +55,31 @@ public final class Constants {
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  1.0;
 	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.1;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
-	public static final double	ELE_DEADZONE 				=  .5; 
+	public static final double	ELEV_DEADZONE 				=  .5; 
 		//Measured off encoder revs
-	public static final double	ELE_MAX					= 58.5;
-	public static final double	ELE_LVL3				= 58.0; 
-	public static final double	ELE_LVL2				= 34.0; 
-	public static final double	ELE_LVL1				= 8.0;
-	public static final double	ELE_LVL0				= 5.0; 
-	public static final double	ELE_CARGO_BALL			= 24.0; 
-	// public static final double	ELE_HATCH_LVL3				= 300; 
-	// public static final double	ELE_HATCH_LVL2				= 200; 
-	// public static final double	ELE_HATCH_LVL1				= 100; 
-	// public static final double	ELE_BALL_LVL1				= 150; 
-	// public static final double	ELE_BALL_LVL2				= 250; 
-	// public static final double	ELE_BALL_LVL3				= 350; 
-	public static final double	ELE_FEEDER					= 8.0; 
-	public static final double	ELE_GROUND					=   0; 
-	public static final int ELE_ENC_STARTING_POSITION 		= 0;
-	public static final int ELE_ENC_MIN				 		= 0;
-	public static final int	ELE_TOLERANCE					= 2;
-	public static final int	ELE_HOLD_TIMEOUT				= 3;
-	public static final double ELE_P						= 0.8;
-	public static final double ELE_I						= 0.0001;
-	public static final double ELE_D						= 1.0;
-	public static final double ELE_Iz						= 0;
-	public static final double ELE_FF						= 0;
+	public static final double	ELEV_MAX				= 58.5;
+	// public static final double	ELEV_LVL3				= 58.0; 
+	// public static final double	ELEV_LVL2				= 34.0; 
+	// public static final double	ELEV_LVL1				= 8.0;
+	public static final double	ELEV_CARGO_BALL				= 24.0; 
+	public static final double	ELEV_HATCH_LVL3				= 58.0; 
+	public static final double	ELEV_HATCH_LVL2				= 34.0; 
+	public static final double	ELEV_HATCH_LVL1				= 8.0; 
+	public static final double	ELEV_BALL_LVL1				= 58.0; 
+	public static final double	ELEV_BALL_LVL2				= 34.0; 
+	public static final double	ELEV_BALL_LVL3				= 8.0; 
+	public static final double	ELEV_LVL0					= 5.0; 
+	public static final double	ELEV_FEEDER					= 8.0; 
+	public static final double	ELEV_GROUND					= 0.0; 
+	public static final int ELEV_ENC_STARTING_POSITION 		= 0;
+	public static final int ELEV_ENC_MIN				 	= 0;
+	public static final int	ELEV_TOLERANCE					= 2;
+	public static final int	ELEV_HOLD_TIMEOUT				= 3;
+	public static final double ELEV_P						= 0.8;
+	public static final double ELEV_I						= 0.0001;
+	public static final double ELEV_D						= 1.0;
+	public static final double ELEV_Iz						= 0;
+	public static final double ELEV_FF						= 0;
 
 	/*
 	 * Intake

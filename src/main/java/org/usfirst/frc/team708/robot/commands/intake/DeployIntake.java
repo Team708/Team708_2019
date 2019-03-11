@@ -13,7 +13,7 @@ public class DeployIntake extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        if (Robot.elevator.getEncoderDistance() >= (Math.abs(Constants.ELE_LVL0)-Constants.ELE_TOLERANCE)) {
+        if (Robot.elevator.getEncoderDistance() >= (Math.abs(Constants.ELEV_LVL0)-Constants.ELEV_TOLERANCE)) {
             Robot.intake.intakeDeploy();
         }
     }

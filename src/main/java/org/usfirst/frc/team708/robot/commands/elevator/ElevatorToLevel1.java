@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorToLevel1 extends Command {
 	
     public ElevatorToLevel1() {
-    	requires(Robot.elevator);
+    	// requires(Robot.elevator);
     }
     
     // Called just before this Command runs the first time
@@ -17,17 +17,21 @@ public class ElevatorToLevel1 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	}    	
+        if (Robot.intake.hasHatch())
+            Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL1;
+        else if (Robot.intake.hasBall())
+            Robot.elevator.elev_position = Constants.ELEV_BALL_LVL1;
+        else 
+            Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL1;
+    }    	
 
     protected boolean isFinished()
     {   
-        Robot.elevator.goToPosition(Constants.ELE_LVL1);
-        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL1)-Constants.ELE_TOLERANCE))
-        return false;
-        else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL1)+Constants.ELE_TOLERANCE))
-        return false;
+        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+            return false;
         else {
-            Robot.elevator.ele_position = Constants.ELE_LVL1;
             return true;
         }
     }
@@ -36,8 +40,6 @@ public class ElevatorToLevel1 extends Command {
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems are scheduled to run
     protected void interrupted() {
     	end();
     }

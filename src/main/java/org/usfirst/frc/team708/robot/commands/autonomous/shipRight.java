@@ -33,7 +33,6 @@ public class shipRight extends CommandGroup {
         addSequential(new TurnToDegrees(.7, -90));
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
-        addParallel(new ElevatorHoldOriginal());
         addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(.5));

@@ -25,8 +25,7 @@ public class Level0CG extends CommandGroup {
         // Use requires() here to declare subsystem dependencies
         addSequential(new ElevatorToLevel0());
         addSequential(new DeployIntake());        
-        addSequential(new ElevatorHoldForBall());
-        // addSequential(new IntakeBallIn());
+        addSequential(new IntakeBallIn());
         addSequential(new RetractIntake());
     }
 

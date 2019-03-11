@@ -2,9 +2,8 @@ package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.RobotMap;
-// import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHold;
+import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHold;
 import org.usfirst.frc.team708.robot.commands.elevator.JoystickMoveElevator;
-// import org.usfirst.frc.team708.robot.commands.elevator.ElevatorHo/ld;
 
 import java.lang.invoke.ConstantCallSite;
 
@@ -30,7 +29,7 @@ public class Elevator extends Subsystem {
 	private CANPIDController	elevatorPIDController;
 //	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-	public double ele_position = 0.0;
+	public double elev_position = 0.0;
 	
     /**
       * Constructor
@@ -47,19 +46,19 @@ public class Elevator extends Subsystem {
 		lowerLimit.enableLimitSwitch(true);
 		elevatorMotor.setIdleMode(IdleMode.kBrake);
 
-		elevatorEncoder.setPosition(Constants.ELE_ENC_STARTING_POSITION);
+		elevatorEncoder.setPosition(Constants.ELEV_ENC_STARTING_POSITION);
 		elevatorPIDController = elevatorMotor.getPIDController();
-		elevatorPIDController.setP(Constants.ELE_P);
-    elevatorPIDController.setI(Constants.ELE_I);
-    elevatorPIDController.setD(Constants.ELE_D);
-    elevatorPIDController.setIZone(Constants.ELE_Iz);
-		elevatorPIDController.setFF(Constants.ELE_FF);
+		elevatorPIDController.setP(Constants.ELEV_P);
+    elevatorPIDController.setI(Constants.ELEV_I);
+    elevatorPIDController.setD(Constants.ELEV_D);
+    elevatorPIDController.setIZone(Constants.ELEV_Iz);
+		elevatorPIDController.setFF(Constants.ELEV_FF);
 		elevatorPIDController.setOutputRange(Constants.ELEVATOR_MOTOR_DOWN, Constants.ELEVATOR_MOTOR_UP);
 	}
 	
 	public void initDefaultCommand() {
-		setDefaultCommand(new JoystickMoveElevator());
-		// setDefaultCommand(new ElevatorHold());
+		// setDefaultCommand(new JoystickMoveElevator());
+		setDefaultCommand(new ElevatorHold());
   }
 	
 	public void manualMove(double speed) {
@@ -72,7 +71,7 @@ public class Elevator extends Subsystem {
 	    
 	public boolean isElevatorMin() {
 		if (lowerLimit.get()) {
-			elevatorEncoder.setPosition(Constants.ELE_ENC_MIN);
+			elevatorEncoder.setPosition(Constants.ELEV_ENC_MIN);
 			return (true);
 		}  
 		else
@@ -81,7 +80,7 @@ public class Elevator extends Subsystem {
 
 	public boolean isElevatorMax() {
 //  if (upperLimit.get()) {
-		if (elevatorEncoder.getPosition() > Constants.ELE_MAX) {
+		if (elevatorEncoder.getPosition() > Constants.ELEV_MAX) {
 			return (true);
 	    }
 		else 
@@ -93,7 +92,12 @@ public class Elevator extends Subsystem {
   }
    
   public void resetElevatorEncoder() {
-		elevatorEncoder.setPosition(Constants.ELE_ENC_MIN);  
+		elevatorEncoder.setPosition(Constants.ELEV_ENC_MIN);  
+	}
+
+	public boolean elevAtLevel() {
+		double difference = Math.abs(getEncoderDistance() - elev_position);
+		return difference <= Constants.ELEV_TOLERANCE;
 	}
 
 	public void goToPosition(double elevatorLevel) {
@@ -106,6 +110,6 @@ public class Elevator extends Subsystem {
 			SmartDashboard.putBoolean("Elev Down:", 	lowerLimit.get());
    		SmartDashboard.putBoolean("Elev Up", 			upperLimit.get());	
 			SmartDashboard.putNumber("Elev Distance", elevatorEncoder.getPosition());
-			SmartDashboard.putNumber("Elev Set Positon", ele_position);
+			SmartDashboard.putNumber("Elev Set Positon", elev_position);
 	}
 }

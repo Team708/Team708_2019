@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorToLevel2 extends Command {
 	
     public ElevatorToLevel2() {
-    	requires(Robot.elevator);
+    	// requires(Robot.elevator);
     }
     
     // Called just before this Command runs the first time
@@ -17,19 +17,21 @@ public class ElevatorToLevel2 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	}    	
+        if (Robot.intake.hasHatch())
+            Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL2;
+        else if (Robot.intake.hasBall())
+            Robot.elevator.elev_position = Constants.ELEV_BALL_LVL2;
+        else 
+            Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL2;
+    }    	
 
-    protected boolean isFinished()
-    {
-        Robot.elevator.goToPosition(Constants.ELE_LVL2);
-        if (Robot.elevator.getEncoderDistance() <= (Math.abs(Constants.ELE_LVL2)-Constants.ELE_TOLERANCE))
-        return false;
-        else if (Robot.elevator.getEncoderDistance() > (Math.abs(Constants.ELE_LVL2)+Constants.ELE_TOLERANCE))
-        return false;
-        else {
-            Robot.elevator.ele_position = Constants.ELE_LVL2;
+    protected boolean isFinished() {
+        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+            return false;
+        else 
             return true;
-        } 
     }
 
     // Called once after isFinished returns true

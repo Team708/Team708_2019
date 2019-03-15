@@ -1,6 +1,5 @@
 package org.usfirst.frc.team708.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 import org.usfirst.frc.team708.robot.util.triggers.*;
@@ -8,8 +7,7 @@ import org.usfirst.frc.team708.robot.commands.climber.*;
 import org.usfirst.frc.team708.robot.commands.drivetrain.*;
 import org.usfirst.frc.team708.robot.commands.elevator.*;
 import org.usfirst.frc.team708.robot.commands.intake.*;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
-import org.usfirst.frc.team708.robot.commands.autonomous.*;
+import org.usfirst.frc.team708.robot.commands.driverAssist.*;
 
 
 /**
@@ -139,7 +137,7 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		highGear.whenReleased(new GearLow());
 		// findTape.whenPressed(new FindRocketHatch());
 		// findBall.whenPressed(new FindBall());
-		findFeeder.whenPressed(new FindFeeder());
+		findFeeder.whenPressed(new FindFeederCG());
 		// rollerForward.whileHeld(new MoveRollerForward());	
 		// rollerBackward.whileHeld(new MoveRollerBackward());	
 

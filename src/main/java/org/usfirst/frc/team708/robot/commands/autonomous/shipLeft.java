@@ -31,7 +31,7 @@ public class shipLeft extends CommandGroup {
         addSequential(new DriveStraightToEncoderDistanceOrTime(-190, -1, 3));
         addSequential(new TurnToDegrees(.7, -90));
         addSequential(new FindRocketHatch());
-        addSequential(new DeployHatch());
+        addSequential(new ExtendHatch());
         addSequential(new DriveCurvatureToDegreesOrTime(-0.7, 0.7, false, 100, 2));
         addSequential(new DriveStraightToEncoderDistanceOrTime(150, 1, 3));
         addSequential(new FindRocketHatch());
@@ -39,7 +39,7 @@ public class shipLeft extends CommandGroup {
         addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, 160, 2));
         addSequential(new TurnToDegrees(.7, -100));
         addSequential(new FindRocketHatch());
-        addSequential(new DeployHatch());
+        addSequential(new ExtendHatch());
         //end
         
         addSequential(new Send("in shipLeft - End"));

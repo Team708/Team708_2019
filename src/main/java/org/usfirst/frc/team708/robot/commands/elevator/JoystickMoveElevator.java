@@ -26,9 +26,9 @@ protected void execute() {
     // Robot.elevator.elev_position = Robot.elevator.getEncoderDistance();
       
     if (Robot.elevator.elev_position <= Constants.ELEV_GROUND)
-    Robot.elevator.elev_position = Constants.ELEV_GROUND;
+        Robot.elevator.elev_position = Constants.ELEV_GROUND;
     else if (Robot.elevator.elev_position >= Constants.ELEV_MAX)
-    Robot.elevator.elev_position = Constants.ELEV_MAX;
+        Robot.elevator.elev_position = Constants.ELEV_MAX;
     else if (moveSpeed >= .2)
         Robot.elevator.elev_position++;
     else if (moveSpeed <= -.2)

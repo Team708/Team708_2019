@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.subsystems.Intake;
 
-public class DeployHatch extends Command {
+public class ExtendHatch extends Command {
 
 
-    public DeployHatch() {
+    public ExtendHatch() {
     }
     
 

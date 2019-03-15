@@ -1,12 +1,12 @@
-package org.usfirst.frc.team708.robot.commands.elevator;
+package org.usfirst.frc.team708.robot.commands.driverAssist;
 
-import org.usfirst.frc.team708.robot.commands.drivetrain.*;
-import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.Robot;
-import org.usfirst.frc.team708.robot.commands.autonomous.*;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
-import  org.usfirst.frc.team708.robot.commands.intake.*;
-import  org.usfirst.frc.team708.robot.commands.elevator.*;
+import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
+import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
+import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
+import  org.usfirst.frc.team708.robot.commands.intake.OpenBeak;
+import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
+import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
+import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel1;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -16,21 +16,25 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * this does nothing
+ */
+public class FindFeederCG extends CommandGroup {
 
-public class Level1CG extends CommandGroup {
-
-    public Level1CG() {
+    public FindFeederCG() {
+        // Use requires() here to declare subsystem dependencies
+        
+        addSequential(new CloseBeak());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
         // addSequential(new WaitCommand(1.0));
         addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
-        addSequential(new DeployGamePiece());
+        addSequential(new ExtendHatch());
         addSequential(new WaitCommand(1.0));
-        addSequential(new CloseBeak());
+        addSequential(new OpenBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
-        // addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time

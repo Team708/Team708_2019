@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
      */
     public void autonomousInit() {
         // schedule the autonomous command
-        drivetrain.shiftGearHigh();
+        drivetrain.shiftGearlow();
         drivetrain.setBrakeMode(true);
         drivetrain.resetGyro();
         intake.intakeRetract();

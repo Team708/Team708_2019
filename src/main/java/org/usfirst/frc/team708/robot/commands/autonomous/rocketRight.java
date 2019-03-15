@@ -26,33 +26,31 @@ public class rocketRight extends CommandGroup {
 	
     public  rocketRight() {
         //Temporary AUTO
-        addSequential(new Send("in rocketRight - Start"));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-160, -1.0, 2));
+        // addSequential(new Send("in rocketRight - Start"));
+
         addSequential(new GearLow());
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(-140, -1.0, 3));
+
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-160, -.8, 2));
         addSequential(new WaitCommand(1.0));
 
         addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, 140, 1));
-        // addSequential(new DriveCurvatureToDegreesOrTime(-1.0, 0.1, false, 20, 3));
-        addSequential(new TurnToDegrees(.7, -50)); addSequential(new Send("in rocketRight - End"));
-        
-        // addSequential(new Send("in shipRight - Start"));
+        addSequential(new TurnToDegrees(.7, -50)); 
         addSequential(new WaitCommand(1.0));
-        // //Leaving HAB Lv. 2
-        // addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, -240, 3));
-        // // addSequential(new DriveStraightToEncoderDistanceOrTime(-240, -1, 3));
-        // addSequential(new TurnToDegrees(.7, -90));
+
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
-        addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(6, .6, 1));
+
+        // addSequential(new WaitCommand(1.0));
         // addParallel(new ElevatorHoldOriginal());
         addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        // // //Leaving Rocket, Acquire 2nd HATCH
         addSequential(new DriveCurvatureToDegreesOrTime(-0.7, 0.3, false, 20, 1));
+
+        // // //Leaving Rocket, Acquire 2nd HATCH
         // // addSequential(new DriveStraightToEncoderDistanceOrTime(200, 1.0, 3));
         // // addSequential(new FindRocketHatch());
         // // // addSequential(new RetractHatch());
@@ -75,9 +73,8 @@ public class rocketRight extends CommandGroup {
         // // addSequential(new DriveCurvatureToEncoderOrTime(1.0, 0.0, true, 120, 3));
         // // addSequential(new TurnToDegrees(.7, 90));
         // // addSequential(new FindRocketHatch());
-        // // //end
-        
-        addSequential(new Send("in shipRight - End"));
+        // // //end        
+        // addSequential(new Send("in shipRight - End"));
      }
     
     // Make this return true when this Command no longer needs to run execute()

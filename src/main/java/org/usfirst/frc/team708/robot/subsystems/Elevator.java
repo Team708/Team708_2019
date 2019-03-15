@@ -29,7 +29,13 @@ public class Elevator extends Subsystem {
 	private CANPIDController	elevatorPIDController;
 //	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-	public double elev_position = 0.0;
+	public double  elev_position = 0.0;
+
+	public boolean lvl0CG = false;
+	public boolean lvl1CG = false;
+	public boolean lvl2CG = false;
+	public boolean lvl3CG = false;
+	public boolean lvlFCG = false;
 	
     /**
       * Constructor
@@ -72,6 +78,8 @@ public class Elevator extends Subsystem {
 	public boolean isElevatorMin() {
 		if (lowerLimit.get()) {
 			elevatorEncoder.setPosition(Constants.ELEV_ENC_MIN);
+			resetElevatorEncoder();
+
 			return (true);
 		}  
 		else
@@ -92,7 +100,8 @@ public class Elevator extends Subsystem {
   }
    
   public void resetElevatorEncoder() {
-		elevatorEncoder.setPosition(Constants.ELEV_ENC_MIN);  
+		elevatorEncoder.setPosition(Constants.ELEV_ENC_MIN);
+		elev_position = Constants.ELEV_ENC_MIN; 
 	}
 
 	public boolean elevAtLevel() {

@@ -27,12 +27,14 @@ public class FindFeeder extends CommandGroup {
         addSequential(new CloseBeak());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
+        // addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
         addSequential(new DeployHatch());
         addSequential(new WaitCommand(1.0));
         addSequential(new OpenBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.2,1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
     }
 
     // Called just before this Command runs the first time

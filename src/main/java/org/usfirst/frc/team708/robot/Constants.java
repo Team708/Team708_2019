@@ -75,9 +75,10 @@ public final class Constants {
 	public static final int ELEV_ENC_MIN				 	= 0;
 	public static final int	ELEV_TOLERANCE					= 2;
 	public static final int	ELEV_HOLD_TIMEOUT				= 3;
-	public static final double ELEV_P						= 0.8;
-	public static final double ELEV_I						= 0.0001;
-	public static final double ELEV_D						= 1.0;
+
+	public static final double ELEV_P						= 1.0;  //.8
+	public static final double ELEV_I						= 0;    // .0001
+	public static final double ELEV_D						= 0;    // 1.0
 	public static final double ELEV_Iz						= 0;
 	public static final double ELEV_FF						= 0;
 
@@ -105,14 +106,14 @@ public final class Constants {
 	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  14; //inches encoder value
 //  public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  14; //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  7; //inches encoder value
-	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
-	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.6;		
+	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.4;		
+	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.2;		
 
 	public static final int		MOVE_CLIMBER_FORWARD				=	18;
 	public static final double	MOVE_CLIMBER_TOLERANCE				=  	.5;
 	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  	-1.0;
 	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  	1.0;
-	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.75;
+	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.8;
 	public static final double 	HAB_LVL3_ENCODER_DISTANCE		=	41000;
 	public static final double	HAB_LVL2_ENCODER_DISTANCE		=	15000;
 	public static final double	MOVE_CLIMBER_REAR_RETRACT			=	1.0;

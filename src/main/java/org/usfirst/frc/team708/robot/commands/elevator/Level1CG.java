@@ -22,14 +22,15 @@ public class Level1CG extends CommandGroup {
     public Level1CG() {
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
         addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.4,1.0));
-        addSequential(new ElevatorToGround());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
+        // addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time
@@ -38,11 +39,6 @@ public class Level1CG extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    //     addSequential( new ElevatorToLevel1()));
-    //     addSequential(new DeployHatch());
-    //     addSequential(new CloseBeak());
-    //     addSequential(new RetractHatch());
-    //    addSequential(new ElevatorToGround());
     }
 
     // Make this return true when this Command no longer needs to run execute()

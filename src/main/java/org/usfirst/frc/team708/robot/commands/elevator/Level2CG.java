@@ -26,13 +26,14 @@ public class Level2CG extends CommandGroup {
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel2());
         addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
         addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.4,1.0));
-        addSequential(new ElevatorToGround());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
+        addSequential(new ElevatorToLevel1());
     }
 
     // Called just before this Command runs the first time

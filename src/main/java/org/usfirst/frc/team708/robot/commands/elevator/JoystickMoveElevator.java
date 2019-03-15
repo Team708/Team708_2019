@@ -21,15 +21,22 @@ public class JoystickMoveElevator extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         moveSpeed = OI.operatorGamepad.getAxis(Gamepad.leftStick_Y);
-        Robot.elevator.moveMotor(moveSpeed);
-        Robot.elevator.elev_position = Robot.elevator.getEncoderDistance();
-
+        // Robot.elevator.moveMotor(moveSpeed);
+        // Robot.elevator.elev_position = Robot.elevator.getEncoderDistance();
+        if (moveSpeed >= .2) {
+            Robot.elevator.elev_position++;
+        }
+        else if (moveSpeed <= -.2) {
+            Robot.elevator.elev_position--;
+        }
         if(Robot.elevator.isElevatorMin()) {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+            // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
+            Robot.elevator.elev_position = Constants.ELEV_GROUND;
             Robot.elevator.resetElevatorEncoder();
         }
         else if(Robot.elevator.isElevatorMax()) {
-            Robot.elevator.moveMotor(Constants.ELEVATOR_STOP);
+            // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP);
+            Robot.elevator.elev_position = Constants.ELEV_MAX;
         }
 
     }

@@ -27,13 +27,13 @@ public class ElevatorToLevel1 extends Command {
 
     protected boolean isFinished()
     {   
-        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
-            return false;
-        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
-            return false;
-        else {
-            return true;
-        }
+        // if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+        //     return false;
+        // else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+        //     return false;
+        // else 
+            // 
+                return true;
     }
 
     // Called once after isFinished returns true

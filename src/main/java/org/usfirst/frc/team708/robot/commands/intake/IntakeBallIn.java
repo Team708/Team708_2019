@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class IntakeBallIn extends Command {
 
     public IntakeBallIn() {
+        requires(Robot.intake);
     }
     
 

@@ -10,11 +10,11 @@ public class InitiateClimbCG extends CommandGroup {
 
     public InitiateClimbCG() {  	        
         addSequential(new ClimbStage1());
-        // addSequential(new ClimbStage2());
-        // addSequential(new ClimbStage3());
-        // addSequential(new ClimbStage4());
-        // addSequential(new ClimbStage5());
-        // addSequential(new ClimbStage6());
+        addSequential(new ClimbStage2());
+        addSequential(new ClimbStage3());
+        addSequential(new ClimbStage4());
+        addSequential(new ClimbStage5());
+        addSequential(new ClimbStage6());
     }
     
     // Called just before this Command runs the first time

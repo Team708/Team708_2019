@@ -7,7 +7,7 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToBallOrTi
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegreesOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
-import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.*;
 import org.usfirst.frc.team708.robot.commands.intake.*;
@@ -27,24 +27,32 @@ public class rocketRight extends CommandGroup {
     public  rocketRight() {
         //Temporary AUTO
         addSequential(new Send("in rocketRight - Start"));
-        addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, -240, 3));
-        addSequential(new TurnToDegrees(.7, -90)); addSequential(new Send("in rocketRight - End"));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-160, -1.0, 2));
+        addSequential(new GearLow());
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(-140, -1.0, 3));
+        addSequential(new WaitCommand(1.0));
+
+        addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, 140, 1));
+        // addSequential(new DriveCurvatureToDegreesOrTime(-1.0, 0.1, false, 20, 3));
+        addSequential(new TurnToDegrees(.7, -50)); addSequential(new Send("in rocketRight - End"));
         
         // addSequential(new Send("in shipRight - Start"));
-        // addSequential(new GearHigh());
+        addSequential(new WaitCommand(1.0));
         // //Leaving HAB Lv. 2
         // addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.1, false, -240, 3));
         // // addSequential(new DriveStraightToEncoderDistanceOrTime(-240, -1, 3));
         // addSequential(new TurnToDegrees(.7, -90));
-        // addSequential(new FindRocketHatch());
-        // addSequential(new ElevatorToLevel1());
+        addSequential(new FindRocketHatch());
+        addSequential(new ElevatorToLevel1());
+        addSequential(new WaitCommand(1.0));
         // addParallel(new ElevatorHoldOriginal());
-        // addSequential(new DeployGamePiece());
-        // addSequential(new CloseBeak());
-        // addSequential(new WaitCommand(.5));
-        // addSequential(new RetractHatch());
+        addSequential(new DeployGamePiece());
+        addSequential(new WaitCommand(1.0));
+        addSequential(new CloseBeak());
+        addSequential(new WaitCommand(1.0));
+        addSequential(new RetractHatch());
         // // //Leaving Rocket, Acquire 2nd HATCH
-        // // addSequential(new DriveCurvatureToDegreesOrTime(-0.7, 0.2, false, 50, 2));
+        addSequential(new DriveCurvatureToDegreesOrTime(-0.7, 0.3, false, 20, 1));
         // // addSequential(new DriveStraightToEncoderDistanceOrTime(200, 1.0, 3));
         // // addSequential(new FindRocketHatch());
         // // // addSequential(new RetractHatch());

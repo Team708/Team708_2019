@@ -22,7 +22,7 @@ public class ClimbStage2 extends Command {
         if (Robot.climber.getEncoderRoller()<Constants.REAR_CLIMBER_ROLLER_FIRST_DISTANCE) 
             Robot.climber.moveRollerMotor(Constants.CLIMBER_ROLLER_FORWARD);
         else {
-            Robot.climber.moveRollerMotor(0.0);
+            // Robot.climber.moveRollerMotor(0.0);
             Robot.climber.stage2 = false;
         }
     }

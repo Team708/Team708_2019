@@ -23,7 +23,7 @@ public class OI {
 	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver gamepad
 	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
 	public final static Gamepad climbingGamepad = new Gamepad(RobotMap.climbingGamepad);// Operator gamepad
-
+	
 // look in Gamepad.java for button constants
 	
 /*
@@ -137,8 +137,8 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 // Driver
 		highGear.whileHeld(new GearHigh());
 		highGear.whenReleased(new GearLow());
-		findTape.whenPressed(new FindRocketHatch());
-		findBall.whenPressed(new FindBall());
+		// findTape.whenPressed(new FindRocketHatch());
+		// findBall.whenPressed(new FindBall());
 		findFeeder.whenPressed(new FindFeeder());
 		// rollerForward.whileHeld(new MoveRollerForward());	
 		// rollerBackward.whileHeld(new MoveRollerBackward());	
@@ -156,6 +156,10 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		level1Rocket.whenPressed(new Level1CG());
 		level2Rocket.whenPressed(new Level2CG());
 		level3Rocket.whenPressed(new Level3CG());
+		// level0.whenPressed(new ElevatorToLevel0());
+		// level1Rocket.whenPressed(new ElevatorToLevel1());
+		// level2Rocket.whenPressed(new ElevatorToLevel2());
+		// level3Rocket.whenPressed(new ElevatorToLevel3());
 						
 		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());

@@ -9,12 +9,13 @@ public class ElevatorToGround extends Command {
 	
 	
 public ElevatorToGround() {
-    requires(Robot.elevator);
+    // requires(Robot.elevator);
 }
     
 
 // Called just before this Command runs the first time
 protected void initialize() {
+        Robot.elevator.elev_position = Constants.ELEV_GROUND;
 	}    	
 
 

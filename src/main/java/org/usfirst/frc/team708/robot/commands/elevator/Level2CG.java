@@ -25,6 +25,7 @@ public class Level2CG extends CommandGroup {
     public Level2CG() {
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel2());
+        addSequential(new WaitCommand(1.0));
         addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());

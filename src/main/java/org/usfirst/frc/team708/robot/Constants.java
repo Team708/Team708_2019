@@ -68,7 +68,7 @@ public final class Constants {
 	public static final double	ELEV_BALL_LVL1				= 58.0; 
 	public static final double	ELEV_BALL_LVL2				= 34.0; 
 	public static final double	ELEV_BALL_LVL3				= 8.0; 
-	public static final double	ELEV_LVL0					= 5.0; 
+	public static final double	ELEV_LVL0					= 6.0; 
 	public static final double	ELEV_FEEDER					= 8.0; 
 	public static final double	ELEV_GROUND					= 0.0; 
 	public static final int ELEV_ENC_STARTING_POSITION 		= 0;
@@ -104,7 +104,7 @@ public final class Constants {
 	public static final int		REAR_CLIMBER_ROLLER_FIRST_DISTANCE	=  13;  //inches encoder value
 	public static final int		REAR_CLIMBER_ROLLER_SECOND_DISTANCE	=  14; //inches encoder value
 //  public static final int		REAR_CLIMBER_ROLLER_DISTANCE_INCHES	=  14; //inches encoder value
-	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  4; //inches encoder value
+	public static final int		REAR_CLIMBER_ROLLER_DISTANCE_FINAL	=  7; //inches encoder value
 	public static final double 	CLIMBER_ROLLER_FORWARD				=  0.6;		
 	public static final double 	CLIMBER_ROLLER_BACKWARD				=  -0.6;		
 
@@ -135,13 +135,13 @@ public final class Constants {
 
 	public static final double Y_TARGET 				= 190.0;		
 	public static final double Y_THRESHOLD				=   6.0;		//Target angle in degrees
-	public static final double X_THRESHOLD 				=   6.0;		//Target angle in degrees
-	public static final double AREA_THRESHOLD			= 	6.0;
+	public static final double X_THRESHOLD 				=   3.0;		//Target angle in degrees
+	public static final double AREA_THRESHOLD			= 	3.0;
 	public static final double ROCKET_HATCH_TARGET_AREA			=	23.0;
 	public static final double ROCKET_CARGO_TARGET_AREA			=	23.0;
 
 
-	public static final double VISION_MOVE			= .7;
+	public static final double VISION_MOVE			= .6;
 	public static final double VISION_ROTATE		= .4;
 
 	public static final int ALLIANCE_RED 	 	=	1;

@@ -21,7 +21,7 @@ private WPI_TalonSRX 	climberFrontMaster, climberFrontSlave, climberRearMaster;
 private WPI_TalonSRX	climberRoller;
 private double countsPerInch;
 
-public double HABLevel;
+public double HABLevel = Constants.HAB_LVL3_ENCODER_DISTANCE;
 public boolean stage1  = true;
 public boolean stage2  = false;
 public boolean stage3  = false;

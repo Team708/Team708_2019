@@ -15,8 +15,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
 
-import org.usfirst.frc.team708.robot.util.Potentiometer;
-
 public class Intake extends Subsystem {
 	
 	private WPI_TalonSRX 	ballMaster;
@@ -45,7 +43,8 @@ public class Intake extends Subsystem {
 		intakeSolenoid.set(intakeDeployed);
 		hatchSolenoid.set(hatchExtended);
 
-		ballSensor 		= new AnalogInput(RobotMap.ballSensor);
+		// ballSensor 		= new AnalogInput(RobotMap.ballSensor);
+		ballSensor 		= new AnalogInput(3);
 		hatchSensor 	= new DigitalInput(RobotMap.hatchSensor);
 
 		ballMaster.setNeutralMode(NeutralMode.Brake);
@@ -77,7 +76,8 @@ public class Intake extends Subsystem {
 		if (ballSensor.getVoltage() >= 1)
 			return (true);	    
 		else 
-			return (false);		
+			return (false);	
+			
 	}
 
 	public boolean hasHatch() {		
@@ -137,6 +137,8 @@ public class Intake extends Subsystem {
 		}
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
+		SmartDashboard.putNumber("Ball Voltage", ballSensor.getVoltage());
+		SmartDashboard.putNumber("Ball Value", ballSensor.getValue());
 		SmartDashboard.putBoolean("Intake Deployed", intakeDeployed);
 		SmartDashboard.putBoolean("Beak Closed:", beakClosed);
 		SmartDashboard.putBoolean("Hatch Extended:", hatchExtended);

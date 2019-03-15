@@ -27,7 +27,7 @@ public class ClimbStage4 extends Command {
         }
         else {
             Robot.climber.stage4 = false;
-            Robot.climber.moveRollerMotor(0.0);
+            // Robot.climber.moveRollerMotor(0.0);
             Robot.drivetrain.stop();
         }
     }

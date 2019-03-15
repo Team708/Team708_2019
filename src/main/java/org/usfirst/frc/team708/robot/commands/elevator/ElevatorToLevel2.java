@@ -26,11 +26,11 @@ public class ElevatorToLevel2 extends Command {
     }    	
 
     protected boolean isFinished() {
-        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
-            return false;
-        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
-            return false;
-        else 
+        // if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+        //     return false;
+        // else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+        //     return false;
+        // else 
             return true;
     }
 

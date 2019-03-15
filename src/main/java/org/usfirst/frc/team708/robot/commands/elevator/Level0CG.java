@@ -35,11 +35,6 @@ public class Level0CG extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    //     addSequential( new ElevatorToLevel1()));
-    //     addSequential(new DeployHatch());
-    //     addSequential(new CloseBeak());
-    //     addSequential(new RetractHatch());
-    //    addSequential(new ElevatorToGround());
     }
 
     // Make this return true when this Command no longer needs to run execute()

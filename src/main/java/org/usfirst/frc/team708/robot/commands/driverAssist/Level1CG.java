@@ -24,7 +24,7 @@ public class Level1CG extends CommandGroup {
         // addSequential(new WaitCommand(1.0));
         addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
         addSequential(new DeployGamePiece());
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());

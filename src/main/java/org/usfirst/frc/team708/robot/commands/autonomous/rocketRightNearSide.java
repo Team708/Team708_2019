@@ -21,7 +21,7 @@ public class rocketRightNearSide extends CommandGroup {
     }
 	
     public  rocketRightNearSide() {
-        addSequential(new Send("in rocketRight - Start"));
+        addSequential(new Send("in rocketRightNearSide - Start"));
         addSequential(new GearLow());
     // Leave HAB2 and Square off position
         addSequential(new DriveStraightToEncoderDistanceOrTime(-60, -.6, 2));
@@ -60,32 +60,10 @@ public class rocketRightNearSide extends CommandGroup {
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        
-        // // //Leaving Rocket, Acquire 2nd HATCH
-        // // addSequential(new DriveStraightToEncoderDistanceOrTime(200, 1.0, 3));
-        // // addSequential(new FindRocketHatch());
-        // // // addSequential(new RetractHatch());
-        // // addSequential(new DeployHatch());
-        // // addSequential(new WaitCommand(.5));
-        // // addSequential(new OpenBeak());
-        // // addSequential(new WaitCommand(.5));
-        // // addSequential(new RetractHatch());
-        // // //Leaving Feeder Station, Place 2nd HATCH
-        // // addSequential(new DriveCurvatureToEncoderOrTime(-1.0, -0.1, false, -140, 3));
-        // // addSequential(new TurnToDegrees(.7, -100));
-        // // addSequential(new FindRocketHatch());
-        // // addSequential(new ElevatorToLevel1());
-        // // addParallel(new ElevatorHold());
-        // // addSequential(new DeployGamePiece());
-        // // addSequential(new CloseBeak());
-        // // addSequential(new WaitCommand(.5));
-        // // addSequential(new RetractHatch());
-        // // addSequential(new DriveCurvatureToDegreesOrTime(-.7, -.2, false, -50, 3));
-        // // addSequential(new DriveCurvatureToEncoderOrTime(1.0, 0.0, true, 120, 3));
-        // // addSequential(new TurnToDegrees(.7, 90));
-        // // addSequential(new FindRocketHatch());
-        // // //end        
-        // addSequential(new Send("in shipRight - End"));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
+    // Turn and face the cargo ship    
+        addSequential(new DriveCurvatureToDegreesOrTime(.7, .7, false, 100, 2));
+        addSequential(new Send("in shipRightNearSide - End"));
      }
     
     // Make this return true when this Command no longer needs to run execute()

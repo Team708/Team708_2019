@@ -18,13 +18,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 
-public class rocketLeft extends CommandGroup {
+public class rocketLeftFarSide extends CommandGroup {
    
     // Called just before this Command runs the first time
     protected void initialize() {
     }
 	
-    public  rocketLeft() {
+    public  rocketLeftFarSide() {
 
         //Temporary AUTO
         addSequential(new Send("in rocketLeft - Start"));

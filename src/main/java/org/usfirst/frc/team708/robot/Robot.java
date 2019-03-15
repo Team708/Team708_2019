@@ -208,11 +208,11 @@ public class Robot extends TimedRobot {
 
         // autonomousMode.addOption
         autonomousMode.addOption("Do Nothing", new DoNothing());
-        autonomousMode.addOption("Drive in Square", new DriveInSquare());
+        // autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
-        autonomousMode.addOption("Rocket Left", new rocketLeft());
-        autonomousMode.addOption("Rocket right", new rocketRightNearSide());
-        autonomousMode.addOption("Ship Left", new shipLeft());
+        autonomousMode.addOption("Rocket Left Far Side", new rocketLeftFarSide());
+        autonomousMode.addOption("Rocket right Near Side", new rocketRightNearSide());
+        // autonomousMode.addOption("Ship Left", new shipLeft());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

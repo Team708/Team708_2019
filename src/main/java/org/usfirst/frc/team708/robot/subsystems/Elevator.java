@@ -27,7 +27,6 @@ public class Elevator extends Subsystem {
 	private CANEncoder 				elevatorEncoder;
 	private CANDigitalInput 	upperLimit, lowerLimit;
 	private CANPIDController	elevatorPIDController;
-//	public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
 	public double  elev_position = 0.0;
 

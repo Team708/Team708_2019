@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot.commands.driverAssist;
 
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
@@ -7,6 +8,8 @@ import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel1;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel3;
+import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel3CG;
+import  org.usfirst.frc.team708.robot.commands.elevator.EndLevel3CG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -22,6 +25,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Level3CG extends CommandGroup {
 
     public Level3CG() {
+        addSequential(new StartLevel3CG());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel3());
         // addSequential(new WaitCommand(1.0));
@@ -33,6 +37,7 @@ public class Level3CG extends CommandGroup {
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-10,-.4,1.0));
         addSequential(new ElevatorToLevel1());
+        addSequential(new EndLevel3CG());
     }
 
     // Called just before this Command runs the first time
@@ -41,16 +46,11 @@ public class Level3CG extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    //     addSequential( new ElevatorToLevel1()));
-    //     addSequential(new DeployHatch());
-    //     addSequential(new CloseBeak());
-    //     addSequential(new RetractHatch());
-    //    addSequential(new ElevatorToGround());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.elevator.lvl3CG;
     }
 
     // Called once after isFinished returns true

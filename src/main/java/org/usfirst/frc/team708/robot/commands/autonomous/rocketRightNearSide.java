@@ -28,7 +28,7 @@ public class rocketRightNearSide extends CommandGroup {
         addSequential(new DriveStraightToEncoderDistanceOrTime(12, .6, 1));
     // Look for the near-side ROCKET and place 1st HATCH
         addSequential(new DriveCurvatureToEncoderOrTime(-1.0, 0.2, false, 80, 2));
-        addSequential(new TurnToDegrees(.7, -90)); 
+        addSequential(new TurnToDegrees(.7, -110)); 
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
         addSequential(new DriveStraightToEncoderDistanceOrTime(6, .6, 1));
@@ -38,7 +38,7 @@ public class rocketRightNearSide extends CommandGroup {
         addSequential(new RetractHatch());
         addSequential(new DriveCurvatureToDegreesOrTime(-0.7, -0.3, false, 15, 1));
     // Aquire 2nd HATCH from the FEEDER
-        addSequential(new TurnToDegrees(.7, -90));
+        addSequential(new TurnToDegrees(.7, -180));
         addSequential(new FindRocketHatch());
         // addSequential(new ElevatorToLevel1());
         addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));

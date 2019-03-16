@@ -150,7 +150,7 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		toggleIntake.whenPressed(new ToggleIntake());
 		toggleBeak.whenPressed(new ToggleBeak());
 //		eleGround.whenPressed(new ElevatorToGround());
-		level0.whenPressed(new Level0CG());
+		level0.whenPressed(new ElevatorToLevel0());
 		level1Rocket.whenPressed(new Level1CG());
 		level2Rocket.whenPressed(new Level2CG());
 		level3Rocket.whenPressed(new Level3CG());

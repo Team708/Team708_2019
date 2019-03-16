@@ -55,7 +55,11 @@ public class Elevator extends Subsystem {
 		elevatorPIDController = elevatorMotor.getPIDController();
 		elevatorPIDController.setP(Constants.ELEV_P);
     elevatorPIDController.setI(Constants.ELEV_I);
-    elevatorPIDController.setD(Constants.ELEV_D);
+		elevatorPIDController.setD(Constants.ELEV_D);
+		// elevatorPIDController.setP(SmartDashboard.getNumber("P", 0.0));
+    // elevatorPIDController.setI(SmartDashboard.getNumber("I", 0.0));
+		// elevatorPIDController.setD(SmartDashboard.getNumber("D", 0.0));
+    // elevatorPIDController.setIZone(SmartDashboard.getNumber("Iz", 0.0));
     elevatorPIDController.setIZone(Constants.ELEV_Iz);
 		elevatorPIDController.setFF(Constants.ELEV_FF);
 		elevatorPIDController.setOutputRange(Constants.ELEVATOR_MOTOR_DOWN, Constants.ELEVATOR_MOTOR_UP);
@@ -119,5 +123,11 @@ public class Elevator extends Subsystem {
    		SmartDashboard.putBoolean("Elev Up", 			upperLimit.get());	
 			SmartDashboard.putNumber("Elev Distance", elevatorEncoder.getPosition());
 			SmartDashboard.putNumber("Elev Set Positon", elev_position);
+			SmartDashboard.putBoolean("Running Level 1", lvl1CG);	
+			SmartDashboard.putBoolean("Running Level 2", lvl2CG);	
+			SmartDashboard.putBoolean("Running Level 3", lvl3CG);	
+			SmartDashboard.putBoolean("Running Feeder", feederCG);
+
+
 	}
 }

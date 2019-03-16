@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot.commands.driverAssist;
 
+import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
@@ -7,6 +8,8 @@ import  org.usfirst.frc.team708.robot.commands.intake.OpenBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel1;
+import  org.usfirst.frc.team708.robot.commands.elevator.StartFeederCG;
+import  org.usfirst.frc.team708.robot.commands.elevator.EndFeederCG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -23,7 +26,7 @@ public class FindFeederCG extends CommandGroup {
 
     public FindFeederCG() {
         // Use requires() here to declare subsystem dependencies
-        
+        addSequential(new StartFeederCG());
         addSequential(new CloseBeak());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
@@ -35,6 +38,7 @@ public class FindFeederCG extends CommandGroup {
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
+        addSequential(new EndFeederCG());
     }
 
     // Called just before this Command runs the first time
@@ -47,7 +51,7 @@ public class FindFeederCG extends CommandGroup {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.elevator.feederCG;
     }
 
     // Called once after isFinished returns true

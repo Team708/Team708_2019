@@ -26,7 +26,7 @@ public class FindRocketHatch extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         Robot.drivetrain.setBrakeMode(true);
-        Robot.visionProcessor.setNTInfo("pipeline", 1);
+        Robot.visionProcessor.setNTInfo("pipeline", 0);
         Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_ON);
         if  (Robot.visionProcessor.seesTarget()) {
             if (!Robot.visionProcessor.isCentered()) {

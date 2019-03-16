@@ -30,6 +30,7 @@ public class Intake extends Subsystem {
 	private boolean beakClosed		 = true;				
 
 	private AnalogInput 	ballSensor;
+	// public DigitalInput 	ballSensor;
 	public DigitalInput 	hatchSensor;
 
 	public Intake() {
@@ -43,8 +44,8 @@ public class Intake extends Subsystem {
 		intakeSolenoid.set(intakeDeployed);
 		hatchSolenoid.set(hatchExtended);
 
-		// ballSensor 		= new AnalogInput(RobotMap.ballSensor);
-		ballSensor 		= new AnalogInput(3);
+		ballSensor 		= new AnalogInput(RobotMap.ballSensor);
+		// ballSensor 		= new DigitalInput(RobotMap.ballSensor);
 		hatchSensor 	= new DigitalInput(RobotMap.hatchSensor);
 
 		ballMaster.setNeutralMode(NeutralMode.Brake);
@@ -72,11 +73,12 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean hasBall() {		
-		// if (!ballSensor.get())
-		if (ballSensor.getVoltage() >= 1)
-			return (true);	    
-		else 
-			return (false);	
+		// if (ballSensor.get())
+		// if (ballSensor.getVoltage() >= .25)
+		// 	return (true);	    
+		// else 
+		// 	return (false);	
+		return false;
 			
 	}
 
@@ -138,7 +140,7 @@ public class Intake extends Subsystem {
 		SmartDashboard.putBoolean("Has Hatch:", hasHatch());
 		SmartDashboard.putBoolean("Has Ball:", hasBall());
 		SmartDashboard.putNumber("Ball Voltage", ballSensor.getVoltage());
-		SmartDashboard.putNumber("Ball Value", ballSensor.getValue());
+		SmartDashboard.putNumber("Ball Voltage", ballSensor.getValue());
 		SmartDashboard.putBoolean("Intake Deployed", intakeDeployed);
 		SmartDashboard.putBoolean("Beak Closed:", beakClosed);
 		SmartDashboard.putBoolean("Hatch Extended:", hatchExtended);

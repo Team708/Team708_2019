@@ -29,7 +29,6 @@ public class rocketRightFarSide extends CommandGroup {
         // addSequential(new Send("in rocketRight - Start"));
 
         addSequential(new GearLow());
-
         addSequential(new DriveStraightToEncoderDistanceOrTime(-160, -.8, 2));
         addSequential(new WaitCommand(1.0));
 

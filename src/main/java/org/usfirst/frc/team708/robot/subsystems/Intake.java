@@ -73,12 +73,12 @@ public class Intake extends Subsystem {
 	}
 	
 	public boolean hasBall() {		
-		// if (ballSensor.get())
-		// if (ballSensor.getVoltage() >= .25)
-		// 	return (true);	    
-		// else 
-		// 	return (false);	
-		return false;
+		// if (!ballSensor.get())
+		if (((ballSensor.getVoltage() >= 2) && (ballSensor.getVoltage() <= 5)))
+			return (true);	    
+		else 
+			return (false);	
+		// return false;
 			
 	}
 

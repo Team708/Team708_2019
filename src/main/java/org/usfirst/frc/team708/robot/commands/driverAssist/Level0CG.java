@@ -4,6 +4,7 @@ import  org.usfirst.frc.team708.robot.commands.intake.IntakeBallIn;
 import  org.usfirst.frc.team708.robot.commands.intake.DeployIntake;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractIntake;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel0;
+import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -23,7 +24,8 @@ public class Level0CG extends CommandGroup {
         addSequential(new ElevatorToLevel0());
         addSequential(new DeployIntake());        
         addSequential(new IntakeBallIn());
-        addSequential(new RetractIntake());
+        // addSequential(new RetractIntake());
+        // addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time

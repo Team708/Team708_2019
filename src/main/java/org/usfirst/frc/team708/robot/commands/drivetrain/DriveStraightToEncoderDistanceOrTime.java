@@ -30,8 +30,6 @@ public class DriveStraightToEncoderDistanceOrTime extends Command {
     protected void initialize() {
     	Robot.drivetrain.resetEncoder();
     	Robot.drivetrain.resetGyro();
-//    	Robot.drivetrain.enable();
-//    	Robot.drivetrain.disable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -44,9 +42,9 @@ public class DriveStraightToEncoderDistanceOrTime extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         if(targetDistance >= 0 )
-        	return (Robot.drivetrain.getEncoderDistanceRight() >= targetDistance) || isTimedOut();
+        	return (Robot.drivetrain.getEncoderDistanceLeft() >= targetDistance) || isTimedOut();
         else
-        	return (Robot.drivetrain.getEncoderDistanceRight() <= targetDistance) || isTimedOut();
+        	return (Robot.drivetrain.getEncoderDistanceLeft() <= targetDistance) || isTimedOut();
     }
 
     // Called once after isFinished returns true

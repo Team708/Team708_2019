@@ -16,6 +16,7 @@ public class FindRocketHatch extends Command {
 
     public FindRocketHatch() {
         this.setTimeout(maxTime);
+        requires(Robot.drivetrain);
     }
    
     // Called just before this Command runs the first time

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team708.robot.commands.driverAssist;
 
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
@@ -7,6 +8,7 @@ import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel1;
+import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel1CG;
 import  org.usfirst.frc.team708.robot.commands.elevator.EndLevel1CG;
 
@@ -20,18 +22,19 @@ public class Level1CG extends CommandGroup {
 
     public Level1CG() {
         addSequential(new StartLevel1CG());
+        addSequential(new ElevatorToGround());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
         // addSequential(new WaitCommand(1.0));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(6, .4, 1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 3.0));
         addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-10, -.4, 1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 3.0));
+        addSequential(new ElevatorToGround());
         addSequential(new EndLevel1CG());
-        // addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time

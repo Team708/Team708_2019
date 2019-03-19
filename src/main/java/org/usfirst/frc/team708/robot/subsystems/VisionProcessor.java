@@ -19,6 +19,7 @@ public class VisionProcessor extends Subsystem {
 	private boolean led 		= false;
 	private boolean isAtY		= false;
 	private boolean isAtArea	= false;
+	public double robotSide;
 
 //	Required Network Table Data 	
 	private boolean seesTarget;	//Get from Network Table
@@ -147,6 +148,7 @@ public class VisionProcessor extends Subsystem {
 		SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
 		SmartDashboard.putBoolean("Has Target", seesTarget());
 		SmartDashboard.putNumber("TV", tv);
+		SmartDashboard.putNumber("TA", area);
 	}
 
 	public void initDefaultCommand() {

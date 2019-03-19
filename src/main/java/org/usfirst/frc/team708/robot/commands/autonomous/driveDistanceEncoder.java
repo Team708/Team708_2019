@@ -3,7 +3,7 @@ package org.usfirst.frc.team708.robot.commands.autonomous;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
-import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
 
@@ -23,12 +23,13 @@ public class driveDistanceEncoder extends CommandGroup {
 	
     public  driveDistanceEncoder() {
 		addSequential(new Send("in driveDistanceEncoder - Start"));
-    	// addSequential(new GearHigh());
+    	addSequential(new GearLow());
 
    	    // addSequential(new WaitCommand(2.0));
         //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
-           addSequential(new DriveStraightToEncoderDistanceOrTime(120, .4, 1.0));
-           addSequential(new Send("in driveDistanceEncoder - End"));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 1.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(-120, -.8, 10.0));
+        addSequential(new Send("in driveDistanceEncoder - End"));
     }
     
     // Make this return true when this Command no longer needs to run execute()

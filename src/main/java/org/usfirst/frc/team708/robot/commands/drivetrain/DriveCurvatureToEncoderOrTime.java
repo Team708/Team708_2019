@@ -48,9 +48,9 @@ public class DriveCurvatureToEncoderOrTime extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if (targetDistance >= 0) {
-    		return ((Robot.drivetrain.getEncoderDistanceRight() >= targetDistance) || this.timeSinceInitialized() >= runTime);
+    		return ((Robot.drivetrain.getEncoderDistanceLeft() >= targetDistance) || this.timeSinceInitialized() >= runTime);
     	} else {
-    		return ((Robot.drivetrain.getEncoderDistanceRight() <= targetDistance) || this.timeSinceInitialized() >= runTime);
+    		return ((Robot.drivetrain.getEncoderDistanceLeft() <= targetDistance) || this.timeSinceInitialized() >= runTime);
     	}
     }
 

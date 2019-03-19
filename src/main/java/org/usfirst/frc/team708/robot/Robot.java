@@ -135,6 +135,7 @@ public class Robot extends TimedRobot {
         intake.intakeRetract();
         intake.beakOpen();
         intake.hatchRetract();
+        elevator.elev_position = 0.0;
         // original dashboard code
         autonomousCommand = (Command) autonomousMode.getSelected();
         if (autonomousCommand != null)
@@ -205,14 +206,12 @@ public class Robot extends TimedRobot {
      * Dashboard
      */
     private void queueAutonomousModes() {
-
         // autonomousMode.addOption
         autonomousMode.addOption("Do Nothing", new DoNothing());
         // autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
-        autonomousMode.addOption("Rocket Left Far Side", new rocketLeftFarSide());
-        autonomousMode.addOption("Rocket right Near Side", new rocketRightNearSide());
-        // autonomousMode.addOption("Ship Left", new shipLeft());
+        autonomousMode.addOption("Rocket Right Near Side", new rocketRightNearSide());
+        autonomousMode.addOption("Rocket Left Near Side", new rocketLeftNearSide());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

@@ -75,8 +75,8 @@ public class RobotMap {
 //	public static final int 			 	= 3;
 	
 // Analog sensor IDs
-	public static final int ballSensor			= 0;
-//	public static final int 					= 1;
+	// public static final int ballSensor			= 0;
+	public static final int ballSensor			= 1;
 //	public static final int 					= 2;
 //	public static final int 					= 3;
 	

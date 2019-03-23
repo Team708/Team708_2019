@@ -152,7 +152,7 @@ public final class Constants {
 	 */
 	public static final double ASSIST_DISTANCE		= 16.0;
 	public static final double ASSIST_MOVE_SPEED	= .5;
-	public static final double ASSIST_TIME			= 3.0;
+	public static final double ASSIST_TIME			= 2.0;
 	
 	/*
 	 * Smart Dashboard

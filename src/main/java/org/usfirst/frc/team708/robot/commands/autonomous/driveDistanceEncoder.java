@@ -22,14 +22,14 @@ public class driveDistanceEncoder extends CommandGroup {
     }
 	
     public  driveDistanceEncoder() {
-		addSequential(new Send("in driveDistanceEncoder - Start"));
+		// addSequential(new Send("in driveDistanceEncoder - Start"));
     	addSequential(new GearLow());
 
-   	    // addSequential(new WaitCommand(2.0));
+   	    addSequential(new WaitCommand(2.0));
         //    addSequential(new DriveCurvatureToEncoderOrTime(.4, -0.1, false, 20, 1.0));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(60, .6, 2.0));
         // addSequential(new DriveStraightToEncoderDistanceOrTime(-120, -.8, 10.0));
-        addSequential(new Send("in driveDistanceEncoder - End"));
+        // addSequential(new Send("in driveDistanceEncoder - End"));
     }
     
     // Make this return true when this Command no longer needs to run execute()

@@ -31,28 +31,22 @@ public class FindFeederCG extends CommandGroup {
         addSequential(new StartFeederCG());
         addSequential(new ElevatorToGround());
         addSequential(new CloseBeak());
+    //  addSequential(new WaitCommand(1.0));
+
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
         addSequential(new ExtendHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,Constants.ASSIST_MOVE_SPEED, Constants.ASSIST_TIME));
+    //  addSequential(new WaitCommand(1.0));
+
+        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new OpenBeak());
+        addSequential(new WaitCommand(1.0));
+
         addParallel(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,Constants.ASSIST_MOVE_SPEED, Constants.ASSIST_TIME));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE,-Constants.ASSIST_MOVE_SPEED, 2.0));
+     
         addSequential(new ElevatorToGround());
         
-        // addSequential(new CloseBeak());
-        // addSequential(new ElevatorToGround());
-        // addSequential(new FindRocketHatch());
-        // addSequential(new ElevatorToLevel1());
-        // addSequential(new ExtendHatch());
-        // addSequential(new WaitCommand(1.0));
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 3.0));
-        // addSequential(new WaitCommand(1.0));
-        // addSequential(new OpenBeak());
-        // addSequential(new WaitCommand(1.0));
-        // addSequential(new RetractHatch());
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 3.0));
-        // addSequential(new ElevatorToGround());
         addSequential(new EndFeederCG());
     }
 

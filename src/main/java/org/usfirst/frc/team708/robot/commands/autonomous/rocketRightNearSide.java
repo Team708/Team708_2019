@@ -23,29 +23,30 @@ public class rocketRightNearSide extends CommandGroup {
     }
 	
     public  rocketRightNearSide() {
-        addSequential(new Send("in rocketRightNearSide - Start"));
         addSequential(new GearLow());
-    // Leave HAB2 and Square off position
-        addSequential(new DriveStraightToEncoderDistanceOrTime(60, .6, 3.0));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-12, -.8, 1.0));
-    // // Look for the near-side ROCKET and place 1st HATCH
+
+// Leave HAB2 and Square off position
+        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
         addSequential(new WaitCommand(1.0));
-        addSequential(new DriveCurvatureToEncoderOrTime(.8, 0.25, false, 100, 4.0));
-        // addSequential(new WaitCommand(1.0));
-        // addSequential(new TurnToDegrees(.7, 45));
+
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
+        addSequential(new WaitCommand(1.0));
+        
+        addSequential(new DriveCurvatureToEncoderOrTime(.6, 0.25, false, 65, 3.0));
+        addSequential(new WaitCommand(1.0));
+
         addSequential(new Level2CG()); 
-    // // Aquire 2nd HATCH from the FEEDER
-        addSequential(new TurnToDegrees(.7, 150));
-        addSequential(new FindFeederCG());
-    // // Curve around the ROCKET and align with the far side    
-        addSequential(new DriveCurvatureToEncoderOrTime(-.7, -.1, false, -200, 2.0));
-        addSequential(new DriveCurvatureToEncoderOrTime(-.7, .4, false, -75, 2.0));
-        addSequential(new TurnToDegrees(.7, -85));
-    // // Place 2nd HATCH onto ROCKET
-        addSequential(new Level2CG()); 
-    // // Turn and face the cargo ship    
-        addSequential(new TurnToDegrees(.7, 120));
-        addSequential(new Send("in shipRightNearSide - End"));
+        
+// Aquire 2nd HATCH from the FEEDER
+    //  addSequential(new TurnToDegrees(.7, 150));
+    //  addSequential(new FindFeederCG());
+
+// Curve around the ROCKET and align with the far side    
+    //     addSequential(new DriveCurvatureToEncoderOrTime(-.7, -.1, false, -200, 2.0));
+
+// Place 2nd HATCH onto ROCKET
+    //     addSequential(new TurnToDegrees(-.6, -40));
+    //     addSequential(new Level2CG()); 
      }
     
     // Make this return true when this Command no longer needs to run execute()

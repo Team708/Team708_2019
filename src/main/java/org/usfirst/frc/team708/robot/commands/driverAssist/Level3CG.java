@@ -5,9 +5,9 @@ import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
+import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
-import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel1;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel3;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel3CG;
@@ -16,14 +16,9 @@ import  org.usfirst.frc.team708.robot.commands.elevator.EndLevel3CG;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.shuffleboard.*;
-
-
-
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * this does nothing
- */
+
 public class Level3CG extends CommandGroup {
 
     public Level3CG() {
@@ -31,14 +26,18 @@ public class Level3CG extends CommandGroup {
         addSequential(new ElevatorToGround());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel3());
-        // addSequential(new WaitCommand(1.0));
-        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 3.0));
-        addSequential(new DeployGamePiece());
         addSequential(new WaitCommand(1.0));
+
+        addSequential(new ExtendHatch());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));
+        addSequential(new WaitCommand(1.0));
+    
+    //  addSequential(new DeployGamePiece());
+
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));
         addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 3.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new ElevatorToGround());
         addSequential(new EndLevel3CG());
     }

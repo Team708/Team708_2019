@@ -94,54 +94,54 @@ public class Drivetrain extends PIDSubsystem {
 	{
 		move = move * Constants.DRIVE_MOTOR_MAX_SPEED;
 		rotate = rotate * Constants.ROTATE_MOTOR_MAX_SPEED;    	
-		if (usePID)
-		{
-			if (rotate == 0.0 && move > 0.0)
-			{
-				// Enables the PID controller if it is not already
-				if (!getPIDController().isEnabled()) 
-				{
-					getPIDController().setPID(Constants.KpForward, Constants.KiForward, Constants.KdForward);
-					getPIDController().reset();
-					gyro.reset();
-					enable();
-					gyro.reset();
-				}
-				// Sets the forward move speed to the move parameter
-				moveSpeed = move;
-			} 
-			else if (rotate == 0.0 && move < 0.0)
-			{
-				// Enables the PID controller if it is not already
-				if (!getPIDController().isEnabled())
-				{
-					getPIDController().setPID(Constants.KpBackward, Constants.KiBackward, Constants.KdBackward);
-					getPIDController().reset();
-					gyro.reset();
-					enable();
-					gyro.reset();
-				}
-				// Sets the forward move speed to the move parameter
-				moveSpeed = move;
-			} else 
-			{
-				// Disables the PID controller if it enabled so the drivetrain can move freely
-				if (getPIDController().isEnabled()) 
-				{
-					getPIDController().reset();
-				}
-				drivetrain.arcadeDrive(move, rotate);
-			}
-		} 
-		else 
-		{
-			// Disables the PID controller if it enabled so the drivetrain can move freely
-			if (getPIDController().isEnabled()) 
-			{
-				getPIDController().reset();
-			}
+		// if (usePID)
+		// {
+		// 	if (rotate == 0.0 && move > 0.0)
+		// 	{
+		// 		// Enables the PID controller if it is not already
+		// 		if (!getPIDController().isEnabled()) 
+		// 		{
+		// 			getPIDController().setPID(Constants.KpForward, Constants.KiForward, Constants.KdForward);
+		// 			getPIDController().reset();
+		// 			gyro.reset();
+		// 			enable();
+		// 			gyro.reset();
+		// 		}
+		// 		// Sets the forward move speed to the move parameter
+		// 		moveSpeed = move;
+		// 	} 
+		// 	else if (rotate == 0.0 && move < 0.0)
+		// 	{
+		// 		// Enables the PID controller if it is not already
+		// 		if (!getPIDController().isEnabled())
+		// 		{
+		// 			getPIDController().setPID(Constants.KpBackward, Constants.KiBackward, Constants.KdBackward);
+		// 			getPIDController().reset();
+		// 			gyro.reset();
+		// 			enable();
+		// 			gyro.reset();
+		// 		}
+		// 		// Sets the forward move speed to the move parameter
+		// 		moveSpeed = move;
+		// 	} else 
+		// 	{
+		// 		// Disables the PID controller if it enabled so the drivetrain can move freely
+		// 		if (getPIDController().isEnabled()) 
+		// 		{
+		// 			getPIDController().reset();
+		// 		}
+		// 		drivetrain.arcadeDrive(move, rotate);
+		// 	}
+		// } 
+		// else 
+		// {
+		// 	// Disables the PID controller if it enabled so the drivetrain can move freely
+		// 	if (getPIDController().isEnabled()) 
+		// 	{
+		// 		getPIDController().reset();
+		// 	}
 			drivetrain.arcadeDrive(move, rotate);
-		}
+		// }
   }
 	
 	// public void haloDrive(double move, double rotate) {
@@ -355,8 +355,8 @@ public class Drivetrain extends PIDSubsystem {
 		}
 			SmartDashboard.putNumber("DT Encoder Left Rev", encoderLeft.getPosition());		// Encoder raw count
 			SmartDashboard.putNumber("DT Encoder Right Rev", encoderRight.getPosition());		// Encoder raw count
-			SmartDashboard.putNumber("DT Encoder Left Inches", getEncoderDistanceLeft());		// Encoder raw count
-			SmartDashboard.putNumber("DT Encoder Right Inches", getEncoderDistanceRight());		// Encoder raw count
+			SmartDashboard.putNumber("DT Encoder Left Inches", getEncoderDistanceLeft());		// Encoder inches
+			SmartDashboard.putNumber("DT Encoder Right Inches", getEncoderDistanceRight());		// Encoder inches
 
 			SmartDashboard.putBoolean("Gear High", gearHigh);		//Drivetrain Gear mode
 			SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast

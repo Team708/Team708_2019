@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -211,7 +209,12 @@ public class Robot extends TimedRobot {
         // autonomousMode.addOption("Drive in Square", new DriveInSquare());
         autonomousMode.addOption("Drive past HAB", new driveDistanceEncoder());
         autonomousMode.addOption("Rocket Right Near Side", new rocketRightNearSide());
-        autonomousMode.addOption("Rocket Left Near Side", new rocketLeftNearSide());
+        // autonomousMode.addOption("Rocket Right Far  Side", new rocketRightFarSide());
+        autonomousMode.addOption("Rocket Left  Near Side", new rocketLeftNearSide());
+        autonomousMode.addOption("Cargo  Right Side",  new cargoRightSide());
+        autonomousMode.addOption("Cargo  Left  Side",  new cargoLeftSide());
+        autonomousMode.addOption("Cargo  Right Front", new cargoRightFront());
+        autonomousMode.addOption("Cargo  Left  Front", new cargoLeftFront());
 
         SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }

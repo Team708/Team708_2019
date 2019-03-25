@@ -134,7 +134,7 @@ public final class Constants {
 	public static final int VISION_TARGET_NOT_FOUND		= 0;
 	public static final int VISION_TARGET_FOUND			= 1;
 
-	public static final double Y_TARGET 				= 190.0;		
+	public static final double TARGET_Y 				= 190.0;		
 	public static final double Y_THRESHOLD				=   6.0;		//Target angle in degrees
 	public static final double X_THRESHOLD 				=   3.0;		//Target angle in degrees
 	public static final double AREA_THRESHOLD			= 	2.0;

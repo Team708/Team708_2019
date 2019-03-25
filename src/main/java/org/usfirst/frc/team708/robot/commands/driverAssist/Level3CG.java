@@ -7,7 +7,8 @@ import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
-import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
+import  org.usfirst.frc.team708.robot.commands.intake.AutoIntakeBallOutForTime;
+// import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel3;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel3CG;
@@ -32,7 +33,7 @@ public class Level3CG extends CommandGroup {
         addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new WaitCommand(1.0));
     
-    //  addSequential(new DeployGamePiece());
+        addSequential(new AutoIntakeBallOutForTime(.2));
 
         addSequential(new CloseBeak());
         addSequential(new WaitCommand(1.0));

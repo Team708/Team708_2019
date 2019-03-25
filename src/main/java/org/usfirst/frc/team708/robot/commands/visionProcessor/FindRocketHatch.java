@@ -12,7 +12,8 @@ public class FindRocketHatch extends Command {
     
     private double maxTime      = 5.0;
     private boolean notAligned  = false;
-    private double targetArea   = Constants.ROCKET_HATCH_TARGET_AREA;
+    // private double targetArea   = Constants.ROCKET_HATCH_TARGET_AREA;
+    private double targetY      = Constants.TARGET_Y;
 
     public FindRocketHatch() {
         this.setTimeout(maxTime);
@@ -29,28 +30,29 @@ public class FindRocketHatch extends Command {
         Robot.drivetrain.setBrakeMode(true);
         Robot.visionProcessor.setNTInfo("pipeline", 0);
         Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_ON);
+
         if  (Robot.visionProcessor.seesTarget()) {
             if (!Robot.visionProcessor.isCentered()) {
-            //    Robot.drivetrain.haloDrive(0.0, Robot.visionProcessor.getRotate(), false);
-            Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetArea), 
-                                                Robot.visionProcessor.getRotate(), false);
+                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetY), 
+                                                    Robot.visionProcessor.getRotate(), false);
             }
             else {
-                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetArea), 0.0, false);
+                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetY), 0.0, false);
             }
         }
         else {
-            notAligned = true;
+            notAligned = false;
         }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return ((Robot.visionProcessor.isCentered()) && (Robot.visionProcessor.isAtArea(targetArea))) || notAligned || isTimedOut();
+        return ((Robot.visionProcessor.isCentered()) && (Robot.visionProcessor.isAtY(targetY))) || notAligned || isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        Robot.drivetrain.setBrakeMode(false);
     }
 
     // Called when another command which requires one or more of the same

@@ -93,43 +93,44 @@ public class VisionProcessor extends Subsystem {
 			setNTInfo("ledMode", Constants.VISION_LED_OFF);		
 	}
 
-	public boolean isAtY() {
+	public boolean isAtY(double targetY) {
 		yAngle = getNTInfo("ty");
-		if (Math.abs(yAngle) <= Constants.Y_THRESHOLD)
+		difference = yAngle - targetY;
+		if (Math.abs(difference) <= Constants.Y_THRESHOLD)
 			isAtY = true;			
 		else 
 			isAtY = false;			
 		return isAtY;
 	}
 
-	public boolean isAtArea(double targetArea) {
-		area = getNTInfo("ta");
-		difference = area - targetArea;
-		if (Math.abs(difference) <= Constants.AREA_THRESHOLD) 
-			isAtArea = true;		
-		else 
-			isAtArea = false;		
-		return isAtArea;
-	}
+	// public boolean isAtArea(double targetArea) {
+	// 	area = getNTInfo("ta");
+	// 	difference = area - targetArea;
+	// 	if (Math.abs(difference) <= Constants.AREA_THRESHOLD) 
+	// 		isAtArea = true;		
+	// 	else 
+	// 		isAtArea = false;		
+	// 	return isAtArea;
+	// }
 
-	public double getMoveBall() {	
-		if (seesTarget()) 
-			if (!isAtY())	
-				if (yAngle > 0)
-					move = Constants.VISION_MOVE;
-				else 
-					move = -Constants.VISION_MOVE;
-			else // centered
-				move= 0.0;		 
-		else 
-			move = 0.0;		
-		return move;
-	}
+	// public double getMoveBall() {	
+	// 	if (seesTarget()) 
+	// 		if (!isAtY())	
+	// 			if (yAngle > 0)
+	// 				move = Constants.VISION_MOVE;
+	// 			else 
+	// 				move = -Constants.VISION_MOVE;
+	// 		else // centered
+	// 			move= 0.0;		 
+	// 	else 
+	// 		move = 0.0;		
+	// 	return move;
+	// }
 
-	public double getMoveRocket(double targetArea) {	
+	public double getMoveRocket(double targetValue) {	
 		if (seesTarget()) 
-			if (!isAtArea(targetArea))	
-				if (area < targetArea)
+			if (!isAtY(targetValue)) 	
+				if (yAngle < targetValue)
 					move = Constants.VISION_MOVE;				
 				else 
 					move = -Constants.VISION_MOVE;					
@@ -143,9 +144,9 @@ public class VisionProcessor extends Subsystem {
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("Is Centered", isCentered());
 		SmartDashboard.putNumber("Displacement X", xAngle);
-		SmartDashboard.putBoolean("Is At Y", isAtY());
-		SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
-		SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
+		SmartDashboard.putBoolean("Is At Y", isAtY(Constants.TARGET_Y));
+		// SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
+		// SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));
 		SmartDashboard.putBoolean("Has Target", seesTarget());
 		SmartDashboard.putNumber("TV", tv);
 		SmartDashboard.putNumber("TA", area);

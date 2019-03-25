@@ -20,11 +20,12 @@ public class SweepForTarget extends Command {
     protected void initialize() {
         Robot.drivetrain.resetGyro();
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        currentAngle = Robot.drivetrain.getAngle();
         Robot.drivetrain.haloDrive(0.0, sweepRotate, false);
+        currentAngle = Robot.drivetrain.getAngle();
+        
         if (!Robot.visionProcessor.seesTarget()) {
             if (currentAngle >= 30) {
                 sweepRotate = -0.2;

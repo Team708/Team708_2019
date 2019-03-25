@@ -56,7 +56,9 @@ public class DriveCurvatureToEncoderOrTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
+        Robot.drivetrain.stop();
+        Robot.drivetrain.resetGyro();
+    	Robot.drivetrain.resetEncoder();
     }
 
     // Called when another command which requires one or more of the same

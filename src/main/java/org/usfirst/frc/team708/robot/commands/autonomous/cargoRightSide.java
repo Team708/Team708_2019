@@ -20,25 +20,47 @@ public class cargoRightSide extends CommandGroup {
         addSequential(new GearLow());
 
 // Leave HAB2 and Square off position
-        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
+        // addSequential(new WaitCommand(.2));
 
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
+        // addSequential(new WaitCommand(.2));
         
-        addSequential(new DriveCurvatureToEncoderOrTime(.6, -0.3, false, 65, 2.0));
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(220, .6, 4.0));
+        // addSequential(new WaitCommand(0.2));
 
-        addSequential(new Level1CG()); 
+        // addSequential(new TurnToDegrees(.6, -80));
+        // addSequential(new WaitCommand(0.2));
+
+    //  addSequential(new Level1CG()); 
         
 // Aquire 2nd HATCH from the FEEDER
-    //  addSequential(new TurnToDegrees(-.7, -150));
-    // addSequential(new DriveCurvatureToEncoderOrTime(.6, 0.2, false, 60, 2.0));
+
+    //  addSequential(new TurnToDegrees(.6, -80));
+    //  addSequential(new WaitCommand(0.2));
+
+    //  addSequential(new DriveStraightToEncoderDistanceOrTime(200, .6, 4.0));
+    //  addSequential(new WaitCommand(0.2));
+
     //  addSequential(new FindFeederCG());
 
-// Curve around the ROCKET and align with the far side    
-    //     addSequential(new DriveCurvatureToEncoderOrTime(-.7, -.2, false, -60, 2.0));
-    //     addSequential(new DriveCurvatureToDegreesOrTime(-.7, -.5, false, -160, 1.0));
+    // addSequential(new TurnToDegrees(.6, 150));
+    // addSequential(new WaitCommand(0.2));
+
+    // addSequential(new DriveStraightToEncoderDistanceOrTime(160, .6, 4.0));
+    // addSequential(new WaitCommand(0.2));
+
+    // addSequential(new DriveCurvatureToDegreesOrTime(.4, -.6, false, -80, 1.0));
+    
+    addSequential(new TurnToDegrees(.6, -1));
+    addSequential(new WaitCommand(0.2));
+
+    addSequential(new DriveStraightToEncoderDistanceOrTime(-180, -.6, 4.0));
+    addSequential(new WaitCommand(0.2));
+
+    addSequential(new DriveCurvatureToDegreesOrTime(.4, .6, false, 80, 1.0));
+
+
 
 // Place HATCH onto Front Cargo Ship
     //     addSequential(new Level1CG()); 

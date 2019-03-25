@@ -29,18 +29,19 @@ public class cargoRightFront extends CommandGroup {
         addSequential(new GearLow());
 
 // Leave HAB2 and Square off position
-        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 2.0));
+        addSequential(new WaitCommand(.2));
 
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 1.0));
+        addSequential(new WaitCommand(.2));
         
-        addSequential(new DriveCurvatureToEncoderOrTime(.6, -0.3, false, 30, 2.0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 1.0));
+        addSequential(new WaitCommand(.2));
 
-        addSequential(new Level1CG()); 
+        // addSequential(new Level1CG()); 
         
 // Aquire 2nd HATCH from the FEEDER
+
     // addSequential(new DriveCurvatureToEncoderOrTime(-.6, -0.3, false, 80, 3.0));
     // addSequential(new DriveStraightToEncoderDistanceOrTime(25, .6, 2.0));
     //  addSequential(new FindFeederCG());

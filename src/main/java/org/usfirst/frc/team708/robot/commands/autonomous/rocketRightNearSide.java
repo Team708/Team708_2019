@@ -27,26 +27,39 @@ public class rocketRightNearSide extends CommandGroup {
 
 // Leave HAB2 and Square off position
         addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(.2));
 
         addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
-        addSequential(new WaitCommand(1.0));
-        
-        addSequential(new DriveCurvatureToEncoderOrTime(.6, 0.25, false, 65, 3.0));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(.2));
 
-        addSequential(new Level2CG()); 
+        addSequential(new DriveCurvatureToEncoderOrTime(.6, 0.25, false, 65, 3.0));
+        addSequential(new WaitCommand(.2));
+
+        addSequential(new DriveCurvatureToEncoderOrTime(.6, -0.12, false, 18, 12.0));
+        addSequential(new WaitCommand(0.2));
+
+         addSequential(new Level2CG()); 
         
 // Aquire 2nd HATCH from the FEEDER
-    //  addSequential(new TurnToDegrees(.7, 150));
-    //  addSequential(new FindFeederCG());
+        addSequential(new TurnToDegrees(.6, 130));
+        addSequential(new WaitCommand(0.2));
+
+        addSequential(new DriveStraightToEncoderDistanceOrTime(60, .6, 3.0));
+        addSequential(new WaitCommand(0.2));
+
+        addSequential(new FindFeederCG());
 
 // Curve around the ROCKET and align with the far side    
-    //     addSequential(new DriveCurvatureToEncoderOrTime(-.7, -.1, false, -200, 2.0));
+        addSequential(new TurnToDegrees(.4, -1));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-190, -.6, 4.0));
+        
+        // addSequential(new WaitCommand(0.2));
+
+        // addSequential(new DriveCurvatureToEncoderOrTime(.6, .4, false, 30, 2.0));
+        // addSequential(new WaitCommand(0.2));
 
 // Place 2nd HATCH onto ROCKET
-    //     addSequential(new TurnToDegrees(-.6, -40));
-    //     addSequential(new Level2CG()); 
+//     addSequential(new Level2CG()); 
      }
     
     // Make this return true when this Command no longer needs to run execute()

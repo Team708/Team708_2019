@@ -4,6 +4,7 @@ import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.RobotMap;
 import org.usfirst.frc.team708.robot.commands.drivetrain.JoystickDrive;
+import org.usfirst.frc.team708.robot.commands.drivetrain.SwagDrive;
 import org.usfirst.frc.team708.robot.util.IRSensor;
 import org.usfirst.frc.team708.robot.util.UltrasonicSensor;
 import org.usfirst.frc.team708.robot.util.Math708;
@@ -83,6 +84,7 @@ public class Drivetrain extends PIDSubsystem {
 	@Override
 	public void initDefaultCommand() {
     setDefaultCommand(new JoystickDrive());
+    // setDefaultCommand(new SwagDrive());
   }
   
 	/**

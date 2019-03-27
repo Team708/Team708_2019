@@ -27,16 +27,17 @@ public class Level3CG extends CommandGroup {
         addSequential(new ElevatorToGround());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel3());
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(.5));
 
         addSequential(new ExtendHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));
-        addSequential(new WaitCommand(1.0));
+        
+        addSequential(new WaitCommand(.2));
     
+        addParallel(new CloseBeak());
         addSequential(new AutoIntakeBallOutForTime(.2));
 
-        addSequential(new CloseBeak());
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new WaitCommand(.2));
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new ElevatorToGround());

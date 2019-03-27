@@ -7,9 +7,6 @@ import org.usfirst.frc.team708.robot.OI;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.util.Gamepad;
 
-/**
- *
- */
 public class JoystickDrive extends Command {
 
     public JoystickDrive() {
@@ -23,7 +20,6 @@ public class JoystickDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// Robot.drivetrain.haloDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), OI.driverGamepad.getAxis(Gamepad.rightStick_X), false);
         Robot.drivetrain.haloDrive(OI.driverGamepad.getAxis(Gamepad.leftStick_Y), 
                                                 OI.driverGamepad.getAxis(Gamepad.rightStick_X), false);
     }

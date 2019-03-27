@@ -147,12 +147,13 @@ public final class Constants {
 
 	public static final int ALLIANCE_RED 	 		= 1;
 	public static final int ALLIANCE_BLUE 	 		= -1;
+
 	/*
 	 * Driver Assist
 	 */
 	public static final double ASSIST_DISTANCE		= 16.0;
 	public static final double ASSIST_MOVE_SPEED	= .5;
-	public static final double ASSIST_TIME			= 2.0;
+	public static final double ASSIST_TIME			= .2;
 	
 	/*
 	 * Smart Dashboard

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 // */
 public class FindRocketHatch extends Command {
     
-    private double maxTime      = 5.0;
+    private double maxTime      = 3.0;
     private boolean notAligned  = false;
     // private double targetArea   = Constants.ROCKET_HATCH_TARGET_AREA;
     private double targetY      = Constants.TARGET_Y;

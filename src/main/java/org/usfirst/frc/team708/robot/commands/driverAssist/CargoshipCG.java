@@ -3,16 +3,16 @@ package org.usfirst.frc.team708.robot.commands.driverAssist;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocket;
+import org.usfirst.frc.team708.robot.commands.visionProcessor.FindCargoship;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.AutoIntakeBallOutForTime;
 // import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
-import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel2;
+import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToCargoship;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
-import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel2CG;
-import  org.usfirst.frc.team708.robot.commands.elevator.EndLevel2CG;
+import  org.usfirst.frc.team708.robot.commands.elevator.StartCargoshipCG;
+import  org.usfirst.frc.team708.robot.commands.elevator.EndCargoshipCG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -20,28 +20,27 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 
-public class Level2CG extends CommandGroup {
+public class CargoshipCG extends CommandGroup {
 
-    public Level2CG() {
-        addSequential(new StartLevel2CG());
+    public CargoshipCG() {
+        addSequential(new StartCargoshipCG());
         addSequential(new ElevatorToGround());
-        addSequential(new FindRocket());
-        addSequential(new ElevatorToLevel2());
+        addSequential(new FindCargoship());
+        addSequential(new ElevatorToCargoship());
         addSequential(new WaitCommand(1.0));
 
         addSequential(new ExtendHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,
-                                                                    Constants.ASSIST_MOVE_SPEED, 2.0));
-        addSequential(new WaitCommand(.2));
-    
+        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));
+        // addSequential(new WaitCommand(1.0));
+
         addParallel(new CloseBeak());
         addSequential(new AutoIntakeBallOutForTime(1.0));
-
+        
         // addSequential(new WaitCommand(.2));
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new ElevatorToGround());
-        addSequential(new EndLevel2CG());
+        addSequential(new EndCargoshipCG());
     }
 
     // Called just before this Command runs the first time
@@ -54,7 +53,7 @@ public class Level2CG extends CommandGroup {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.elevator.lvl2CG;
+        return !Robot.elevator.lvl1CG;
     }
 
     // Called once after isFinished returns true

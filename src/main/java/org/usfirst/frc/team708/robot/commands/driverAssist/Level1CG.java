@@ -3,7 +3,7 @@ package org.usfirst.frc.team708.robot.commands.driverAssist;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
+import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocket;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
@@ -25,7 +25,7 @@ public class Level1CG extends CommandGroup {
     public Level1CG() {
         addSequential(new StartLevel1CG());
         addSequential(new ElevatorToGround());
-        addSequential(new FindRocketHatch());
+        addSequential(new FindRocket());
         addSequential(new ElevatorToLevel1());
         addSequential(new WaitCommand(1.0));
 

@@ -52,7 +52,7 @@ public final class Constants {
 	/*
 	 * Elevator
 	 */
-	public static final double 	ELEVATOR_MOTOR_UP		 	=  .6;
+	public static final double 	ELEVATOR_MOTOR_UP		 	=  .8;
 	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.3;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
 	public static final double	ELEV_DEADZONE 				=  .5; 
@@ -142,7 +142,7 @@ public final class Constants {
 	public static final double ROCKET_CARGO_TARGET_AREA			=	10.0;
 
 
-	public static final double VISION_MOVE			= .4;
+	public static final double VISION_MOVE			= .5;
 	public static final double VISION_ROTATE		= .3;
 
 	public static final int ALLIANCE_RED 	 		= 1;

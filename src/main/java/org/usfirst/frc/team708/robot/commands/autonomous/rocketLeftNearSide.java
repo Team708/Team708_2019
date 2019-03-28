@@ -7,7 +7,7 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoder
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
-import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocketHatch;
+import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocket;
 import org.usfirst.frc.team708.robot.commands.intake.*;
 import org.usfirst.frc.team708.robot.commands.elevator.*;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level1CG;

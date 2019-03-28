@@ -4,20 +4,15 @@ import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.Constants;
 
 import edu.wpi.first.wpilibj.command.Command;
-//
-///**
-// *
-// */
-public class FindRocketHatch extends Command {
+
+public class FindCargoship extends Command {
     
-    private double maxTime      = 3.0;
-    private boolean notAligned  = false;
-    // private double targetArea   = Constants.ROCKET_HATCH_TARGET_AREA;
+    private double maxTime = 5.0;
+    private boolean notAligned = false;
     private double targetY      = Constants.TARGET_Y;
 
-    public FindRocketHatch() {
-        this.setTimeout(maxTime);
-        requires(Robot.drivetrain);
+    public FindCargoship() {
+       this.setTimeout(maxTime);
     }
    
     // Called just before this Command runs the first time
@@ -30,18 +25,17 @@ public class FindRocketHatch extends Command {
         Robot.drivetrain.setBrakeMode(true);
         Robot.visionProcessor.setNTInfo("pipeline", 0);
         Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_ON);
-
         if  (Robot.visionProcessor.seesTarget()) {
             if (!Robot.visionProcessor.isCentered()) {
                 Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetY), 
-                                                    Robot.visionProcessor.getRotate(), false);
+                                                Robot.visionProcessor.getRotate(), false);
             }
             else {
                 Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetY), 0.0, false);
             }
         }
         else {
-            notAligned = false;
+            notAligned = true;
         }
     }
 
@@ -52,7 +46,6 @@ public class FindRocketHatch extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        // Robot.drivetrain.setBrakeMode(false);
     }
 
     // Called when another command which requires one or more of the same

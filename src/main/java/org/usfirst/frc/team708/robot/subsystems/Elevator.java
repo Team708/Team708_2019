@@ -34,6 +34,7 @@ public class Elevator extends Subsystem {
 	public boolean lvl1CG = false;
 	public boolean lvl2CG = false;
 	public boolean lvl3CG = false;
+	public boolean cargoshipCG = false;
 	public boolean feederCG = false;
 	
     /**

@@ -24,8 +24,8 @@ public class Level0CG extends CommandGroup {
         addSequential(new ElevatorToLevel0());
         addSequential(new DeployIntake());        
         addSequential(new IntakeBallIn());
-        // addSequential(new RetractIntake());
-        // addSequential(new ElevatorToGround());
+        addSequential(new RetractIntake());
+        addSequential(new ElevatorToGround());
     }
 
     // Called just before this Command runs the first time

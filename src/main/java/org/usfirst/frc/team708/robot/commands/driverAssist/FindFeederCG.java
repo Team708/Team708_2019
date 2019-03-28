@@ -35,8 +35,9 @@ public class FindFeederCG extends CommandGroup {
 
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel1());
+
+         addSequential(new WaitCommand(1.0));
         addSequential(new ExtendHatch());
-    //  addSequential(new WaitCommand(1.0));
 
         addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new OpenBeak());

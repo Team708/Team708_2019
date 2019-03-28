@@ -27,7 +27,7 @@ public class Level2CG extends CommandGroup {
         addSequential(new ElevatorToGround());
         addSequential(new FindRocketHatch());
         addSequential(new ElevatorToLevel2());
-        addSequential(new WaitCommand(.2));
+        addSequential(new WaitCommand(1.0));
 
         addSequential(new ExtendHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE,
@@ -35,7 +35,7 @@ public class Level2CG extends CommandGroup {
         addSequential(new WaitCommand(.2));
     
         addParallel(new CloseBeak());
-        addSequential(new AutoIntakeBallOutForTime(.2));
+        addSequential(new AutoIntakeBallOutForTime(1.0));
 
         // addSequential(new WaitCommand(.2));
         addSequential(new RetractHatch());

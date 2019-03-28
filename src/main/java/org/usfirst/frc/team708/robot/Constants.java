@@ -53,16 +53,16 @@ public final class Constants {
 	 * Elevator
 	 */
 	public static final double 	ELEVATOR_MOTOR_UP		 	=  .6;
-	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.1;
+	public static final double 	ELEVATOR_MOTOR_DOWN		 	=  -.3;
 	public static final double 	ELEVATOR_STOP 				= 0.0;
 	public static final double	ELEV_DEADZONE 				=  .5; 
 		//Measured off encoder revs
-	public static final double	ELEV_MAX					= 60;
+	public static final double	ELEV_MAX					= 61;
 	// public static final double	ELEV_LVL3				= 58.0; 
 	// public static final double	ELEV_LVL2				= 34.0; 
 	// public static final double	ELEV_LVL1				= 8.0;
 	// public static final double	ELEV_CARGO_BALL				= 24.0; 
-	public static final double	ELEV_HATCH_LVL3				= 59.0; 
+	public static final double	ELEV_HATCH_LVL3				= 60.0; 
 	public static final double	ELEV_HATCH_LVL2				= 34.0; 
 	public static final double	ELEV_HATCH_LVL1				= 8.0; 
 	public static final double	ELEV_BALL_LVL1				= 9.0; 
@@ -134,16 +134,16 @@ public final class Constants {
 	public static final int VISION_TARGET_NOT_FOUND		= 0;
 	public static final int VISION_TARGET_FOUND			= 1;
 
-	public static final double TARGET_Y 				= 190.0;		
-	public static final double Y_THRESHOLD				=   6.0;		//Target angle in degrees
-	public static final double X_THRESHOLD 				=   3.0;		//Target angle in degrees
+	public static final double TARGET_Y 				= 0.0;		
+	public static final double Y_THRESHOLD				=   1.0;		//Target angle in degrees
+	public static final double X_THRESHOLD 				=   .5;		//Target angle in degrees
 	public static final double AREA_THRESHOLD			= 	2.0;
 	public static final double ROCKET_HATCH_TARGET_AREA			=	10.0;
 	public static final double ROCKET_CARGO_TARGET_AREA			=	10.0;
 
 
 	public static final double VISION_MOVE			= .4;
-	public static final double VISION_ROTATE		= .4;
+	public static final double VISION_ROTATE		= .3;
 
 	public static final int ALLIANCE_RED 	 		= 1;
 	public static final int ALLIANCE_BLUE 	 		= -1;
@@ -151,9 +151,9 @@ public final class Constants {
 	/*
 	 * Driver Assist
 	 */
-	public static final double ASSIST_DISTANCE		= 16.0;
+	public static final double ASSIST_DISTANCE		= 11.0;
 	public static final double ASSIST_MOVE_SPEED	= .5;
-	public static final double ASSIST_TIME			= .2;
+	public static final double ASSIST_TIME			= 1.0;
 	
 	/*
 	 * Smart Dashboard

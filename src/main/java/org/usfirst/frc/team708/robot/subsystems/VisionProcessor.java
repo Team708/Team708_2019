@@ -131,9 +131,9 @@ public class VisionProcessor extends Subsystem {
 		if (seesTarget()) 
 			if (!isAtY(targetValue)) 	
 				if (yAngle < targetValue)
-					move = Constants.VISION_MOVE;				
+					move = -Constants.VISION_MOVE;				
 				else 
-					move = -Constants.VISION_MOVE;					
+					move = Constants.VISION_MOVE;					
 			else  // centered
 				move= 0.0;			
 		else
@@ -144,6 +144,7 @@ public class VisionProcessor extends Subsystem {
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("Is Centered", isCentered());
 		SmartDashboard.putNumber("Displacement X", xAngle);
+		SmartDashboard.putNumber("Displacement Y", yAngle);
 		SmartDashboard.putBoolean("Is At Y", isAtY(Constants.TARGET_Y));
 		// SmartDashboard.putBoolean("Is At Area-Ball", isAtArea(Constants.ROCKET_CARGO_TARGET_AREA));
 		// SmartDashboard.putBoolean("Is At Area-Hatch", isAtArea(Constants.ROCKET_HATCH_TARGET_AREA));

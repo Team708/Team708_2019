@@ -5,6 +5,8 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegrees
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh
+;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level1CG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -17,30 +19,30 @@ public class cargoRightSide extends CommandGroup {
     }
 	
     public  cargoRightSide() {
-        addSequential(new GearLow());
+        addSequential(new GearHigh());
 
 // Leave HAB2 and Square off position
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
-        // addSequential(new WaitCommand(.2));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(60, .8, 3.0));
+        addSequential(new WaitCommand(1.0));
 
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
-        // addSequential(new WaitCommand(.2));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.8, 2.0));
+        addSequential(new WaitCommand(1.0));
         
-        // addSequential(new DriveStraightToEncoderDistanceOrTime(220, .6, 4.0));
-        // addSequential(new WaitCommand(0.2));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(260, .8, 4.0));
+        addSequential(new WaitCommand(.2));
 
-        // addSequential(new TurnToDegrees(.6, -80));
-        // addSequential(new WaitCommand(0.2));
+        addSequential(new TurnToDegrees(.6, -80));
+        addSequential(new WaitCommand(0.2));
 
-    //  addSequential(new Level1CG()); 
+        addSequential(new Level1CG()); 
         
 // Aquire 2nd HATCH from the FEEDER
 
-    //  addSequential(new TurnToDegrees(.6, -80));
-    //  addSequential(new WaitCommand(0.2));
+     addSequential(new TurnToDegrees(.6, -80));
+     addSequential(new WaitCommand(0.2));
 
-    //  addSequential(new DriveStraightToEncoderDistanceOrTime(200, .6, 4.0));
-    //  addSequential(new WaitCommand(0.2));
+     addSequential(new DriveStraightToEncoderDistanceOrTime(200, .8, 4.0));
+     addSequential(new WaitCommand(0.2));
 
     //  addSequential(new FindFeederCG());
 
@@ -52,13 +54,13 @@ public class cargoRightSide extends CommandGroup {
 
     // addSequential(new DriveCurvatureToDegreesOrTime(.4, -.6, false, -80, 1.0));
     
-    addSequential(new TurnToDegrees(.6, -1));
-    addSequential(new WaitCommand(0.2));
+    // addSequential(new TurnToDegrees(.6, -1));
+    // addSequential(new WaitCommand(0.2));
 
-    addSequential(new DriveStraightToEncoderDistanceOrTime(-180, -.6, 4.0));
-    addSequential(new WaitCommand(0.2));
+    // addSequential(new DriveStraightToEncoderDistanceOrTime(-180, -.6, 4.0));
+    // addSequential(new WaitCommand(0.2));
 
-    addSequential(new DriveCurvatureToDegreesOrTime(.4, .6, false, 80, 1.0));
+    // addSequential(new DriveCurvatureToDegreesOrTime(.4, .6, false, 80, 1.0));
 
 
 

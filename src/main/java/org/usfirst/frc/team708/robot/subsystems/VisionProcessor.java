@@ -1,8 +1,10 @@
 package org.usfirst.frc.team708.robot.subsystems;
 
 import org.usfirst.frc.team708.robot.Constants;
-import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team708.robot.util.Math708;
+import org.usfirst.frc.team708.robot.Robot;
+// import org.usfirst.frc.team708.robot.subsystems.Drivetrain;
+// import org.usfirst.frc.team708.robot.subsystems.Intake;
+// import org.usfirst.frc.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.networktables.*;
@@ -13,8 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class VisionProcessor extends Subsystem {
 	
-	public static Drivetrain 		drivetrain;
-	
+	// public static Drivetrain 		drivetrain;
+	// private static Intake			intake;
+
 	private boolean isCentered 	= false;
 	private boolean led 		= false;
 	private boolean isAtY		= false;
@@ -49,7 +52,6 @@ public class VisionProcessor extends Subsystem {
 		limeLightEntry.setNumber(setValue);
 	}
 
-	
 	public VisionProcessor() {
 		super("Vision Processor");
 	}
@@ -61,6 +63,24 @@ public class VisionProcessor extends Subsystem {
 		else 
 			seesTarget = false;		
 		return seesTarget;
+	}
+	public void toggleLEDMode() {
+		led = !led;
+		if(led) 
+			setNTInfo("ledMode", Constants.VISION_LED_ON);		
+		else 
+			setNTInfo("ledMode", Constants.VISION_LED_OFF);		
+	}
+
+	public boolean isAtY(double targetY) {
+		yAngle = getNTInfo("ty");
+		difference = yAngle - targetY;
+		
+		if (Math.abs(difference) <= Constants.Y_THRESHOLD)
+			isAtY = true;			
+		else 
+			isAtY = false;			
+		return isAtY;
 	}
 
 	public boolean isCentered() {
@@ -85,22 +105,47 @@ public class VisionProcessor extends Subsystem {
 		return rotate;
 	}
 
-	public void toggleLEDMode() {
-		led = !led;
-		if(led) 
-			setNTInfo("ledMode", Constants.VISION_LED_ON);		
-		else 
-			setNTInfo("ledMode", Constants.VISION_LED_OFF);		
+	
+	public double getMoveCargoship (double targetValue) {
+		if (seesTarget)
+			if (!isAtY(targetValue))
+				if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+					move = -Constants.VISION_MOVE;				
+				else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
+					move = Constants.VISION_MOVE;
+				else 
+					move = 0.0;
+			else
+				move = 0.0;
+		else
+			move = 0.0;
+		return move;
 	}
-
-	public boolean isAtY(double targetY) {
-		yAngle = getNTInfo("ty");
-		difference = yAngle - targetY;
-		if (Math.abs(difference) <= Constants.Y_THRESHOLD)
-			isAtY = true;			
-		else 
-			isAtY = false;			
-		return isAtY;
+	
+	public double getMoveRocket(double targetValue) {	
+		if (seesTarget()) 
+			if (!isAtY(targetValue)) 	
+				if (Robot.intake.hasBall()) {
+					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+						move = Constants.VISION_MOVE;				
+					else if (yAngle > (targetValue + Constants.Y_THRESHOLD)) 
+						move = -Constants.VISION_MOVE;	
+					else 
+						move = 0.0;
+				}
+				else {
+					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
+						move = -Constants.VISION_MOVE;				
+					else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
+						move = Constants.VISION_MOVE;
+					else 
+						move = 0.0;
+				}						
+			else  // centered
+				move= 0.0;			
+		else
+			move = 0.0; 
+		return move;
 	}
 
 	// public boolean isAtArea(double targetArea) {
@@ -126,20 +171,6 @@ public class VisionProcessor extends Subsystem {
 	// 		move = 0.0;		
 	// 	return move;
 	// }
-
-	public double getMoveRocket(double targetValue) {	
-		if (seesTarget()) 
-			if (!isAtY(targetValue)) 	
-				if (yAngle < targetValue)
-					move = -Constants.VISION_MOVE;				
-				else 
-					move = Constants.VISION_MOVE;					
-			else  // centered
-				move= 0.0;			
-		else
-			move = 0.0; 
-		return move;
-	}
 
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("Is Centered", isCentered());

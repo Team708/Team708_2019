@@ -1,34 +1,42 @@
-package org.usfirst.frc.team708.robot.commands.elevator;
+package org.usfirst.frc.team708.robot.commands.drivetrain;
 
+import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StartLevel2CG extends Command {
-	
-    public StartLevel2CG() {
-    	// requires(Robot.elevator);
+/**
+ *
+ */
+public class StartDriverAssistCG extends Command{
+        
+    public StartDriverAssistCG() {    	
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.elevator.lvl2CG = true;
-    }    	
-  
+    	Robot.drivetrain.runningCG = true;
+
+    }
+
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    }    	
+    	
+   }
 
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+
     }
 
     // Called when another command which requires one or more of the same
-    // subsystems are scheduled to run
+    // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+        end();
     }
 }

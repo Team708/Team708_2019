@@ -30,12 +30,12 @@ public class Elevator extends Subsystem {
 
 	public double  elev_position = 0.0;
 
-	public boolean lvl0CG = false;
-	public boolean lvl1CG = false;
-	public boolean lvl2CG = false;
-	public boolean lvl3CG = false;
-	public boolean cargoshipCG = false;
-	public boolean feederCG = false;
+	// public boolean lvl0CG = false;
+	// public boolean lvl1CG = false;
+	// public boolean lvl2CG = false;
+	// public boolean lvl3CG = false;
+	// public boolean cargoshipCG = false;
+	// public boolean feederCG = false;
 	
     /**
       * Constructor
@@ -124,10 +124,10 @@ public class Elevator extends Subsystem {
    		SmartDashboard.putBoolean("Elev Up", 			upperLimit.get());	
 			SmartDashboard.putNumber("Elev Distance", elevatorEncoder.getPosition());
 			SmartDashboard.putNumber("Elev Set Positon", elev_position);
-			SmartDashboard.putBoolean("Running Level 1", lvl1CG);	
-			SmartDashboard.putBoolean("Running Level 2", lvl2CG);	
-			SmartDashboard.putBoolean("Running Level 3", lvl3CG);	
-			SmartDashboard.putBoolean("Running Feeder", feederCG);
+			// SmartDashboard.putBoolean("Running Level 1", lvl1CG);	
+			// SmartDashboard.putBoolean("Running Level 2", lvl2CG);	
+			// SmartDashboard.putBoolean("Running Level 3", lvl3CG);	
+			// SmartDashboard.putBoolean("Running Feeder", feederCG);
 
 
 	}

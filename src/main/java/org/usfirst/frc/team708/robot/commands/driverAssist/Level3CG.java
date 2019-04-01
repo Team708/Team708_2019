@@ -3,6 +3,8 @@ package org.usfirst.frc.team708.robot.commands.driverAssist;
 import org.usfirst.frc.team708.robot.Constants;
 import org.usfirst.frc.team708.robot.Robot;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderDistanceOrTime;
+import org.usfirst.frc.team708.robot.commands.drivetrain.EndDriverAssistCG;
+import org.usfirst.frc.team708.robot.commands.drivetrain.StartDriverAssistCG;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocket;
 import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
@@ -11,8 +13,6 @@ import  org.usfirst.frc.team708.robot.commands.intake.AutoIntakeBallOutForTime;
 // import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToLevel3;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
-import  org.usfirst.frc.team708.robot.commands.elevator.StartLevel3CG;
-import  org.usfirst.frc.team708.robot.commands.elevator.EndLevel3CG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Level3CG extends CommandGroup {
 
     public Level3CG() {
-        addSequential(new StartLevel3CG());
+        addSequential(new StartDriverAssistCG());
         addSequential(new ElevatorToGround());
         addSequential(new FindRocket());
         addSequential(new ElevatorToLevel3());
@@ -41,7 +41,7 @@ public class Level3CG extends CommandGroup {
         addSequential(new RetractHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
         addSequential(new ElevatorToGround());
-        addSequential(new EndLevel3CG());
+        addSequential(new EndDriverAssistCG());
     }
 
     // Called just before this Command runs the first time
@@ -54,7 +54,7 @@ public class Level3CG extends CommandGroup {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.elevator.lvl3CG;
+        return !Robot.drivetrain.runningCG;
     }
 
     // Called once after isFinished returns true

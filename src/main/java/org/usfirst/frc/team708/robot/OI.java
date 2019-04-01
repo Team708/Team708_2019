@@ -141,7 +141,7 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		highGear.whileHeld(new GearHigh());
 		highGear.whenReleased(new GearLow());
 		// findBall.whenPressed(new FindBall());
-		findFeeder.whenPressed(new FindFeederCG());				//Needs tuning
+		// findFeeder.whenPressed(new FindFeederCG());				
 		// findFeeder.whenPressed(new ElevatorToLevel1());				
 		// rollerForward.whileHeld(new MoveRollerForward());	
 		// rollerBackward.whileHeld(new MoveRollerBackward());	
@@ -157,14 +157,14 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		toggleBeak.whenPressed(new ToggleBeak());
 //		eleGround.whenPressed(new ElevatorToGround());
 		level0.whenPressed(new Level0CG());
-		cargoship.whenPressed(new CargoshipCG());
-		level1Rocket.whenPressed(new Level1CG());				//Needs tuning
-		level2Rocket.whenPressed(new Level2CG());				//Needs tuning
-		level3Rocket.whenPressed(new Level3CG());				//Needs tuning
+		// cargoship.whenPressed(new CargoshipCG());
+		// level1Rocket.whenPressed(new Level1CG());				
+		// level2Rocket.whenPressed(new Level2CG());				
+		// level3Rocket.whenPressed(new Level3CG());				
 		// level0.whenPressed(new ElevatorToLevel0());
-		// level1Rocket.whenPressed(new ElevatorToLevel1());
-		// level2Rocket.whenPressed(new ElevatorToLevel2());
-		// level3Rocket.whenPressed(new ElevatorToLevel3());
+		level1Rocket.whenPressed(new ElevatorToLevel1());
+		level2Rocket.whenPressed(new ElevatorToLevel2());
+		level3Rocket.whenPressed(new ElevatorToLevel3());
 						
 		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());

@@ -49,6 +49,10 @@ public class Drivetrain extends PIDSubsystem {
 	private boolean brake = true;	
 	private boolean usePID = false;
 	public boolean tilting = false;
+
+	public boolean runningCG = false;
+	public boolean runningAuto = false;
+
 	
 	public Drivetrain() {
 		// Passes variables from this class into the superclass constructor

@@ -10,7 +10,7 @@ import  org.usfirst.frc.team708.robot.commands.intake.CloseBeak;
 import  org.usfirst.frc.team708.robot.commands.intake.ExtendHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.RetractHatch;
 import  org.usfirst.frc.team708.robot.commands.intake.AutoIntakeBallOutForTime;
-// import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
+import  org.usfirst.frc.team708.robot.commands.intake.DeployGamePiece;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToCargoship;
 import  org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 
@@ -28,14 +28,14 @@ public class CargoshipCG extends CommandGroup {
 
         addSequential(new FindCargoship());
         addSequential(new ElevatorToCargoship());
-        addSequential(new WaitCommand(1.0));
         
-        addSequential(new ExtendHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));
+        // addSequential(new ExtendHatch());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(20, Constants.ASSIST_MOVE_SPEED, 2.0));
         // addSequential(new WaitCommand(1.0));
-
+        
+        addSequential(new DeployGamePiece());
         addSequential(new CloseBeak());
-        addSequential(new AutoIntakeBallOutForTime(1.0));
+        // addSequential(new AutoIntakeBallOutForTime(1.0));
         
         // addSequential(new WaitCommand(.2));
         addSequential(new RetractHatch());

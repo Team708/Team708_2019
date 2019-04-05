@@ -38,12 +38,12 @@ public class OI {
 	private static final int ROLLER_BACKWARDS 				= Gamepad.button_Y;
 	private static final int FIND_BALL_BUTTON				= Gamepad.button_B;
 	private static final int ROLLER_FORWARDS				= Gamepad.button_A;
-	private static final int FIND_TAPE_BUTTON				= Gamepad.button_X;
-
-/*
- * Operator Button Assignment
- */
 	
+	/*
+	* Operator Button Assignment
+	*/
+	
+	private static final int FIND_TAPE_BUTTON			= Gamepad.button_X;
 	
 //	private static final int 								= Gamepad.shoulderAxisLeft;;
 //	private static final int 								= Gamepad.shoulderAxisRight;
@@ -91,32 +91,32 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 	public static final Button findFeeder		= new JoystickButton(driverGamepad, FIND_FEEDER_BUTTON);
 	public static final Button highGear		 	= new JoystickButton(driverGamepad, SHIFT_DRIVETRAIN_HIGH_BUTTON);
 	public static final Button findBall			= new JoystickButton(driverGamepad, FIND_BALL_BUTTON);
-	public static final Button findTape			= new JoystickButton(driverGamepad, FIND_TAPE_BUTTON);
 	public static final Button rollerForward	= new JoystickButton(driverGamepad, ROLLER_FORWARDS);
 	public static final Button rollerBackward	= new JoystickButton(driverGamepad, ROLLER_BACKWARDS);
-//	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
-//	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
-//	public static final Trigger lowGear			= new AxisUp(driverGamepad, HOLDGEARHIGH);
-//	public static final Trigger lowGear			= new AxisDown(driverGamepad, HOLDGEARHIGH);
-
-/*
- * Operator Button events
- */
+	public static final Button findTape			= new JoystickButton(driverGamepad, FIND_TAPE_BUTTON);
+	//	public static final Trigger highGearEngaged	= new AxisUp(driverGamepad, HOLDGEARHIGH);
+	//	public static final Trigger highGearRelease	= new AxisDown(driverGamepad, HOLDGEARHIGH);
+	//	public static final Trigger lowGear			= new AxisUp(driverGamepad, HOLDGEARHIGH);
+	//	public static final Trigger lowGear			= new AxisDown(driverGamepad, HOLDGEARHIGH);
+	
+	/*
+	* Operator Button events
+	*/
 	// public static final Button hatchIn			= new JoystickButton(operatorGamepad, HATCH_IN_BUTTON);
 	// public static final Button hatchOut			= new JoystickButton(operatorGamepad, HATCH_OUT_BUTTON);
 	public static final Button ballIn			= new JoystickButton(operatorGamepad, BALL_IN_BUTTON);
 	public static final Button ballOut			= new JoystickButton(operatorGamepad, BALL_OUT_BUTTON);
-
+	
 	public static final Button level0			= new JoystickButton(operatorGamepad, LEVEL_0_BUTTON);
 	public static final Button cargoship		= new JoystickButton(operatorGamepad, CARGOSHIP_BUTTON);
 	public static final Button level1Rocket		= new JoystickButton(operatorGamepad, LEVEL_1_ROCKET_BUTTON);
 	public static final Button level2Rocket		= new JoystickButton(operatorGamepad, LEVEL_2_ROCKET_BUTTON);
 	public static final Button level3Rocket		= new JoystickButton(operatorGamepad, LEVEL_3_ROCKET_BUTTON);
-
+	
 	public static final Button toggleIntake		= new JoystickButton(operatorGamepad, TOGGLE_INTAKE_BUTTON);
 	public static final Button toggleHatch		= new JoystickButton(operatorGamepad, TOGGLE_HATCH_BUTTON);
 	public static final Button toggleBeak		= new JoystickButton(operatorGamepad, TOOGLE_BEAK_BUTTON);
-//	public static final Button level0			= new JoystickButton(operatorGamepad, LEVEL_0_ELEV_BUTTON);
+	//	public static final Button level0			= new JoystickButton(operatorGamepad, LEVEL_0_ELEV_BUTTON);
 
 	public static final Trigger elevatorUp		= new AxisUp(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
 	public static final Trigger elevatorDown	= new AxisDown(operatorGamepad, ELEVATOR_OVERIDE_BUTTON);
@@ -141,30 +141,32 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		highGear.whileHeld(new GearHigh());
 		highGear.whenReleased(new GearLow());
 		// findBall.whenPressed(new FindBall());
-		// findFeeder.whenPressed(new FindFeederCG());				
-		// findFeeder.whenPressed(new ElevatorToLevel1());				
+		findFeeder.whenPressed(new FindFeederCG());				
 		// rollerForward.whileHeld(new MoveRollerForward());	
 		// rollerBackward.whileHeld(new MoveRollerBackward());	
+		findTape.whenPressed(new FindRocket());
 		
 //Operator
 		// hatchIn.whileHeld(new IntakeHatchIn());
 		// hatchOut.whileHeld(new IntakeHatchOut());
-		findTape.whenPressed(new FindRocket());
 		ballIn.whileHeld(new IntakeBallIn());
 		ballOut.whileHeld(new IntakeBallOut());
 		toggleHatch.whenPressed(new ToggleHatch());
 		toggleIntake.whenPressed(new ToggleIntake());
 		toggleBeak.whenPressed(new ToggleBeak());
-//		eleGround.whenPressed(new ElevatorToGround());
+
+	//	eleGround.whenPressed(new ElevatorToGround());
+		cargoship.whenPressed(new CargoshipCG());
+		// cargoship.whenPressed(new ElevatorToCargoship());
 		level0.whenPressed(new Level0CG());
-		// cargoship.whenPressed(new CargoshipCG());
-		// level1Rocket.whenPressed(new Level1CG());				
-		// level2Rocket.whenPressed(new Level2CG());				
-		// level3Rocket.whenPressed(new Level3CG());				
-		// level0.whenPressed(new ElevatorToLevel0());
-		level1Rocket.whenPressed(new ElevatorToLevel1());
-		level2Rocket.whenPressed(new ElevatorToLevel2());
-		level3Rocket.whenPressed(new ElevatorToLevel3());
+	//  level0.whenPressed(new ElevatorToLevel0());
+
+		// level1Rocket.whenPressed(new ElevatorToLevel1());
+		// level2Rocket.whenPressed(new ElevatorToLevel2());
+		// level3Rocket.whenPressed(new ElevatorToLevel3());
+		level1Rocket.whenPressed(new Level1CG());				
+		level2Rocket.whenPressed(new Level2CG());				
+		level3Rocket.whenPressed(new Level3CG());				
 						
 		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());

@@ -19,6 +19,7 @@ public class FindCargoship extends Command {
     protected void initialize() {
         notAligned = false;
         Robot.drivetrain.setBrakeMode(true);
+        Robot.drivetrain.shiftGearlow();
         Robot.visionProcessor.setNTInfo("pipeline", 0);
         Robot.visionProcessor.setNTInfo("led", Constants.VISION_LED_ON);
     }
@@ -26,16 +27,18 @@ public class FindCargoship extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if  (Robot.visionProcessor.seesTarget()) {
-            // if (!Robot.visionProcessor.isCentered()) {
-                // Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 
-            //                                             Robot.visionProcessor.getRotate(), false);
-            // }
-            // else {
-                // Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 0.0, false);
-            // }
             if (!Robot.visionProcessor.isCentered()) {
-                    Robot.drivetrain.haloDrive(0.0, Robot.visionProcessor.getRotate(), false);
+                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 
+                                                        Robot.visionProcessor.getRotate(), false);
+            //  Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
+            //                                          Robot.visionProcessor.getRotate(), false);
             }
+            else {
+                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 0.0, false);
+            //  Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
+            //                                                     Robot.visionProcessor.getRotate(), false);
+            }
+            // }
         }
         else {
             notAligned = true;
@@ -44,10 +47,10 @@ public class FindCargoship extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        // return (((Robot.visionProcessor.isCentered()) && (Robot.visionProcessor.isAtY(targetY)))
-        //                      || notAligned || isTimedOut());
-        return ((Robot.visionProcessor.isCentered())
-                                     || notAligned || isTimedOut());
+        return (((Robot.visionProcessor.isCentered()) && (Robot.visionProcessor.isAtY(targetY)))
+                             || notAligned || isTimedOut());
+        // return ((Robot.visionProcessor.isCentered())
+        //                              || notAligned || isTimedOut());
     }
 
     // Called once after isFinished returns true

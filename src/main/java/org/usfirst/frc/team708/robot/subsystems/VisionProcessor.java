@@ -34,7 +34,7 @@ public class VisionProcessor extends Subsystem {
 
 //	Accessing the Limelight's Network Table	
 	private NetworkTableInstance 	limeLightInstance 	= NetworkTableInstance.getDefault();
-	private NetworkTable					limeLightTable			= limeLightInstance.getTable("/limelight");
+	private NetworkTable			limeLightTable		= limeLightInstance.getTable("/limelight");
 	   	
 	private double rotate			= 0.0;
 	private double move				= 0.0;
@@ -110,7 +110,7 @@ public class VisionProcessor extends Subsystem {
 		if (seesTarget)
 			if (!isAtY(targetValue))
 				if (yAngle < (targetValue - Constants.Y_THRESHOLD))
-					move = -Constants.VISION_MOVE;				
+					move = 0.0;				
 				else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
 					move = Constants.VISION_MOVE;
 				else 
@@ -129,13 +129,13 @@ public class VisionProcessor extends Subsystem {
 					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
 						move = Constants.VISION_MOVE;				
 					else if (yAngle > (targetValue + Constants.Y_THRESHOLD)) 
-						move = -Constants.VISION_MOVE;	
+						move = 0.0;	
 					else 
 						move = 0.0;
 				}
 				else {
 					if (yAngle < (targetValue - Constants.Y_THRESHOLD))
-						move = -Constants.VISION_MOVE;				
+						move = 0.0;				
 					else if (yAngle > (targetValue + Constants.Y_THRESHOLD))
 						move = Constants.VISION_MOVE;
 					else 

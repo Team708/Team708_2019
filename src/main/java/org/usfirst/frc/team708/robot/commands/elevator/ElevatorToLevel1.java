@@ -27,6 +27,7 @@ public class ElevatorToLevel1 extends Command {
 
     protected boolean isFinished()
     {   
+        Robot.drivetrain.resetEncoder(); 
         if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
             return false;
         else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))

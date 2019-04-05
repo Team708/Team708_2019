@@ -20,18 +20,19 @@ public class ElevatorToCargoship extends Command {
         if (Robot.intake.hasHatch())
             Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL1;
         else if (Robot.intake.hasBall())
-            Robot.elevator.elev_position = Constants.ELEV_BALL_LVL2;
+            Robot.elevator.elev_position = Constants.ELEV_CARGO_BALL;
         else 
             Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL1;
     }    	
 
     protected boolean isFinished()
     {   
-        // if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
-        //     return false;
-        // else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
-        //     return false;
-        // else 
+        Robot.drivetrain.resetEncoder(); 
+        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+            return false;
+        else 
             return true;
     }
 

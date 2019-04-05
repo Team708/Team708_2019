@@ -27,7 +27,6 @@ public class Level3CG extends CommandGroup {
         addSequential(new ElevatorToGround());
         addSequential(new FindRocket());
         addSequential(new ElevatorToLevel3());
-        addSequential(new WaitCommand(2.0));
 
         addSequential(new ExtendHatch());
         addSequential(new DriveStraightToEncoderDistanceOrTime(Constants.ASSIST_DISTANCE, Constants.ASSIST_MOVE_SPEED, 2.0));

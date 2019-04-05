@@ -17,6 +17,7 @@ public class ElevatorToLevel2 extends Command {
   
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.drivetrain.resetEncoder(); 
         if (Robot.intake.hasHatch())
             Robot.elevator.elev_position = Constants.ELEV_HATCH_LVL2;
         else if (Robot.intake.hasBall())
@@ -26,17 +27,16 @@ public class ElevatorToLevel2 extends Command {
     }    	
 
     protected boolean isFinished() {
-        // if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
-        //     return false;
-        // else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
-        //     return false;
-        // else 
+        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+            return false;
+        else 
             return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
     }
 
     // Called when another command which requires one or more of the same

@@ -61,9 +61,9 @@ public final class Constants {
 	// public static final double	ELEV_LVL3				= 58.0; 
 	// public static final double	ELEV_LVL2				= 34.0; 
 	// public static final double	ELEV_LVL1				= 8.0;
-	// public static final double	ELEV_CARGO_BALL				= 24.0; 
-	public static final double	ELEV_HATCH_LVL3				= 60.0; 
-	public static final double	ELEV_HATCH_LVL2				= 34.0; 
+	public static final double	ELEV_CARGO_BALL				= 20.0; 
+	public static final double	ELEV_HATCH_LVL3				= 59.0; 
+	public static final double	ELEV_HATCH_LVL2				= 33.0; 
 	public static final double	ELEV_HATCH_LVL1				= 8.0; 
 	public static final double	ELEV_BALL_LVL1				= 9.0; 
 	public static final double	ELEV_BALL_LVL2				= 35.0; 
@@ -73,7 +73,7 @@ public final class Constants {
 	public static final double	ELEV_GROUND					= 0.0; 
 	public static final int ELEV_ENC_STARTING_POSITION 		= 0;
 	public static final int ELEV_ENC_MIN				 	= 0;
-	public static final int	ELEV_TOLERANCE					= 2;
+	public static final int	ELEV_TOLERANCE					= 1;
 	public static final int	ELEV_HOLD_TIMEOUT				= 3;
 
 	public static final double ELEV_P						= 4.0;  //.8
@@ -134,16 +134,17 @@ public final class Constants {
 	public static final int VISION_TARGET_NOT_FOUND		= 0;
 	public static final int VISION_TARGET_FOUND			= 1;
 
-	public static final double TARGET_Y 				= 0.0;		
-	public static final double Y_THRESHOLD				=   1.0;		//Target angle in degrees
-	public static final double X_THRESHOLD 				=   .4;		//Target angle in degrees
-	public static final double AREA_THRESHOLD			= 	2.0;
-	public static final double ROCKET_HATCH_TARGET_AREA			=	10.0;
-	public static final double ROCKET_CARGO_TARGET_AREA			=	10.0;
+	public static final double TARGET_Y 				=   0.0;		
+	public static final double Y_THRESHOLD				=   1.0;	//Target angle in degrees
+	public static final double X_THRESHOLD 				=    .6;    //Target angle in degrees
+
+	public static final double AREA_THRESHOLD				= 	2.0;
+	public static final double ROCKET_HATCH_TARGET_AREA		=	10.0;
+	public static final double ROCKET_CARGO_TARGET_AREA		=	10.0;
 
 
-	public static final double VISION_MOVE			= .45;
-	public static final double VISION_ROTATE		= .4;
+	public static final double VISION_MOVE			= .4;
+	public static final double VISION_ROTATE		= .2;
 
 	public static final int ALLIANCE_RED 	 		= 1;
 	public static final int ALLIANCE_BLUE 	 		= -1;
@@ -151,7 +152,7 @@ public final class Constants {
 	/*
 	 * Driver Assist
 	 */
-	public static final double ASSIST_DISTANCE		= 14.0;
+	public static final double ASSIST_DISTANCE		= 16.0;
 	public static final double ASSIST_MOVE_SPEED	= .5;
 	public static final double ASSIST_TIME			= 1.0;
 	

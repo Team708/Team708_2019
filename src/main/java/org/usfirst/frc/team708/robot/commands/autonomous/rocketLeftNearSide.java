@@ -5,13 +5,19 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderD
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegreesOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
-import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
+import org.usfirst.frc.team708.robot.commands.drivetrain.StartAutoCG;
+import org.usfirst.frc.team708.robot.commands.drivetrain.EndAutoCG;
 import org.usfirst.frc.team708.robot.commands.visionProcessor.FindRocket;
 import org.usfirst.frc.team708.robot.commands.intake.*;
 import org.usfirst.frc.team708.robot.commands.elevator.*;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level1CG;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level2CG;
+import org.usfirst.frc.team708.robot.Robot;
+
+// import java.awt.Robot;
+
 import org.usfirst.frc.team708.robot.commands.driverAssist.FindFeederCG;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -24,35 +30,43 @@ public class rocketLeftNearSide extends CommandGroup {
     }
 	
     public  rocketLeftNearSide() {
+        addSequential(new StartAutoCG());
         addSequential(new GearLow());
 
     // Leave HAB2 and Square off position
-        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .6, 3.0));
-        addSequential(new WaitCommand(1.0));
 
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-16, -.6, 2.0));
-        addSequential(new WaitCommand(1.0));
-
-        addSequential(new DriveCurvatureToEncoderOrTime(.6, -0.25, false, 65, 3.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 3.0));
+        // addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(48, .6, 3.0));
+        addSequential(new TurnToDegrees(.6, -45));
         addSequential(new WaitCommand(1.0));
 
         addSequential(new Level2CG()); 
 
 // Aquire 2nd HATCH from the FEEDER
-        addSequential(new TurnToDegrees(.7, -150));
+
+        addSequential(new TurnToDegrees(.6, -135));
+        addSequential(new WaitCommand(0.2));
+        addSequential(new GearHigh());
+
+        addSequential(new DriveStraightToEncoderDistanceOrTime(130, .6, 3.0));
+        addSequential(new WaitCommand(0.2));
+
         addSequential(new FindFeederCG());
 
 // Curve around the ROCKET and align with the far side    
-        addSequential(new DriveCurvatureToEncoderOrTime(-.7, .1, false, -200, 2.0));
+        // addSequential(new DriveCurvatureToEncoderOrTime(-.7, .1, false, -200, 2.0));
         
 //  Place 2nd HATCH onto ROCKET
-        addSequential(new TurnToDegrees(.6, 40));
-        addSequential(new Level2CG()); 
+        // addSequential(new TurnToDegrees(.4, 5));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(-190, -.7, 4.0));
+        // addSequential(new Level2CG()); 
+        addSequential(new EndAutoCG());
      }
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !Robot.drivetrain.runningAuto;
     }
 
     // Called once after isFinished returns true

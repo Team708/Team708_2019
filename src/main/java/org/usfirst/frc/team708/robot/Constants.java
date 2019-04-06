@@ -113,9 +113,9 @@ public final class Constants {
 	public static final double	MOVE_CLIMBER_TOLERANCE				=  	.5;
 	public static final double	MOVE_CLIMBER_FRONT_EXTEND			=  	-1.0;
 	public static final double	MOVE_CLIMBER_FRONT_RETRACT			=  	1.0;
-	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.8;
+	public static final double	MOVE_CLIMBER_REAR_EXTEND			=  	-0.69;
 	public static final double	MOVE_CLIMBER_REAR_RETRACT			=	1.0;
-	public static final double 	HAB_LVL3_ENCODER_DISTANCE		=	41000;
+	public static final double 	HAB_LVL3_ENCODER_DISTANCE		=	42500;
 	public static final double	HAB_LVL2_ENCODER_DISTANCE		=	15000;
 	public static final double	STOP_CLIMBER						= 	0.0;
 

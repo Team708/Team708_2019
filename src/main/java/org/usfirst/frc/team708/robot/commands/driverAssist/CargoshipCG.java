@@ -30,17 +30,19 @@ public class CargoshipCG extends CommandGroup {
         addSequential(new ElevatorToCargoship());
         
         // addSequential(new ExtendHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(20, Constants.ASSIST_MOVE_SPEED, 2.0));
-        // addSequential(new WaitCommand(1.0));
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(20, Constants.ASSIST_MOVE_SPEED, 2.0));
+        // // addSequential(new WaitCommand(1.0));
         
-        addSequential(new DeployGamePiece());
-        addSequential(new CloseBeak());
+        // // addSequential(new DeployGamePiece());
+        // addSequential(new CloseBeak());
+
+        // addParallel(new ExtendHatch());
         // addSequential(new AutoIntakeBallOutForTime(1.0));
         
-        // addSequential(new WaitCommand(.2));
-        addSequential(new RetractHatch());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
-        addSequential(new ElevatorToGround());
+        // // addSequential(new WaitCommand(.2));
+        // addSequential(new RetractHatch());
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(-Constants.ASSIST_DISTANCE, -Constants.ASSIST_MOVE_SPEED, 2.0));
+        // addSequential(new ElevatorToGround());
         addSequential(new EndDriverAssistCG());
     }
 

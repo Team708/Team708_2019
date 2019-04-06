@@ -14,6 +14,7 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.EndAutoCG;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level1CG;
 import org.usfirst.frc.team708.robot.commands.driverAssist.Level2CG;
 import org.usfirst.frc.team708.robot.commands.driverAssist.FindFeederCG;
+import org.usfirst.frc.team708.robot.commands.drivetrain.ResetEncoder;
 import org.usfirst.frc.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -30,23 +31,29 @@ public class rocketRightNearSide extends CommandGroup {
         addSequential(new GearLow());
 
 // Leave HAB2 and Square off position
+
         // addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 3.0));
         // addSequential(new WaitCommand(1.0));
 
         addSequential(new DriveStraightToEncoderDistanceOrTime(48, .6, 3.0));
         addSequential(new TurnToDegrees(.8, 45));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new WaitCommand(.5));
+        addSequential(new ResetEncoder());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(30, .6, 3.0));
+
+        addSequential(new WaitCommand(.5));
 
          addSequential(new Level2CG()); 
         
 // Aquire 2nd HATCH from the FEEDER
 
-        addSequential(new TurnToDegrees(.8, 135));
-        addSequential(new WaitCommand(0.2));
-        addSequential(new GearHigh());
+        addSequential(new TurnToDegrees(.8, 126));
+        // addSequential(new WaitCommand(0.2));
 
-        addSequential(new DriveStraightToEncoderDistanceOrTime(135, .8, 3.0));
-        addSequential(new WaitCommand(0.2));
+        addSequential(new GearHigh());
+        addSequential(new ResetEncoder());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(130, .8, 3.0));
+        addSequential(new WaitCommand(1.0));
 
         addSequential(new FindFeederCG());
 
@@ -56,11 +63,10 @@ public class rocketRightNearSide extends CommandGroup {
         
         // addSequential(new WaitCommand(0.2));
 
-        // addSequential(new DriveCurvatureToEncoderOrTime(.6, .4, false, 30, 2.0));
-        // addSequential(new WaitCommand(0.2));
-
 // Place 2nd HATCH onto ROCKET
-//     addSequential(new Level2CG()); 
+        // addSequential(new DriveCurvatureToEncoderOrTime(.6, .4, false, 30, 2.0));
+        //     addSequential(new Level2CG());
+
         addSequential(new EndAutoCG());
      }
     

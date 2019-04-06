@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class FindCargoship extends Command {
     
-    private double maxTime = 2.0;
+    private double maxTime = 4.0;
     private boolean notAligned = false;
     private double targetY      = Constants.TARGET_Y;
 
@@ -28,15 +28,15 @@ public class FindCargoship extends Command {
     protected void execute() {
         if  (Robot.visionProcessor.seesTarget()) {
             if (!Robot.visionProcessor.isCentered()) {
-                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 
-                                                        Robot.visionProcessor.getRotate(), false);
-            //  Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
-            //                                          Robot.visionProcessor.getRotate(), false);
+                // Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 
+                //                                         Robot.visionProcessor.getRotate(), false);
+             Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
+                                                     Robot.visionProcessor.getRotate(), false);
             }
             else {
-                Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 0.0, false);
-            //  Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
-            //                                                     Robot.visionProcessor.getRotate(), false);
+                // Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveCargoship(targetY), 0.0, false);
+             Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveCargoship(targetY),
+                                                                Robot.visionProcessor.getRotate(), false);
             }
             // }
         }

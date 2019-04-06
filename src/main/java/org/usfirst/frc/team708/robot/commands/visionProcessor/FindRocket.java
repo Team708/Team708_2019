@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 // */
 public class FindRocket extends Command {
     
-    private double maxTime      = 2.0;
+    private double maxTime      = 4.0;
     private boolean notAligned  = false;
     // private double targetArea   = Constants.ROCKET_HATCH_TARGET_AREA;
     private double targetY      = Constants.TARGET_Y;
@@ -39,8 +39,10 @@ public class FindRocket extends Command {
     protected void execute() {
         if  (Robot.visionProcessor.seesTarget()) {
             if (!Robot.visionProcessor.isCentered()) {
+                // if (!Robot.visionProcessor.isAtY(targetY)) {
                 Robot.drivetrain.curvatureDrive(Robot.visionProcessor.getMoveRocket(targetY), 
                                                     Robot.visionProcessor.getRotate(), false);
+                // }
             //  Robot.drivetrain.haloDrive(Robot.visionProcessor.getMoveRocket(targetY),
             //                                      Robot.visionProcessor.getRotate(), false);
         }

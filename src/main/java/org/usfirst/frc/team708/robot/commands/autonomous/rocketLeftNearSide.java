@@ -6,6 +6,8 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegrees
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
+import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
+import org.usfirst.frc.team708.robot.commands.drivetrain.ResetEncoder;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
 import org.usfirst.frc.team708.robot.commands.drivetrain.StartAutoCG;
 import org.usfirst.frc.team708.robot.commands.drivetrain.EndAutoCG;
@@ -37,30 +39,37 @@ public class rocketLeftNearSide extends CommandGroup {
 
         // addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 3.0));
         // addSequential(new WaitCommand(1.0));
+
         addSequential(new DriveStraightToEncoderDistanceOrTime(48, .6, 3.0));
-        addSequential(new TurnToDegrees(.6, -45));
-        addSequential(new WaitCommand(1.0));
+        addSequential(new TurnToDegrees(.8, -45));
+        addSequential(new WaitCommand(.5));
+        addSequential(new ResetEncoder());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(30, .6, 3.0));
+
+        addSequential(new WaitCommand(.5));
 
         addSequential(new Level2CG()); 
 
 // Aquire 2nd HATCH from the FEEDER
 
-        addSequential(new TurnToDegrees(.6, -135));
-        addSequential(new WaitCommand(0.2));
-        addSequential(new GearHigh());
+        addSequential(new TurnToDegrees(.8, -126));
+        // addSequential(new WaitCommand(0.2));
 
-        addSequential(new DriveStraightToEncoderDistanceOrTime(130, .6, 3.0));
-        addSequential(new WaitCommand(0.2));
+        addSequential(new GearHigh());
+        addSequential(new ResetEncoder());
+        addSequential(new DriveStraightToEncoderDistanceOrTime(130, .8, 3.0));
+        // addSequential(new WaitCommand(0.2));
 
         addSequential(new FindFeederCG());
 
 // Curve around the ROCKET and align with the far side    
+        // addSequential(new TurnToDegrees(.4, 5));
         // addSequential(new DriveCurvatureToEncoderOrTime(-.7, .1, false, -200, 2.0));
         
 //  Place 2nd HATCH onto ROCKET
-        // addSequential(new TurnToDegrees(.4, 5));
         // addSequential(new DriveStraightToEncoderDistanceOrTime(-190, -.7, 4.0));
         // addSequential(new Level2CG()); 
+        
         addSequential(new EndAutoCG());
      }
     

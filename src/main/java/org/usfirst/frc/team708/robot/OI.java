@@ -156,17 +156,17 @@ private static final int BALL_IN_BUTTON					= Gamepad.button_L_Shoulder;
 		toggleBeak.whenPressed(new ToggleBeak());
 
 	//	eleGround.whenPressed(new ElevatorToGround());
-		cargoship.whenPressed(new CargoshipCG());
-		// cargoship.whenPressed(new ElevatorToCargoship());
+		// cargoship.whenPressed(new CargoshipCG());
+		cargoship.whenPressed(new ElevatorToCargoship());
 		level0.whenPressed(new Level0CG());
 	//  level0.whenPressed(new ElevatorToLevel0());
 
-		// level1Rocket.whenPressed(new ElevatorToLevel1());
-		// level2Rocket.whenPressed(new ElevatorToLevel2());
-		// level3Rocket.whenPressed(new ElevatorToLevel3());
-		level1Rocket.whenPressed(new Level1CG());				
-		level2Rocket.whenPressed(new Level2CG());				
-		level3Rocket.whenPressed(new Level3CG());				
+		level1Rocket.whenPressed(new ElevatorToLevel1());
+		level2Rocket.whenPressed(new ElevatorToLevel2());
+		level3Rocket.whenPressed(new ElevatorToLevel3());
+		// level1Rocket.whenPressed(new Level1CG());				
+		// level2Rocket.whenPressed(new Level2CG());				
+		// level3Rocket.whenPressed(new Level3CG());				
 						
 		initiateClimb.whenPressed(new InitiateClimbCG());
 		stopClimb.whenPressed(new ClimberStop());

@@ -130,7 +130,7 @@ public Climber() {
 	}
 
 	public boolean rearExtend() {
-		return (getEncoderRear() >= HABLevel);
+		return (getEncoderRear() >= (HABLevel-1000));
 		// return false;
 		// return climberRearMaster.getSensorCollection().isRevLimitSwitchClosed(); //Used to be Fwd
 	}

@@ -25,11 +25,13 @@ protected void execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 protected boolean isFinished() {
-    
-    // if(Robot.elevator.isElevatorMin()) {
-        // Robot.elevator.moveMotor(Constants.ELEVATOR_STOP); 
-        // Robot.elevator.resetElevatorEncoder();
-        return true;
+    Robot.drivetrain.resetEncoder(); 
+        if (Robot.elevator.getEncoderDistance() <= (Robot.elevator.elev_position-Constants.ELEV_TOLERANCE))
+            return false;
+        else if (Robot.elevator.getEncoderDistance() > (Robot.elevator.elev_position+Constants.ELEV_TOLERANCE))
+            return false;
+        else 
+            return true;
     // }	
     // else
     // {

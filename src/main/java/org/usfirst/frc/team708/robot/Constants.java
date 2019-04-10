@@ -18,7 +18,7 @@ public final class Constants {
 	 * Drivetrain
 	 */
 	public static final double	DRIVE_MOTOR_MAX_SPEED 					= 1.0;  // 1.0
-	public static final double	ROTATE_MOTOR_MAX_SPEED 					= .7;  // 1.0
+	public static final double	ROTATE_MOTOR_MAX_SPEED 					= 1.0;  // .80
 	public static final double	TANK_STICK_TOLERANCE 					= .20;
 	public static final int  	DRIVETRAIN_WHEEL_DIAMETER 				= 4; //4inch wheel * (LOW 10.44,  HIGH 4.87)
 	public static final double  DRIVETRAIN_GEAR_RATIO_LOW				= 10.44;

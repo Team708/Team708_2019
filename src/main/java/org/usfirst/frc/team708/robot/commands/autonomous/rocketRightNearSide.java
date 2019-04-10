@@ -5,6 +5,7 @@ import org.usfirst.frc.team708.robot.commands.drivetrain.DriveStraightToEncoderD
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToDegreesOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.DriveCurvatureToEncoderOrTime;
 import org.usfirst.frc.team708.robot.commands.drivetrain.TurnToDegrees;
+import org.usfirst.frc.team708.robot.commands.elevator.ElevatorToGround;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearHigh;
 import org.usfirst.frc.team708.robot.commands.drivetrain.GearLow;
 import org.usfirst.frc.team708.robot.commands.drivetrain.Send;
@@ -35,27 +36,33 @@ public class rocketRightNearSide extends CommandGroup {
         // addSequential(new DriveStraightToEncoderDistanceOrTime(120, .6, 3.0));
         // addSequential(new WaitCommand(1.0));
 
+        addSequential(new DriveStraightToEncoderDistanceOrTime(45, .8, 2.0));
+        addSequential(new WaitCommand(1.0));
+        addSequential(new DriveStraightToEncoderDistanceOrTime(-50, -.8, 2.0));
+        addSequential(new WaitCommand(2.0));
+
         addSequential(new DriveStraightToEncoderDistanceOrTime(48, .6, 3.0));
-        addSequential(new TurnToDegrees(.8, 45));
-        addSequential(new WaitCommand(.5));
+        addSequential(new TurnToDegrees(.6, 30)); //.7
         addSequential(new ResetEncoder());
+        addSequential(new WaitCommand(1.0)); 
         addSequential(new DriveStraightToEncoderDistanceOrTime(30, .6, 3.0));
 
         addSequential(new WaitCommand(.5));
 
-         addSequential(new Level2CG()); 
+         addSequential(new Level2CG());
+         addSequential(new ElevatorToGround()); 
         
 // Aquire 2nd HATCH from the FEEDER
 
-        addSequential(new TurnToDegrees(.8, 126));
+        addSequential(new TurnToDegrees(.6, 126)); //.7
         // addSequential(new WaitCommand(0.2));
 
-        addSequential(new GearHigh());
-        addSequential(new ResetEncoder());
-        addSequential(new DriveStraightToEncoderDistanceOrTime(130, .8, 3.0));
-        addSequential(new WaitCommand(1.0));
+        // addSequential(new GearHigh());
+        // addSequential(new ResetEncoder());
+        // addSequential(new DriveStraightToEncoderDistanceOrTime(100, .8, 3.0));
+        // addSequential(new WaitCommand(1.0));
 
-        addSequential(new FindFeederCG());
+        // addSequential(new FindFeederCG());
 
 // Curve around the ROCKET and align with the far side    
         // addSequential(new TurnToDegrees(.4, -5));

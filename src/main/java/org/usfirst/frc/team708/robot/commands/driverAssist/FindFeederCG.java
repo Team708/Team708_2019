@@ -31,7 +31,7 @@ public class FindFeederCG extends CommandGroup {
         addSequential(new StartDriverAssistCG());
         addSequential(new ElevatorToGround());
         addSequential(new CloseBeak());
-    //  addSequential(new WaitCommand(1.0));
+        // addSequential(new WaitCommand(1.0));
 
         addSequential(new FindRocket());
         addSequential(new ElevatorToLevel1());
